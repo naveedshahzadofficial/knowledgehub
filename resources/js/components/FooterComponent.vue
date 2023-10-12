@@ -19,8 +19,7 @@
         <div class="row mt-2 ml-0 mr-0">
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <span class="nowrap footer2"
-                    >&copy; Automation of Business Regulations, Government of
-                    the Punjab</span
+                    >&copy; Government of the Punjab</span
                 >
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 text-right">
