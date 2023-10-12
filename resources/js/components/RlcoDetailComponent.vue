@@ -257,7 +257,7 @@ export default {
         isSubmitted: false,
         printObj: {
             id: "printSection",
-            popTitle: 'BizPunjab',
+            popTitle: 'Knowledge Hub',
             extraCss: process.env.MIX_BASE_URL+'/assets/print.css',
         },
         isExpand: false,
