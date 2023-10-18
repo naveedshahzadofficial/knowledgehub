@@ -7,13 +7,13 @@ import Detail from "../views/Detail";
 import PageNotFound from "../views/PageNotFound";
 
 export const router = createRouter({
-    history: createWebHistory('/rlcos/'),
-    linkActiveClass: 'text-dark bg-white',
+    history: createWebHistory("/knowledgehub/"),
+    linkActiveClass: "text-dark bg-white",
     routes: [
         {
             path: "/",
             name: "home",
-            component: Home
+            component: Home,
         },
         {
             path: "/search",
@@ -36,7 +36,7 @@ export const router = createRouter({
         {
             path: "/rlco/detail/:id",
             name: "rlcos.show",
-            component: Detail
-        }
-            ]
+            component: Detail,
+        },
+    ],
 });

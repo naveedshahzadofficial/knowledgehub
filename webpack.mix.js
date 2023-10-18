@@ -1,4 +1,4 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
 /*
  |--------------------------------------------------------------------------
@@ -10,8 +10,8 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css', [
+mix.js("resources/js/app.js", "public/js")
+    .sass("resources/sass/app.scss", "public/css", [
         //
     ])
     .sourceMaps()
@@ -25,20 +25,18 @@ mix.js('resources/js/app.js', 'public/js')
                 }),
             ],
         };
-    }).copyDirectory('resources/fonts', 'public/fonts')
-    .copyDirectory('resources/media', 'public/media');
-
+    })
+    .copyDirectory("resources/fonts", "public/fonts")
+    .copyDirectory("resources/media", "public/media");
 
 if (!mix.inProduction()) {
-mix.browserSync('rlcos.test');
+    mix.browserSync("knowledgehub.test");
 }
-
 
 if (mix.inProduction()) {
-    mix.version()
+    mix.version();
     //mix.setResourceRoot('../');
     //mix.setResourceRoot(`/${process.env.MIX_BASE_URL}/`);
-    //mix.setResourceRoot('/rlcos/public/');
-    //mix.setPublicPath('/rlcos/public/');
+    //mix.setResourceRoot('/knowledgehub/public/');
+    //mix.setPublicPath('/knowledgehub/public/');
 }
-
