@@ -60,14 +60,14 @@ class RlcoResource extends JsonResource
             "application_form_file" => !empty($this->application_form_file)?Storage::url($this->application_form_file):null,
             "process_flow_diagram_file" => !empty($this->process_flow_diagram_file)?Storage::url($this->process_flow_diagram_file):null,
             "relevant_laws_file" => !empty($this->relevant_laws_file)?Storage::url($this->relevant_laws_file):null,
-            "business_category" => new BusinessCategoryResource($this->businessCategory), // object
-            "department" => new DepartmentResource($this->department), // object
-            "inspection_department" => new DepartmentResource($this->inspectionDepartment), // object
-            "dependencies" => DependencyResource::collection($this->dependencies), // array
-            "faqs" => FaqResource::collection($this->faqs), // array
-            "foss" => FosResource::collection($this->foss), // array
-            "other_documents" => OtherDocumentResource::collection($this->otherDocuments), // array
-            "required_documents" => RequiredDocumentResource::collection($this->requiredDocuments), // array
+            "business_category" => new BusinessCategoryResource($this->whenLoaded('businessCategory')), // object
+            "department" => new DepartmentResource($this->whenLoaded('department')), // object
+            "inspection_department" => new DepartmentResource($this->whenLoaded('inspectionDepartment')), // object
+            "dependencies" => DependencyResource::collection($this->whenLoaded('dependencies')), // array
+            "faqs" => FaqResource::collection($this->whenLoaded('faqs')), // array
+            "foss" => FosResource::collection($this->whenLoaded('foss')), // array
+            "other_documents" => OtherDocumentResource::collection($this->whenLoaded('otherDocuments')), // array
+            "required_documents" => RequiredDocumentResource::collection($this->whenLoaded('requiredDocuments')), // array
             "last_updated_date" => $this->last_updated_date,
 
         ];

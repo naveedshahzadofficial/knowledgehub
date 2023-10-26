@@ -96,4 +96,9 @@ class RlcoController extends Controller
         $rlco->reviews()->create($request->all()+ ['ip_address'=> $request->ip()]);
         return response()->json(['id'=>$rlco->id]);
     }
+
+    public function rlcosList()
+    {
+        return RlcoResource::collection(Rlco::where('rlco_status',1)->get());
+    }
 }

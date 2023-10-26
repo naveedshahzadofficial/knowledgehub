@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\RlcoController;
 |
 */
 Route::group(['prefix' => 'v1'],function() {
+    Route::get('rlcos_list', [RlcoController::class, 'rlcosList']);
     Route::get('department_list', [RlcoController::class, 'departmentList']);
     Route::get('business_list', [RlcoController::class, 'businessList']);
     Route::get('activity_list', [RlcoController::class, 'activityList']);
