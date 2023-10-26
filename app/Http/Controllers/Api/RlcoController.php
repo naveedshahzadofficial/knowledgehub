@@ -99,6 +99,6 @@ class RlcoController extends Controller
 
     public function rlcosList()
     {
-        return RlcoResource::collection(Rlco::where('rlco_status',1)->get());
+        return RlcoResource::collection(Rlco::with('requiredDocuments.requiredDocument')->where('rlco_status',1)->get());
     }
 }
