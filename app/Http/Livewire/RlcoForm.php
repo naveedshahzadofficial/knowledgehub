@@ -163,7 +163,8 @@ class RlcoForm extends Component
 
         $rules = [
             'form.department_id' => 'required',
-            'form.rlco_name' => "required|unique:rlcos,rlco_name,{$rlco_id},id",
+            //'form.rlco_name' => "required|unique:rlcos,rlco_name,{$rlco_id},id",
+            'form.rlco_name' => "required",
             'form.business_category_id' => 'required',
             'form.activity_ids' => 'required',
             'form.automation_status' => 'required',
