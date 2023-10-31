@@ -5,10 +5,7 @@
                         <Select2 v-model="department_id"  :options="departments" :placeholder="`Government Agency`" />
 
                     </div>
-                    <div class="col-lg-12 col-md-12  col-sm-12 my-3">
-                        <Select2 v-model="business_category_id" :options="businesses" :placeholder="`Business Sector`" />
-                    </div>
-                    <div class="col-lg-12 col-md-12  col-sm-12">
+                    <div class="col-lg-12 col-md-12  col-sm-12 mt-3">
                         <Select2 v-model="activity_id" :options="activities" :placeholder="`Business Activity`" />
                     </div>
         </div>
@@ -25,7 +22,6 @@ export default {
     name: "HomeSearchFormComponent",
     props: {
         department_id: "",
-        business_category_id: "",
         activity_id: "",
     },
     data(){
@@ -36,16 +32,12 @@ export default {
         departments() {
             return this.$store.state.department.departments;
         },
-        businesses() {
-            return this.$store.state.business.businesses;
-        },
         activities() {
             return this.$store.state.activity.activities;
         },
     },
     mounted() {
         this.$store.dispatch('department/getDepartment');
-        this.$store.dispatch('business/getBusiness');
         this.$store.dispatch('activity/getActivity');
         this.select2focus();
     },
@@ -54,7 +46,6 @@ export default {
             this.isLoading = true;
             const newParams = {
                 department_id: this.department_id,
-                business_category_id: this.business_category_id,
                 activity_id: this.activity_id,
             };
             this.$emit('search-params', newParams);

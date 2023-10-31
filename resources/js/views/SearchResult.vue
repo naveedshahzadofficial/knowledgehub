@@ -1,8 +1,8 @@
 <template>
         <div class="wrapping-searching">
-        <SearchFormComponent :prop_department_id="prop_department_id" :prop_business_category_id="prop_business_category_id" :prop_activity_id="prop_activity_id" @search-params="searchParams" />
+        <SearchFormComponent :prop_department_id="prop_department_id"  :prop_activity_id="prop_activity_id" @search-params="searchParams" />
 
-            <div class="row mt-3">
+            <div class="row mt-4">
 
                 <div class="col-lg-3 col-md-3 col-sm-12">
                     <h4 class="searching-box-heading">Browse by Activity</h4>

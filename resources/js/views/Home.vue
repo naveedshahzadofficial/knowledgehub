@@ -51,7 +51,6 @@ export default {
                 name: "search",
                 params: {
                     prop_department_id: params.department_id,
-                    prop_business_category_id: params.business_category_id,
                     prop_activity_id: params.activity_id,
                 },
             });
