@@ -414,8 +414,9 @@ class RlcoForm extends Component
             $this->validate($rules,$messages);
 
         $required_document_id = $this->required_document_form['required_document_id']??null;
+        $required_document = RequiredDocument::where('id',  $required_document_id)->first();
 
-        if ((int)$required_document_id === 0) {
+        if (empty($required_document->id??null)) {
             $required_document = RequiredDocument::firstOrCreate(
                 ['document_title' => $required_document_id],
                 ['document_status' => 'Active']
