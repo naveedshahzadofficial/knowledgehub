@@ -6,6 +6,12 @@ To install and run the project, follow these steps:
 composer install
 npm install
 npm run dev
+git rm --cached -r .idea/
 ```
 
-To install and run the project, follow these steps:
+How to add directory into gitignore:
+
+```bash
+.idea/
+git rm --cached -r .idea/
+```
