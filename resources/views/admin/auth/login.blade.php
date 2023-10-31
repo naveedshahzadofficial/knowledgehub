@@ -21,7 +21,7 @@
 
                         <div class="auth-form  pt-5">
                             @component('_components.alerts-default')@endcomponent
-                            {{ Form::open(array('route' => 'admin.login','class'=>'kt_auth_form','name'=>'kt_auth_form','id'=>'kt_auth_form')) }}
+                            {{ Form::open(array('route' => 'admin.login.submit','class'=>'kt_auth_form','name'=>'kt_auth_form','id'=>'kt_auth_form')) }}
 
                                 <div class="form-group row">
                                 <div class="col-lg-12">
