@@ -193,7 +193,7 @@ class RlcoForm extends Component
             $new_keyword_ids = array();
             if(!empty($keyword_ids)){
                 foreach ($keyword_ids as $keyword_id){
-                    if ((int)$keyword_id === 0) {
+                    if (!is_numeric($keyword_id)) {
                         $keyword = Keyword::firstOrCreate(
                             ['keyword_name' => $keyword_id],
                             ['keyword_status' => 1]
