@@ -247,7 +247,7 @@
             });
 
             window.addEventListener('page:tab', event =>{
-                KTUtil.scrollTop(300,3000);
+                KTUtil.scrollTop(300,1000);
             });
 
             window.addEventListener('editor:setData', event =>{

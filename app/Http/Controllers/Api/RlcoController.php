@@ -75,10 +75,12 @@ class RlcoController extends Controller
         foreach ($activities as $activity){
             foreach ($activity->rlcos as $rlco){
                 $rlco->activity_id = $activity->id;
-                array_push($rlcos, $rlco);
+                $rlcos[$rlco->id] = $rlco;
             }
         }
-        $total_rlcos = $activities->sum('rlcos_count');
+        $rlcos = array_values($rlcos);
+        //$total_rlcos = $activities->sum('rlcos_count');
+        $total_rlcos = count($rlcos);
 
         return response()->json([
             'activities' => ActivityResource::collection($activities),
