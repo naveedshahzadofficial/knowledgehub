@@ -355,17 +355,17 @@ class RlcoForm extends Component
             $this->validate($rules,$messages);
 
         $required_document_id = $this->required_document_form['required_document_id']??null;
+        $required_document = RequiredDocument::where('id',  $required_document_id)->first();
+        if (empty($required_document->id??null)) {
+                $required_document = RequiredDocument::firstOrCreate(
+                    ['document_title' => $required_document_id],
+                    ['document_status' => 'Active']
+                );
 
-            if ((int)$required_document_id === 0) {
-                    $required_document = RequiredDocument::firstOrCreate(
-                        ['document_title' => $required_document_id],
-                        ['document_status' => 'Active']
-                    );
-
-                    $new_document = ['required_document_id'=>$required_document->id,'position'=>$this->required_document_form['position']??null];
-                } else {
-                    $new_document = ['required_document_id'=>$required_document_id, 'position'=>$this->required_document_form['position']??null];
-                }
+                $new_document = ['required_document_id'=>$required_document->id,'position'=>$this->required_document_form['position']??null];
+        } else {
+                $new_document = ['required_document_id'=>$required_document_id, 'position'=>$this->required_document_form['position']??null];
+        }
 
         $this->rlco->requiredDocuments()->create($new_document);
         $this->reset('required_document_form');
