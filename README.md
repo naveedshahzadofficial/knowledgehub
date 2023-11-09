@@ -26,7 +26,7 @@ BASE_URL=https://webdev.pitb.gov.pk/knowledgehub
 ```
 4. make build
 ```bash
-npm run build
+npm run prod
 ```
 5. add code into git
 ```bash
