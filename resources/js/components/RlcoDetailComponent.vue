@@ -268,6 +268,7 @@
                         <th>Original</th>
                         <th>Photocopies</th>
                         <th>Attestation</th>
+                        <th>Remarks</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -348,6 +349,7 @@
                                  </span>
                             </span>
                             </td>
+                            <td>{{ document.remark }}</td>
                         </tr>
                     </tbody>
                 </table>
