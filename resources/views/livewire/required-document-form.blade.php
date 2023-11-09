@@ -27,7 +27,31 @@
         </div>
     </div>
 
+    <div class="row form-group">
+        <div class="col-lg-6">
+            <label for="">Document Type<span class="text-danger">*</span></label>
+            <div class="checkbox-inline">
+                @foreach($document_types as $document_type)
+                    <label class="checkbox checkbox-success">
+                        <input type="checkbox" wire:model.defer="required_document_form.document_types" name="document_types" value="{{ $document_type }}">
+                        <span></span>{{ $document_type }}</label>
+                @endforeach
+            </div>
+            @error('required_document_form.document_types')
+            <div class="invalid-feedback d-block">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="col-lg-6">
+            <label>{!! __('Remarks (if any):') !!}</label>
+            <textarea wire:model.defer="required_document_form.remark"  class="form-control" ></textarea>
+            @error('required_document_form.remark')
+            <div class="invalid-feedback d-block">{{ $message }}</div>
+            @enderror
+        </div>
 
+    </div>
     <div class="row form-group">
         @if(isset($required_document_form['id']) && !empty($required_document_form['id']))
             <button class="btn btn-custom-color" wire:click.prevent="updateRequiredDocument({{ $required_document_form['id'] }})"  wire:loading.class="spinner spinner-white spinner-right" wire:loading.attr="disabled">Update Document</button>
@@ -41,7 +65,9 @@
         <tr>
             <th>&nbsp;</th>
             <th>Document</th>
+            <th>Type</th>
             <th class="text-center">Order No.</th>
+            <th>Remarks</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -63,7 +89,9 @@
                 </td>
 
                 <td>{{ optional($document->requiredDocument)->document_title }}</td>
+                <td>{{ $document->document_type }}</td>
                 <td class="text-center">{{ $document->position }}</td>
+                <td>{{ $document->remark }}</td>
                 <td>
                     <button wire:click.prevent="editRequiredDocument({{ $document->id }})" class="btn btn-bg-primary text-center btn-circle btn-icon btn-xs"><i class="flaticon2-edit text-white"></i></button> &nbsp;
                     <button wire:click.prevent="confirmDialog('required_document',{{ $document->id }})" class="btn btn-danger text-center btn-circle btn-icon btn-xs"><i class="flaticon2-trash text-white"></i></button>

@@ -14,6 +14,7 @@ use App\Models\OtherDocument;
 use App\Models\RequiredDocument;
 use App\Models\Rlco;
 use App\Models\RlcoRequiredDocument;
+use App\Models\RlcoRequiredDocumentTypes;
 use App\Models\Scope;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -32,7 +33,7 @@ class RlcoForm extends Component
     public $activities;
     public $scopes;
     public $keywords;
-
+    public $document_types;
 
     public $rlcoRequiredDocuments;
     public $required_document_form;
@@ -83,11 +84,13 @@ class RlcoForm extends Component
         $this->business_activities = Collect();
         $this->activities = Activity::orderBy('activity_order')->where('activity_status',1)->get();
         $this->scopes = Scope::orderBy('scope_order')->where('scope_status',1)->get();
+        $this->document_types = array('Original','Photocopies','Attestation');
         $this->departments = Department::where('department_status',1)->get();
         $this->required_documents = RequiredDocument::where('document_status','Active')->get();
         $this->keywords = Collect();
         $this->form['admin_id'] = auth()->id();
         $this->form['scope_ids'] = [];
+        $this->required_document_form['document_types'] = [];
 
         $this->rlcoRequiredDocuments = Collect();
         $this->dependencies = Collect();
@@ -337,36 +340,44 @@ class RlcoForm extends Component
         if(!$this->rlco) {
             $this->formSaved();
         }
-
         $rules = [
             'required_document_form.required_document_id' => 'required|unique:rlco_required_documents,required_document_id,NULL,id,rlco_id,' . $this->rlco->id,
             'required_document_form.position' => 'required|numeric|min:1|unique:rlco_required_documents,position,NULL,id,rlco_id,' . $this->rlco->id,
-
+            'required_document_form.document_types' => 'required',
         ];
         $messages = [
             'required_document_form.required_document_id.unique' => 'Required Document is already exits..',
             'required_document_form.required_document_id.required' => 'Required Document is required.',
             'required_document_form.position.required' => 'Order is required.',
+            'required_document_form.document_types.required' => 'Type is required.',
             'required_document_form.position.unique' => 'Order is already exits.',
             'required_document_form.position.min' => 'Order must be at least 1.',
         ];
 
         if(!empty($rules) && !empty($messages))
             $this->validate($rules,$messages);
-
         $required_document_id = $this->required_document_form['required_document_id']??null;
+        $input_document_types = implode(', ',$this->required_document_form['document_types']);
         if (!is_numeric($required_document_id)) {
                 $required_document = RequiredDocument::firstOrCreate(
                     ['document_title' => $required_document_id],
                     ['document_status' => 'Active']
                 );
 
-                $new_document = ['required_document_id'=>$required_document->id,'position'=>$this->required_document_form['position']??null];
+                $new_document = ['required_document_id'=>$required_document->id,'position'=>$this->required_document_form['position']??null,'document_type'=>$input_document_types??null,'remark'=>$this->required_document_form['remark']??null];
         } else {
-                $new_document = ['required_document_id'=>$required_document_id, 'position'=>$this->required_document_form['position']??null];
+                $new_document = ['required_document_id'=>$required_document_id, 'position'=>$this->required_document_form['position']??null,'document_type'=>$input_document_types??null,'remark'=>$this->required_document_form['remark']??null];
         }
 
-        $this->rlco->requiredDocuments()->create($new_document);
+        $new_req_document = $this->rlco->requiredDocuments()->create($new_document);
+        $docTypes = $this->required_document_form['document_types'];
+        foreach ($docTypes as $docType) {
+            RlcoRequiredDocumentTypes::create([
+                'rlco_id' => $this->rlco->id,
+                'rlco_required_document_id' => $new_req_document->id,
+                'document_type' => $docType
+            ]);
+        }
         $this->reset('required_document_form');
         $this->dispatchBrowserEvent('select2:setValue',['id'=>'#required_document_id','value'=>'']);
         $this->loadRlcoRequiredDocuments();
@@ -380,6 +391,8 @@ class RlcoForm extends Component
             $this->required_document_form['id'] = $document->id;
             $this->required_document_form['required_document_id'] = $document->required_document_id;
             $this->required_document_form['position'] = $document->position;
+            $this->required_document_form['document_types'] = explode(', ',$document->document_type);
+            $this->required_document_form['remark'] = $document->remark;
             $this->dispatchBrowserEvent('select2:setValue',['id'=>'#required_document_id','value'=>$document->required_document_id]);
         }
     }
@@ -400,11 +413,13 @@ class RlcoForm extends Component
         $rules = [
             'required_document_form.required_document_id' => "required|unique:rlco_required_documents,required_document_id,{$document_id},id,rlco_id,{$this->rlco->id}",
             'required_document_form.position' => "required|numeric|min:1|unique:rlco_required_documents,position,{$document_id},id,rlco_id,{$this->rlco->id}",
+            'required_document_form.document_types' => "required",
         ];
         $messages = [
             'required_document_form.required_document_id.unique' => 'Required Document is already exits..',
             'required_document_form.required_document_id.required' => 'Required Document is required.',
             'required_document_form.position.required' => 'Order is required.',
+            'required_document_form.document_types.required' => 'Type is required.',
             'required_document_form.position.unique' => 'Order is already exits.',
             'required_document_form.position.min' => 'Order must be at least 1.',
         ];
@@ -413,6 +428,7 @@ class RlcoForm extends Component
             $this->validate($rules,$messages);
 
         $required_document_id = $this->required_document_form['required_document_id']??null;
+        $input_document_types = implode(', ',$this->required_document_form['document_types']);
 
         if (!is_numeric($required_document_id)) {
             $required_document = RequiredDocument::firstOrCreate(
@@ -420,12 +436,21 @@ class RlcoForm extends Component
                 ['document_status' => 'Active']
             );
 
-            $new_document = ['required_document_id'=>$required_document->id,'position'=>$this->required_document_form['position']??null];
+            $new_document = ['required_document_id'=>$required_document->id,'position'=>$this->required_document_form['position']??null,'document_type'=>$input_document_types??null,'remark'=>$this->required_document_form['remark']??null];
         } else {
-            $new_document = ['required_document_id'=>$required_document_id, 'position'=>$this->required_document_form['position']??null];
+            $new_document = ['required_document_id'=>$required_document_id, 'position'=>$this->required_document_form['position']??null,'document_type'=>$input_document_types??null,'remark'=>$this->required_document_form['remark']??null];
         }
 
         $document->update($new_document);
+        $docTypes = $this->required_document_form['document_types'];
+        RlcoRequiredDocumentTypes::where('rlco_required_document_id',$document->id)->delete();
+        foreach ($docTypes as $docType) {
+            RlcoRequiredDocumentTypes::create([
+                'rlco_id' => $this->rlco->id,
+                'rlco_required_document_id' => $document->id,
+                'document_type' => $docType
+            ]);
+        }
         $this->reset('required_document_form');
         $this->dispatchBrowserEvent('select2:setValue',['id'=>'#required_document_id','value'=>'']);
         $this->loadRlcoRequiredDocuments();

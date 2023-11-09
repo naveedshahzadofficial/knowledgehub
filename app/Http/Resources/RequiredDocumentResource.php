@@ -20,7 +20,8 @@ class RequiredDocumentResource extends JsonResource
             'position' => $this->position,
             'rlco_id' => $this->rlco_id,
             'required_document_id' => $this->required_document_id,
-            'document_title' => optional($this->requiredDocument)->document_title
+            'document_title' => optional($this->requiredDocument)->document_title,
+            'document_type' => explode(', ',$this->document_type),
         ];
     }
 }

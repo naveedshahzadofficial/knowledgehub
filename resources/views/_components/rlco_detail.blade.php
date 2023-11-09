@@ -212,16 +212,20 @@
         <div class="d-flex justify-content-between pt-5">
             <div class="d-flex flex-column flex-root">
                 <span class="font-weight-bolder mb-2">{!! __('Required Documents') !!}</span>
-                <table class="table">
+                <table class="table ">
                     <tr>
-                        <th>Sr. No.</th>
-                        <th>Title</th>
+                        <th width="5%">Sr. No.</th>
+                        <th width="40%">Title</th>
+                        <th width="10%">Type</th>
+                        <th width="45%">Remarks</th>
                     </tr>
                     <tbody>
                     @foreach($rlco->requiredDocuments as $document)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ optional($document->requiredDocument)->document_title }}</td>
+                            <td>{{ $document->document_type }}</td>
+                            <td>{{ $document->remark }}</td>
                         </tr>
                     @endforeach
                     </tbody>
