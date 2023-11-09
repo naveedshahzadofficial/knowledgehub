@@ -264,11 +264,11 @@
                 >
                     <thead>
                     <tr>
-                        <th class="text-left font-weight-bold">Document</th>
-                        <th class="text-center font-weight-bold">Original</th>
-                        <th class="text-center font-weight-bold">Photocopies</th>
-                        <th class="text-center font-weight-bold">Attestation</th>
-                        <th class="text-left font-weight-bold">Remarks</th>
+                        <th class="text-left font-weight-bolder">Document</th>
+                        <th class="text-center font-weight-bolder">Original</th>
+                        <th class="text-center font-weight-bolder">Photocopies</th>
+                        <th class="text-center font-weight-bolder">Attestation</th>
+                        <th class="text-left font-weight-bolder">Remarks</th>
                     </tr>
                     </thead>
                     <tbody>
