@@ -39,4 +39,5 @@ if (mix.inProduction()) {
     //mix.setResourceRoot(`/${process.env.MIX_BASE_URL}/`);
     //mix.setResourceRoot('/knowledgehub/public/');
     //mix.setPublicPath('/knowledgehub/public/');
+    //test
 }
