@@ -111,34 +111,6 @@
                                 <span>{{ rlco_detail.fee_submission_mode }}</span>
                             </td>
                         </tr>
-
-                        <tr
-                            v-if="
-                                rlco_detail.fee_question === 'Yes' &&
-                                rlco_detail.fee_submission_mode === 'Manual' &&
-                                rlco_detail.fee_manual_mode
-                            "
-                        >
-                            <th>Payment Mode</th>
-                            <td>
-                                <span
-                                    v-if="rlco_detail.fee_manual_mode === 'OTC'"
-                                    ><a
-                                        :href="rlco_detail.challan_form_file"
-                                        target="_blank"
-                                        >Challan form</a
-                                    ></span
-                                >
-                                <span
-                                    v-if="
-                                        rlco_detail.fee_manual_mode ===
-                                        'By Hand'
-                                    "
-                                    >By Hand</span
-                                >
-                            </td>
-                        </tr>
-
                         <tr
                             v-if="
                                 rlco_detail.time_taken || rlco_detail.time_unit
