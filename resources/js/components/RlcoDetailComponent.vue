@@ -105,26 +105,10 @@
 
                         <tr
                             v-if="
-                                rlco_detail.fee_question === 'Yes' &&
-                                rlco_detail.fee_submission_mode === 'Online' &&
-                                rlco_detail.payment_source
-                            "
-                        >
+                                rlco_detail.fee_question === 'Yes'">
                             <th>Payment Mode</th>
                             <td>
-                                <span
-                                    v-if="
-                                        rlco_detail.payment_source ===
-                                        'ePay Punjab'
-                                    "
-                                    >Online</span
-                                >
-                                <span
-                                    v-if="
-                                        rlco_detail.payment_source === 'Banks'
-                                    "
-                                    >Online</span
-                                >
+                                <span>{{ rlco_detail.fee_submission_mode }}</span>
                             </td>
                         </tr>
 
