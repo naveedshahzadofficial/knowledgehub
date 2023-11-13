@@ -4,7 +4,20 @@
 @push('post-scripts')
     <script>
         $(function (){
-            ClassicEditor.create(document.querySelector('#{{ $id }}'))
+            ClassicEditor.create(document.querySelector('#{{ $id }}'),{
+                link: {
+                    decorators: {
+                        addTargetToExternalLinks: {
+                            mode: 'automatic',
+                            callback: url => /^(https?:)?\/\//.test( url ),
+                            attributes: {
+                                target: '_blank',
+                                rel: 'noopener noreferrer'
+                            }
+                        }
+                    }
+                }
+            })
                 .then(editor => {
                     editors['#{{ $id }}'] = editor;
                    // editor.ui.view.editable.element.style.height = '10px';
