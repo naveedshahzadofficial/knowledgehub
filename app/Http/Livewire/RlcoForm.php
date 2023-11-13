@@ -357,7 +357,7 @@ class RlcoForm extends Component
         if(!empty($rules) && !empty($messages))
             $this->validate($rules,$messages);
         $required_document_id = $this->required_document_form['required_document_id']??null;
-        $input_document_types = implode(', ',$this->required_document_form['document_types']);
+        $input_document_types = implode(', ',(array)$this->required_document_form['document_types']);
         if (!is_numeric($required_document_id)) {
                 $required_document = RequiredDocument::firstOrCreate(
                     ['document_title' => $required_document_id],
