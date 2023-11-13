@@ -370,7 +370,7 @@ class RlcoForm extends Component
         }
 
         $new_req_document = $this->rlco->requiredDocuments()->create($new_document);
-        $docTypes = $this->required_document_form['document_types'];
+        $docTypes = (array)$this->required_document_form['document_types'];
         foreach ($docTypes as $docType) {
             RlcoRequiredDocumentTypes::create([
                 'rlco_id' => $this->rlco->id,
@@ -428,7 +428,7 @@ class RlcoForm extends Component
             $this->validate($rules,$messages);
 
         $required_document_id = $this->required_document_form['required_document_id']??null;
-        $input_document_types = implode(', ',$this->required_document_form['document_types']);
+        $input_document_types = implode(', ',(array)$this->required_document_form['document_types']);
 
         if (!is_numeric($required_document_id)) {
             $required_document = RequiredDocument::firstOrCreate(
@@ -442,7 +442,7 @@ class RlcoForm extends Component
         }
 
         $document->update($new_document);
-        $docTypes = $this->required_document_form['document_types'];
+        $docTypes = (array)$this->required_document_form['document_types'];
         RlcoRequiredDocumentTypes::where('rlco_required_document_id',$document->id)->delete();
         foreach ($docTypes as $docType) {
             RlcoRequiredDocumentTypes::create([
