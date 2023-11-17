@@ -23,6 +23,8 @@ class RequiredDocumentResource extends JsonResource
             'document_title' => optional($this->requiredDocument)->document_title,
             'document_type' => explode(', ',$this->document_type),
             'remark' => $this->remark,
+            'document_requirement_type' => $this->document_requirement_type,
+            'document_requirement_remarks' => $this->document_requirement_remarks,
         ];
     }
 }

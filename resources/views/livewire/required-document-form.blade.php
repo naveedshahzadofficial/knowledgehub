@@ -53,6 +53,36 @@
 
     </div>
     <div class="row form-group">
+        <div class="col-lg-6">
+            <label for="">Requirement Type<span class="text-danger">*</span></label>
+            <div class="radio-inline">
+                @php $requirement_types = array('Required','Optional','Conditional') @endphp
+                @foreach($requirement_types as $requirement_type)
+                    <label class="radio radio-success">
+                        <input type="radio" wire:model.defer="required_document_form.document_requirement_type"
+                               @click="is_document_required= '{{ $requirement_type }}'"
+                               name="document_requirement_type" value="{{ $requirement_type }}">
+                        <span></span>{{ $requirement_type }}</label>
+                @endforeach
+            </div>
+            @error('required_document_form.document_requirement_type')
+            <div class="invalid-feedback d-block">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="col-lg-6" x-show.transition.opacity="is_document_required=='Conditional'">
+            <label>{!! __('Remarks') !!}</label>
+            <div wire:ignore>
+                <x-c-k-editor wire:model.debounce.999999s="required_document_form.document_requirement_remarks" id="document_requirement_remarks-ckeditor" placeholder="Remarks" setFieldName="required_document_form.document_requirement_remarks" ></x-c-k-editor>
+            </div>
+            @error('required_document_form.document_requirement_remarks')
+            <div class="invalid-feedback d-block">{{ $message }}</div>
+            @enderror
+        </div>
+
+    </div>
+    <div class="row form-group">
         @if(isset($required_document_form['id']) && !empty($required_document_form['id']))
             <button class="btn btn-custom-color" wire:click.prevent="updateRequiredDocument({{ $required_document_form['id'] }})"  wire:loading.class="spinner spinner-white spinner-right" wire:loading.attr="disabled">Update Document</button>
         @else
@@ -68,6 +98,7 @@
             <th>Type</th>
             <th class="text-center">Order No.</th>
             <th>Remarks</th>
+            <th>Requirement</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -92,6 +123,7 @@
                 <td>{{ $document->document_type }}</td>
                 <td class="text-center">{{ $document->position }}</td>
                 <td>{{ $document->remark }}</td>
+                <td class="text-center">{{ $document->document_requirement_type }}</td>
                 <td>
                     <button wire:click.prevent="editRequiredDocument({{ $document->id }})" class="btn btn-bg-primary text-center btn-circle btn-icon btn-xs"><i class="flaticon2-edit text-white"></i></button> &nbsp;
                     <button wire:click.prevent="confirmDialog('required_document',{{ $document->id }})" class="btn btn-danger text-center btn-circle btn-icon btn-xs"><i class="flaticon2-trash text-white"></i></button>

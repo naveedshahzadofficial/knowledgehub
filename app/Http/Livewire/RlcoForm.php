@@ -344,11 +344,14 @@ class RlcoForm extends Component
             'required_document_form.required_document_id' => 'required|unique:rlco_required_documents,required_document_id,NULL,id,rlco_id,' . $this->rlco->id,
             'required_document_form.position' => 'required|numeric|min:1|unique:rlco_required_documents,position,NULL,id,rlco_id,' . $this->rlco->id,
             'required_document_form.document_types' => 'required',
+            'required_document_form.document_requirement_type' => 'required',
+            'required_document_form.document_requirement_remarks' => '',
         ];
         $messages = [
             'required_document_form.required_document_id.unique' => 'Required Document is already exits..',
             'required_document_form.required_document_id.required' => 'Required Document is required.',
             'required_document_form.position.required' => 'Order is required.',
+            'required_document_form.document_requirement_type.required' => 'Document requirement is required.',
             'required_document_form.document_types.required' => 'Type is required.',
             'required_document_form.position.unique' => 'Order is already exits.',
             'required_document_form.position.min' => 'Order must be at least 1.',
@@ -364,9 +367,9 @@ class RlcoForm extends Component
                     ['document_status' => 'Active']
                 );
 
-                $new_document = ['required_document_id'=>$required_document->id,'position'=>$this->required_document_form['position']??null,'document_type'=>$input_document_types??null,'remark'=>$this->required_document_form['remark']??null];
+                $new_document = ['required_document_id'=>$required_document->id,'position'=>$this->required_document_form['position']??null,'document_type'=>$input_document_types??null,'remark'=>$this->required_document_form['remark']??null,'document_requirement_type'=>$this->required_document_form['document_requirement_type']??null,'document_requirement_remarks'=>$this->required_document_form['document_requirement_remarks']??null];
         } else {
-                $new_document = ['required_document_id'=>$required_document_id, 'position'=>$this->required_document_form['position']??null,'document_type'=>$input_document_types??null,'remark'=>$this->required_document_form['remark']??null];
+                $new_document = ['required_document_id'=>$required_document_id, 'position'=>$this->required_document_form['position']??null,'document_type'=>$input_document_types??null,'remark'=>$this->required_document_form['remark']??null,'document_requirement_type'=>$this->required_document_form['document_requirement_type']??null,'document_requirement_remarks'=>$this->required_document_form['document_requirement_remarks']??null];
         }
 
         $new_req_document = $this->rlco->requiredDocuments()->create($new_document);
@@ -380,6 +383,7 @@ class RlcoForm extends Component
         }
         $this->reset('required_document_form');
         $this->dispatchBrowserEvent('select2:setValue',['id'=>'#required_document_id','value'=>'']);
+        $this->dispatchBrowserEvent('editor:setData', ['editor_id'=>'#document_requirement_remarks-ckeditor','editor_text'=>'']);
         $this->loadRlcoRequiredDocuments();
 
     }
@@ -393,7 +397,10 @@ class RlcoForm extends Component
             $this->required_document_form['position'] = $document->position;
             $this->required_document_form['document_types'] = explode(', ',$document->document_type);
             $this->required_document_form['remark'] = $document->remark;
+            $this->required_document_form['document_requirement_type'] = $document->document_requirement_type;
+            $this->required_document_form['document_requirement_remarks'] = $document->document_requirement_remarks;
             $this->dispatchBrowserEvent('select2:setValue',['id'=>'#required_document_id','value'=>$document->required_document_id]);
+            $this->dispatchBrowserEvent('editor:setData', ['editor_id'=>'#document_requirement_remarks-ckeditor','editor_text'=>$document->document_requirement_remarks]);
         }
     }
 
@@ -414,11 +421,13 @@ class RlcoForm extends Component
             'required_document_form.required_document_id' => "required|unique:rlco_required_documents,required_document_id,{$document_id},id,rlco_id,{$this->rlco->id}",
             'required_document_form.position' => "required|numeric|min:1|unique:rlco_required_documents,position,{$document_id},id,rlco_id,{$this->rlco->id}",
             'required_document_form.document_types' => "required",
+            'required_document_form.document_requirement_type' => 'required',
         ];
         $messages = [
             'required_document_form.required_document_id.unique' => 'Required Document is already exits..',
             'required_document_form.required_document_id.required' => 'Required Document is required.',
             'required_document_form.position.required' => 'Order is required.',
+            'required_document_form.document_requirement_type.required' => 'Document requirement is required.',
             'required_document_form.document_types.required' => 'Type is required.',
             'required_document_form.position.unique' => 'Order is already exits.',
             'required_document_form.position.min' => 'Order must be at least 1.',
@@ -436,9 +445,9 @@ class RlcoForm extends Component
                 ['document_status' => 'Active']
             );
 
-            $new_document = ['required_document_id'=>$required_document->id,'position'=>$this->required_document_form['position']??null,'document_type'=>$input_document_types??null,'remark'=>$this->required_document_form['remark']??null];
+            $new_document = ['required_document_id'=>$required_document->id,'position'=>$this->required_document_form['position']??null,'document_type'=>$input_document_types??null,'remark'=>$this->required_document_form['remark']??null,'document_requirement_type'=>$this->required_document_form['document_requirement_type']??null,'document_requirement_remarks'=>$this->required_document_form['document_requirement_remarks']??null];
         } else {
-            $new_document = ['required_document_id'=>$required_document_id, 'position'=>$this->required_document_form['position']??null,'document_type'=>$input_document_types??null,'remark'=>$this->required_document_form['remark']??null];
+            $new_document = ['required_document_id'=>$required_document_id, 'position'=>$this->required_document_form['position']??null,'document_type'=>$input_document_types??null,'remark'=>$this->required_document_form['remark']??null,'document_requirement_type'=>$this->required_document_form['document_requirement_type']??null,'document_requirement_remarks'=>$this->required_document_form['document_requirement_remarks']??null];
         }
 
         $document->update($new_document);
@@ -453,6 +462,7 @@ class RlcoForm extends Component
         }
         $this->reset('required_document_form');
         $this->dispatchBrowserEvent('select2:setValue',['id'=>'#required_document_id','value'=>'']);
+        $this->dispatchBrowserEvent('editor:setData', ['editor_id'=>'#document_requirement_remarks-ckeditor','editor_text'=>'']);
         $this->loadRlcoRequiredDocuments();
 
     }

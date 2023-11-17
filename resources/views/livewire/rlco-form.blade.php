@@ -10,6 +10,7 @@
     renewal_fee_plan: '{{ $form['renewal_fee_plan']??null }}',
     time_unit: '{{ $form['time_unit']??null }}',
     fee_manual_mode: '{{ $form['fee_manual_mode']??null }}',
+    is_document_required: '{{ $required_document_form['document_requirement_type']??null }}',
 }" class="wizard wizard-3" id="kt_wizard_v3" data-wizard-state="step-first" data-wizard-clickable="true">
     <!--begin: Wizard Nav-->
     <div class="wizard-nav">
