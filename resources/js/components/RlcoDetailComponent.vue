@@ -89,7 +89,7 @@
                                     "
                                     @click.prevent="toggleModal"
                                     class="make-link"
-                                    >Fee Schedule</span
+                                    >Fee Details</span
                                 >
                                 <span
                                     v-else-if="
@@ -147,7 +147,7 @@
                                     "
                                     @click.prevent="toggleModalRenewal"
                                     class="make-link"
-                                    >Renewal Fee Schedule</span
+                                    >Renewal Fee Details</span
                                 >
                                 <span
                                     v-else-if="
@@ -606,7 +606,7 @@
         </div>
 
         <base-modal-component
-            title="Fee Schedule"
+            title="Fee Details"
             @toggle-modal="toggleModal"
             v-if="isShowModal"
         >
@@ -614,7 +614,7 @@
         </base-modal-component>
 
         <base-modal-component
-            title="Renewal Fee Schedule"
+            title="Renewal Fee Details"
             @toggle-modal="toggleModalRenewal"
             v-if="isShowModalRenewal"
         >
