@@ -35,6 +35,7 @@
 import RlcoItemComponent from "./RlcoItemComponent";
 export default {
     name: "RlcoListComponent",
+    emits: ['toggle-favorite', 'detail-rlco'],
     components: {RlcoItemComponent},
     props: {
         rlcos: {},

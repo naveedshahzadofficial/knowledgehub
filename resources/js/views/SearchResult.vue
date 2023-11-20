@@ -135,7 +135,7 @@ export default {
          findRlcos: function (activity){
              this.activeActivity = activity.id;
              this.activityName = activity.activity_name;
-             this.activity_rlcos = this.rlcos.filter((rlco) => rlco.activity_id === parseInt(activity.id));
+             this.activity_rlcos = activity.rlcos;
              let rlco = _.head(this.activity_rlcos);
              if(rlco!==undefined) {
                  this.rlcoDetail(rlco);
@@ -147,7 +147,10 @@ export default {
            this.rlco_detail = rlco;
         },
          allActivites: function(){
-             this.activity_rlcos = this.rlcos;
+             const flattenedRlcos = [].concat(...this.activities.map((activity) => activity.rlcos.map(rlco => rlco)));
+             this.activity_rlcos = flattenedRlcos.filter((rlco, index, self) =>
+                 index === self.findIndex((r) => r.id === rlco.id)
+             );
              this.activeActivity='all';
              this.activityName = 'All Activities';
              let rlco = _.head(this.activity_rlcos);

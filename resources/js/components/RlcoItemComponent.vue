@@ -14,6 +14,7 @@
 <script>
 export default {
     name: "RlcoItemComponent",
+    emits: ['toggle-favorite'],
     props: {
         rlco: Object,
         isFavorite: false

@@ -34,61 +34,39 @@ class RlcoController extends Controller
          $activity_id = $request->input('activity_id');
 
          /* Activities with count of RLCOs */
-        $query = Activity::with(['rlcos'=>function($q) use($department_id, $business_category_id){
-            if (!empty($department_id)) {
-                $q->where('department_id', $department_id);
-            }
-            if (!empty($business_category_id)) {
-                $q->where('business_category_id', $business_category_id);
-            }
-            $q->where('rlco_status', 1)
+        $activities = Activity::with(['rlcos'=>function($query) use($department_id, $business_category_id){
+            $query->when($department_id, function ($query , $department_id){
+                $query->where('department_id', $department_id);
+            })->when($business_category_id, function ($query , $business_category_id){
+                $query->where('business_category_id', $business_category_id);
+            })->where('rlco_status', 1)
                 ->with('businessCategory', 'department', 'inspectionDepartment', 'requiredDocuments.requiredDocument', 'faqs', 'foss', 'dependencies.department', 'otherDocuments', 'scopes');
-        }])
-            ->withCount(['rlcos' => function($q) use($department_id, $business_category_id){
-                if (!empty($department_id)) {
-                    $q->where('department_id', $department_id);
-                }
-                if (!empty($business_category_id)) {
-                    $q->where('business_category_id', $business_category_id);
-                }
-                $q->where('rlco_status', 1);
+         }])
+            ->withCount(['rlcos' => function($query) use($department_id, $business_category_id){
+                $query->when($department_id, function ($query , $department_id){
+                    $query->where('department_id', $department_id);
+                })->when($business_category_id, function ($query , $business_category_id){
+                    $query->where('business_category_id', $business_category_id);
+                })->where('rlco_status', 1);
             }])
             ->has('rlcos')
-            ->where('activity_status', 1);
+            ->when($activity_id, function ($query , $activity_id){
+                $query->where('id', $activity_id);
+            })
+            ->when($business_category_id, function ($query , $business_category_id){
+                $query->whereRelation('rlcos', 'business_category_id', $business_category_id);
+            })
+            ->when($department_id, function ($query , $department_id){
+                $query->whereRelation('rlcos', 'department_id', $department_id);
+            })
+            ->where('activity_status', 1)->get();
 
-        if (!empty($business_category_id)) {
-            $query->whereHas('rlcos', function ($q) use($business_category_id) {
-                $q->where('business_category_id', $business_category_id);
-            });
-        }
-
-        if (!empty($activity_id)) {
-            $query->where('id', $activity_id);
-        }
-        if (!empty($department_id)) {
-            $query->whereHas('rlcos', function ($q) use($department_id) {
-                $q->where('department_id', $department_id);
-            });
-        }
-
-        $activities = $query->get();
-
-       $rlcos = array();
-        foreach ($activities as $activity){
-            foreach ($activity->rlcos as $rlco){
-                $rlco->activity_id = $activity->id;
-                $rlcos[$rlco->id] = $rlco;
-            }
-        }
-        $rlcos = array_values($rlcos);
-        $total_rlcos = count($rlcos);
-
-        //$total_rlcos = $activities->sum('rlcos_count');
+        $flattenedRlcos = $activities->pluck('rlcos')->flatten();
+        $total_rlcos = $flattenedRlcos->unique('id')->count();
 
 
         return response()->json([
             'activities' => ActivityResource::collection($activities),
-            'rlcos' => RlcoResource::collection($rlcos),
             'total_rlcos' => $total_rlcos,
         ]);
     }

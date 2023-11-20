@@ -17,6 +17,7 @@ class ActivityResource extends JsonResource
         return [
             'id' => $this->id,
             'activity_name' => $this->activity_name,
+            "rlcos" => RlcoResource::collection($this->whenLoaded('rlcos')),
             'rlcos_count' => $this->rlcos_count??null,
             ];
     }
