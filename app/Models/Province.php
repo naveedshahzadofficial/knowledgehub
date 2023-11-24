@@ -13,6 +13,10 @@ class Province extends Model
 
     protected $fillable = ['province_name', 'province_remark', 'province_status'];
 
+    public function scopeActive($query) {
+        return $query->where('province_status', true);
+    }
+
     public function districts(): HasMany
     {
         return $this->hasMany(District::class);

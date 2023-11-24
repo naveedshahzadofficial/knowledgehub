@@ -90,7 +90,7 @@
                     <th>Rlco Name</th>
                     <th>Department</th>
                     <th>Status</th>
-                    <th style="width: 90px;" class="text-center">Action</th>
+                    <th style="width: 120px;" class="text-center">Action</th>
                 </tr>
                 </thead>
             </table>
@@ -211,6 +211,7 @@
         });
 
         function resetForm() {
+            $('#department_id').val('').trigger('change.select2');
             $('#business_category_id').val('').trigger('change.select2');
             reDrawDataTable();
         }

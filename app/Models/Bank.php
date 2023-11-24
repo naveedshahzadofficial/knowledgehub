@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Tehsil extends Model
+class Bank extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = [ 'tehsil_name_e','tehsil_name_u','district_id','province_id','fbr_code_id','tehsil_remark','tehsil_status'];
+
+    protected $fillable = ['name_e', 'name_u', 'remark', 'status'];
 
     public function scopeActive($query) {
-        return $query->where('tehsil_status', true);
+        return $query->where('status', true);
     }
 }

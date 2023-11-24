@@ -12,6 +12,9 @@ class District extends Model
     use HasFactory, SoftDeletes;
     protected $fillable = [ 'district_name_e', 'district_name_u', 'district_short_name', 'division_id','province_id','fbr_code_id' ,'district_status','district_remark',];
 
+    public function scopeActive($query) {
+        return $query->where('district_status', true);
+    }
     public function registrations(): HasMany
     {
         return $this->hasMany(Registration::class,'business_district_id');

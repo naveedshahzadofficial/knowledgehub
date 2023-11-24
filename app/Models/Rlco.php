@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Rlco extends Model
@@ -92,5 +93,10 @@ class Rlco extends Model
     }
     public function reviews(){
         return $this->hasMany(Review::class);
+    }
+
+    public function accountInfo(): HasOne
+    {
+        return $this->hasOne(AccountInfo::class);
     }
 }

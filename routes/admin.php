@@ -20,6 +20,8 @@ Route::get('/login', [Auth\LoginController::class, 'showLoginForm'])->name('logi
         Route::post('rlcos/index-ajax', [ Admin\RlcoController::class,'indexAjax'])->name('rlcos.index-ajax');
         Route::resource('rlcos', Admin\RlcoController::class);
 
+        Route::resource('rlcos.account-info', Admin\AccountInfoController::class);
+
         Route::post('auditable/index-ajax', [ Admin\AuditableController::class,'indexAjax'])->name('auditable.index-ajax');
         Route::resource('auditable', Admin\AuditableController::class);
 

@@ -50,6 +50,7 @@ class RlcoController extends Controller
                 $actionBtn = '<span onclick="toggleStatus(this); return false;"  data-href="'.route('admin.rlcos.destroy',$rlco).'" class="edit btn btn-custom-color text-center btn-circle btn-icon btn-xs">'.($rlco->rlco_status?'<i class="fa fa-toggle-on text-white"></i>':'<i class="fa fa-toggle-off text-danger"></i>').'</span>';
                 $actionBtn .= '&nbsp;&nbsp;<a target="_blank" href="'.route('admin.rlcos.show',$rlco).'" class="edit btn btn-custom-color text-center btn-circle btn-icon btn-xs"><i class="flaticon-eye text-white"></i></a>';
                 $actionBtn .= '&nbsp;&nbsp;<a  href="'.route('admin.rlcos.edit',$rlco).'" class="edit btn btn-custom-color text-center btn-circle btn-icon btn-xs"><i class="flaticon-edit text-white"></i></a>';
+                $actionBtn .= '&nbsp;&nbsp;<a  href="'.route('admin.rlcos.account-info.index',$rlco).'" class="edit btn btn-custom-color text-center btn-circle btn-icon btn-xs" title="Accounts"><i class="fas fa-file-archive text-white"></i></a>';
                 return $actionBtn;
             })
             ->rawColumns(['rlco_status','action'])

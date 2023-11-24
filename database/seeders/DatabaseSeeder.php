@@ -33,5 +33,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RequiredDocumentSeeder::class);
         $this->call(ActivitySectionSeeder::class);
         $this->call(ScopeSeeder::class);
+        $this->call(BankSeeder::class);
     }
 }
