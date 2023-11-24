@@ -109,8 +109,6 @@ class AccountInfoForm extends Component
         if($account){
             $this->account_form = $account->toArray();
             $this->dispatchBrowserEvent('select2:setValue',['id'=>'#province_id','value'=>$account->province_id]);
-            $this->dispatchBrowserEvent('select2:setValue',['id'=>'#district_id','value'=>$account->district_id]);
-            $this->dispatchBrowserEvent('select2:setValue',['id'=>'#tehsil_id','value'=>$account->tehsil_id]);
             $this->dispatchBrowserEvent('select2:setValue',['id'=>'#bank_id','value'=>$account->bank_id]);
         }
     }
@@ -177,15 +175,19 @@ class AccountInfoForm extends Component
         $this->dispatchBrowserEvent('account-info:refill-select2',[
             'data'=>$this->districts,
             'field_name'=>'district_name_e',
-            'child_id'=>'#district_id'
+            'select2_id'=>'#district_id',
+            'selected_id'=>$this->account_form['district_id']??0
         ]);
+
+        $this->updatedAccountFormDistrictId($this->account_form['district_id']);
     }
     public function updatedAccountFormDistrictId($value){
         $this->tehsils = Tehsil::active()->where('district_id', $value)->get();
         $this->dispatchBrowserEvent('account-info:refill-select2',[
             'data'=>$this->tehsils,
             'field_name'=>'tehsil_name_e',
-            'child_id'=>'#tehsil_id'
+            'select2_id'=>'#tehsil_id',
+            'selected_id'=>$this->account_form['tehsil_id']??0
         ]);
     }
 

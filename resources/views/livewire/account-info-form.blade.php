@@ -205,14 +205,16 @@ applicable_at_level: '{{ $form['applicable_at_level']??null }}',
     <script>
 
         window.addEventListener('account-info:refill-select2', event =>{
-            let child_id = event.detail.child_id;
-            $(child_id).empty();
-            var newOption = new Option("--- Please Select ---", "", false, false);
-            $(child_id).append(newOption);
+            let select2_id = event.detail.select2_id;
+            const fieldName = event.detail.field_name;
+            const SelectedId = event.detail.selected_id;
+            console.log(SelectedId);
+            $(select2_id).empty();
+            $(select2_id).append(new Option("--- Please Select ---", "", false, false));
             event.detail.data.forEach(function(row){
-                $(child_id).append('<option  value="'+row.id+'">'+row[event.detail.field_name]+'</option>');
+                $(select2_id).append(new Option(row[fieldName], row.id, SelectedId==row.id, SelectedId==row.id));
             });
-            $(child_id).trigger('change.select2');
+            $(select2_id).trigger('change.select2');
         });
 
     </script>
