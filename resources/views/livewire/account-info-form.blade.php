@@ -135,7 +135,7 @@ applicable_at_level: '{{ $form['applicable_at_level']??null }}',
                             <label>{!! __('Account No.') !!}<span class="text-danger">*</span></label>
                             <input wire:model.defer="account_form.account_no" type="text"
                                    class="form-control @error('account_form.account_no') is-invalid @enderror"
-                                   placeholder="Branch"/>
+                                   placeholder="Account No."/>
                             @error('account_form.account_no')
                             <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
