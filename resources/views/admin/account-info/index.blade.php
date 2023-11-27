@@ -6,6 +6,10 @@
                     <div class="card-title">
                         <h3 class="card-label">Account Information</h3>
                     </div>
+                    <div class="card-toolbar flex-column align-items-start">
+                        <p style="color: #30807d; font-size: 14px;">{{ $rlco->rlco_name }}</p>
+                        <p style="color: #30807d; font-size: 14px;">{{ optional($rlco->department)->department_name }}</p>
+                    </div>
                 </div>
 
                 <div class="card-body p-0">
