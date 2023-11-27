@@ -56,33 +56,6 @@ applicable_at_level: '{{ $form['applicable_at_level']??null }}',
                 </h4>
                 <div class="section_box">
                     <div class="row form-group">
-                        <div class="col-lg-6">
-                            <label>{!! __('Province') !!}<span class="text-danger">*</span></label>
-                            <div wire:ignore>
-                                <x-select2-dropdown wire:model.defer="account_form.province_id"
-                                                    setFieldName="account_form.province_id"
-                                                    id="province_id" fieldName="province_name"
-                                                    :listing="$provinces"/>
-                            </div>
-                            @error('account_form.province_id')
-                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-lg-6">
-                            <label>{!! __('Bank') !!}<span class="text-danger">*</span></label>
-                            <div wire:ignore>
-                                <x-select2-dropdown wire:model.defer="account_form.bank_id"
-                                                    setFieldName="account_form.bank_id"
-                                                    id="bank_id" fieldName="name_e"
-                                                    :listing="$banks"/>
-                            </div>
-                            @error('account_form.bank_id')
-                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                    </div>
-                    <div class="row form-group">
                         <div class="col-lg-6" x-show.transition.opacity="applicable_at_level=='District' || applicable_at_level=='Tehsil'">
                             <label>{!! __('District') !!}<span class="text-danger">*</span></label>
                             <div wire:ignore>
@@ -112,6 +85,18 @@ applicable_at_level: '{{ $form['applicable_at_level']??null }}',
                     </div>
                     <div class="row form-group">
                         <div class="col-lg-6">
+                            <label>{!! __('Bank') !!}<span class="text-danger">*</span></label>
+                            <div wire:ignore>
+                                <x-select2-dropdown wire:model.defer="account_form.bank_id"
+                                                    setFieldName="account_form.bank_id"
+                                                    id="bank_id" fieldName="name_e"
+                                                    :listing="$banks"/>
+                            </div>
+                            @error('account_form.bank_id')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-lg-6">
                             <label>{!! __('Branch') !!}<span class="text-danger"></span></label>
                             <input wire:model.defer="account_form.branch" type="text"
                                    class="form-control @error('account_form.branch') is-invalid @enderror"
@@ -120,6 +105,9 @@ applicable_at_level: '{{ $form['applicable_at_level']??null }}',
                             <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
                         </div>
+
+                    </div>
+                    <div class="row form-group">
                         <div class="col-lg-6">
                             <label>{!! __('Title/Head') !!}<span class="text-danger">*</span></label>
                             <input wire:model.defer="account_form.account_title" type="text"
@@ -129,8 +117,7 @@ applicable_at_level: '{{ $form['applicable_at_level']??null }}',
                             <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
                         </div>
-                    </div>
-                    <div class="row form-group">
+
                         <div class="col-lg-6">
                             <label>{!! __('Account No.') !!}<span class="text-danger">*</span></label>
                             <input wire:model.defer="account_form.account_no" type="text"
@@ -157,7 +144,6 @@ applicable_at_level: '{{ $form['applicable_at_level']??null }}',
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>Province</th>
                             <th>District</th>
                             <th>Tehsil</th>
                             <th>Bank</th>
@@ -170,7 +156,6 @@ applicable_at_level: '{{ $form['applicable_at_level']??null }}',
                         <tbody>
                         @forelse($accounts as $account)
                             <tr>
-                                <td>{{ optional($account->province)->province_name }}</td>
                                 <td>{{ optional($account->district)->district_name_e }}</td>
                                 <td>{{ optional($account->tehsil)->tehsil_name_e }}</td>
                                 <td>{{ optional($account->bank)->name_e }}</td>

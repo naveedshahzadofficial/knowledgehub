@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use App\Models\Account;
 use App\Models\Bank;
 use App\Models\District;
-use App\Models\Province;
 use App\Models\Tehsil;
 use Livewire\Component;
 
@@ -26,7 +25,6 @@ class AccountInfoForm extends Component
     protected $rules = [
     'form.account_type' => 'required',
     'form.applicable_at_level' => 'required',
-    'account_form.province_id' => 'required',
     'account_form.district_id' => 'required_if:form.applicable_at_level,District|required_if:form.applicable_at_level,Tehsil',
     'account_form.tehsil_id' => 'required_if:form.applicable_at_level,Tehsil',
     'account_form.bank_id' => 'required',
@@ -37,7 +35,6 @@ class AccountInfoForm extends Component
     protected $messages = [
     'form.account_type.required' => 'Account Type is required.',
     'form.applicable_at_level.required' => 'Applicable at level is required.',
-    'account_form.province_id.required' => 'Province is required.',
     'account_form.district_id.required_if' => 'District is required.',
     'account_form.tehsil_id.required_if' => 'Tehsil is required.',
     'account_form.bank_id.required' => 'Bank is required.',
@@ -53,8 +50,7 @@ class AccountInfoForm extends Component
     public function mount()
     {
         $this->rlco->load('accountInfo');
-        $this->provinces = Province::active()->get();
-        $this->districts = Collect();
+        $this->districts = District::active()->where('province_id', 7)->get();
         $this->tehsils = Collect();
         $this->banks = Bank::active()->get();
         $this->accounts = Collect();
@@ -93,12 +89,12 @@ class AccountInfoForm extends Component
         {
             $this->account_form['tehsil_id'] = null;
         }
+        $this->account_form['province_id']= 7;
         $this->account_form['account_info_id']= $this->accountInfo->id;
         Account::create($this->account_form);
-        $this->dispatchBrowserEvent('account-info:select2',['id'=>'#province_id','key_name'=>'account_form.province_id']);
-        $this->dispatchBrowserEvent('account-info:select2',['id'=>'#bank_id','key_name'=>'account_form.bank_id']);
         $this->dispatchBrowserEvent('account-info:select2',['id'=>'#district_id','key_name'=>'account_form.district_id']);
         $this->dispatchBrowserEvent('account-info:select2',['id'=>'#tehsil_id','key_name'=>'account_form.tehsil_id']);
+        $this->dispatchBrowserEvent('account-info:select2',['id'=>'#bank_id','key_name'=>'account_form.bank_id']);
         $this->reset('account_form');
         $this->successAlert();
         $this->loadAccounts();
@@ -108,7 +104,7 @@ class AccountInfoForm extends Component
         $account = Account::find($account_id);
         if($account){
             $this->account_form = $account->toArray();
-            $this->dispatchBrowserEvent('select2:setValue',['id'=>'#province_id','value'=>$account->province_id]);
+            $this->dispatchBrowserEvent('select2:setValue',['id'=>'#district_id','value'=>$account->district_id]);
             $this->dispatchBrowserEvent('select2:setValue',['id'=>'#bank_id','value'=>$account->bank_id]);
         }
     }
@@ -126,7 +122,6 @@ class AccountInfoForm extends Component
         }
 
         $account->update($this->account_form);
-        $this->dispatchBrowserEvent('account-info:select2',['id'=>'#province_id','key_name'=>'account_form.province_id']);
         $this->dispatchBrowserEvent('account-info:select2',['id'=>'#bank_id','key_name'=>'account_form.bank_id']);
         $this->dispatchBrowserEvent('account-info:select2',['id'=>'#district_id','key_name'=>'account_form.district_id']);
         $this->dispatchBrowserEvent('account-info:select2',['id'=>'#tehsil_id','key_name'=>'account_form.tehsil_id']);
@@ -152,7 +147,7 @@ class AccountInfoForm extends Component
 
     private function loadAccounts()
     {
-        $this->accounts = Account::with('province', 'district', 'tehsil', 'bank')->where('account_info_id', $this->accountInfo->id)->get();
+        $this->accounts = Account::with( 'district', 'tehsil', 'bank')->where('account_info_id', $this->accountInfo->id)->get();
     }
 
     public function confirmDelete($type, $id){
@@ -170,17 +165,6 @@ class AccountInfoForm extends Component
         ]);
     }
 
-    public function updatedAccountFormProvinceId($value){
-        $this->districts = District::active()->where('province_id', $value)->get();
-        $this->dispatchBrowserEvent('account-info:refill-select2',[
-            'data'=>$this->districts,
-            'field_name'=>'district_name_e',
-            'select2_id'=>'#district_id',
-            'selected_id'=>$this->account_form['district_id']??0
-        ]);
-
-        $this->updatedAccountFormDistrictId($this->account_form['district_id']);
-    }
     public function updatedAccountFormDistrictId($value){
         $this->tehsils = Tehsil::active()->where('district_id', $value)->get();
         $this->dispatchBrowserEvent('account-info:refill-select2',[
