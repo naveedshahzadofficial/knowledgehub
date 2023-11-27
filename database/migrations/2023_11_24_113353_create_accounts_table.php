@@ -21,6 +21,7 @@ class CreateAccountsTable extends Migration
             $table->foreignId('tehsil_id')->nullable()->constrained();
             $table->foreignId('bank_id')->nullable()->constrained();
             $table->string('branch')->nullable();
+            $table->unsignedBigInteger('payment_service_id')->nullable();
             $table->string('account_title')->nullable();
             $table->string('account_no');
             $table->timestamps();

@@ -76,30 +76,6 @@ applicable_at_level: '{{ $form['applicable_at_level']??null }}',
                     </div>
                     <div class="row form-group">
                         <div class="col-lg-6">
-                            <label>{!! __('Bank') !!}<span class="text-danger">*</span></label>
-                            <div wire:ignore>
-                                <x-select2-dropdown wire:model.defer="account_form.bank_id"
-                                                    setFieldName="account_form.bank_id"
-                                                    id="bank_id" fieldName="name_e"
-                                                    :listing="$banks"/>
-                            </div>
-                            @error('account_form.bank_id')
-                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-lg-6">
-                            <label>{!! __('Branch') !!}<span class="text-danger"></span></label>
-                            <input wire:model.defer="account_form.branch" type="text"
-                                   class="form-control @error('account_form.branch') is-invalid @enderror"
-                                   placeholder="Branch"/>
-                            @error('account_form.branch')
-                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-lg-6">
                             <label>{!! __('Title/Head') !!}<span class="text-danger">*</span></label>
                             <input wire:model.defer="account_form.account_title" type="text"
                                    class="form-control @error('account_form.account_title') is-invalid @enderror"
@@ -110,7 +86,7 @@ applicable_at_level: '{{ $form['applicable_at_level']??null }}',
                         </div>
 
                         <div class="col-lg-6">
-                            <label>{!! __('Account No.') !!}<span class="text-danger">*</span></label>
+                            <label>{!! __('Account No./ IBAN') !!}<span class="text-danger">*</span></label>
                             <input wire:model.defer="account_form.account_no" type="text"
                                    class="form-control @error('account_form.account_no') is-invalid @enderror"
                                    placeholder="Account No."/>
@@ -137,10 +113,8 @@ applicable_at_level: '{{ $form['applicable_at_level']??null }}',
                         <tr>
                             <th>District</th>
                             <th>Tehsil</th>
-                            <th>Bank</th>
-                            <th>Branch</th>
                             <th>Title/Head</th>
-                            <th>Account No.</th>
+                            <th>Account No./ IBAN</th>
                             <th class="text-center">Action</th>
                         </tr>
                         </thead>
@@ -149,8 +123,6 @@ applicable_at_level: '{{ $form['applicable_at_level']??null }}',
                             <tr>
                                 <td>{{ optional($account->district)->district_name_e }}</td>
                                 <td>{{ optional($account->tehsil)->tehsil_name_e }}</td>
-                                <td>{{ optional($account->bank)->name_e }}</td>
-                                <td>{{ $account->branch }}</td>
                                 <td>{{ $account->account_title }}</td>
                                 <td>{{ $account->account_no }}</td>
                                 <td class="text-center"><button wire:click.prevent="editAccount({{ $account->id }})" class="btn btn-bg-primary text-center btn-circle btn-icon btn-xs"><i class="flaticon2-edit text-white"></i></button> &nbsp; <button wire:click.prevent="confirmDialog('account',{{ $account->id }})" class="btn btn-danger text-center btn-circle btn-icon btn-xs"><i class="flaticon2-trash text-white"></i></button></td>

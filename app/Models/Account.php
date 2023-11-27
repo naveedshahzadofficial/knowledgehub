@@ -10,7 +10,7 @@ class Account extends Model
 {
     use HasFactory;
     protected $fillable = ['account_info_id', 'province_id', 'district_id', 'tehsil_id',
-        'bank_id', 'branch', 'account_title', 'account_no'
+        'bank_id', 'branch', 'account_title', 'account_no', 'payment_service_id'
     ];
 
     public function province(): BelongsTo
