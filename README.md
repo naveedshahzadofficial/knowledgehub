@@ -1,4 +1,4 @@
-## Installation
+## Installation -
 
 To install and run the project, follow these steps:
 
