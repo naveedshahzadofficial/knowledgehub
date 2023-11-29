@@ -7,13 +7,13 @@ import Detail from "../views/Detail";
 import PageNotFound from "../views/PageNotFound";
 
 export const router = createRouter({
-    history: createWebHistory("/knowledgehub/"),
+    history: createWebHistory("/"),
     linkActiveClass: "text-dark bg-white",
     routes: [
         {
             path: "/",
             name: "home",
-            component: Home,
+            component: SearchResult,
         },
         {
             path: "/search",
