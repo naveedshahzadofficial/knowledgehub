@@ -1,5 +1,8 @@
 <template>
         <div class="wrapping-searching">
+            <div class="row">
+                <div class="col-lg-12"><p class="home-notice-main"> Browse list of permits you may require by selecting the relevant government agency and/or business activity. </p></div>
+            </div>
         <SearchFormComponent :prop_department_id="prop_department_id"  :prop_activity_id="prop_activity_id" @search-params="searchParams" />
 
             <div class="row mt-4">

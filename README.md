@@ -31,7 +31,7 @@ npm run prod
 5. add code into git
 ```bash
 git add .
-git commit -m "build-17-11-2023"
+git commit -m "build-03-12-2023"
 git push origin main
 ```
 6. now build deploy on server

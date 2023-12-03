@@ -1,5 +1,5 @@
 <template>
-    <footer class="main-footer footer-overlay">
+    <footer class="main-footer footer-overlay d-none">
         <div class="row ml-0 mr-0">
             <div class="col-lg-12 col-md-12 col-sm-12 mt-2 footer text-center">
                 <router-link :to="{ name: 'Overview' }">Overview</router-link>

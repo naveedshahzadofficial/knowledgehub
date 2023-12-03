@@ -54,7 +54,7 @@
                 <table class="table detail-table">
                     <tbody>
                         <tr>
-                            <th>Business Category/ Section</th>
+                            <th width="40%">Business Category/ Section</th>
                             <td>
                                 {{
                                     rlco_detail.business_category?.category_name
@@ -220,10 +220,10 @@
                 >
                     <thead>
                     <tr>
-                        <th class="text-left font-weight-bolder">Document</th>
-                        <th class="text-center font-weight-bolder">Original</th>
-                        <th class="text-center font-weight-bolder">Photocopies</th>
-                        <th class="text-center font-weight-bolder">Attestation</th>
+                        <th class="text-left font-weight-bolder" width="40%">Document</th>
+                        <th class="text-center font-weight-bolder" width="10%">Original</th>
+                        <th class="text-center font-weight-bolder" width="10%">Photocopies</th>
+                        <th class="text-center font-weight-bolder" width="10%">Attestation</th>
                         <th class="text-left font-weight-bolder">Remarks</th>
                     </tr>
                     </thead>
