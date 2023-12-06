@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Account;
+use App\Models\DepartmentStructuralUnit;
 use App\Models\District;
 use App\Models\Tehsil;
 use Livewire\Component;
@@ -19,6 +20,8 @@ class AccountInfoForm extends Component
     public $tehsils;
     public $banks;
 
+    public $departmentStructuralUnits;
+
     protected $listeners = ['confirmDelete'];
 
     protected $rules = [
@@ -26,6 +29,7 @@ class AccountInfoForm extends Component
     'form.applicable_at_level' => 'required',
     'account_form.district_id' => 'required_if:form.applicable_at_level,District|required_if:form.applicable_at_level,Tehsil',
     'account_form.tehsil_id' => 'required_if:form.applicable_at_level,Tehsil',
+    'account_form.department_structural_unit_id' => 'required_if:form.applicable_at_level,Custom',
     'account_form.account_title' => 'required',
     'account_form.account_no' => 'required',
     ];
@@ -34,6 +38,7 @@ class AccountInfoForm extends Component
     'form.applicable_at_level.required' => 'Applicable at level is required.',
     'account_form.district_id.required_if' => 'District is required.',
     'account_form.tehsil_id.required_if' => 'Tehsil is required.',
+    'account_form.department_structural_unit_id.required_if' => 'Structural Unit is required.',
     'account_form.account_title.required' => 'Account Title is required.',
     'account_form.account_no.required' => 'Account No. is required.',
     ];
@@ -48,6 +53,7 @@ class AccountInfoForm extends Component
         $this->rlco->load('accountInfo');
         $this->districts = District::active()->where('province_id', 7)->get();
         $this->tehsils = Collect();
+        $this->departmentStructuralUnits = DepartmentStructuralUnit::active()->where('department_id', $this->rlco->department_id)->get();
         $this->accounts = Collect();
         if($this->rlco->accountInfo){
             $this->accountInfo = $this->rlco->accountInfo;
@@ -80,8 +86,14 @@ class AccountInfoForm extends Component
         if($this->form['applicable_at_level'] == 'Province'){
             $this->account_form['district_id'] = null;
             $this->account_form['tehsil_id'] = null;
+            $this->account_form['department_structural_unit_id'] = null;
         }else if($this->form['applicable_at_level'] == 'District')
         {
+            $this->account_form['tehsil_id'] = null;
+            $this->account_form['department_structural_unit_id'] = null;
+        }else if($this->form['applicable_at_level'] == 'Custom')
+        {
+            $this->account_form['district_id'] = null;
             $this->account_form['tehsil_id'] = null;
         }
         $this->account_form['province_id']= 7;
@@ -89,6 +101,7 @@ class AccountInfoForm extends Component
         Account::create($this->account_form);
         $this->dispatchBrowserEvent('account-info:select2',['id'=>'#district_id','key_name'=>'account_form.district_id']);
         $this->dispatchBrowserEvent('account-info:select2',['id'=>'#tehsil_id','key_name'=>'account_form.tehsil_id']);
+        $this->dispatchBrowserEvent('account-info:select2',['id'=>'#department_structural_unit_id','key_name'=>'account_form.department_structural_unit_id']);
         $this->reset('account_form');
         $this->successAlert();
         $this->loadAccounts();
@@ -99,6 +112,7 @@ class AccountInfoForm extends Component
         if($account){
             $this->account_form = $account->toArray();
             $this->dispatchBrowserEvent('select2:setValue',['id'=>'#district_id','value'=>$account->district_id]);
+            $this->dispatchBrowserEvent('select2:setValue',['id'=>'#department_structural_unit_id','value'=>$account->department_structural_unit_id]);
         }
     }
 
@@ -109,14 +123,21 @@ class AccountInfoForm extends Component
         if($this->form['applicable_at_level'] == 'Province'){
             $this->account_form['district_id'] = null;
             $this->account_form['tehsil_id'] = null;
+            $this->account_form['department_structural_unit_id'] = null;
         }else if($this->form['applicable_at_level'] == 'District')
         {
+            $this->account_form['tehsil_id'] = null;
+            $this->account_form['department_structural_unit_id'] = null;
+        }else if($this->form['applicable_at_level'] == 'Custom')
+        {
+            $this->account_form['district_id'] = null;
             $this->account_form['tehsil_id'] = null;
         }
 
         $account->update($this->account_form);
         $this->dispatchBrowserEvent('account-info:select2',['id'=>'#district_id','key_name'=>'account_form.district_id']);
         $this->dispatchBrowserEvent('account-info:select2',['id'=>'#tehsil_id','key_name'=>'account_form.tehsil_id']);
+        $this->dispatchBrowserEvent('account-info:select2',['id'=>'#department_structural_unit_id','key_name'=>'account_form.department_structural_unit_id']);
         $this->reset('account_form');
         $this->successAlert();
         $this->loadAccounts();
@@ -139,7 +160,7 @@ class AccountInfoForm extends Component
 
     private function loadAccounts()
     {
-        $this->accounts = Account::with( 'district', 'tehsil')->where('account_info_id', $this->accountInfo->id)->get();
+        $this->accounts = Account::with( 'district', 'tehsil', 'departmentStructuralUnit')->where('account_info_id', $this->accountInfo->id)->get();
     }
 
     public function confirmDelete($type, $id){

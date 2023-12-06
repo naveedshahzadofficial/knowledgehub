@@ -26,7 +26,7 @@ applicable_at_level: '{{ $form['applicable_at_level']??null }}',
                         <div class="col-lg-6">
                             <label for="applicable_at_level">Applicable at Level<span class="text-danger">*</span></label>
                             <div class="radio-inline">
-                                @foreach(['Province', 'District', 'Tehsil'] as $applicable_at_level)
+                                @foreach(['Province', 'District', 'Tehsil', 'Custom'] as $applicable_at_level)
                                     <label class="radio radio-success">
                                         <input type="radio" wire:model.defer="form.applicable_at_level" name="applicable_at_level" @click="applicable_at_level= '{{ $applicable_at_level  }}'"  value="{{ $applicable_at_level  }}">
                                         <span></span>{{ $applicable_at_level  }}</label>
@@ -73,6 +73,20 @@ applicable_at_level: '{{ $form['applicable_at_level']??null }}',
                             @enderror
                         </div>
 
+
+                        <div class="col-lg-6" x-show.transition.opacity="applicable_at_level=='Custom'">
+                            <label>{!! __('Structural Units') !!}<span class="text-danger">*</span></label>
+                            <div wire:ignore>
+                                <x-select2-dropdown wire:model.defer="account_form.department_structural_unit_id"
+                                                    setFieldName="account_form.department_structural_unit_id"
+                                                    id="department_structural_unit_id" fieldName="unit_name"
+                                                    :listing="$departmentStructuralUnits"/>
+                            </div>
+                            @error('account_form.department_structural_unit_id')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                     </div>
                     <div class="row form-group">
                         <div class="col-lg-6">
@@ -111,8 +125,9 @@ applicable_at_level: '{{ $form['applicable_at_level']??null }}',
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>District</th>
-                            <th>Tehsil</th>
+                            <th x-show.transition.opacity="applicable_at_level=='District' || applicable_at_level=='Tehsil'">District</th>
+                            <th x-show.transition.opacity="applicable_at_level=='Tehsil'">Tehsil</th>
+                            <th x-show.transition.opacity="applicable_at_level=='Custom'">Structural Unit</th>
                             <th>Title/Head</th>
                             <th>Account No./ IBAN</th>
                             <th class="text-center">Action</th>
@@ -121,8 +136,9 @@ applicable_at_level: '{{ $form['applicable_at_level']??null }}',
                         <tbody>
                         @forelse($accounts as $account)
                             <tr>
-                                <td>{{ optional($account->district)->district_name_e }}</td>
-                                <td>{{ optional($account->tehsil)->tehsil_name_e }}</td>
+                                <td x-show.transition.opacity="applicable_at_level=='District' || applicable_at_level=='Tehsil'">{{ optional($account->district)->district_name_e }}</td>
+                                <td x-show.transition.opacity="applicable_at_level=='Tehsil'">{{ optional($account->tehsil)->tehsil_name_e }}</td>
+                                <td x-show.transition.opacity="applicable_at_level=='Custom'">{{ optional($account->departmentStructuralUnit)->unit_name }}</td>
                                 <td>{{ $account->account_title }}</td>
                                 <td>{{ $account->account_no }}</td>
                                 <td class="text-center"><button wire:click.prevent="editAccount({{ $account->id }})" class="btn btn-bg-primary text-center btn-circle btn-icon btn-xs"><i class="flaticon2-edit text-white"></i></button> &nbsp; <button wire:click.prevent="confirmDialog('account',{{ $account->id }})" class="btn btn-danger text-center btn-circle btn-icon btn-xs"><i class="flaticon2-trash text-white"></i></button></td>
