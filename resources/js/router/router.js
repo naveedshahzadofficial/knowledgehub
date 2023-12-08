@@ -7,7 +7,7 @@ import Detail from "../views/Detail";
 import PageNotFound from "../views/PageNotFound";
 
 export const router = createRouter({
-    history: createWebHistory("/"),
+    history: createWebHistory("/knowledgehub/"),
     linkActiveClass: "text-dark bg-white",
     routes: [
         {
