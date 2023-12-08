@@ -42,6 +42,7 @@ class RlcoResource extends JsonResource
             "renewal_fee" =>  $this->renewal_required=='Yes' && $this->renewal_fee_plan=='Single Fee'?(is_numeric($this->renewal_fee)?number_format($this->renewal_fee):$this->renewal_fee):'Not Applicable',
             "renewal_fee_schedule" => $this->renewal_fee_schedule,
             "fine_details" => $this->fine_details,
+            "payment_after_assessment" => $this->payment_after_assessment,
             "generic_sector" => $this->generic_sector,
             "inspection_department_id" => $this->inspection_department_id,
             "inspection_required" => $this->inspection_required=='Both'?'Pre-inspection & Post-inspection':$this->inspection_required,

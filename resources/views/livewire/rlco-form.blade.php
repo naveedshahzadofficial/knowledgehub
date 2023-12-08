@@ -3,6 +3,7 @@
     automation_status: '{{ $form['automation_status']??null }}',
     fee_submission_mode: '{{ $form['fee_submission_mode']??null }}',
     renewal_required: '{{ $form['renewal_required']??null }}',
+    payment_after_assessment: '{{ $form['payment_after_assessment']??null }}',
     dependency_question: '{{ $form['dependency_question']??null }}',
     generic_sector: '{{ $form['generic_sector']??null }}',
     fee_question: '{{ $form['fee_question']??null }}',
@@ -468,7 +469,7 @@
                             <div x-show.transition.opacity="fee_submission_mode=='Manual' && fee_manual_mode=='OTC'"  class="col-lg-6">
                                 <div x-data="{ open: false }">
                                     <label>{!!__('Challan form') !!}<span class="text-danger">*</span></label>
-                                    @if(isset($form['challan_form_file']) && !empty($form['challan_form_file']))
+                                    @if(!empty($form['challan_form_file']))
                                         <br><a href="{{ asset('storage/'.$form['challan_form_file']) }}"
                                                target="_blank" class="file_viewer" title="Challan form">View File</a>
                                         &nbsp;|&nbsp;
@@ -477,7 +478,7 @@
                                     @endif
 
                                     <input
-                                        @if(isset($form['challan_form_file']) && !empty($form['challan_form_file'])) x-show="open"
+                                        @if(!empty($form['challan_form_file'])) x-show="open"
                                         @endif  type="file" class="form-control" wire:model="challan_form_file">
                                     <span class="form-text text-muted">File with extension jpg, jpeg, png, pdf are allowed, Max. upload size is 5MB.</span>
                                     @error('challan_form_file')
@@ -518,6 +519,7 @@
                                 </div>
                                 @enderror
                             </div><!--form-group ends-->
+
                         </div>
 
 
@@ -577,6 +579,24 @@
                             </div>
                         </div>
 
+                        <div x-show.transition.opacity="automation_status!='No Information'"  class="row form-group">
+                            <div class="col-lg-6">
+                                <label>Payment After Assessment<span class="text-danger">*</span></label>
+                                <div class="radio-inline">
+                                    <label class="radio radio-success">
+                                        <input type="radio" wire:model.defer="form.payment_after_assessment" name="payment_after_assessment" @click="payment_after_assessment= 'Yes'"  value="Yes">
+                                        <span></span>Yes</label>
+                                    <label class="radio radio-success">
+                                        <input type="radio" wire:model.defer="form.payment_after_assessment" name="payment_after_assessment" @click="payment_after_assessment= 'No'" value="No">
+                                        <span></span>No</label>
+                                </div>
+                                @error('form.payment_after_assessment')
+                                <div class="invalid-feedback d-block">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div><!--form-group ends-->
+                        </div>
 
                         <div x-show.transition.opacity="automation_status!='No Information'"  class="row form-group">
 
