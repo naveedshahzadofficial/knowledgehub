@@ -580,8 +580,8 @@
                         </div>
 
                         <div x-show.transition.opacity="automation_status!='No Information'"  class="row form-group">
-                            <div class="col-lg-6">
-                                <label>Payment After Assessment<span class="text-danger">*</span></label>
+                            <div class="col-lg-12">
+                                <label>Is any other payment (like Approval Fee/Charges) after assessment required?<span class="text-danger">*</span></label>
                                 <div class="radio-inline">
                                     <label class="radio radio-success">
                                         <input type="radio" wire:model.defer="form.payment_after_assessment" name="payment_after_assessment" @click="payment_after_assessment= 'Yes'"  value="Yes">
