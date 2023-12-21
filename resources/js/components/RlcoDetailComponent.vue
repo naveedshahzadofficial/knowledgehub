@@ -221,9 +221,10 @@
                     <thead>
                     <tr>
                         <th class="text-left font-weight-bolder" width="40%">Document</th>
-                        <th class="text-center font-weight-bolder" width="10%">Original</th>
-                        <th class="text-center font-weight-bolder" width="10%">Photocopies</th>
-                        <th class="text-center font-weight-bolder" width="10%">Attestation</th>
+                        <th class="text-center font-weight-bolder" width="5%">Original</th>
+                        <th class="text-center font-weight-bolder" width="8%">Photocopies</th>
+                        <th class="text-center font-weight-bolder" width="7%">Attestation</th>
+                        <th class="text-left font-weight-bolder"  width="7%">Requirement</th>
                         <th class="text-left font-weight-bolder">Remarks</th>
                     </tr>
                     </thead>
@@ -304,6 +305,21 @@
                                     </svg>
                                  </span>
                             </span>
+                            </td>
+                            <td>
+                                <base-modal-component
+                                    title="Document Requirement Remarks"
+                                    @toggle-modal="toggleModalDocumentRequirement(index)"
+                                    v-if="isShowModalDocumentRequirement[index]"
+                                >
+                                    <div v-html="document.document_requirement_remarks"></div>
+                                </base-modal-component>
+
+                                <span v-if="document.document_requirement_type === 'Conditional'"
+                                @click.prevent="toggleModalDocumentRequirement(index)"
+                                class="make-link"
+                            >{{ document.document_requirement_type }}</span>
+                                 <span v-else>{{ document.document_requirement_type }}</span>
                             </td>
                             <td>{{ document.remark }}</td>
                         </tr>
@@ -620,6 +636,7 @@
         >
             <div v-html="rlco_detail?.renewal_fee_schedule"></div>
         </base-modal-component>
+
     </div>
 </template>
 
@@ -641,6 +658,7 @@ export default {
         base_url: process.env.MIX_BASE_URL,
         isShowModal: false,
         isShowModalRenewal: false,
+        isShowModalDocumentRequirement: [],
         feedbackForm: {
             rating: null,
             feedback: "",
@@ -669,6 +687,7 @@ export default {
             if (oldVal && !this.isOverFlow) {
                 this.$refs.detail_page.scrollTo(0, 0);
                 this.isShowModalRenewal = false;
+                this.isShowModalDocumentRequirement = Array(this.rlco_detail.required_documents).fill(false);
                 this.feedbackForm = { rating: null, feedback: "" };
                 this.feedback_label = "Glad to know any additional feedback";
                 this.isSubmitted = false;
@@ -708,6 +727,9 @@ export default {
         },
         toggleModalRenewal() {
             this.isShowModalRenewal = !this.isShowModalRenewal;
+        },
+        toggleModalDocumentRequirement(index) {
+            this.isShowModalDocumentRequirement[index] = !this.isShowModalDocumentRequirement[index];
         },
         scrollToTop() {
             let refDiv = this.$refs.detail_page;
