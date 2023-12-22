@@ -582,7 +582,7 @@
 
                         <div x-show.transition.opacity="automation_status!='No Information'" class="row form-group">
                             <div class="col-lg-12">
-                                <label>Is fee required at time of application<span class="text-danger">*</span></label>
+                                <label>Is fee required at time of application?<span class="text-danger">*</span></label>
                                 <div class="radio-inline">
                                     @php $options = array('Yes','No','Conditional') @endphp
                                     @foreach($options as $option)
