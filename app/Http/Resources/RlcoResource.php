@@ -43,6 +43,7 @@ class RlcoResource extends JsonResource
             "renewal_fee_schedule" => $this->renewal_fee_schedule,
             "fine_details" => $this->fine_details,
             "payment_after_assessment" => $this->payment_after_assessment,
+            "is_fee_required_time_of_application" => $this->is_fee_required_time_of_application,
             "generic_sector" => $this->generic_sector,
             "inspection_department_id" => $this->inspection_department_id,
             "inspection_required" => $this->inspection_required=='Both'?'Pre-inspection & Post-inspection':$this->inspection_required,

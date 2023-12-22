@@ -4,6 +4,7 @@
     fee_submission_mode: '{{ $form['fee_submission_mode']??null }}',
     renewal_required: '{{ $form['renewal_required']??null }}',
     payment_after_assessment: '{{ $form['payment_after_assessment']??null }}',
+    is_fee_required_time_of_application: '{{ $form['is_fee_required_time_of_application']??null }}',
     dependency_question: '{{ $form['dependency_question']??null }}',
     generic_sector: '{{ $form['generic_sector']??null }}',
     fee_question: '{{ $form['fee_question']??null }}',
@@ -575,6 +576,27 @@
                                 </div>
                                 @error('form.renewal_fee_schedule')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div x-show.transition.opacity="automation_status!='No Information'" class="row form-group">
+                            <div class="col-lg-12">
+                                <label>Is fee required at time of application<span class="text-danger">*</span></label>
+                                <div class="radio-inline">
+                                    @php $options = array('Yes','No','Conditional') @endphp
+                                    @foreach($options as $option)
+                                        <label class="radio radio-success">
+                                            <input type="radio" wire:model.defer="form.is_fee_required_time_of_application"
+                                                   @click="is_fee_required_time_of_application= '{{ $option }}'"
+                                                   name="is_fee_required_time_of_application" value="{{ $option }}">
+                                            <span></span>{{ $option }}</label>
+                                    @endforeach
+                                </div>
+                                @error('form.is_fee_required_time_of_application')
+                                <div class="invalid-feedback d-block">
+                                    {{ $message }}
+                                </div>
                                 @enderror
                             </div>
                         </div>
