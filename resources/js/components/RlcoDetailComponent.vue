@@ -523,6 +523,12 @@
                             >Apply Online</a
                         >
                     </div>
+                    <div v-else><a
+                        class="btn btn-sm px-3 text-light custom-detail-btn"
+                        target="_blank"
+                        href="https://bfc.punjab.gov.pk"
+                    >Visit BFC</a
+                    ></div>
                     &nbsp;&nbsp;
                     <div v-if="rlco_detail.department_website">
                         <a

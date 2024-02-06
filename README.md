@@ -45,3 +45,16 @@ cd /var/www/vhosts/webdev/knowledgehub/
 php artisan config:cache
 sudo chmod 777 storage -Rf
 ```
+
+On Unix-like (Linux, macOS, Git bash, etc.):
+```bash
+export NODE_OPTIONS=--openssl-legacy-provider
+```
+On Windows command prompt:
+```bash
+set NODE_OPTIONS=--openssl-legacy-provider
+```
+On PowerShell:
+```bash
+$env:NODE_OPTIONS = "--openssl-legacy-provider"
+```
