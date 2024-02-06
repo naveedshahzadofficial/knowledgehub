@@ -20,6 +20,7 @@ How deploy code on server:
 1. uncomment for production the assets into resources/sass/_custom.scss
 2. comment the assets for local
 3. set the url into .env file
+4. replace the following in resources/js/router/router.js createWebHistory('/knowledgehub/') replace with createWebHistory('/')
 ```bash
 APP_URL=https://webdev.pitb.gov.pk/knowledgehub
 BASE_URL=https://webdev.pitb.gov.pk/knowledgehub
