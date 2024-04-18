@@ -512,9 +512,7 @@
                     <div
                         v-if="
                             rlco_detail.automation_status != 'No Information' &&
-                            rlco_detail.application_url &&
-                            false
-                        "
+                            rlco_detail.application_url"
                     >
                         <a
                             class="btn btn-sm px-3 text-light custom-detail-btn"
