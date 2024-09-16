@@ -25,9 +25,9 @@
 
                                 <div class="form-group row">
                                 <div class="col-lg-12">
-                                    <label class="text-white d-block text-left">{!! __('labels.email_address') !!}<span
+                                    <label class="text-white d-block text-left">{!! __('Username or Email') !!}<span
                                             class="text-danger">*</span></label>
-                                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email">
+                                    <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Username or Email">
                                     @error('email')
                                     <div class="invalid-feedback d-block text-left">{{ $message }}</div>
                                     @enderror
@@ -118,7 +118,7 @@
                     }
                 },
                 messages: {
-                    email: "Please enter your email.",
+                    email: "Please enter your username or email.",
                     password: {
                         required: "Please enter your password.",
                     }

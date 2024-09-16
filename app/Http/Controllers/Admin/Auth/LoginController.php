@@ -14,13 +14,32 @@ class LoginController extends Controller
 {
 
     use AuthenticatesUsers;
+    protected $username;
+    protected $redirectTo = RouteServiceProvider::ADMIN_HOME;
 
     public function __construct()
     {
         $this->middleware("guest:admin", ['except' => ['logout']]);
+        $this->username = $this->findUsername();
     }
 
-    protected $redirectTo = RouteServiceProvider::ADMIN_HOME;
+    public function findUsername()
+    {
+        $fieldValue = request()->input('email');
+
+        $login_type = filter_var($fieldValue, FILTER_VALIDATE_EMAIL )
+            ? 'email'
+            : 'username';
+
+        request()->merge([$login_type => $fieldValue]);
+
+        return $login_type;
+    }
+
+    public function username()
+    {
+        return $this->username;
+    }
 
     public function showLoginForm()
     {
