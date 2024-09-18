@@ -46,4 +46,19 @@ class Admin extends Authenticatable
     {
             $this->notify(new AdminResetPasswordNotification($token));
     }
+
+    public function isSuperAdmin(): bool
+    {
+        return $this->hasRole('Super Admin');
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->hasRole('Admin');
+    }
+
+    public function isDepartment(): bool
+    {
+        return $this->hasRole('Department User');
+    }
 }

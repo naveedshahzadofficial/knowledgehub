@@ -8,7 +8,7 @@
             <div class="card-title">
                 <h3 class="card-label">All RLCOs</h3>
             </div>
-
+            @if(!auth()->user()->isDepartment())
             <div class="card-toolbar">
                 <!--begin::Button-->
                 <a href="{{ route('admin.rlcos.create') }}" class="btn btn-custom-color font-weight-bolder">
@@ -27,61 +27,63 @@
                     New RLCO</a>
                 <!--end::Button-->
             </div>
+            @endif
 
         </div>
         <div class="card-body">
             @component('_components.alerts-default')@endcomponent
+                @if(!auth()->user()->isDepartment())
+                    <div class="kt-form kt-form--fit mb-15">
+                        <div class="row mb-6">
 
-            <div class="kt-form kt-form--fit mb-15">
-                <div class="row mb-6">
+                            <div class="col-lg-3 mb-lg-0 mb-6">
+                                <label>Department:</label>
+                                <select name="department_id" class="form-control select2" id="department_id">
+                                    <option value="">--- Select ---</option>
+                                    @isset($departments)
+                                        @foreach($departments as $department)
+                                            <option
+                                                {{ request()->get('department_id')==$department->id?'selected':'' }} value="{{ $department->id }}">{{ $department->department_name }}</option>
+                                        @endforeach
+                                    @endisset
+                                </select>
+                            </div>
 
-                    <div class="col-lg-3 mb-lg-0 mb-6">
-                        <label>Department:</label>
-                        <select name="department_id" class="form-control select2" id="department_id">
-                            <option value="">--- Select ---</option>
-                            @isset($departments)
-                                @foreach($departments as $department)
-                                    <option
-                                        {{ request()->get('department_id')==$department->id?'selected':'' }} value="{{ $department->id }}">{{ $department->department_name }}</option>
-                                @endforeach
-                            @endisset
-                        </select>
+                            <div class="col-lg-3 mb-lg-0 mb-6">
+                                <label>Business Category:</label>
+                                <select name="business_category_id" class="form-control select2" id="business_category_id">
+                                    <option value="">--- Select ---</option>
+                                    @isset($business_categories)
+                                        @foreach($business_categories as $business_category)
+                                            <option
+                                                {{ request()->get('business_category_id')==$business_category->id?'selected':'' }} value="{{ $business_category->id }}">{{ $business_category->category_name }}</option>
+                                        @endforeach
+                                    @endisset
+                                </select>
+                            </div>
+
+                            <div class="col-lg-6 mt-7">
+                                <button onclick="reDrawDataTable();" class="btn btn-custom-color btn-primary--icon"
+                                        id="kt_search">
+                                                            <span>
+                                                                <i class="la la-search text-white"></i>
+                                                                <span>Search</span>
+                                                            </span>
+                                </button>&nbsp;&nbsp;
+                                <button onclick="resetForm();" class="btn btn-secondary btn-secondary--icon" id="kt_reset">
+                                                            <span>
+                                                                <i class="la la-close"></i>
+                                                                <span>Reset</span>
+                                                            </span>
+                                </button>
+                            </div>
+
+                        </div>
+
                     </div>
+                @endif
 
-                    <div class="col-lg-3 mb-lg-0 mb-6">
-                        <label>Business Category:</label>
-                        <select name="business_category_id" class="form-control select2" id="business_category_id">
-                            <option value="">--- Select ---</option>
-                            @isset($business_categories)
-                                @foreach($business_categories as $business_category)
-                                    <option
-                                        {{ request()->get('business_category_id')==$business_category->id?'selected':'' }} value="{{ $business_category->id }}">{{ $business_category->category_name }}</option>
-                                @endforeach
-                            @endisset
-                        </select>
-                    </div>
-
-                    <div class="col-lg-6 mt-7">
-                        <button onclick="reDrawDataTable();" class="btn btn-custom-color btn-primary--icon"
-                                id="kt_search">
-													<span>
-														<i class="la la-search text-white"></i>
-														<span>Search</span>
-													</span>
-                        </button>&nbsp;&nbsp;
-                        <button onclick="resetForm();" class="btn btn-secondary btn-secondary--icon" id="kt_reset">
-													<span>
-														<i class="la la-close"></i>
-														<span>Reset</span>
-													</span>
-                        </button>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!--begin: Datatable-->
+                <!--begin: Datatable-->
             <table class="table table-bordered table-checkable" id="my_datatable">
                 <thead>
                 <tr>

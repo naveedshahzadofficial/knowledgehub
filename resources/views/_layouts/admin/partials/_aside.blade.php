@@ -42,61 +42,62 @@
 
 							<!--begin::Menu Nav-->
 							<ul class="menu-nav my-4">
+                                @if(!auth()->user()->isDepartment())
+                                    <li class="menu-item {{ areActiveRoutes(['admin.dashboard']) }}" aria-haspopup="true">
+                                        <a href="{{ route('admin.dashboard') }}" class="menu-link">
+                                                <!--begin::Svg Icon -->
+                                           <span class="svg-icon text-white svg-icon-white menu-icon fas fa-home"></span>
+                                                <!--end::Svg Icon-->
+                                            <span class="menu-text text-white">Dashboard</span>
+                                        </a>
+                                    </li>
+                                @endif
 
-                                <li class="menu-item {{ areActiveRoutes(['admin.dashboard']) }}" aria-haspopup="true">
-                                    <a href="{{ route('admin.dashboard') }}" class="menu-link">
-											<!--begin::Svg Icon -->
-                                       <span class="svg-icon text-white svg-icon-white menu-icon fas fa-home"></span>
-                                            <!--end::Svg Icon-->
-                                        <span class="menu-text text-white">Dashboard</span>
-                                    </a>
-                                </li>
+                                @if(!auth()->user()->isDepartment())
+                                    <li class="menu-item menu-item-submenu {{ areActiveRoutes(['admin.activities.index','admin.activities.create','admin.activities.edit',
+                                                                                                'admin.required-documents.index','admin.required-documents.create','admin.required-documents.edit',
+                                                                                                'admin.roles.index','admin.roles.create','admin.roles.edit', 'admin.roles.show',
+                                                                                                'admin.admins.index','admin.admins.create','admin.admins.edit', 'admin.admins.show'
+                                                                                                ]) }}" aria-haspopup="true" data-menu-toggle="hover">
+                                        <a href="javascript:;" class="menu-link menu-toggle">
+                                            <span class="svg-icon text-white svg-icon-white menu-icon fas fa-cog"></span>
+                                            <span class="menu-text text-white">System Settings</span>
+                                            <i class="menu-arrow"></i>
+                                        </a>
+
+                                        <div class="menu-submenu">
+                                            <i class="menu-arrow"></i>
+                                            <ul class="menu-subnav">
 
 
-                                <li class="menu-item menu-item-submenu {{ areActiveRoutes(['admin.activities.index','admin.activities.create','admin.activities.edit',
-                                                                                            'admin.required-documents.index','admin.required-documents.create','admin.required-documents.edit',
-                                                                                            'admin.roles.index','admin.roles.create','admin.roles.edit', 'admin.roles.show',
-                                                                                            'admin.admins.index','admin.admins.create','admin.admins.edit', 'admin.admins.show'
-                                                                                            ]) }}" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="javascript:;" class="menu-link menu-toggle">
-                                        <span class="svg-icon text-white svg-icon-white menu-icon fas fa-cog"></span>
-                                        <span class="menu-text text-white">System Settings</span>
-                                        <i class="menu-arrow"></i>
-                                    </a>
+                                                <li class="menu-item {{ areActiveRoutes(['admin.roles.index','admin.roles.create','admin.roles.edit', 'admin.roles.show']) }}" aria-haspopup="true">
+                                                    <a href="{{ route('admin.roles.index') }}" class="menu-link">
+                                                        <span class="menu-text text-white">Roles</span>
+                                                    </a>
+                                                </li>
 
-                                    <div class="menu-submenu">
-                                        <i class="menu-arrow"></i>
-                                        <ul class="menu-subnav">
+                                                <li class="menu-item {{ areActiveRoutes(['admin.admins.index','admin.admins.create','admin.admins.edit', 'admin.admins.show']) }}" aria-haspopup="true">
+                                                    <a href="{{ route('admin.admins.index') }}" class="menu-link">
+                                                        <span class="menu-text text-white">Staffs</span>
+                                                    </a>
+                                                </li>
 
+                                                <li class="menu-item {{ areActiveRoutes(['admin.activities.index','admin.activities.create','admin.activities.edit']) }}" aria-haspopup="true">
+                                                    <a href="{{ route('admin.activities.index') }}" class="menu-link">
+                                                        <span class="menu-text text-white">Activities</span>
+                                                    </a>
+                                                </li>
 
-                                            <li class="menu-item {{ areActiveRoutes(['admin.roles.index','admin.roles.create','admin.roles.edit', 'admin.roles.show']) }}" aria-haspopup="true">
-                                                <a href="{{ route('admin.roles.index') }}" class="menu-link">
-                                                    <span class="menu-text text-white">Roles</span>
-                                                </a>
-                                            </li>
+                                                <li class="menu-item {{ areActiveRoutes(['admin.required-documents.index','admin.required-documents.create','admin.required-documents.edit']) }}" aria-haspopup="true">
+                                                    <a href="{{ route('admin.required-documents.index') }}" class="menu-link">
+                                                        <span class="menu-text text-white">Required Documents</span>
+                                                    </a>
+                                                </li>
 
-                                            <li class="menu-item {{ areActiveRoutes(['admin.admins.index','admin.admins.create','admin.admins.edit', 'admin.admins.show']) }}" aria-haspopup="true">
-                                                <a href="{{ route('admin.admins.index') }}" class="menu-link">
-                                                    <span class="menu-text text-white">Staffs</span>
-                                                </a>
-                                            </li>
-
-                                            <li class="menu-item {{ areActiveRoutes(['admin.activities.index','admin.activities.create','admin.activities.edit']) }}" aria-haspopup="true">
-                                                <a href="{{ route('admin.activities.index') }}" class="menu-link">
-                                                    <span class="menu-text text-white">Activities</span>
-                                                </a>
-                                            </li>
-
-                                            <li class="menu-item {{ areActiveRoutes(['admin.required-documents.index','admin.required-documents.create','admin.required-documents.edit']) }}" aria-haspopup="true">
-                                                <a href="{{ route('admin.required-documents.index') }}" class="menu-link">
-                                                    <span class="menu-text text-white">Required Documents</span>
-                                                </a>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </li>
-
+                                            </ul>
+                                        </div>
+                                    </li>
+                                @endif
 
 
 
@@ -118,8 +119,8 @@
 										<span class="menu-text text-white">All RLCOs</span>
 									</a>
 								</li>
-
-                                <li class="menu-item {{ areActiveRoutes(['admin.reviews.index','admin.reviews.show']) }}" aria-haspopup="true">
+                                @if(!auth()->user()->isDepartment())
+                                    <li class="menu-item {{ areActiveRoutes(['admin.reviews.index','admin.reviews.show']) }}" aria-haspopup="true">
 									<a href="{{ route('admin.reviews.index') }}" class="menu-link">
 										<span class="svg-icon svg-icon-white menu-icon" >
 
@@ -136,7 +137,7 @@
 										<span class="menu-text text-white">Reviews</span>
 									</a>
 								</li>
-
+                                @endif
 
 
 							</ul>
