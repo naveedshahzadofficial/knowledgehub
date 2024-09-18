@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BusinessActivity;
 use App\Models\BusinessCategory;
 use App\Models\Department;
 use App\Models\Rlco;
@@ -51,6 +52,7 @@ class RlcoController extends Controller
                 $actionBtn .= '&nbsp;&nbsp;<a target="_blank" href="'.route('admin.rlcos.show',$rlco).'" class="edit btn btn-custom-color text-center btn-circle btn-icon btn-xs"><i class="flaticon-eye text-white"></i></a>';
                 $actionBtn .= '&nbsp;&nbsp;<a  href="'.route('admin.rlcos.edit',$rlco).'" class="edit btn btn-custom-color text-center btn-circle btn-icon btn-xs"><i class="flaticon-edit text-white"></i></a>';
                 $actionBtn .= '&nbsp;&nbsp;<a  href="'.route('admin.rlcos.account-info.index',$rlco).'" class="edit btn btn-custom-color text-center btn-circle btn-icon btn-xs" title="Accounts"><i class="fas fa-file-archive text-white"></i></a>';
+                $actionBtn .= '&nbsp;&nbsp;<a  href="'.route('admin.rlocs.sectors-mapping',$rlco).'" class="edit btn btn-custom-color text-center btn-circle btn-icon btn-xs" title="Sectors Mapping"><i class="fas fa-building text-white"></i></a>';
                 return $actionBtn;
             })
             ->rawColumns(['rlco_status','action'])
@@ -91,6 +93,20 @@ class RlcoController extends Controller
         else
             session()->flash('success_message', 'Rlco has been active successfully.');
         $rlco->update(['rlco_status'=>!$rlco->rlco_status]);
+        return redirect()->route('admin.rlcos.index');
+    }
+
+    public function sectors_mapping(Rlco $rlco)
+    {
+        $rlco->load( 'businessActivities');
+        $business_activities = BusinessActivity::active()->orderBy('class_name')->get();
+        return View('admin.rlco.sectors_mapping',compact('rlco', 'business_activities'));
+    }
+
+    public function update_sectors_mapping(Request $request, Rlco $rlco)
+    {
+        $rlco->businessActivities()->sync($request->input('business_activity_ids', []));
+        session()->flash('success_message', 'Sectors has been updated successfully.');
         return redirect()->route('admin.rlcos.index');
     }
 }

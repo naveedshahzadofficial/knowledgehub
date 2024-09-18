@@ -17,10 +17,16 @@ Route::get('/login', [Auth\LoginController::class, 'showLoginForm'])->name('logi
     Route::group(['middleware' => ['auth:admin']], function () {
         Route::post('/logout', [Auth\LoginController::class,'logout'])->name('logout');
 
+        Route::resource('roles', Admin\RoleController::class);
+        Route::resource('admins', Admin\AdminController::class);
+
         Route::post('rlcos/index-ajax', [ Admin\RlcoController::class,'indexAjax'])->name('rlcos.index-ajax');
+        Route::get('rlcos/{rlco}/sectors-mapping', [Admin\RlcoController::class, 'sectors_mapping'])->name('rlocs.sectors-mapping');
+        Route::put('rlcos/{rlco}/sectors-mapping', [Admin\RlcoController::class, 'update_sectors_mapping'])->name('rlcos.sectors-mapping.update');
         Route::resource('rlcos', Admin\RlcoController::class);
 
         Route::resource('rlcos.account-info', Admin\AccountInfoController::class);
+
 
         Route::post('auditable/index-ajax', [ Admin\AuditableController::class,'indexAjax'])->name('auditable.index-ajax');
         Route::resource('auditable', Admin\AuditableController::class);
