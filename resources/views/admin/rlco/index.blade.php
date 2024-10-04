@@ -8,7 +8,7 @@
             <div class="card-title">
                 <h3 class="card-label">All RLCOs</h3>
             </div>
-            @if(!auth()->user()->isDepartment())
+            @if(!auth()->user()->isDepartment() && !auth()->user()->isSectoralMapper())
             <div class="card-toolbar">
                 <!--begin::Button-->
                 <a href="{{ route('admin.rlcos.create') }}" class="btn btn-custom-color font-weight-bolder">
