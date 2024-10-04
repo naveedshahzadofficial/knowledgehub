@@ -53,7 +53,7 @@ class RlcoController extends Controller
                 if(!auth()->user()->isDepartment() && !auth()->user()->isSectoralMapper())
                     return '<span onclick="toggleStatus(this); return false;" data-href="'.route('admin.rlcos.destroy',$rlco).'"   class="btn btn-circle btn-sm border-0 cursor-move active '.($rlco->rlco_status?'btn-hover-success':'btn-hover-danger').'">'.$rlco->getRlcoStatus().'</span>';
                 else
-                    return '<span class="btn btn-circle btn-sm border-0 cursor-move active '.($rlco->rlco_status?'btn-hover-success':'btn-hover-danger').'">'.$rlco->getRlcoStatus().'</span>';
+                    return '<span class="btn btn-circle btn-sm border-0 active '.($rlco->rlco_status?'btn-hover-success':'btn-hover-danger').'">'.$rlco->getRlcoStatus().'</span>';
             })
             ->addColumn('action', function(Rlco $rlco){
                 $actionBtn = '';
