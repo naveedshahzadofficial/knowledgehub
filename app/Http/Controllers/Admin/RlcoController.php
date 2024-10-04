@@ -31,7 +31,9 @@ class RlcoController extends Controller
         $query = Rlco::select("*")->with('department')
         ->when(auth()->user()->isDepartment(), function ($query) {
             $query->where('department_id', auth()->user()->department_id);
-        });
+        })->when(auth()->user()->isDepartment() || auth()->user()->isSectoralMapper(), function ($query) {
+                $query->where('rlco_status', 1);
+            });
         if (!empty($registration_no)) {
             $query->where('rlco_no', 'like' ,"%$registration_no%");
         }
@@ -52,7 +54,7 @@ class RlcoController extends Controller
             })
             ->addColumn('action', function(Rlco $rlco){
                 $actionBtn = '';
-                if(!auth()->user()->isDepartment()) {
+                if(!auth()->user()->isDepartment() && !auth()->user()->isSectoralMapper()) {
                     $actionBtn .= '<span onclick="toggleStatus(this); return false;"  data-href="' . route('admin.rlcos.destroy', $rlco) . '" class="edit btn btn-custom-color text-center btn-circle btn-icon btn-xs">' . ($rlco->rlco_status ? '<i class="fa fa-toggle-on text-white"></i>' : '<i class="fa fa-toggle-off text-danger"></i>') . '</span>';
                     $actionBtn .= '&nbsp;&nbsp;<a  href="' . route('admin.rlcos.edit', $rlco) . '" class="edit btn btn-custom-color text-center btn-circle btn-icon btn-xs"><i class="flaticon-edit text-white"></i></a>';
                     $actionBtn .= '&nbsp;&nbsp;<a  href="' . route('admin.rlcos.account-info.index', $rlco) . '" class="edit btn btn-custom-color text-center btn-circle btn-icon btn-xs" title="Accounts"><i class="fas fa-file-archive text-white"></i></a>';

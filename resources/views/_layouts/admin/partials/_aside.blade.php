@@ -42,7 +42,7 @@
 
 							<!--begin::Menu Nav-->
 							<ul class="menu-nav my-4">
-                                @if(!auth()->user()->isDepartment())
+                                @if(!auth()->user()->isDepartment() && !auth()->user()->isSectoralMapper())
                                     <li class="menu-item {{ areActiveRoutes(['admin.dashboard']) }}" aria-haspopup="true">
                                         <a href="{{ route('admin.dashboard') }}" class="menu-link">
                                                 <!--begin::Svg Icon -->
@@ -53,7 +53,7 @@
                                     </li>
                                 @endif
 
-                                @if(!auth()->user()->isDepartment())
+                                @if(!auth()->user()->isDepartment() && !auth()->user()->isSectoralMapper())
                                     <li class="menu-item menu-item-submenu {{ areActiveRoutes(['admin.activities.index','admin.activities.create','admin.activities.edit',
                                                                                                 'admin.required-documents.index','admin.required-documents.create','admin.required-documents.edit',
                                                                                                 'admin.roles.index','admin.roles.create','admin.roles.edit', 'admin.roles.show',
@@ -119,7 +119,7 @@
 										<span class="menu-text text-white">All RLCOs</span>
 									</a>
 								</li>
-                                @if(!auth()->user()->isDepartment())
+                                @if(!auth()->user()->isDepartment()  && !auth()->user()->isSectoralMapper())
                                     <li class="menu-item {{ areActiveRoutes(['admin.reviews.index','admin.reviews.show']) }}" aria-haspopup="true">
 									<a href="{{ route('admin.reviews.index') }}" class="menu-link">
 										<span class="svg-icon svg-icon-white menu-icon" >

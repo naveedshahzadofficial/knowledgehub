@@ -61,4 +61,9 @@ class Admin extends Authenticatable
     {
         return $this->hasRole('Department User');
     }
+
+    public function isSectoralMapper(): bool
+    {
+        return $this->hasRole('Sectoral Mapper');
+    }
 }
