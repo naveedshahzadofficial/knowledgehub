@@ -9,10 +9,12 @@ export default {
             sectors: [],
             departments: [],
             rlcos: [],
-            business_type_id: "",
+            business_category_id: "",
             business_activity_id:"",
             department_id:"",
-            is_first_landing: true
+            rlco_id:"",
+            is_first_landing: true,
+            is_first_time_variable: false,
         }
     },
     methods: {
@@ -23,8 +25,14 @@ export default {
                 this.categories = response.data.categories;
                 this.sectors = response.data.sectors;
                 this.departments = response.data.departments;
+                console.log(this.$route.params.id2);
+                this.business_activity_id = parseInt(this.$route.params.id2) || '';
+                    if(this.business_activity_id){
+                        this.is_first_time_variable = true
+                    }
                     if (this.activities.length > 0) {
-                        this.getActivityRlcos(this.$route.params.id??this.activities[0].id);
+                        let activity_id  = this.$route.params.id || this.activities[0].id;
+                        this.getActivityRlcos(activity_id);
                     }else{
                         this.rlcos = [];
                     }
@@ -51,27 +59,45 @@ export default {
                     behavior: "smooth", // Enables smooth scrolling
                 });
             }
-        },
+        }
     },
     mounted() {
         this.loadActivities();
 
     },
     computed: {
-        filteredRlcos: function () {
+        filteredBusinessActivities: function (){
+            return this.sectors.filter(sector => {
+                if(!this.is_first_time_variable)
+                this.business_activity_id = '';
+                if (!this.business_category_id) {
+                    return true;
+                }
+                this.is_first_time_variable = false;
+                return this.business_category_id ? sector.business_category_id === this.business_category_id : true;
+            });
+        },
+        filteredCommonRlcos: function () {
             return this.rlcos.filter(rlco => {
                 // Check if business_type_id or business_activity_id are empty, return all rlcos if so
-                if (!this.business_type_id && !this.business_activity_id && !this.department_id) {
+                if (!this.business_activity_id && !this.department_id) {
                     return true;
                 }
                 // Filter based on business_type_id and business_activity_id
-                const matchesBusinessType = this.business_type_id ? rlco.business_category_id === this.business_type_id : true;
                 const matchesBusinessActivity = this.business_activity_id
                     ? rlco.business_activities.some(activity => activity.id === this.business_activity_id)
                     : true;
                 // const matchesBusinessActivity = this.business_activity_id ? rlco.business_activity_id === this.business_activity_id : true;
                 const matchesBusinessDepartment = this.department_id ? rlco.department_id === this.department_id : true;
-                return matchesBusinessType && matchesBusinessActivity && matchesBusinessDepartment;
+                return matchesBusinessActivity && matchesBusinessDepartment;
+            });
+        },
+        filteredRlcos: function () {
+            return this.filteredCommonRlcos.filter(rlco => {
+                if (!this.rlco_id) {
+                    return true;
+                }
+                return  this.rlco_id ? rlco.id === this.rlco_id : true;
             });
         }
     }
@@ -125,24 +151,31 @@ export default {
 
                 <div class="row justify-content-between align-items-center mb-3 mt-5">
                     <!-- Left Side Dropdowns -->
-                    <div class="col-md-6">
+                    <div class="col-md-9">
                         <div class="row">
-                            <div class="col-md-4">
-                                <v-select v-model="business_type_id" :options="categories"
+                            <div class="col-md-3">
+                                <v-select v-model="business_category_id" :options="categories"
                                           :reduce="category => category.id" label="category_name"
+                                          placeholder="Sectors" class="w-auto" style="width: 100% !important;"
+                                >
+                                </v-select>
+                            </div>
+                            <div class="col-md-3">
+                                <v-select v-model="business_activity_id" :options="filteredBusinessActivities"
+                                          :reduce="sector => sector.id" label="easy_class_name"
                                           placeholder="Business Types" class="w-auto" style="width: 100% !important;">
                                 </v-select>
                             </div>
-                            <div class="col-md-4">
-                                <v-select v-model="business_activity_id" :options="sectors"
-                                          :reduce="sector => sector.id" label="class_name"
-                                          placeholder="Sectors" class="w-auto" style="width: 100% !important;">
-                                </v-select>
-                            </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <v-select v-model="department_id" :options="departments"
                                           :reduce="department => department.id" label="department_name"
                                           placeholder="Licensing Authority" class="w-auto" style="width: 100% !important;">
+                                </v-select>
+                            </div>
+                            <div class="col-md-3">
+                                <v-select v-model="rlco_id" :options="filteredCommonRlcos"
+                                          :reduce="rlco => rlco.id" label="rlco_name"
+                                          placeholder="Service Types" class="w-auto" style="width: 100% !important;">
                                 </v-select>
                             </div>
                         </div>

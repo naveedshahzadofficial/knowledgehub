@@ -98,9 +98,13 @@ class RlcoController extends Controller
         return response()->json(['activities'=>$activities,'categories'=>$categories,'sectors'=>$sectors,'departments'=>$departments]);
     }
 
-    public function activityRlcos($activity_id)
+    public function activityRlcos($activity_id = null)
     {
-            $rlcos = RlcoResource::collection(Rlco::with('scopes','businessActivities')->active()->whereRelation('activities', 'id', $activity_id)->get());
+            $rlcos = RlcoResource::collection(Rlco::with('scopes','businessActivities')->active()
+                ->when($activity_id, function ($query, $activity_id){
+                   $query->whereRelation('activities', 'id', $activity_id);
+                })
+                ->get());
             return response()->json(['rlcos'=>$rlcos]);
     }
 }

@@ -20,7 +20,7 @@ export const router = createRouter({
             component: Home,
         },
         {
-            path: "/services/:id?",
+            path: "/services/:id?/:id2?",
             name: "services",
             component: Services,
         },

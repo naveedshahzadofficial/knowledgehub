@@ -1,11 +1,12 @@
 <script>
 import {useAssets} from "@/composable/use-assets";
-
 export default {
     name: "HomePage",
     data() {
         return {
             activities: [],
+            sectors: [],
+            business_activity_id:''
         }
     },
     methods: {
@@ -13,8 +14,12 @@ export default {
         loadActivities: function () {
             axios.get('activities').then(response => {
                 this.activities = response.data.activities;
+                this.sectors = response.data.sectors;
             })
         },
+        search: function (){
+            this.$router.push({'name':'services', params:{ 'id': 0,'id2': this.business_activity_id}});
+        }
     },
     mounted() {
         this.loadActivities();
@@ -23,7 +28,24 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped>
+    .v-select >>>  .vs__dropdown-toggle {
+        border: transparent !important;
+    }
+    .v-select >>> .vs__open-indicator{
+        display: none !important;
+    }
+.form-control {
+    border: transparent !important;
+}
+
+    .v-select >>> .vs__clear{
+    display: none !important;
+}
+    .v-select >>> .vs__actions{
+    display: none !important;
+}
+</style>
 <template>
     <main>
         <div class="heroSectionBG">
@@ -40,10 +62,14 @@ export default {
                             <p class="lead">Empowering businesses with efficient, transparent, and accessible services. Discover, apply, and manage all your business needs in one place.</p>
                         </div>
                         <div class="col-lg-6">
-                            <div class="input-group">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                                <input type="text" class="form-control" placeholder="Search by Business type, Sector, RLCOs" aria-label="Search by Business type, Sector, RLCOs">
-                                <button class="btn btn-primary" type="button">Search</button>
+                            <div class="input-group ">
+                                <i class="fa-solid fa-magnifying-glass "></i>
+                                <v-select v-model="business_activity_id" :options="sectors"
+                                          :reduce="sector => sector.id" label="easy_class_name"
+                                          placeholder="Search Business Type Name" class="w-auto form-control">
+                                </v-select>
+<!--                                <input type="text" class="form-control" placeholder="Search by Business type, Sector, RLCOs" aria-label="Search by Business type, Sector, RLCOs">-->
+                                <button class="btn btn-primary" type="button" @click.prevent="search">Search</button>
                             </div>
                         </div>
                     </div>

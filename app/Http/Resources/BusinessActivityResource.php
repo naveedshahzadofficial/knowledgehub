@@ -16,7 +16,8 @@ class BusinessActivityResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'class_name' => $this->class_name
+            'class_name' => $this->class_name,
+            'easy_class_name' => $this->easy_class_name
         ];
     }
 }

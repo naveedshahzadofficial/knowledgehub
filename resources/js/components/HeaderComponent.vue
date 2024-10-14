@@ -5,7 +5,7 @@
                 <div class="col-lg-2">
                     <div class="logoImage">
                         <router-link :to="{ name: 'home' }">
-                            <img :src="useAssets('eBiz-logo.svg')" alt="Header Logo">
+                            <img :src="useAssets('ebiz-logo.png')" alt="Header Logo">
                         </router-link>
                     </div>
                 </div>
