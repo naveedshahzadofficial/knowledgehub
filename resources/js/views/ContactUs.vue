@@ -45,7 +45,7 @@ export default {
                             <li>
                                 <span class="contact-icon"><i class="fas fa-phone"></i></span>
                                 <div class="contact-inner">
-                                    <label class="description">0800-09100</label>
+                                    <label class="description">+92-42-99000000</label>
                                 </div>
                             </li>
                             <li>

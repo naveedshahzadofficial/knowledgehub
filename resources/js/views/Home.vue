@@ -57,7 +57,7 @@ export default {
                             <div class="info-box">
                                 <img :src="useAssets('business.svg')" alt="Business Essentials">
                                 <h5>Business Essentials</h5>
-                                <p>PBP is the ultimate resource for streamlined services, the latest regulatory news, and
+                                <p>eBiz Punjab is the ultimate resource for streamlined services, the latest regulatory news, and
                                     exclusive access to ad-hoc government support programs that businesses often miss out
                                     on.</p>
                             </div>
@@ -67,7 +67,7 @@ export default {
                                 <img :src="useAssets('connect.svg')" alt="Business Sector">
                                 <h5>Business Sector</h5>
                                 <p>Unlock the power of collaboration and forge meaningful connections in Punjab's business
-                                    network. PBP facilitates partnerships, knowledge sharing, & growth opportunities,
+                                    network. eBiz Punjab facilitates partnerships, knowledge sharing, & growth opportunities,
                                     empowering businesses to expand reach, learn from industry experts.</p>
                             </div>
                         </div>
@@ -85,7 +85,7 @@ export default {
                                 <img :src="useAssets('investment.svg')" alt="Investments">
                                 <h5>Investments</h5>
                                 <p>Discover growth opportunities and attract the investment your business needs to scale new
-                                    heights. PBP's investment section connects businesses with a diverse range of funding
+                                    heights. eBiz Punjab's investment section connects businesses with a diverse range of funding
                                     sources enabling access to the capital required to fuel expansion and success.</p>
                             </div>
                         </div>
@@ -105,10 +105,10 @@ export default {
                             <div class="d-flex productivityTabs">
                                 <ul>
                                     <li class="tabActive">
-                                        <a href="javascript: void(0);">With eBiz Portal</a>
+                                        <a target="_blank" href="https://webdev.pitb.gov.pk/ebiz/">With eBiz Portal</a>
                                     </li>
                                     <!-- <li>
-                                        <a href="#">Without PBP</a>
+                                        <a href="#">Without eBiz Punjab</a>
                                     </li> -->
                                 </ul>
                             </div>
@@ -134,20 +134,22 @@ export default {
             </div>
             <div class="row">
                 <div class="col-md-4 mb-3" v-for="(activity, index) in activities">
-                    <div class="options-card">
+                    <router-link :to="{ name: 'services', params : {'id':activity.id }}" class="text-decoration-none">
+                        <div class="options-card">
                         <div class="card-body p-4">
                             <div class="icon-card">
                                 <img :src="activity.activity_icon_url" alt="">
-                                <h5 class="card-title mt-1">{{ activity.activity_name }}</h5>
+                                <h5 class="card-title text-black mt-1" style="color: black !important; text-decoration: none !important;">{{ activity.activity_name }}</h5>
                             </div>
 
                             <div class="mt-3">
-                                <router-link :to="{ name: 'services', params : {'id':activity.id }}" class="arrow-icon">
+                                <span class="arrow-icon">
                                     <img :src="useAssets('arrow.svg')" alt="">
-                                </router-link>
+                                </span>
                             </div>
                         </div>
                     </div>
+                    </router-link>
                 </div>
             </div>
         </section>

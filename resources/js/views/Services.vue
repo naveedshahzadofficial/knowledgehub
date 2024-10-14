@@ -40,10 +40,17 @@ export default {
         },
         scrollToRlco() {
             let refDiv = this.$refs.rlco_position;
-            refDiv.scrollIntoView({
-                behavior: "smooth", // Enables smooth scrolling
-                block: "start"      // Aligns the element to the top of the viewport
-            });
+            if (refDiv) {
+                // Get the element's position relative to the document
+                const elementPosition = refDiv.getBoundingClientRect().top + window.pageYOffset;
+                // Calculate the scroll position with a -10% offset of the window's height
+                const offset = window.innerHeight * 0.25; // 10% of the window height
+                // Scroll to the element minus the offset
+                window.scrollTo({
+                    top: elementPosition - offset,
+                    behavior: "smooth", // Enables smooth scrolling
+                });
+            }
         },
     },
     mounted() {
@@ -224,7 +231,7 @@ export default {
                     </div>
                     <div class="col-3">
                         <div class="card d-block justify-content-between align-items-center p-3">
-                            <a href="javascript:void(0)" class="card-link">
+                            <a href="https://bfc.punjab.gov.pk/" target="_blank" class="card-link">
                                 <div class="d-flex align-items-center ">
                                     <div class="card-body text-center d-flex align-items-left">
                                         <span class="card-text w-auto">
@@ -242,7 +249,7 @@ export default {
                     </div>
                     <div class="col-3">
                         <div class="card d-block justify-content-between align-items-center p-3">
-                            <a href="javascript:void(0)" class="card-link">
+                            <a href="https://bfc.punjab.gov.pk/#our_locations" target="_blank" class="card-link">
                                 <div class="d-flex align-items-center ">
                                     <div class="card-body text-center d-flex align-items-left">
                                         <span class="card-text w-auto">

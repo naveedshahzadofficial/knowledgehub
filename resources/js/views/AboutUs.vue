@@ -32,11 +32,34 @@ export default {
             </div>
             <div class="container mt-4 mb-4">
                 <div class="row">
-                    <div class="col-12">
-                        <p>Duis nec malesuada dolor, eu dictum lacus. Integer non risus dictum sapien auctor volutpat. Pellentesque at tincidunt dolor. Suspendisse et iaculis mi, eu vehicula erat. Mauris ac massa blandit, iaculis felis non, malesuada sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean vestibulum metus sit amet nisi auctor laoreet. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi accumsan leo quis nibh bibendum, in consequat ante consequat. Integer quis velit est. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut vitae imperdiet metus, sit amet faucibus erat. Etiam volutpat lectus a dui placerat venenatis. Nam mollis massa sit amet sapien vehicula, a posuere lectus molestie. Nam vitae mi in sem luctus egestas.</p>
-                        <p>Suspendisse eget blandit ligula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum rhoncus, justo sed ultricies accumsan, diam ex elementum elit, eu pulvinar diam tortor et elit. Proin auctor arcu orci, sed interdum leo aliquam vel. Vestibulum lacinia, nibh et elementum pellentesque, orci erat ornare urna, et euismod diam libero sit amet purus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam efficitur dui metus, nec dignissim libero tempor ut. Proin id rutrum ante. Vestibulum accumsan, dolor id mollis fringilla, felis lacus viverra leo, porttitor commodo ligula justo eu ante. Duis nisl lacus, mattis quis tempor eu, lobortis a mi.</p>
-                        <p>Fusce faucibus, velit ac ornare sollicitudin, quam metus sagittis turpis, at hendrerit nibh purus quis risus. Vestibulum non ultrices odio. Nunc neque dolor, accumsan ut porttitor ut, mollis eget nibh. Phasellus efficitur rutrum velit et dapibus. Mauris bibendum elit sit amet pellentesque varius. Cras tempor tempus justo sed lobortis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer quis tortor gravida ligula euismod tincidunt.</p>
-                        <p>Suspendisse eget blandit ligula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum rhoncus, justo sed ultricies accumsan, diam ex elementum elit, eu pulvinar diam tortor et elit. Proin auctor arcu orci, sed interdum leo aliquam vel. Vestibulum lacinia, nibh et elementum pellentesque, orci erat ornare urna, et euismod diam libero sit amet purus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam efficitur dui metus, nec dignissim libero tempor ut. Proin id rutrum ante. Vestibulum accumsan, dolor id mollis fringilla, felis lacus viverra leo, porttitor commodo ligula justo eu ante. Duis nisl lacus, mattis quis tempor eu, lobortis a mi.</p>
+                    <div class="col-lg-12 col-md-12 col-sm-12 page-content">
+                        <p>
+                            To obtain licenses, permits, etc., businesses have to go through
+                            cumbersome processing using manual application procedures at
+                            various departments, such as Housing and Urban Development, Local
+                            Government, Environment Protection Authority, Excise & Taxation,
+                            Labour Department, Punjab Revenue Authority, Punjab Food
+                            Authority, Punjab Power Development Company Limited, Water &
+                            Sanitation Agency, etc.
+                        </p>
+                        <p>
+                            After the success of EoDB program and significant improvement in
+                            ranking, there was a need to reduce compliances and for
+                            regulatory guillotine. In light of this, the Prime Minister of
+                            Pakistan approved the launch of “Pakistan Regulatory
+                            Modernization Initiative (PRMI)”. The key objective of this
+                            initiative is to reduce the compliance burden for businesses on
+                            one hand, while improving the effectiveness of regulatory regime
+                            on the other hand.
+                        </p>
+                        <p>
+                            In response, Planning & Development Board and Program
+                            Implementation Unit (PIU) launched Knowledge Hub 'a Single
+                            Platform to access all the developed systems for Licenses &
+                            Permits' for the facilitation of Businesses aligned with
+                            Pakistan Regulatory Modernization Initiative (PRMI) headed by
+                            Board of Investment, Islamabad.
+                        </p>
                     </div>
                 </div>
             </div>
