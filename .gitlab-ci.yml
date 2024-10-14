@@ -31,6 +31,8 @@ build:
     - rm package-lock.json
     - cat $STAGING_ENV > .env
     - ls -la
+    - rm composer.lock || echo "composer.lock file not found"
+    - rm package-lock.json || echo "package-lock.json file not found"
     - composer install --no-interaction --prefer-dist
     - sed -i "s/createWebHistory('\/')/createWebHistory('\/knowledgehub\/')/g" resources/js/router/router.js
     - export http_proxy="http://10.50.27.160:8080/"
