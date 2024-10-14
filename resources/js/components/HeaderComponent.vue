@@ -1,46 +1,67 @@
 <template>
     <header>
-        <div class="logo row">
-            <div class="col-lg-9 col-md-9 col-sm-12 pl-0">
-                <router-link exact :to="{ name: 'home' }"
-                    ><img :src="logo" alt="{{ app_title }}"
-                /></router-link>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-12 text-right pt-5">
-                <span
-                    v-if="!isOnHomePage && totalFavorite"
-                    class="saved-permits"
-                    :class="[
-                        totalFavorite ? 'favorite-icon' : 'un-favorite-icon',
-                    ]"
-                >
-                    <router-link :to="{ name: 'favorite' }"
-                        ><font-awesome-icon icon="star" />&nbsp;Saved
-                        Permits&nbsp;(<span
-                            class="favorite-count"
-                            v-text="totalFavorite"
-                        ></span
-                        >)
-                    </router-link>
-                </span>
-                <span class="saved-back-link" v-if="isSavedPage">
-                    <router-link :to="{ name: 'search' }">Back</router-link>
-                </span>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="logoImage">
+                        <router-link :to="{ name: 'home' }">
+                            <img :src="useAssets('eBiz-logo.svg')" alt="Header Logo">
+                        </router-link>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="headerMenu float-end">
+                        <nav class="navbar navbar-expand-lg navbar-light">
+
+                            <!-- Navbar links -->
+                            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <router-link class="nav-link" :to="{ name: 'services'}" >Services</router-link>
+                                    </li>
+                                    <li class="nav-item">
+                                        <router-link class="nav-link" :to="{ name: 'about-us'}">About</router-link>
+                                    </li>
+                                    <li class="nav-item">
+                                        <router-link class="nav-link" :to="{ name: 'contact-us'}">Contact Us</router-link>
+                                    </li>
+                                </ul>
+                                <a href="#" class="btn btn-login">Log In</a>
+                                <a class="RightmenuBtn">
+                                    <span class="navbar-toggler-icon"></span>
+                                </a>
+                            </div>
+                        </nav>
+                        <div class="Rightmenu">
+                            <a class="RightmenuBtn">
+                                <i class="fa-solid fa-xmark"></i>
+                            </a>
+                            <ul>
+                                <li><router-link :to="{ name: 'home'}">Home</router-link></li>
+                                <li><router-link :to="{ name: 'services'}">Services</router-link></li>
+                                <li> <router-link :to="{ name: 'about-us'}">About</router-link></li>
+                                <li><router-link :to="{ name: 'contact-us'}">Contact Us</router-link></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 </template>
 
 <script>
+import {useAssets} from "../composable/use-assets";
+
 export default {
     name: "HeaderComponent",
+    methods: {useAssets},
     props: {
         totalFavorite: 0,
     },
     data() {
         return {
             app_title: this.$store.state.app_title,
-            logo: process.env.MIX_BASE_URL + "/media/logo-blue.png",
         };
     },
     computed: {

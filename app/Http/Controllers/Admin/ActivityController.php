@@ -43,7 +43,18 @@ class ActivityController extends Controller
 
     public function store(ActivityRequest $request): RedirectResponse
     {
-        $activity=Activity::create($request->all());
+        if ($request->hasFile('activity_icon')) {
+            $activity_icon = $request->file('activity_icon')->store('activity_icons', 'public');
+        }else{
+            $activity_icon = '';
+        }
+        $activity=Activity::create([
+            'activity_name' => $request->input('activity_name') ?? '',
+            'activity_order' => $request->input('activity_order') ?? '',
+            'activity_remark' => $request->input('activity_remark') ?? '',
+            'activity_status' => $request->input('activity_status') ?? '',
+            'activity_icon' => $activity_icon,
+        ]);
         if(!$activity){
             session()->flash('error_message', 'Fail activity added, please try again.');
             return redirect()->route('admin.activities.create');
@@ -65,7 +76,17 @@ class ActivityController extends Controller
 
     public function update(ActivityRequest $request,  Activity $activity): RedirectResponse
     {
-        $affected = $activity->update($request->all());
+        if ($request->hasFile('activity_icon')) {
+            $activity_icon = $request->file('activity_icon')->store('activity_icons', 'public');
+        }else{
+            $activity_icon = $request->input('already_activity_icon');
+        }
+        $activity->activity_name = $request->input('activity_name');
+        $activity->activity_order = $request->input('activity_order');
+        $activity->activity_remark = $request->input('activity_remark');
+        $activity->activity_status = $request->input('activity_status');
+        $activity->activity_icon = $activity_icon;
+        $affected = $activity->save();
         if($affected)
             session()->flash('success_message', 'Activity has been updated successfully.');
         else

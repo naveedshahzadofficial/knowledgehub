@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="card-body p-0">
-                    {{ Form::open(array('route' => 'admin.activities.store','class'=>'form form-horizontal','name'=>'activity_form','id'=>'activity_form')) }}
+                    {{ Form::open(array('route' => 'admin.activities.store','class'=>'form form-horizontal','name'=>'activity_form','id'=>'activity_form', 'files'=>true)) }}
                     <div class="form-body col-xl-8 col-xs-12">
 
                         <div class="form-group">
@@ -35,6 +35,17 @@
                                    value="{{ old('activity_order') }}"
                                    id="activity_order"  required />
                             @error('activity_order')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="bmd-label-floating">Icon <span class="color-red-700">*</span> </label>
+
+                            <input type="file" class="form-control  @error('activity_icon') is-invalid @enderror" name="activity_icon"
+                                   id="activity_icon"  required />
+                            @error('activity_icon')
                             <div class="invalid-feedback d-block">
                                 {{ $message }}
                             </div>

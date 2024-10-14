@@ -9,7 +9,11 @@
     <meta name="description" content="RLCOs" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('new_assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('new_assets/css/responsive.css') }}" rel="stylesheet">
+    <link href="{{ asset('new_assets/css/all.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('new_assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('new_assets/css/vue-select.css') }}">
 </head>
 
 <body class="page-background">
@@ -17,6 +21,9 @@
 <div id="app"></div>
 
 <script type="module" src="{{ asset(mix('js/app.js')) }}"></script>
+<script type="module" src="{{ asset('new_assets/js/jquery.min.js') }}"></script>
+<script type="module" src="{{ asset('new_assets/js/bootstrap.bundle.min.js') }}"></script>
+<script type="module" src="{{ asset('new_assets/js/main.js') }}"></script>
 </body>
 
 </html>

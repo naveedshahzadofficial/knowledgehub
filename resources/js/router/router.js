@@ -1,10 +1,14 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home.vue";
-import SearchResult from "../views/SearchResult.vue";
-import Overview from "../views/Overview";
-import Favorite from "../views/Favorite";
-import Detail from "../views/Detail";
+import Home from "@/views/Home.vue";
+import SearchResult from "@/views/SearchResult.vue";
+import Overview from "@/views/Overview";
+import Favorite from "@/views/Favorite";
+import Detail from "@/views/Detail";
 import PageNotFound from "../views/PageNotFound";
+import Services from "@/views/Services.vue";
+import AboutUs from "@/views/AboutUs.vue";
+import ContactUs from "@/views/ContactUs.vue";
+import ServiceDetail from "@/views/ServiceDetail.vue";
 
 export const router = createRouter({
     history: createWebHistory("/"),
@@ -13,7 +17,27 @@ export const router = createRouter({
         {
             path: "/",
             name: "home",
-            component: SearchResult,
+            component: Home,
+        },
+        {
+            path: "/services/:id?",
+            name: "services",
+            component: Services,
+        },
+        {
+            path: "/service-detail/:id",
+            name: "service-detail",
+            component: ServiceDetail,
+        },
+        {
+            path: "/about-us",
+            name: "about-us",
+            component: AboutUs,
+        },
+        {
+            path: "/contact-us",
+            name: "contact-us",
+            component: ContactUs,
         },
         {
             path: "/search",

@@ -1,11 +1,9 @@
 <template>
-    <div class="container-fluid">
-        <HeaderComponent :totalFavorite="totalFavorite" />
-        <div class="content-wrap mb-4" >
-            <router-view @toggle-favorite="toggleFavorite"></router-view>
-        </div>
-    </div>
+  <section>
+    <HeaderComponent :totalFavorite="totalFavorite" />
+      <router-view></router-view>
     <FooterComponent />
+  </section>
 </template>
 
 <script>

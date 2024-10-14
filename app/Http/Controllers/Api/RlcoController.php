@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ActivityResource;
+use App\Http\Resources\BusinessCategoryResource;
+use App\Http\Resources\DepartmentResource;
 use App\Http\Resources\RlcoResource;
 use App\Models\Activity;
+use App\Models\BusinessActivity;
 use App\Models\BusinessCategory;
 use App\Models\Department;
 use App\Models\Rlco;
@@ -84,5 +87,20 @@ class RlcoController extends Controller
     public function rlcosList()
     {
         return RlcoResource::collection(Rlco::with('requiredDocuments.requiredDocument')->where('rlco_status',1)->get());
+    }
+
+    public function activities()
+    {
+        $activities = ActivityResource::collection(Activity::active()->orderBy('activity_order')->get());
+        $categories = BusinessCategoryResource::collection(BusinessCategory::where('category_status',1)->get());
+        $departments = DepartmentResource::collection(Department::active()->get());
+        $sectors = BusinessActivity::where('activity_status',1)->get();
+        return response()->json(['activities'=>$activities,'categories'=>$categories,'sectors'=>$sectors,'departments'=>$departments]);
+    }
+
+    public function activityRlcos($activity_id)
+    {
+            $rlcos = RlcoResource::collection(Rlco::with('scopes','businessActivities')->active()->whereRelation('activities', 'id', $activity_id)->get());
+            return response()->json(['rlcos'=>$rlcos]);
     }
 }

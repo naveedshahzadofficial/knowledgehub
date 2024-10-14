@@ -1,156 +1,147 @@
 <template>
     <div id="printSection">
-        <div class="section-detail-heading">
-            <h4
-                v-text="
-                    rlco_detail?.rlco_name
-                        ? rlco_detail?.rlco_name
-                        : 'No RLCOs found.'
-                "
-            ></h4>
-            <span
-                v-if="rlco_detail?.id && !isOverFlow"
-                class="view-detail-icon"
-                @click.prevent="openDetailPage"
-                title="Full Page"
-                ><font-awesome-icon icon="expand"
-            /></span>
-            <span
-                v-if="rlco_detail?.id && isOverFlow"
-                class="view-detail-icon"
-                v-print="printObj"
-                title="Print Page"
-                ><font-awesome-icon icon="print"
-            /></span>
-        </div>
-
-        <div
-            id="top_detail"
-            ref="detail_page"
-            class="business-detail"
-            :class="[
-                { 'overflow-auto': !isOverFlow },
-                { 'overflow-hidden h-100': isOverFlow },
-            ]"
-        >
-            <div
-                v-if="rlco_detail && rlco_detail.id"
-                class="col-lg-12 col-md-12 list-detail"
-            >
-                <div class="col-lg-12 col-md-12">
-                    <div class="row">
-                        <span class="detail-department">{{
-                            rlco_detail.department?.department_name
-                        }}</span>
-                    </div>
-                    <div class="row">
-                        <span class="detail-scope">{{
-                            rlco_detail.scope
-                        }}</span>
-                    </div>
+        <main class="confirmation-compliance-page">
+            <!-- Header Section -->
+            <div class="bg-light-grey pb-4">
+                <!-- Breadcrumb Navigation -->
+                <div class="container py-2">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><i class="fas fa-angle-left"></i></li>
+                            <li class="breadcrumb-item"><router-link :to="{ name: 'home'}">Home</router-link></li>
+                            <li class="breadcrumb-item"><router-link :to="{ name: 'services'}">Services</router-link></li>
+                            <li class="breadcrumb-item"><a >Service Detail</a></li>
+                        </ol>
+                    </nav>
                 </div>
+                <div class="container mt-4">
+                    <h1 class="display-6">eBiz Services</h1>
+                    <p class="lead">Your trusted partner for personalised business support and guidance.</p>
+                </div>
+            </div>
+            <div class="container mt-4">
+                <div class="row float-end">
+                <span
+                    v-if="rlco_detail?.id && isOverFlow"
+                    class="view-detail-icon"
+                    v-print="printObj"
+                    title="Print Page"
+                ><font-awesome-icon icon="print"
+                /></span>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row mt-4">
+                    <div class="col-lg-6 mb-4">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between w-100">
+                                    <h5 class="card-title compliance-heading" v-text="rlco_detail?.rlco_name ? rlco_detail?.rlco_name : 'No RLCOs found.'"></h5>
+                                    <p class="provincial-text">{{ rlco_detail.scope }}</p>
+                                </div>
+                                <div class="d-flex justify-content-between w-100 align-items-center">
+                                <span class="badge bg-primary mb-2 epa-badge"><i
+                                    class="fas fa-circle"></i><span>{{ rlco_detail.department?.department_name }}</span></span>
+                                    <button class="btn btn-dark float-end start-service-btn d-none">Start Service</button>
+                                </div>
+                                <p class="after-completion-text" v-html="rlco_detail.description"></p>
 
-                <div class="detail-desc" v-html="rlco_detail.description"></div>
-                <table class="table detail-table">
-                    <tbody>
-                        <tr>
-                            <th width="40%">Business Category/ Section</th>
-                            <td>
-                                {{
-                                    rlco_detail.business_category?.category_name
-                                }}
-                            </td>
-                        </tr>
+                            </div>
+                        </div>
 
-                        <tr
-                            v-if="
-                                rlco_detail.title_of_law &&
-                                rlco_detail.link_of_law
-                            "
-                        >
-                            <th>Enforcing Law</th>
-                            <td>
-                                <a
-                                    target="_blank"
-                                    :href="rlco_detail.link_of_law"
-                                    >{{ rlco_detail.title_of_law }}</a
-                                >
-                            </td>
-                        </tr>
+                        <div class="card shadow-sm mt-4" v-if="rlco_detail.required_documents?.length > 0">
+                            <div class="card-body p-0">
+                                <table class="table table-bordered complianceTbl">
+                                    <thead>
+                                    <tr>
+                                        <th>Document</th>
+                                        <th>Original</th>
+                                        <th>Photocopies</th>
+                                        <th>Attestation</th>
+                                        <th>Requirement</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="(
+                                document, index
+                            ) in rlco_detail.required_documents">
+                                        <td>{{ document.document_title }}</td>
+                                        <td>
+                                            <span v-if="document.document_type.indexOf('Original') !== -1"><i class="fas fa-check-circle"></i></span>
+                                            <span  v-if="document.document_type.indexOf('Original') == -1"><i class="far fa-times-circle"></i></span>
+                                        </td>
+                                        <td>
+                                            <span v-if="document.document_type.indexOf('Photocopies') !== -1"><i class="fas fa-check-circle"></i></span>
+                                            <span  v-if="document.document_type.indexOf('Photocopies') == -1"><i class="far fa-times-circle"></i></span>
+                                        </td>
+                                        <td>
+                                            <span v-if="document.document_type.indexOf('Attestation') !== -1"><i class="fas fa-check-circle"></i></span>
+                                            <span  v-if="document.document_type.indexOf('Attestation') == -1"><i class="far fa-times-circle"></i></span>
+                                        </td>
+                                        <td>
+                                            <base-modal-component
+                                                title="Document Requirement Remarks"
+                                                @toggle-modal="toggleModalDocumentRequirement(index)"
+                                                v-if="isShowModalDocumentRequirement[index]"
+                                            >
+                                                <div v-html="document.document_requirement_remarks"></div>
+                                            </base-modal-component>
 
-                        <tr v-if="rlco_detail.fee_question">
-                            <th>Fee (PKR)</th>
-                            <td>
-                                <span
-                                    v-if="
+                                            <span v-if="document.document_requirement_type === 'Conditional'"
+                                                  @click.prevent="toggleModalDocumentRequirement(index)"
+                                                  class="make-link"
+                                            >{{ document.document_requirement_type }}</span>
+                                            <span v-else>{{ document.document_requirement_type }}</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div>
+                            <ul class="list-unstyled enforcing-list">
+                                <li class="shaow-sm mb-2"><span><strong>Business Category/ Section:</strong></span> <span>{{ rlco_detail.business_category?.category_name }}</span></li>
+                                <li v-if="rlco_detail.title_of_law && rlco_detail.link_of_law" class="shaow-sm mb-2"><span><strong>Enforcing Law:</strong></span> <span><a target="_blank" :href="rlco_detail.link_of_law">{{ rlco_detail.title_of_law }}</a></span></li>
+                                <li v-if="rlco_detail.fee_question" class="shaow-sm mb-2"><span><strong>Fee (PKR):</strong></span>
+                                    <span
+                                        v-if="
                                         rlco_detail.fee_question === 'Yes' &&
                                         rlco_detail.fee_plan === 'Schedule' &&
                                         rlco_detail.fee_schedule
                                     "
-                                    @click.prevent="toggleModal"
-                                    class="make-link"
+                                        @click.prevent="toggleModal"
+                                        class="make-link"
                                     >Fee Details</span
-                                >
-                                <span
-                                    v-else-if="
+                                    >
+                                    <span
+                                        v-else-if="
                                         rlco_detail.fee_question === 'Yes' &&
                                         rlco_detail.fee_plan === 'Single Fee' &&
                                         rlco_detail.fee
                                     "
                                     >{{ rlco_detail.fee }}</span
-                                >
-                                <span v-else>Not Applicable</span>
-                            </td>
-                        </tr>
-
-                        <tr
-                            v-if="
-                                rlco_detail.fee_question === 'Yes'">
-                            <th>Payment Mode</th>
-                            <td>
-                                <span>{{ rlco_detail.fee_submission_mode }}</span>
-                            </td>
-                        </tr>
-                        <tr
-                            v-if="
-                                rlco_detail.time_taken || rlco_detail.time_unit
-                            "
-                        >
-                            <th>Processing Time</th>
-                            <td>
-                                {{ rlco_detail.time_taken }}&nbsp;{{
-                                    rlco_detail.time_unit
-                                }}
-                            </td>
-                        </tr>
-
-                        <tr
-                            v-if="
-                                rlco_detail.renewal_required === 'Yes' &&
-                                rlco_detail.validity
-                            "
-                        >
-                            <th>Validity</th>
-                            <td>{{ rlco_detail.validity }}</td>
-                        </tr>
-
-                        <tr v-if="rlco_detail.renewal_required">
-                            <th>Renewal Fee (PKR)</th>
-                            <td>
-                                <span
-                                    v-if="
+                                    >
+                                    <span v-else>Not Applicable</span>
+                                </li>
+                                <li v-if="rlco_detail.fee_question === 'Yes'" class="shaow-sm mb-2"><span><strong>Payment Mode:</strong></span> <span>{{ rlco_detail.fee_submission_mode }}</span></li>
+                                <li v-if="rlco_detail.time_taken || rlco_detail.time_unit" class="shaow-sm mb-2"><span><strong>Processing Time:</strong></span> <span>{{ rlco_detail.time_taken }}&nbsp;{{ rlco_detail.time_unit }}</span></li>
+                                <li v-if="rlco_detail.renewal_required === 'Yes' && rlco_detail.validity" class="shaow-sm mb-2"><span><strong>Validity:</strong></span> <span>{{ rlco_detail.validity }}</span></li>
+                                <li v-if="rlco_detail.renewal_required" class="shaow-sm mb-2"><span><strong>Renewal Fee (PKR):</strong></span>
+                                    <span
+                                        v-if="
                                         rlco_detail.renewal_required ===
                                             'Yes' &&
                                         rlco_detail.renewal_fee_plan ===
                                             'Schedule' &&
                                         rlco_detail.renewal_fee_schedule
                                     "
-                                    @click.prevent="toggleModalRenewal"
-                                    class="make-link"
+                                        @click.prevent="toggleModalRenewal"
+                                        class="make-link"
                                     >Renewal Fee Details</span
-                                >
-                                <span
-                                    v-else-if="
+                                    >
+                                    <span
+                                        v-else-if="
                                         rlco_detail.renewal_required ===
                                             'Yes' &&
                                         rlco_detail.renewal_fee_plan ===
@@ -158,294 +149,128 @@
                                         rlco_detail.renewal_fee
                                     "
                                     >{{ rlco_detail.renewal_fee }}</span
-                                >
-                                <span v-else>Not Applicable</span>
-                            </td>
-                        </tr>
+                                    >
+                                    <span v-else>Not Applicable</span>
+                                </li>
+                                <li v-if="rlco_detail.inspection_required" class="shaow-sm mb-2"><span><strong>Inspection:</strong></span> <span>
+                                    {{
+                                        rlco_detail.inspection_required == "None"
+                                            ? "Not Applicable"
+                                            : "Applicable"
+                                    }}
+                                </span></li>
+                                <li class="shaow-sm mb-2" v-if="rlco_detail.mode_of_inspection && 1 == 2">
+                                    <span><strong>Mode of Inspection:</strong></span>
+                                    <span>{{ rlco_detail.mode_of_inspection }}</span>
+                                </li>
+                                <li class="shaow-sm mb-2" v-if="rlco_detail.inspection_department && 1 == 2">
+                                    <span><strong>Joint inspection with</strong></span>
+                                    <span>
+                                        {{
+                                            rlco_detail.inspection_department
+                                                ?.department_name
+                                        }}
+                                    </span>
+                                </li>
+                                <li class="shaow-sm mb-2" v-if="rlco_detail.fine_details && 1 == 2">
+                                    <span><strong>Fine Details</strong></span>
+                                    <span><p v-html="rlco_detail.fine_details"></p></span>
+                                </li>
 
-                        <tr v-if="rlco_detail.inspection_required">
-                            <th>Inspection</th>
-                            <td>
-                                {{
-                                    rlco_detail.inspection_required == "None"
-                                        ? "Not Applicable"
-                                        : "Applicable"
-                                }}
-                            </td>
-                        </tr>
-
-                        <tr v-if="rlco_detail.mode_of_inspection && 1 == 2">
-                            <th>Mode of Inspection</th>
-                            <td>{{ rlco_detail.mode_of_inspection }}</td>
-                        </tr>
-                        <tr v-if="rlco_detail.inspection_department && 1 == 2">
-                            <th>Joint inspection with</th>
-                            <td>
-                                {{
-                                    rlco_detail.inspection_department
-                                        ?.department_name
-                                }}
-                            </td>
-                        </tr>
-                        <tr v-if="rlco_detail.fine_details && 1 == 2">
-                            <th>Fine Details</th>
-                            <td><p v-html="rlco_detail.fine_details"></p></td>
-                        </tr>
-
-                        <tr v-if="rlco_detail.process_flow_diagram_file">
-                            <th>Process Flow Diagram</th>
-                            <td>
-                                <a
-                                    target="_blank"
-                                    :href="
+                                <li class="shaow-sm mb-2" v-if="rlco_detail.process_flow_diagram_file">
+                                    <span><strong>Process Flow Diagram</strong></span>
+                                    <span>
+                                        <a
+                                            target="_blank"
+                                            :href="
                                         rlco_detail.process_flow_diagram_file
                                     "
-                                    download
-                                    ><font-awesome-icon icon="download"
-                                /></a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3
-                    v-if="rlco_detail.required_documents?.length > 0"
-                    class="detail-heading pt-3 pb-2"
-                >
-                    Documents to be Attached
-                </h3>
-                <table
-                    class="table detail-table table-bordered"
-                    v-if="rlco_detail.required_documents?.length > 0"
-                >
-                    <thead>
-                    <tr>
-                        <th class="text-left font-weight-bolder" width="40%">Document</th>
-                        <th class="text-center font-weight-bolder" width="5%">Original</th>
-                        <th class="text-center font-weight-bolder" width="8%">Photocopies</th>
-                        <th class="text-center font-weight-bolder" width="7%">Attestation</th>
-                        <th class="text-left font-weight-bolder"  width="7%">Requirement</th>
-                        <th class="text-left font-weight-bolder">Remarks</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr
-                            v-for="(
-                                document, index
-                            ) in rlco_detail.required_documents"
-                        >
-                            <td>{{ document.document_title }}</td>
-                            <td class="text-center"><span v-if="document.document_type.indexOf('Original') !== -1">
-                                <span class="svg-icon svg-icon-success svg-icon-2x">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#000c60" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24"/>
-                                            <circle fill="#000c60" opacity="" cx="12" cy="12" r="10"/>
-                                            <path d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z" fill="#ffffff" fill-rule="nonzero"/>
-                                        </g>
-                                    </svg>
-                                </span>
-                            </span>
-                                <span v-if="document.document_type.indexOf('Original') == -1">
-                                    <span class="svg-icon svg-icon-danger svg-icon-2x">
-                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24"/>
-                                            <circle fill="#d5d7df" opacity="" cx="12" cy="12" r="10"/>
-                                            <path d="M12.0355339,10.6213203 L14.863961,7.79289322 C15.2544853,7.40236893 15.8876503,7.40236893 16.2781746,7.79289322 C16.6686989,8.18341751 16.6686989,8.81658249 16.2781746,9.20710678 L13.4497475,12.0355339 L16.2781746,14.863961 C16.6686989,15.2544853 16.6686989,15.8876503 16.2781746,16.2781746 C15.8876503,16.6686989 15.2544853,16.6686989 14.863961,16.2781746 L12.0355339,13.4497475 L9.20710678,16.2781746 C8.81658249,16.6686989 8.18341751,16.6686989 7.79289322,16.2781746 C7.40236893,15.8876503 7.40236893,15.2544853 7.79289322,14.863961 L10.6213203,12.0355339 L7.79289322,9.20710678 C7.40236893,8.81658249 7.40236893,8.18341751 7.79289322,7.79289322 C8.18341751,7.40236893 8.81658249,7.40236893 9.20710678,7.79289322 L12.0355339,10.6213203 Z" fill="#ffffff"/>
-                                        </g>
-                                    </svg>
-                                     </span>
-                                </span>
-                            </td>
-                            <td class="text-center">
-                                <span v-if="document.document_type.indexOf('Photocopies') !== -1">
-                                <span class="svg-icon svg-icon-success svg-icon-2x">
-                                   <svg xmlns="http://www.w3.org/2000/svg" fill="#000c60" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24"/>
-                                            <circle fill="#000c60" opacity="" cx="12" cy="12" r="10"/>
-                                            <path d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z" fill="#ffffff" fill-rule="nonzero"/>
-                                        </g>
-                                    </svg>
-                                </span>
-                            </span>
-                                <span v-if="document.document_type.indexOf('Photocopies') == -1">
-                                    <span class="svg-icon svg-icon-danger svg-icon-2x">
-                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24"/>
-                                            <circle fill="#d5d7df" opacity="" cx="12" cy="12" r="10"/>
-                                            <path d="M12.0355339,10.6213203 L14.863961,7.79289322 C15.2544853,7.40236893 15.8876503,7.40236893 16.2781746,7.79289322 C16.6686989,8.18341751 16.6686989,8.81658249 16.2781746,9.20710678 L13.4497475,12.0355339 L16.2781746,14.863961 C16.6686989,15.2544853 16.6686989,15.8876503 16.2781746,16.2781746 C15.8876503,16.6686989 15.2544853,16.6686989 14.863961,16.2781746 L12.0355339,13.4497475 L9.20710678,16.2781746 C8.81658249,16.6686989 8.18341751,16.6686989 7.79289322,16.2781746 C7.40236893,15.8876503 7.40236893,15.2544853 7.79289322,14.863961 L10.6213203,12.0355339 L7.79289322,9.20710678 C7.40236893,8.81658249 7.40236893,8.18341751 7.79289322,7.79289322 C8.18341751,7.40236893 8.81658249,7.40236893 9.20710678,7.79289322 L12.0355339,10.6213203 Z" fill="#ffffff"/>
-                                        </g>
-                                    </svg>
-                                 </span>
-                            </span>
-                            </td>
-                            <td class="text-center">
-                                <span v-if="document.document_type.indexOf('Attestation') !== -1">
-                                <span class="svg-icon svg-icon-success svg-icon-2x">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#000c60" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24"/>
-                                            <circle fill="#000c60" opacity="" cx="12" cy="12" r="10"/>
-                                            <path d="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z" fill="#ffffff" fill-rule="nonzero"/>
-                                        </g>
-                                    </svg>
-                                </span>
-                            </span>
-                                <span v-if="document.document_type.indexOf('Attestation') == -1">
-                                    <span class="svg-icon svg-icon-danger svg-icon-2x">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24"/>
-                                            <circle fill="#d5d7df" opacity="" cx="12" cy="12" r="10"/>
-                                            <path d="M12.0355339,10.6213203 L14.863961,7.79289322 C15.2544853,7.40236893 15.8876503,7.40236893 16.2781746,7.79289322 C16.6686989,8.18341751 16.6686989,8.81658249 16.2781746,9.20710678 L13.4497475,12.0355339 L16.2781746,14.863961 C16.6686989,15.2544853 16.6686989,15.8876503 16.2781746,16.2781746 C15.8876503,16.6686989 15.2544853,16.6686989 14.863961,16.2781746 L12.0355339,13.4497475 L9.20710678,16.2781746 C8.81658249,16.6686989 8.18341751,16.6686989 7.79289322,16.2781746 C7.40236893,15.8876503 7.40236893,15.2544853 7.79289322,14.863961 L10.6213203,12.0355339 L7.79289322,9.20710678 C7.40236893,8.81658249 7.40236893,8.18341751 7.79289322,7.79289322 C8.18341751,7.40236893 8.81658249,7.40236893 9.20710678,7.79289322 L12.0355339,10.6213203 Z" fill="#ffffff"/>
-                                        </g>
-                                    </svg>
-                                 </span>
-                            </span>
-                            </td>
-                            <td>
-                                <base-modal-component
-                                    title="Document Requirement Remarks"
-                                    @toggle-modal="toggleModalDocumentRequirement(index)"
-                                    v-if="isShowModalDocumentRequirement[index]"
-                                >
-                                    <div v-html="document.document_requirement_remarks"></div>
-                                </base-modal-component>
-
-                                <span v-if="document.document_requirement_type === 'Conditional'"
-                                @click.prevent="toggleModalDocumentRequirement(index)"
-                                class="make-link"
-                            >{{ document.document_requirement_type }}</span>
-                                 <span v-else>{{ document.document_requirement_type }}</span>
-                            </td>
-                            <td>{{ document.remark }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3
-                    v-if="rlco_detail.dependencies?.length > 0"
-                    class="detail-heading pt-3 pb-1"
-                >
-                    Dependencies
-                </h3>
-                <table
-                    class="table detail-table"
-                    v-if="rlco_detail.dependencies?.length > 0"
-                >
-                    <tbody>
-                        <tr
-                            v-for="(
-                                dependency, index
-                            ) in rlco_detail.dependencies"
-                        >
-                            <td>
-                                {{ dependency.activity_name }}
-                                <div style="font-size: 12px; margin-top: -5px">
-                                    From
-                                    {{ dependency.department?.department_name }}
+                                            download
+                                        ><font-awesome-icon icon="download"
+                                        /></a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                        <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="mistakes-tab" data-bs-toggle="tab" href="#mistakes"
+                                   role="tab">Common Mistakes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="documents-tab" data-bs-toggle="tab" href="#documents"
+                                   role="tab">Help Documents</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="faqs-tab" data-bs-toggle="tab" href="#faqs" role="tab">FAQs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="dependencies-tab" data-bs-toggle="tab" href="#dependencies" role="tab">Dependencies</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content mt-3">
+                            <div class="tab-pane fade show active" id="mistakes" role="tabpanel">
+                                <div  v-if="rlco_detail.foss?.length > 0">
+                                    <ul v-for="(fos, index) in rlco_detail.foss">
+                                        <li>{{ fos.fos_observation }} <span v-if="fos.fos_file"
+                                        ><a
+                                            :href="fos.fos_file"
+                                            target="_blank"
+                                            download
+                                        ><font-awesome-icon
+                                            icon="download" /></a
+                                        ></span>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3
-                    v-if="rlco_detail.foss?.length > 0"
-                    class="detail-heading pt-3 pb-1"
-                >
-                    Common Mistakes
-                </h3>
-
-                <table
-                    class="table detail-table"
-                    v-if="rlco_detail.foss?.length > 0"
-                >
-                    <tbody>
-                        <tr v-for="(fos, index) in rlco_detail.foss">
-                            <td>{{ fos.fos_observation }}</td>
-                            <td>
-                                <span v-if="fos.fos_file"
-                                    ><a
-                                        :href="fos.fos_file"
-                                        target="_blank"
-                                        download
+                            </div>
+                            <div class="tab-pane fade" id="documents" role="tabpanel">
+                                <div v-if="rlco_detail.other_documents?.length > 0">
+                                    <ul v-for="(document, index) in rlco_detail.other_documents">
+                                        <li>{{ document.document_title }} <span v-if="document.document_file"
+                                        ><a
+                                            target="_blank"
+                                            :href="document.document_file"
+                                            download
                                         ><font-awesome-icon
                                             icon="download" /></a
-                                ></span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3
-                    v-if="rlco_detail.other_documents?.length > 0"
-                    class="detail-heading pt-3 pb-1"
-                >
-                    Help Documents
-                </h3>
-
-                <table
-                    class="table detail-table"
-                    v-if="rlco_detail.other_documents?.length > 0"
-                >
-                    <tbody>
-                        <tr
-                            v-for="(
-                                document, index
-                            ) in rlco_detail.other_documents"
-                        >
-                            <td>{{ document.document_title }}</td>
-                            <td>
-                                <span v-if="document.document_file"
-                                    ><a
-                                        target="_blank"
-                                        :href="document.document_file"
-                                        download
-                                        ><font-awesome-icon
-                                            icon="download" /></a
-                                ></span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div v-if="rlco_detail.faqs?.length > 0">
-                    <h3 class="detail-heading pt-3 pb-1">FAQs</h3>
-                    <a
-                        href="javascript:;"
-                        class="text-decoration-none btn-expend"
-                        @click.prevent="isExpand = false"
-                        >Collapse All</a
-                    >&nbsp;&nbsp;&nbsp;&nbsp;<a
-                        href="javascript:;"
-                        class="text-decoration-none btn-expend"
-                        @click.prevent="isExpand = true"
-                        >Expand All</a
-                    >
-                </div>
-
-                <div
-                    v-if="rlco_detail.faqs?.length > 0"
-                    class="accordion accordion-light accordion-light-borderless accordion-svg-toggle"
-                    id="accordionFaqs"
-                >
-                    <div
-                        v-for="(faq, index) in rlco_detail.faqs"
-                        class="card bg-custom-color"
-                    >
-                        <div class="card-header" :id="`heading_faq_${index}`">
-                            <div
-                                class="card-title"
-                                :class="!isExpand ? 'collapsed' : ''"
-                                data-toggle="collapse"
-                                :data-target="`#collapse_faq_${index}`"
-                                :aria-expanded="isExpand ? true : false"
-                            >
-                                <span class="svg-icon svg-icon-primary">
+                                        ></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="faqs" role="tabpanel">
+                                <div v-if="rlco_detail.faqs?.length > 0">
+                                    <a
+                                        href="javascript:;"
+                                        class="text-decoration-none btn-expend"
+                                        @click.prevent="isExpand = false"
+                                    >Collapse All</a
+                                    >&nbsp;&nbsp;&nbsp;&nbsp;<a
+                                    href="javascript:;"
+                                    class="text-decoration-none btn-expend"
+                                    @click.prevent="isExpand = true"
+                                >Expand All</a
+                                >
+                                </div>
+                                <div
+                                    v-if="rlco_detail.faqs?.length > 0"
+                                    class="accordion accordion-light accordion-light-borderless accordion-svg-toggle"
+                                    id="accordionFaqs"
+                                >
+                                    <div
+                                        v-for="(faq, index) in rlco_detail.faqs"
+                                        class="accordion-item card bg-custom-color"
+                                    >
+                                        <div class="accordion-header" :id="`heading_faq_${index}`">
+                                            <div
+                                                class="accordion-button"
+                                                :class="!isExpand ? 'collapsed' : ''"
+                                                data-bs-toggle="collapse"
+                                                :data-bs-target="`#collapse_faq_${index}`"
+                                                :aria-expanded="isExpand ? true : false"
+                                            >
+                                                <span class="svg-icon svg-icon-primary">
                                     <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Navigation/Angle-double-right.svg-->
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -480,150 +305,152 @@
                                     </svg>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <div class="card-label pl-4">
-                                    {{ faq.faq_question }}
+                                                <div class="card-label pl-4">
+                                                    {{ faq.faq_question }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            :id="`collapse_faq_${index}`"
+                                            class="collapse"
+                                            :class="isExpand ? 'show' : ''"
+                                            data-bs-parent="#accordionFaqs"
+                                        >
+                                            <div class="card-body pt-2 pb-0">
+                                                <div v-html="faq.faq_answer"></div>
+                                                <div v-if="faq.faq_file">
+                                                    <a
+                                                        class="btn"
+                                                        :href="faq.faq_file"
+                                                        target="_blank"
+                                                        download
+                                                    >Download attachment
+                                                        <font-awesome-icon icon="download"
+                                                        /></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div
-                            :id="`collapse_faq_${index}`"
-                            class="collapse"
-                            :class="isExpand ? 'show' : ''"
-                            data-parent="#accordionFaqs"
-                        >
-                            <div class="card-body pt-2 pb-0">
-                                <div v-html="faq.faq_answer"></div>
-                                <div v-if="faq.faq_file">
-                                    <a
-                                        class="btn"
-                                        :href="faq.faq_file"
-                                        target="_blank"
-                                        download
-                                        >Download attachment
-                                        <font-awesome-icon icon="download"
-                                    /></a>
+                            <div class="tab-pane fade" id="dependencies" role="tabpanel">
+                                <div v-if="rlco_detail.dependencies?.length > 0">
+                                    <ul v-for="(dependency, index) in rlco_detail.dependencies">
+                                        <li>
+                                <span>
+                                    {{ dependency.activity_name }}
+                                    <div style="font-size: 12px; margin-top: -5px">
+                                        From
+                                        {{ dependency.department?.department_name }}
+                                    </div>
+                                </span>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="detail-btn my-3 d-flex justify-content-center">
-                    <div
-                        v-if="
+                <div class="row mt-4">
+                    <div class="detail-btn my-3 d-flex justify-content-center">
+                        <div
+                            v-if="
                             rlco_detail.automation_status != 'No Information' &&
                             rlco_detail.application_url"
-                    >
-                        <a
-                            class="btn btn-sm px-3 text-light custom-detail-btn"
-                            target="_blank"
-                            :href="rlco_detail.application_url"
+                        >
+                            <a
+                                class="btn btn-sm px-3 text-light custom-detail-btn"
+                                target="_blank"
+                                :href="rlco_detail.application_url"
                             >Apply Online</a
-                        >
-                    </div>
-                    <div v-else><a
-                        class="btn btn-sm px-3 text-light custom-detail-btn"
-                        target="_blank"
-                        href="https://bfc.punjab.gov.pk"
-                    >Visit BFC</a
-                    ></div>
-                    &nbsp;&nbsp;
-                    <div v-if="rlco_detail.department_website">
-                        <a
+                            >
+                        </div>
+                        <div v-else><a
                             class="btn btn-sm px-3 text-light custom-detail-btn"
                             target="_blank"
-                            :href="rlco_detail.department_website"
+                            href="https://bfc.punjab.gov.pk"
+                        >Visit BFC</a
+                        ></div>
+                        &nbsp;&nbsp;
+                        <div v-if="rlco_detail.department_website">
+                            <a
+                                class="btn btn-sm px-3 text-light custom-detail-btn"
+                                target="_blank"
+                                :href="rlco_detail.department_website"
                             >Department Website</a
-                        >
+                            >
+                        </div>
                     </div>
-                </div>
 
-                <div
-                    v-if="rlco_detail.last_updated_date"
-                    class="row detail-btn my-3 mb-2"
-                >
-                    <div class="col-lg-12 text-left">
+                    <div
+                        v-if="rlco_detail.last_updated_date"
+                        class="row detail-btn my-3 mb-2"
+                    >
+                        <div class="col-lg-12 text-left">
                         <span class="last-updated-date"
-                            >Last verified:
+                        >Last verified:
                             {{ rlco_detail.last_updated_date }}</span
                         >
+                        </div>
                     </div>
-                </div>
 
-                <div
-                    v-show="!isSubmitted && !checkFeedbackExits"
-                    class="row feedback-div"
-                >
-                    <div class="col-lg-12">
-                        <h3 class="detail-heading pt-3 pb-2">
-                            Rating & Review
-                        </h3>
-                        <div class="text-body">
-                            How would you rate this information?
+                    <div
+                        v-show="!isSubmitted && !checkFeedbackExits"
+                        class="row feedback-div"
+                    >
+                        <div class="col-lg-12">
+                            <h3 class="detail-heading pt-3 pb-2">
+                                Rating & Review
+                            </h3>
+                            <div class="text-body">
+                                How would you rate this information?
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        v-show="!isSubmitted && !checkFeedbackExits"
+                        class="row mb-4 feedback-div"
+                    >
+                        <div class="col-lg-12 text-left">
+                            <star-rating
+                                :star-size="30"
+                                :show-rating="false"
+                                @update:rating="feedbackForm.rating = $event"
+                            />
+                        </div>
+                        <div
+                            v-show="feedbackForm.rating"
+                            class="col-lg-12 mt-3 mb-5 feedback-div"
+                        >
+                            <label
+                                for="feedback"
+                                v-text="currentFeedbackLabel"
+                            ></label>
+                            <textarea
+                                class="form-control"
+                                name="feedback"
+                                id="feedback"
+                                v-model="feedbackForm.feedback"
+                                cols="2"
+                                rows="2"
+                            ></textarea>
+                            <button
+                                class="btn btn-dark start-service-btn px-3 text-light custom-detail-btn mt-3"
+                                @click.prevent="submitFeedback"
+                            >
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+
+                    <div v-show="isSubmitted" class="row mb-4 feedback-div">
+                        <div class="col-lg-12 text-center">
+                            Thank you for your feedback!
                         </div>
                     </div>
                 </div>
-                <div
-                    v-show="!isSubmitted && !checkFeedbackExits"
-                    class="row mb-4 feedback-div"
-                >
-                    <div class="col-lg-12 text-left">
-                        <star-rating
-                            :star-size="30"
-                            :show-rating="false"
-                            @update:rating="feedbackForm.rating = $event"
-                        />
-                    </div>
-                    <div
-                        v-show="feedbackForm.rating"
-                        class="col-lg-12 mt-3 mb-5 feedback-div"
-                    >
-                        <label
-                            for="feedback"
-                            v-text="currentFeedbackLabel"
-                        ></label>
-                        <textarea
-                            class="form-control"
-                            name="feedback"
-                            id="feedback"
-                            v-model="feedbackForm.feedback"
-                            cols="2"
-                            rows="2"
-                        ></textarea>
-                        <button
-                            class="btn btn-sm px-3 text-light custom-detail-btn mt-3"
-                            @click.prevent="submitFeedback"
-                        >
-                            Submit
-                        </button>
-                    </div>
-                </div>
-
-                <div v-show="isSubmitted" class="row mb-4 feedback-div">
-                    <div class="col-lg-12 text-center">
-                        Thank you for your feedback!
-                    </div>
-                </div>
             </div>
-
-            <div
-                v-if="!isOverFlow"
-                class="scroll-top"
-                @click.prevent="scrollToTop"
-            >
-                <font-awesome-icon class="svg-icon" icon="arrow-up" />
-            </div>
-
-            <div class="col-lg-12 col-md-12 pb-3">
-                <a
-                    href="javascript:;"
-                    v-if="rlco_detail?.id"
-                    class="text-decoration-none view-detail-icon"
-                    v-print="printObj"
-                    ><font-awesome-icon icon="print" />&nbsp; Print it</a
-                >
-            </div>
-        </div>
+        </main>
 
         <base-modal-component
             title="Fee Details"

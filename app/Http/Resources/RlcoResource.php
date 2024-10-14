@@ -70,6 +70,7 @@ class RlcoResource extends JsonResource
             "foss" => FosResource::collection($this->whenLoaded('foss')), // array
             "other_documents" => OtherDocumentResource::collection($this->whenLoaded('otherDocuments')), // array
             "required_documents" => RequiredDocumentResource::collection($this->whenLoaded('requiredDocuments')), // array
+            "business_activities" => BusinessActivityResource::collection($this->whenLoaded('businessActivities')), // array
             "last_updated_date" => $this->last_updated_date,
 
         ];

@@ -14,6 +14,11 @@ use App\Http\Controllers\Api\RlcoController;
 |
 */
 Route::group(['prefix' => 'v1'],function() {
+    Route::get('activities', [RlcoController::class, 'activities']);
+
+    Route::post('activity-rlcos/{activity_id}', [RlcoController::class, 'activityRlcos']);
+
+
     Route::get('rlcos_list', [RlcoController::class, 'rlcosList']);
     Route::get('department_list', [RlcoController::class, 'departmentList']);
     Route::get('business_list', [RlcoController::class, 'businessList']);

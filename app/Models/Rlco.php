@@ -19,6 +19,11 @@ class Rlco extends Model
          'manual_detail', 'admin_id', 'rlco_status', 'dependency_question', 'time_unit', 'generic_sector', 'purpose', 'application_url', 'department_website', 'fee_schedule', 'fee_question','fee_plan',
         'renewal_fee_plan', 'renewal_fee_schedule', 'fee_manual_mode', 'last_updated_date', 'payment_after_assessment', 'is_fee_required_time_of_application'];
 
+    public function scopeActive($query)
+    {
+        return $query->where('rlco_status', 1);
+    }
+
     public function getRlcoStatus()
     {
         return ($this->rlco_status)?'Active':'Inactive';

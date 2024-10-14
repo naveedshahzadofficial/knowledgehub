@@ -1,0 +1,785 @@
+@font-face {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/inter/Inter_Regular.ttf);
+    src: local('Inter'), url('../fonts/inter/Inter_Regular.woff') format('woff'), url('../fonts/inter/Inter_Regular.otf') format('otf'), url('../fonts/inter/Inter_Regular.eot') format('eot');
+  }
+body {
+    font-family: 'Inter', sans-serif;
+}
+header {
+    padding: 17px 0;
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.15);
+}
+
+.logoImage img {
+    width: 85px;
+}
+nav {
+    padding: 0 !important;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: #0d3b66;
+    margin-right: 1rem;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #063056;
+}
+
+.btn-login {
+    background-color: #0d3b66;
+    border-color: #063056;
+    font-size: 14px;
+    width: 96px;
+    height: 32px;
+    line-height: 1.2;
+    color: white;
+    margin-right: 1rem;
+}
+a:focus-visible {
+    outline-offset: 0 !important;
+    outline: 0 !important;
+}
+.btn-login:hover {
+    background-color: #063056;
+    color: white;
+}
+
+.RightmenuBtn {
+    color: #063056;
+    cursor: pointer;
+}
+.Rightmenu {
+    position: fixed;
+    z-index: 9999;
+    right: -300px;
+    top: 0;
+    bottom: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: #ffffff;
+    box-shadow: -2px 2px 9px 2px rgba(0,0,0,0.30);
+    -webkit-box-shadow: -2px 2px 9px 2px rgba(0,0,0,0.30);
+    -moz-box-shadow: -2px 2px 9px 2px rgba(0,0,0,0.30);
+    transition: all 0.3s ease-in-out;
+}
+.Rightmenu.showMenu {
+    right: 0;
+}
+.Rightmenu .RightmenuBtn {
+    display: block;
+    text-align: right;
+}
+.Rightmenu .RightmenuBtn i {
+    background-color: #0d3b66;
+    color: #fafafa;
+    padding: 5px 0;
+    margin: 8px 5px 0 0;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+}
+.Rightmenu ul {
+    padding: 10px 0 0 0;
+    list-style: none;
+}
+.Rightmenu ul li {
+    display: block;
+}
+.Rightmenu ul li a {
+    transition: all 0.3s ease-in-out;
+    color: #0d3b66;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-top: 1px solid #0d3b66;   
+}
+.Rightmenu ul li:last-child a {
+    border-bottom: 1px solid #0d3b66;  
+} 
+.Rightmenu ul li a:hover {
+    background-color: #0d3b66;
+    color: #fafafa;
+}
+.heroSectionBG {
+    background-color: #0b375e;
+}
+.heroSection {
+    /* background-color: #345879; */
+    background-image: url(../images/heroBG.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 87px 0 200px 0;
+}
+.heroSection h1 {
+    font-size: 60px;
+}
+.heroSection h1 .highlight {
+    font-weight: bolder;
+}
+.heroSection p {
+    width: 80%;
+}
+.heroSection .input-group {
+    border-radius: 5px;
+    background-color: #ffffff;
+    padding: 10px 15px;
+}
+.heroSection .input-group input {
+    border: 0;
+}
+.heroSection .input-group button {
+    border-radius: 10px !important;
+    background-color: #0d3b66;
+    border-color: #063056;
+    font-size: 14px;
+    padding: 0 30px;
+}
+.heroSection .input-group i {
+    color: #0d3b66;
+    vertical-align: middle;
+    line-height: 35px;
+}
+.heroSection .input-group button:hover {
+    background-color: #063056;
+    border-color: #063056;
+}
+.heroSection .input-group input:focus {
+    box-shadow: none;
+}
+.info-section {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    margin: -105px 0 0 0;
+}
+.info-section .info-box {
+    background-color: #FAFAFA;
+    padding: 32px 24px 24px;
+    border-radius: 5px;
+    height: 225px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 1px 4px 5px 0px rgba(0,0,0,0.14);
+    -webkit-box-shadow: 1px 4px 5px 0px rgba(0,0,0,0.14);
+    -moz-box-shadow: 1px 4px 5px 0px rgba(0,0,0,0.14);
+
+}
+.info-section .info-box h5 {
+    margin: 15px 0 5px;
+}
+.info-section .info-box p {
+    margin: 0;
+    color: #424241;
+    font-size: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;  
+}
+.info-section .info-box:hover {
+    transform: scale(1.1);
+}
+.productivity {
+    background-color: #f0f8ff;
+    padding: 200px 0 50px 0;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    position: relative;
+}
+.productivity::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    background-image: url(../images/productivityImage.png);
+    background-position: top;
+    background-repeat: no-repeat;
+    right: 0;
+    top: 0;
+}
+.productivity h6 {
+    color: #2D68FF;
+}
+.productivityTabs {
+    padding: 50px 0;
+}
+.productivity .productivityTabs ul {
+    display: flex;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 0;
+    margin: 0;
+}
+.productivity .productivityTabs ul li {
+    margin-right: 10px;
+    list-style: none;
+    padding: 5px 20px;
+    border-radius: 5px;
+}
+.productivity .productivityTabs ul li a{
+    text-decoration: none;
+    color: lightgray;
+} 
+.productivity .productivityTabs ul li.tabActive {
+    background-color: #2D68FF;
+}
+.productivity .productivityTabs ul li.tabActive a {
+    color: #fff;
+}
+.productivity h5 {
+    font-weight: bold;
+}
+.businessPoint i {
+    margin: 0 10px 0 0;
+    color: #28a745;
+}
+.options-card {
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 165px;
+    transition: all 0.3s ease-in-out;
+}
+
+.main-card-body {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.options-card:hover {
+    transform: translateY(-5px);
+    background-color: #d9ebff;
+    border-left: 1px solid #82a6ff !important;
+}
+
+/* .icon-card {
+    font-size: 40px;
+} */
+.exploreService p {
+    margin: 0;
+    color: #d1cdcd;
+}
+.hero-card {
+    background-color: #e7f1ff;
+    border: 2px solid #083cde;
+}
+
+.hero-card .card-body {
+    border-radius: 10px;
+}
+
+.news-card {
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease-in-out;
+}
+.news-card h6 {
+    font-weight: bold;
+}
+.news-card:hover {
+    background-color: #f8f9fa;
+}
+
+.news-card .icon {
+    text-decoration: none;
+}
+.community-card {
+    border-radius: 8px;
+    border: 1px solid #d1cdcd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+}
+
+.community-card:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+    font-size: 18px;
+    margin-left: 10px;
+    color: #0d6efd;
+    float: right;
+}
+
+.small-text {
+    font-size: 14px;
+}
+
+.arrow-icon {
+    font-size: 22px;
+}
+
+.card-body {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.community-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.community-icons svg {
+    fill: gray;
+}
+
+.rounded-circle {
+    border-radius: 50% !important;
+    height: 40px;
+    width: 40px;
+    border: 1px solid gray;
+    text-align: center;
+    padding: 8px 0 0 0;
+    margin: -20px 0 0 0;
+}
+
+.rounded-circle i {
+    color: gray;
+    font-size: 20px;
+}
+
+.bottom-tag-design a {
+    border: 1px solid lightgray;
+    background: lightgray;
+    border-radius: 8px;
+    font-size: 12px;
+    padding: 3px 10px 4px 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.border-bottom-heading {
+    border-bottom: 3px solid;
+    padding: 0 0 10px 0;
+}
+.community-card h5 {
+    font-weight: bold;
+    color: #0d3b66;
+}
+
+footer {
+    background: #0d3b66;
+    color: white;
+    padding: 8px 20px;
+}
+
+.footer-content a {
+    text-decoration: none;
+    color: white;
+}
+.confirmation-compliance-page .breadcrumb,
+.services-page .breadcrumb,
+.ebiz-portal-contact .breadcrumb{
+    font-size: 0.875rem;
+    background: transparent;
+}
+.breadcrumb .breadcrumb-item:last-child a{
+    text-decoration: none; 
+    cursor: default !important;
+}
+.confirmation-compliance-page .display-6 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #012e57;
+}
+
+.confirmation-compliance-page .lead {
+    font-size: 16px;
+    color: #012e57;
+    font-weight: 400;
+}
+
+.confirmation-compliance-page .card {
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: #f2f8ff;
+}
+
+.confirmation-compliance-page .table th, .table td {
+    text-align: left;
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.confirmation-compliance-page .nav-tabs .nav-link {
+    border: none;
+    color: #263238;
+    font-size: 16px;
+}
+
+.confirmation-compliance-page .nav-tabs .nav-link.active {
+    color: #2D68FF;
+    border-bottom: 2px solid #2D68FF;
+    font-weight: 500;
+}
+
+/* .confirmation-compliance-page button.float-action-btn {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+} */
+
+.confirmation-compliance-page li.breadcrumb-item:nth-child(2):before,
+.services-page li.breadcrumb-item:nth-child(2):before,
+.ebiz-portal-contact li.breadcrumb-item:nth-child(2):before {
+    display: none;
+}
+
+.confirmation-compliance-page .breadcrumb-item a,
+.confirmation-compliance-page .breadcrumb-item.active,
+.services-page .breadcrumb-item a,
+.services-page .breadcrumb-item.active,
+.ebiz-portal-contact .breadcrumb-item a,
+.ebiz-portal-contact .breadcrumb-item.active  {
+    color: #012E57;
+    text-decoration: underline;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.confirmation-compliance-page .breadcrumb-item:nth-child(1) a,
+.services-page .breadcrumb-item:nth-child(1) a {
+    text-decoration: none;
+}
+
+.confirmation-compliance-page .breadcrumb-item span,
+.services-page .breadcrumb-item span ,
+.ebiz-portal-contact .breadcrumb-item span {
+    color: #6c757d;
+}
+
+.confirmation-compliance-page .epa-badge {
+    background: rgb(80 184 228 / 30%) !important;
+    color: #4A4AFF !important;
+    padding: 7px 20px;
+    border-radius: 20px;
+}
+
+.confirmation-compliance-page .epa-badge span {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.confirmation-compliance-page .epa-badge i {
+    font-size: 8px;
+    margin-right: 10px;
+}
+
+.confirmation-compliance-page .start-service-btn {
+    line-height: 1;
+    background: #012E57;
+    border-color: #012e57;
+}
+
+.confirmation-compliance-page .provincial-text {
+    color: #012E57;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.confirmation-compliance-page .after-completion-text {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.confirmation-compliance-page .enforcing-list li {
+    background: #f2f8ff;
+    padding: 5px 12px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.confirmation-compliance-page .enforcing-list li span,
+.confirmation-compliance-page .enforcing-list li span a  {
+    color: #012E57;
+    font-size: 12px;
+}
+
+.confirmation-compliance-page .compliance-heading {
+    font-size: 18px;
+    color: #012E57;
+    font-weight: 700;
+}
+
+.confirmation-compliance-page .tab-content ul li {
+    font-size: 14px;
+    font-weight: 400;
+    color: #000
+}
+
+.confirmation-compliance-page .complianceTbl {
+    border: transparent;
+    margin-bottom: 0;
+}
+
+.confirmation-compliance-page .complianceTbl thead tr th {
+    color: #012E57;
+    font-weight: 700;
+    font-size: 12px;
+    border-bottom: 1px solid #012E57;
+    padding: 10px;
+}
+
+.confirmation-compliance-page .complianceTbl tbody tr td {
+    color: #012E57;
+    font-weight: 400;
+    font-size: 12px;
+    padding: 10px;
+    border-bottom: 1px solid rgba(1, 46, 87, 0.20);
+}
+.confirmation-compliance-page .complianceTbl tbody tr:last-child td {
+    border-bottom: none;
+}
+.confirmation-compliance-page .complianceTbl thead tr th:nth-child(2),
+.confirmation-compliance-page .complianceTbl tbody tr td:nth-child(2),
+.confirmation-compliance-page .complianceTbl thead tr th:nth-child(3),
+.confirmation-compliance-page .complianceTbl tbody tr td:nth-child(3),
+.confirmation-compliance-page .complianceTbl thead tr th:nth-child(4),
+.confirmation-compliance-page .complianceTbl tbody tr td:nth-child(4),
+.confirmation-compliance-page .complianceTbl thead tr th:nth-child(5),
+.confirmation-compliance-page .complianceTbl tbody tr td:nth-child(5) {
+    text-align: center;
+}
+.confirmation-compliance-page .after-completion-text a {
+    text-decoration: none;
+}
+
+.confirmation-compliance-page .bg-light-grey {
+    background: #F4F7F9;
+}
+.middel-section .card-body {
+    flex-direction: row;
+}
+.service-list .card,
+.service-center-ops .card,
+.service-categories .card {
+    border: 1px solid #ddd; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+} 
+.service-list .card:hover,
+.service-center-ops .card:hover,
+.service-categories .card:hover {
+    transform: translateY(-5px);
+    background-color: #d9ebff;
+    border-left: 1px solid #82a6ff !important;
+} 
+.service-list .card-text,
+.service-center-ops .card-text,
+.service-categories .card-text{
+    font-size: 14px; 
+    margin-bottom: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-align: left;
+} 
+.service-list .card-body,
+.service-center-ops .card-body,
+.service-categories .card-body{
+    padding: 5px 0px;
+} 
+.service-list .card-text,
+.service-center-ops .card-text,
+.service-categories .card-text {
+    width: 75%;
+    color: #022e57;
+    font-weight: 600;
+} 
+.service-list .card-icon,
+.service-center-ops .card-icon,
+.service-categories .card-icon {
+    width: 25%;
+} 
+.service-list .card-link,
+.service-center-ops .card-link,
+.service-categories .card-link  {
+    color: #000;
+    text-decoration: none;
+}
+.service-list .heading-middle,
+.service-center-ops .heading-middle,
+.service-categories .heading-middle{
+    color: #012d56;
+    font-weight: bold;
+}
+.service-list .card-icon img,
+.service-center-ops .card-icon img,
+.service-categories .card-icon img {
+    max-width: 100%;
+}
+.initia-card{
+    background-color: #d9ebff;
+    border-left: 1px solid #82a6ff !important;
+    border-radius: 10px !important;
+}
+.top-section .bread-crumb ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 0;
+    margin-bottom: 1rem;
+}
+.top-section .bread-crumb ul li a {
+    display: inline-block;
+    padding: 0 10px;
+    color: #012E57;
+    text-decoration: underline;
+    font-size: 12px;
+    font-weight: 400;
+}
+.text-blue-color{
+    color: #012e56;
+}
+.text-blue-two{
+    color: #557ee4;
+}
+.top-section,
+.footer-section{
+    background-color: #f4f7f9;
+}
+.underline{
+    text-decoration: underline;
+}
+.top-section .bread-crumb ul li:first-child a{
+    padding: 0;
+}
+.service-categories .card {
+    padding: 15px 20px 5px 20px ! IMPORTANT;
+}
+.spaceship-icon {
+    display: inline-block;
+    position: fixed;
+    right: 0;
+    bottom: 40px;
+}
+.page-header-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #012e57;
+}
+.thumbs-icon{
+    color: #012e57;
+    border: 1px solid #012e57;
+    border-radius: 50px;
+    padding: 4px 6px;
+    font-size: 16px;
+    margin-left: 20px;
+}
+.headerMenu .navbar-nav a:hover {
+    color: #2d68ff !important;
+}
+.no-cursor{
+    cursor: default !important;
+}
+.news-card a:hover {
+    color: #012e57;
+}
+a.card {
+    text-decoration: none;
+}
+.ebiz-portal-contact .contact-instructions {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ebiz-portal-contact .card {
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f2f8ff;
+}
+
+.contact-instructions li {
+    padding: 10px 10px;
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+}
+
+.contact-icon {
+    background-color: #0d3b66;
+    padding: 10px 22px;
+    position: relative;
+    border-radius: 100px;
+    color: #fff;
+    display: inline-block;
+}
+
+.contact-icon i:before {
+    font-size: 22px;
+    position: absolute;
+    text-align: center;
+    top: 10px;
+    left: 11px;
+}
+
+.contact-icon .fa-map-marker-alt:before {
+    left: 14px;
+}
+
+.contact-instructions .contact-inner {
+    width: 88%;
+    padding-left: 15px;
+}
+
+.contact-instructions .description {
+    font-size: 19px;
+    color: #002222;
+}
+
+.contact-instructions a {
+    color: #212529;
+    text-decoration: none;
+}
+
+.contact-instructions a:hover {
+    color: #2d68ff;
+}
+
+/* .contact-us-footer {
+    background: #0d3b66;
+    color: white;
+    position: absolute;
+    padding: 8px 20px;
+    width: 100%;
+    bottom: 0;
+} */
+
+.ebiz-portal-contact iframe {
+    border: 2px solid #0d3b66;
+    border-radius: 3px;
+}
+
+.top-section .bread-crumb .breadcrumb-item.active span {
+    color: #0d3b66;
+    font-size: 12px;
+}
+
+.mb-98 {
+	margin-bottom: 98px !important;
+}
+.min-height-100dvh {
+	min-height: 100dvh;
+}

@@ -2,11 +2,11 @@
     <form @submit.prevent="onSubmit" class="search-form">
         <div class="row">
                     <div class="col-lg-12 col-md-12  col-sm-12">
-                        <Select2 v-model="department_id"  :options="departments" :placeholder="`Government Agency`" />
+                        <Select2 v-model="v_department_id"  :options="departments" :placeholder="`Government Agency`" />
 
                     </div>
                     <div class="col-lg-12 col-md-12  col-sm-12 mt-3">
-                        <Select2 v-model="activity_id" :options="activities" :placeholder="`Business Activity`" />
+                        <Select2 v-model="v_activity_id" :options="activities" :placeholder="`Business Activity`" />
                     </div>
         </div>
         <div class="row">
@@ -26,6 +26,8 @@ export default {
     },
     data(){
         return {
+            v_department_id:"",
+            v_activity_id: "",
             isLoading:false
         }},
     computed: {
@@ -40,13 +42,15 @@ export default {
         this.$store.dispatch('department/getDepartment');
         this.$store.dispatch('activity/getActivity');
         this.select2focus();
+        this.v_activity_id = this.activity_id;
+        this.v_department_id = this.department_id;
     },
     methods:{
         onSubmit: function (){
             this.isLoading = true;
             const newParams = {
-                department_id: this.department_id,
-                activity_id: this.activity_id,
+                department_id: this.v_department_id,
+                activity_id: this.v_activity_id,
             };
             this.$emit('search-params', newParams);
             this.isLoading = false;

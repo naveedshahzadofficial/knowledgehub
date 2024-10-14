@@ -31,6 +31,7 @@ class ActivityRequest extends FormRequest
                 Rule::unique('activities', 'activity_name')->ignore($this->activity),
                 'max:255'
             ],
+            'activity_icon' => 'sometimes|nullable',
             'activity_order' => 'required',
             'activity_status' => 'required',
         ];

@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="card-body p-0">
-                    {{ Form::open(array('route' => ['admin.activities.update',$activity],'method'=>'PUT','class'=>'form form-horizontal','name'=>'activity_form','id'=>'activity_form')) }}
+                    {{ Form::open(array('route' => ['admin.activities.update',$activity],'method'=>'PUT','class'=>'form form-horizontal','name'=>'activity_form','id'=>'activity_form', 'files'=>true)) }}
                     <div class="form-body col-xl-8 col-xs-12">
 
                         <div class="form-group">
@@ -39,6 +39,22 @@
                                 {{ $message }}
                             </div>
                             @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="bmd-label-floating">Icon <span class="color-red-700">*</span> </label>
+
+                            <input type="file" class="form-control  @error('activity_icon') is-invalid @enderror" name="activity_icon"
+                                   id="activity_icon"   />
+                            @error('activity_icon')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                            @if(isset($activity->activity_icon) && !empty($activity->activity_icon))
+                                <input type="hidden" name="already_activity_icon" value="{{ $activity->activity_icon }}">
+                                <a href="{{ asset('storage/'.$activity->activity_icon) }}"
+                                   target="_blank" class="file_viewer" title="Attachment">View File</a>
+                            @endif
                         </div>
 
                         <div class="form-group">

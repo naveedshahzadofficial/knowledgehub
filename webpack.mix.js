@@ -1,4 +1,5 @@
 const mix = require("laravel-mix");
+const path = require('path');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,27 +12,18 @@ const mix = require("laravel-mix");
  |
  */
 mix.js("resources/js/app.js", "public/js")
-    .sass("resources/sass/app.scss", "public/css", [
-        //
-    ])
     .sourceMaps()
     .vue({ version: 3 })
-    .webpackConfig((webpack) => {
-        return {
-            plugins: [
-                new webpack.DefinePlugin({
-                    __VUE_OPTIONS_API__: true,
-                    __VUE_PROD_DEVTOOLS__: false,
-                }),
-            ],
-        };
+    .webpackConfig({
+        resolve: {
+            alias: {
+                '@': path.resolve('resources/js'), // Adjust the path based on your project structure
+            },
+        }
     })
     .copyDirectory("resources/fonts", "public/fonts")
     .copyDirectory("resources/media", "public/media");
 
-if (!mix.inProduction()) {
-    mix.browserSync("knowledgehub.test");
-}
 
 if (mix.inProduction()) {
     mix.version();
