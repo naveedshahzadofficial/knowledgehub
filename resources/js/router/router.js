@@ -11,7 +11,7 @@ import ContactUs from "@/views/ContactUs.vue";
 import ServiceDetail from "@/views/ServiceDetail.vue";
 
 export const router = createRouter({
-    history: createWebHistory("/"),
+    history: createWebHistory('/'),
     linkActiveClass: "text-dark bg-white",
     routes: [
         {
