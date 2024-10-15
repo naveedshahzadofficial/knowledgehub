@@ -287,4 +287,42 @@
     opacity: 1
 }
 
+
+/* width */
+#vs1__listbox::-webkit-scrollbar,
+#vs2__listbox::-webkit-scrollbar,
+#vs3__listbox::-webkit-scrollbar,
+#vs4__listbox::-webkit-scrollbar
+{
+    width: 5px;
+    height: 5px;
+}
+
+/* Track */
+#vs1__listbox::-webkit-scrollbar-track,
+#vs2__listbox::-webkit-scrollbar-track,
+#vs3__listbox::-webkit-scrollbar-track,
+#vs4__listbox::-webkit-scrollbar-track
+{
+    border-radius: 10px;
+}
+
+/* Handle */
+#vs1__listbox::-webkit-scrollbar-thumb,
+#vs2__listbox::-webkit-scrollbar-thumb,
+#vs3__listbox::-webkit-scrollbar-thumb,
+#vs4__listbox::-webkit-scrollbar-thumb
+{
+    background: grey;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+#vs1__listbox::-webkit-scrollbar-thumb:hover
+#vs2__listbox::-webkit-scrollbar-thumb:hover
+#vs3__listbox::-webkit-scrollbar-thumb:hover
+#vs4__listbox::-webkit-scrollbar-thumb:hover
+{
+    background: #656565;
+}
 /*# sourceMappingURL=vue-select.css.map*/
