@@ -41,7 +41,7 @@ export default {
         getActivityRlcos: function (activity_id) {
             axios.post(`activity-rlcos/${activity_id}`, {}).then(response => {
                 this.rlcos = response.data.rlcos;
-                if(!this.is_first_landing)
+                if(!this.is_first_landing || this.$route.params.id || this.$route.params.id2)
                  this.scrollToRlco();
                 this.is_first_landing = false;
             })
@@ -193,7 +193,7 @@ export default {
 
                 <div class="row row-cols-1 row-cols-md-3 g-4 mt-3 service-list" ref="rlco_position">
                     <div v-if="filteredRlcos.length" class="col-3" v-for="rlco in filteredRlcos">
-                        <router-link class="card d-block justify-content-between align-items-center p-3" :to="{ name: 'service-detail', params: { id: rlco.id }}">
+                        <router-link class="card d-block justify-content-between align-items-center p-3" :to="{ name: 'service-detail', params: { id: rlco.id }}" target="_blank">
                             <div class="card-link">
                                 <div class="d-flex align-items-center ">
                                     <div class="card-body text-center d-flex align-items-center">

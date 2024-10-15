@@ -12,6 +12,20 @@ import ServiceDetail from "@/views/ServiceDetail.vue";
 
 export const router = createRouter({
     history: createWebHistory('/'),
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            return savedPosition
+        } else if (to.hash) {
+            // If the route has a hash (e.g. #section1), scroll to that element
+            return { selector: to.hash, top:100 };
+        }  else {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve({ left: 0, top: 0 })
+                }, 500)
+            })
+        }
+    },
     linkActiveClass: "text-dark bg-white",
     routes: [
         {
