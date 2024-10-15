@@ -31,7 +31,7 @@ export default {
                         this.is_first_time_variable = true
                     }
                     if (this.activities.length > 0) {
-                        let activity_id  = this.$route.params.id || this.activities[0].id;
+                        let activity_id  = this.$route.params.id || 0;
                         this.getActivityRlcos(activity_id);
                     }else{
                         this.rlcos = [];
