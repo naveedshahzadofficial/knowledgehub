@@ -16,6 +16,7 @@ class CreateActivitiesTable extends Migration
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
             $table->string('activity_name');
+            $table->string('activity_icon')->nullable();
             $table->unsignedInteger('activity_order')->nullable();
             $table->text('activity_remark')->nullable();
             $table->boolean('activity_status')->default(1);
