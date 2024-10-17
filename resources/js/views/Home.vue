@@ -131,7 +131,7 @@ export default {
                             <div class="d-flex productivityTabs">
                                 <ul>
                                     <li class="tabActive">
-                                        <a target="_blank" href="https://webdev.pitb.gov.pk/ebiz/">With eBiz Portal</a>
+                                        <a target="_blank" href="https://apply-ebiz.punjab.gov.pk">With eBiz Portal</a>
                                     </li>
                                     <!-- <li>
                                         <a href="#">Without eBiz Punjab</a>

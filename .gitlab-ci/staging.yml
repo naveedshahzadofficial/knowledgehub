@@ -1,7 +1,7 @@
 staging_build:
   stage: build
   only:
-    
+
   tags:
     - knowledgehub-staging
   script:
