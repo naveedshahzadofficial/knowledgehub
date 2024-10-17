@@ -1,0 +1,79 @@
+prod_build:
+  stage: build
+  only:
+    - main
+  tags:
+    - knowledgehub-prod
+  script:
+    - ls -la
+    - pwd
+    - echo "This is job name and pipeline id $CI_JOB_ID && $CI_PIPELINE_ID && $CI_COMMIT_SHA and runner id $CI_RUNNER_ID runner tags $CI_RUNNER_TAGS"
+    - rm composer.lock
+    - rm package-lock.json
+    - cat $PROD_ENV > .env
+    - ls -la
+    - rm composer.lock || echo "composer.lock file not found"
+    - rm package-lock.json || echo "package-lock.json file not found"
+    - composer install --no-interaction --prefer-dist
+    - export http_proxy="http://10.50.27.160:8080/"
+    - export https_proxy="http://10.50.27.160:8080/"
+    - nvm use 20 || nvm install 20 || nvm use 20 || echo "Version '20' not found, skipping installation"
+    - npm install --global yarn
+    - npm install
+    - npm run prod
+    - tar -czf "$CI_COMMIT_SHA".tar.gz --exclude=*.git --exclude=node_modules *
+  artifacts:
+    expire_in: 2 hrs
+    paths:
+      - "$CI_COMMIT_SHA.tar.gz"
+
+prod_test:
+  stage: test
+  only:
+    - main
+  tags:
+    - knowledgehub-prod
+  needs: ["prod_build"]
+  script:
+    - whoami #vendor/bin/phpunit
+    - pwd
+
+prod_deploy:
+  stage: deploy
+  only:
+    - main
+  tags:
+    - knowledgehub-prod
+  needs: ["prod_build"]
+  variables:
+    RELEASE_PATH: $PROD_PATH/releases/$CI_COMMIT_SHA
+  script:
+    - mkdir -p $RELEASE_PATH
+    - tar xzf $CI_COMMIT_SHA.tar.gz -C $RELEASE_PATH
+    - rm -rf $RELEASE_PATH/storage
+    - mkdir -p $PROD_PATH/storage/{app,public,framework,logs}
+    - mkdir -p $PROD_PATH/storage/framework/{cache,sessions,testing,views}
+    - mkdir -p $PROD_PATH/storage/framework/cache/data
+    - sudo chown -R :progs $PROD_PATH
+    - sudo chmod -R 0775 $RELEASE_PATH
+    - sudo chmod -R 0777 $PROD_PATH/storage
+    - sudo chmod -R 0777 $RELEASE_PATH/bootstrap
+    - sudo chmod -R 0775 $RELEASE_PATH/public
+    - sudo cat $PROD_ENV > "${PROD_PATH}/.env"
+    - ln -s -f ${PROD_PATH}/.env $RELEASE_PATH
+    - sudo chmod -R 0775 ${RELEASE_PATH}/.env
+    - ln -s -f $PROD_PATH/storage $RELEASE_PATH
+    - ln -s -n -f $RELEASE_PATH $PROD_PATH/current
+    - cd $RELEASE_PATH && php artisan migrate --force
+    - cd $RELEASE_PATH && php artisan storage:link
+    - cd $RELEASE_PATH && php artisan config:cache
+
+prod_cleanup:
+  stage: cleanup
+  only:
+    - main
+  tags:
+    - knowledgehub-prod
+  needs: ["prod_deploy"]
+  script:
+    - cd $PROD_PATH/releases && ls -t -1 | tail -n +4 | xargs rm -rf
