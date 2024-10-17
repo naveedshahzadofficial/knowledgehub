@@ -177,6 +177,24 @@ export default {
                     </div>
                     </router-link>
                 </div>
+                <div class="col-md-4 mb-3" >
+                    <router-link :to="{ name: 'services', params : {'id':0, 'id2':0 }}" class="text-decoration-none">
+                        <div class="options-card">
+                            <div class="card-body p-4">
+                                <div class="icon-card">
+                                    <img :src="useAssets('connect.svg')" alt="">
+                                    <h5 class="card-title text-black mt-1" style="color: black !important; text-decoration: none !important;">All Activities</h5>
+                                </div>
+
+                                <div class="mt-3">
+                                <span class="arrow-icon">
+                                    <img :src="useAssets('arrow.svg')" alt="">
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    </router-link>
+                </div>
             </div>
         </section>
 

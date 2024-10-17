@@ -87,7 +87,7 @@ export default {
         filteredCommonRlcos: function () {
             return this.rlcos.filter(rlco => {
                 // Check if business_type_id or business_activity_id are empty, return all rlcos if so
-                if (!this.business_activity_id && !this.department_id) {
+                if (!this.business_activity_id && !this.department_id && !this.business_category_id) {
                     return true;
                 }
                 // Filter based on business_type_id and business_activity_id
@@ -95,8 +95,9 @@ export default {
                     ? rlco.business_activities.some(activity => activity.id === this.business_activity_id)
                     : true;
                 // const matchesBusinessActivity = this.business_activity_id ? rlco.business_activity_id === this.business_activity_id : true;
+                const matchesBusinessCategory = this.business_category_id ? rlco.business_category_id === this.business_category_id : true;
                 const matchesBusinessDepartment = this.department_id ? rlco.department_id === this.department_id : true;
-                return matchesBusinessActivity && matchesBusinessDepartment;
+                return matchesBusinessActivity && matchesBusinessDepartment && matchesBusinessCategory;
             });
         },
         filteredRlcos: function () {
@@ -118,7 +119,12 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.v-select >>> .vs__dropdown-menu {
+    width: 500px !important;
+}
+
+</style>
 <template>
     <section>
         <div class="top-section pb-4 services-page">
@@ -160,6 +166,23 @@ export default {
                             </a>
                         </div>
                     </div>
+                    <div class="col-4">
+                        <div class="card d-block justify-content-between align-items-center p-3">
+                            <a href="javascript:void(0)" @click.prevent="getActivityRlcos(0)" class="card-link">
+                                <div class="card-body text-center d-flex flex-column gap-1 align-items-start">
+                                    <span class="card-icon w-auto">
+                                        <img :src="useAssets('connect.svg')"/>
+                                    </span>
+                                    <span class="card-text">
+                                        All Activities
+                                    </span>
+                                    <span class="pt-4">
+                                        <img :src="useAssets('arrow.svg')"/>
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row justify-content-between align-items-center mb-3 mt-5">
@@ -169,7 +192,7 @@ export default {
                             <div class="col-md-3">
                                 <v-select v-model="business_category_id" :options="categories"
                                           :reduce="category => category.id" label="category_name"
-                                          placeholder="Sectors" class="w-auto" style="width: 100% !important;"
+                                          placeholder="Sectors" class="vSelectClass" style="width: 100% !important;"
                                 >
                                 </v-select>
                             </div>

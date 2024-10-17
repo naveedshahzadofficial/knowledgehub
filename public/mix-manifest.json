@@ -1,17 +1,4 @@
 {
-<<<<<<< HEAD
-    "/js/app.js": "/js/app.js?id=136507274181c3b172ddd739040fc038",
-    "/fonts/poppins-bold.woff": "/fonts/poppins-bold.woff?id=05551343c5acd525f596fa06bc0af890",
-    "/fonts/poppins-bold.woff2": "/fonts/poppins-bold.woff2?id=92d44fce9d087075e431198f9c8112db",
-    "/fonts/poppins-light-webfont.woff": "/fonts/poppins-light-webfont.woff?id=8a564dea126f1e959d61ba84bb810bdd",
-    "/fonts/poppins-light-webfont.woff2": "/fonts/poppins-light-webfont.woff2?id=11ab2494bbea4ab736f9926283747798",
-    "/fonts/poppins-regular-webfont.woff": "/fonts/poppins-regular-webfont.woff?id=3a1ea617534e51a39e235aced8d51cb8",
-    "/fonts/poppins-regular-webfont.woff2": "/fonts/poppins-regular-webfont.woff2?id=96d755028103585de46e52d24593411c",
-    "/media/background.jpg": "/media/background.jpg?id=105bf591875f68ce9eeab604d6d77537",
-    "/media/bk-logo-blue.png": "/media/bk-logo-blue.png?id=521ffa51e920e74ee5c7f15b45a236e5",
-    "/media/logo-blue.png": "/media/logo-blue.png?id=d435db2e736152601ed2088a17b913d5",
-    "/media/logo.png": "/media/logo.png?id=7be267978478cf7e022b399faed81dee"
-=======
     "/js/app.js": "/js/app.js",
     "/fonts/poppins-bold.woff": "/fonts/poppins-bold.woff",
     "/fonts/poppins-bold.woff2": "/fonts/poppins-bold.woff2",
@@ -23,5 +10,4 @@
     "/media/bk-logo-blue.png": "/media/bk-logo-blue.png",
     "/media/logo-blue.png": "/media/logo-blue.png",
     "/media/logo.png": "/media/logo.png"
->>>>>>> f99977a9d78b90b3c14a6653cbc002d581829b81
 }
