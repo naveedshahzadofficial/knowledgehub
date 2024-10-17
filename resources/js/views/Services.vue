@@ -15,6 +15,8 @@ export default {
             rlco_id:"",
             is_first_landing: true,
             is_first_time_variable: false,
+            visibleCount: 12, // Initial count of items to show
+            increment: 12,    // How many more to load each time
         }
     },
     methods: {
@@ -59,6 +61,11 @@ export default {
                     behavior: "smooth", // Enables smooth scrolling
                 });
             }
+        },
+        loadMore() {
+            if (this.canLoadMore) {
+                this.visibleCount += this.increment;
+            }
         }
     },
     mounted() {
@@ -99,6 +106,12 @@ export default {
                 }
                 return  this.rlco_id ? rlco.id === this.rlco_id : true;
             });
+        },
+        visibleItems() {
+            return this.filteredRlcos.slice(0, this.visibleCount);
+        },
+        canLoadMore() {
+            return this.visibleCount < this.filteredRlcos.length;
         }
     }
 
@@ -192,7 +205,7 @@ export default {
                 </div>
 
                 <div class="row row-cols-1 row-cols-md-3 g-4 mt-3 service-list" ref="rlco_position">
-                    <div v-if="filteredRlcos.length" class="col-3" v-for="rlco in filteredRlcos">
+                    <div v-if="visibleItems.length" class="col-3" v-for="rlco in visibleItems">
                         <router-link class="card d-block justify-content-between align-items-center p-3" :to="{ name: 'service-detail', params: { id: rlco.id }}" target="_blank">
                             <div class="card-link">
                                 <div class="d-flex align-items-center ">
@@ -214,6 +227,13 @@ export default {
                         </router-link>
                     </div>
                     <div v-else class="col-12">No, Rlcos Found...</div>
+                </div>
+                <div class="row text-center mt-4">
+                    <div class="col-5"></div>
+                    <div class="col-2">
+                        <button v-if="canLoadMore" class="btn btn-sm btn-primary align-content-center" @click="loadMore">Load More</button>
+                    </div>
+                    <div class="col-5"></div>
                 </div>
                 <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
                     <div class="col-12">
