@@ -171,7 +171,7 @@ export default {
                             <a href="javascript:void(0)" @click.prevent="getActivityRlcos(0)" class="card-link">
                                 <div class="card-body text-center d-flex flex-column gap-1 align-items-start">
                                     <span class="card-icon w-auto">
-                                        <img :src="useAssets('connect.svg')"/>
+                                        <img :src="useAssets('activity-icon.svg')"/>
                                     </span>
                                     <span class="card-text">
                                         All Activities

@@ -104,6 +104,7 @@ class RlcoController extends Controller
                 ->when($activity_id, function ($query, $activity_id){
                    $query->whereRelation('activities', 'id', $activity_id);
                 })
+                ->orderBy('rlco_name','ASC')
                 ->get());
             return response()->json(['rlcos'=>$rlcos]);
     }

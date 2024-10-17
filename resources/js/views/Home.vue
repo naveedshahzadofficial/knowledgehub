@@ -182,7 +182,7 @@ export default {
                         <div class="options-card">
                             <div class="card-body p-4">
                                 <div class="icon-card">
-                                    <img :src="useAssets('connect.svg')" alt="">
+                                    <img :src="useAssets('activity-icon.svg')" alt="">
                                     <h5 class="card-title text-black mt-1" style="color: black !important; text-decoration: none !important;">All Activities</h5>
                                 </div>
 
