@@ -159,6 +159,24 @@ export default {
                 </div>
             </div>
             <div class="row">
+                <div class="col-md-4 mb-3" >
+                    <router-link :to="{ name: 'services', params : {'id':0, 'id2':0 }}" class="text-decoration-none">
+                        <div class="options-card">
+                            <div class="card-body p-4">
+                                <div class="icon-card">
+                                    <img :src="useAssets('activity-icon.svg')" alt="">
+                                    <h5 class="card-title text-black mt-1" style="color: black !important; text-decoration: none !important;">All Services</h5>
+                                </div>
+
+                                <div class="mt-3">
+                                <span class="arrow-icon">
+                                    <img :src="useAssets('arrow.svg')" alt="">
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    </router-link>
+                </div>
                 <div class="col-md-4 mb-3" v-for="(activity, index) in activities">
                     <router-link :to="{ name: 'services', params : {'id':activity.id }}" class="text-decoration-none">
                         <div class="options-card">
@@ -175,24 +193,6 @@ export default {
                             </div>
                         </div>
                     </div>
-                    </router-link>
-                </div>
-                <div class="col-md-4 mb-3" >
-                    <router-link :to="{ name: 'services', params : {'id':0, 'id2':0 }}" class="text-decoration-none">
-                        <div class="options-card">
-                            <div class="card-body p-4">
-                                <div class="icon-card">
-                                    <img :src="useAssets('activity-icon.svg')" alt="">
-                                    <h5 class="card-title text-black mt-1" style="color: black !important; text-decoration: none !important;">All Activities</h5>
-                                </div>
-
-                                <div class="mt-3">
-                                <span class="arrow-icon">
-                                    <img :src="useAssets('arrow.svg')" alt="">
-                                </span>
-                                </div>
-                            </div>
-                        </div>
                     </router-link>
                 </div>
             </div>

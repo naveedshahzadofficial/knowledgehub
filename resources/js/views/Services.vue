@@ -15,8 +15,8 @@ export default {
             rlco_id:"",
             is_first_landing: true,
             is_first_time_variable: false,
-            visibleCount: 12, // Initial count of items to show
-            increment: 12,    // How many more to load each time
+            currentPage: 1,
+            itemsPerPage: 12, // Define how many items per page
         }
     },
     methods: {
@@ -62,11 +62,16 @@ export default {
                 });
             }
         },
-        loadMore() {
-            if (this.canLoadMore) {
-                this.visibleCount += this.increment;
+        nextPage() {
+            if (this.currentPage < this.totalPages) {
+                this.currentPage++;
             }
-        }
+        },
+        prevPage() {
+            if (this.currentPage > 1) {
+                this.currentPage--;
+            }
+        },
     },
     mounted() {
         this.loadActivities();
@@ -87,7 +92,7 @@ export default {
         filteredCommonRlcos: function () {
             return this.rlcos.filter(rlco => {
                 // Check if business_type_id or business_activity_id are empty, return all rlcos if so
-                if (!this.business_activity_id && !this.department_id && !this.business_category_id) {
+                if (!this.business_activity_id && !this.department_id) {
                     return true;
                 }
                 // Filter based on business_type_id and business_activity_id
@@ -95,9 +100,9 @@ export default {
                     ? rlco.business_activities.some(activity => activity.id === this.business_activity_id)
                     : true;
                 // const matchesBusinessActivity = this.business_activity_id ? rlco.business_activity_id === this.business_activity_id : true;
-                const matchesBusinessCategory = this.business_category_id ? rlco.business_category_id === this.business_category_id : true;
+                // const matchesBusinessCategory = this.business_category_id ? rlco.business_category_id === this.business_category_id : true;
                 const matchesBusinessDepartment = this.department_id ? rlco.department_id === this.department_id : true;
-                return matchesBusinessActivity && matchesBusinessDepartment && matchesBusinessCategory;
+                return matchesBusinessActivity && matchesBusinessDepartment;
             });
         },
         filteredRlcos: function () {
@@ -108,12 +113,14 @@ export default {
                 return  this.rlco_id ? rlco.id === this.rlco_id : true;
             });
         },
-        visibleItems() {
-            return this.filteredRlcos.slice(0, this.visibleCount);
+        totalPages() {
+            return Math.ceil(this.filteredRlcos.length / this.itemsPerPage);
         },
-        canLoadMore() {
-            return this.visibleCount < this.filteredRlcos.length;
-        }
+        paginatedItems() {
+            const start = (this.currentPage - 1) * this.itemsPerPage;
+            const end = start + this.itemsPerPage;
+            return this.filteredRlcos.slice(start, end);
+        },
     }
 
 };
@@ -123,7 +130,11 @@ export default {
 .v-select >>> .vs__dropdown-menu {
     width: 500px !important;
 }
-
+.page-link {
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
 </style>
 <template>
     <section>
@@ -149,15 +160,15 @@ export default {
         <div class="middel-section">
             <div class="container mt-1">
                 <div class="row row-cols-1 row-cols-md-3 g-4 mt-3 service-categories">
-                    <div :class="index===0?'col-12':'col-4'" v-for="(activity, index) in activities">
+                    <div class="col-12">
                         <div class="card d-block justify-content-between align-items-center p-3">
-                            <a href="javascript:void(0)" @click.prevent="getActivityRlcos(activity.id)" class="card-link">
+                            <a href="javascript:void(0)" @click.prevent="getActivityRlcos(0)" class="card-link">
                                 <div class="card-body text-center d-flex flex-column gap-1 align-items-start">
                                     <span class="card-icon w-auto">
-                                        <img :src="activity.activity_icon_url"/>
+                                        <img :src="useAssets('activity-icon.svg')"/>
                                     </span>
                                     <span class="card-text">
-                                        {{ activity.activity_name }}
+                                        All Services
                                     </span>
                                     <span class="pt-4">
                                         <img :src="useAssets('arrow.svg')"/>
@@ -166,15 +177,15 @@ export default {
                             </a>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-4" v-for="(activity, index) in activities">
                         <div class="card d-block justify-content-between align-items-center p-3">
-                            <a href="javascript:void(0)" @click.prevent="getActivityRlcos(0)" class="card-link">
+                            <a href="javascript:void(0)" @click.prevent="getActivityRlcos(activity.id)" class="card-link">
                                 <div class="card-body text-center d-flex flex-column gap-1 align-items-start">
                                     <span class="card-icon w-auto">
-                                        <img :src="useAssets('activity-icon.svg')"/>
+                                        <img :src="activity.activity_icon_url"/>
                                     </span>
                                     <span class="card-text">
-                                        All Activities
+                                        {{ activity.activity_name }}
                                     </span>
                                     <span class="pt-4">
                                         <img :src="useAssets('arrow.svg')"/>
@@ -228,7 +239,7 @@ export default {
                 </div>
 
                 <div class="row row-cols-1 row-cols-md-3 g-4 mt-3 service-list" ref="rlco_position">
-                    <div v-if="visibleItems.length" class="col-3" v-for="rlco in visibleItems">
+                    <div v-if="paginatedItems.length" class="col-3" v-for="rlco in paginatedItems">
                         <router-link class="card d-block justify-content-between align-items-center p-3" :to="{ name: 'service-detail', params: { id: rlco.id }}" target="_blank">
                             <div class="card-link">
                                 <div class="d-flex align-items-center ">
@@ -251,12 +262,18 @@ export default {
                     </div>
                     <div v-else class="col-12">No, Rlcos Found...</div>
                 </div>
-                <div class="row text-center mt-4">
-                    <div class="col-5"></div>
-                    <div class="col-2">
-                        <button v-if="canLoadMore" class="btn btn-sm btn-primary align-content-center" @click="loadMore">Load More</button>
+                <div class="row text-center mt-4" v-if="totalPages > 0">
+                    <div class="col-8">
+                        <span v-if="currentPage === totalPages" class="p-2 float-start" style="font-size: 12px">Showing {{ ((currentPage - 1) * itemsPerPage) + 1 }} to {{ filteredRlcos.length }} of {{ filteredRlcos.length }} Services</span>
+                        <span v-else class="p-2 float-start" style="font-size: 12px">Showing {{ ((currentPage - 1) * itemsPerPage) + 1 }} to {{ ((currentPage - 1) * itemsPerPage) + itemsPerPage }} of {{ filteredRlcos.length }} Services</span>
                     </div>
-                    <div class="col-5"></div>
+                    <div class="col-4 float-right">
+                        <div class="float-end">
+                            <button class="btn btn-sm btn-outline-info text-primary" @click="prevPage" :disabled="currentPage === 1">Previous</button>
+                            <span class="p-2" style="font-size: 12px">Page {{ currentPage }} of {{ totalPages }}</span>
+                            <button class="btn btn-sm btn-outline-info text-primary" @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
                     <div class="col-12">
