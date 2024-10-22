@@ -16,6 +16,8 @@ class CreateFormsTable extends Migration
         Schema::create('forms', function (Blueprint $table) {
             $table->id();
             $table->string('form_name')->nullable();
+            $table->boolean('form_status')->nullable()->default(true);
+            $table->unsignedInteger('form_order')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

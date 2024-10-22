@@ -21,6 +21,8 @@ class CreateFormFieldsTable extends Migration
             $table->boolean('is_required')->default(false);
             $table->json('field_options')->nullable();
             $table->string('field_group')->nullable();
+            $table->boolean('field_status')->nullable()->default(true);
+            $table->unsignedInteger('field_order')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -10,7 +10,12 @@ class Form extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['form_name'];
+    protected $fillable = ['form_name', 'form_status', 'form_order'];
+
+    public function scopeActive($query)
+    {
+        return $query->where('form_status', 1);
+    }
 
     public function rlcos()
     {

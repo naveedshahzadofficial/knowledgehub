@@ -57,7 +57,42 @@ class FormSeeder extends Seeder
 
         FormField::create(['form_id' => $form->id,
             'field_label' => 'Engineer design of proposed work attached',
-            'field_type' => 'text', 'is_required' => false,
+            'field_type' => 'radio', 'is_required' => true,
+            'field_options' => ['Yes', 'No'],
+            'field_group' => null
+        ]);
+
+        FormField::create(['form_id' => $form->id,
+            'field_label' => 'Results of Geo-technical investigations, hydrological studies etc attached',
+            'field_type' => 'radio', 'is_required' => true,
+            'field_options' => ['Yes', 'No'],
+            'field_group' => null
+        ]);
+
+        FormField::create(['form_id' => $form->id,
+            'field_label' => 'Methodology of instruction work',
+            'field_type' => 'text', 'is_required' => true,
+            'field_options' => null,
+            'field_group' => null
+        ]);
+
+        FormField::create(['form_id' => $form->id,
+            'field_label' => 'Time frame for proposed instructions',
+            'field_type' => 'text', 'is_required' => true,
+            'field_options' => null,
+            'field_group' => null
+        ]);
+
+        FormField::create(['form_id' => $form->id,
+            'field_label' => 'Bank Challan No. and processing fee amount deposited',
+            'field_type' => 'text', 'is_required' => true,
+            'field_options' => null,
+            'field_group' => null
+        ]);
+
+        FormField::create(['form_id' => $form->id,
+            'field_label' => 'Commitment on non-judicial stamp paper for abiding on condition attached',
+            'field_type' => 'radio', 'is_required' => true,
             'field_options' => ['Yes', 'No'],
             'field_group' => null
         ]);

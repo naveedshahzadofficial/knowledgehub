@@ -20,6 +20,9 @@ Route::get('/login', [Auth\LoginController::class, 'showLoginForm'])->name('logi
         Route::resource('roles', Admin\RoleController::class);
         Route::resource('admins', Admin\AdminController::class);
 
+        Route::resource('forms', Admin\FormController::class);
+        Route::resource('forms.form-fields', Admin\FormFieldController::class);
+
         Route::post('rlcos/index-ajax', [ Admin\RlcoController::class,'indexAjax'])->name('rlcos.index-ajax');
         Route::get('rlcos/{rlco}/sectors-mapping', [Admin\RlcoController::class, 'sectors_mapping'])->name('rlocs.sectors-mapping');
         Route::put('rlcos/{rlco}/sectors-mapping', [Admin\RlcoController::class, 'update_sectors_mapping'])->name('rlcos.sectors-mapping.update');
