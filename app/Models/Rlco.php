@@ -104,4 +104,9 @@ class Rlco extends Model
     {
         return $this->hasOne(AccountInfo::class);
     }
+
+    public function forms()
+    {
+        return $this->belongsToMany(Form::class);
+    }
 }
