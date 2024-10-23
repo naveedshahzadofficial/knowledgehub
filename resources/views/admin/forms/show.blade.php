@@ -1,5 +1,5 @@
 @extends('_layouts.admin.app')
-@push('title','View Activity')
+@push('title','View Form')
 @section('content')
     <div class="row">
         <div class="col-lg-12">

@@ -21,4 +21,9 @@ class Form extends Model
     {
         return $this->belongsToMany(Rlco::class);
     }
+
+    public function formFields()
+    {
+        return $this->hasMany(FormField::class);
+    }
 }
