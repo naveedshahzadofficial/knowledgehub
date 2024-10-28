@@ -4,6 +4,8 @@ return [
      'mix_asset_url' => env('MIX_ASSET_URL', null),
      'mix_base_url' => env('MIX_BASE_URL', null),
      'mix_api_url' => env('MIX_API_URL', null),
+     'mix_apply_ebiz_url' => env('MIX_APPLY_EBIZ_URL', 'https://apply-ebiz.punjab.gov.pk'),
+
 
     /*
     |--------------------------------------------------------------------------

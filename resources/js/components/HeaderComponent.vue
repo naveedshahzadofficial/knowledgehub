@@ -26,7 +26,7 @@
                                         <router-link class="nav-link" :to="{ name: 'contact-us'}">Contact Us</router-link>
                                     </li>
                                 </ul>
-                                <a target="_blank" href="https://apply-ebiz.punjab.gov.pk" class="btn btn-login">Log In</a>
+                                <a target="_blank" :href="apply_ebiz_url" class="btn btn-login">Log In</a>
                                 <a class="RightmenuBtn">
                                     <span class="navbar-toggler-icon"></span>
                                 </a>
@@ -62,6 +62,7 @@ export default {
     data() {
         return {
             app_title: this.$store.state.app_title,
+            apply_ebiz_url: process.env.MIX_APPLY_EBIZ_URL,
         };
     },
     computed: {
