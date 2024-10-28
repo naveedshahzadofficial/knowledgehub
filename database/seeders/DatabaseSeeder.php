@@ -34,5 +34,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ActivitySectionSeeder::class);
         $this->call(ScopeSeeder::class);
         $this->call(BankSeeder::class);
+        $this->call(FormSeeder::class);
     }
 }

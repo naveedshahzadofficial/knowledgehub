@@ -121,4 +121,6 @@ class RlcoController extends Controller
         session()->flash('success_message', 'Sectors has been updated successfully.');
         return redirect()->route('admin.rlcos.index');
     }
+
+
 }
