@@ -59,7 +59,9 @@
                                                                                                 'admin.roles.index','admin.roles.create','admin.roles.edit', 'admin.roles.show',
                                                                                                 'admin.admins.index','admin.admins.create','admin.admins.edit', 'admin.admins.show',
                                                                                                 'admin.forms.index','admin.forms.create','admin.forms.edit', 'admin.forms.show',
-                                                                                                'admin.forms.form-fields.index','admin.forms.form-fields.create','admin.form-fields.forms.edit', 'admin.forms.form-fields.show',
+                                                                                                'admin.forms.form-fields.index','admin.forms.form-fields.create','admin.forms.form-fields.edit', 'admin.forms.form-fields.show',
+                                                                                                'admin.forms.form-table-rows.index','admin.forms.form-table-rows.create','admin.forms.form-table-rows.forms.edit', 'admin.forms.form-table-rows.show',
+                                                                                                'admin.forms.form-table-columns.index','admin.forms.form-table-columns.create','admin.forms.form-table-columns.edit', 'admin.forms.form-table-columns.show',
                                                                                                 ]) }}" aria-haspopup="true" data-menu-toggle="hover">
                                         <a href="javascript:;" class="menu-link menu-toggle">
                                             <span class="svg-icon text-white svg-icon-white menu-icon fas fa-cog"></span>
@@ -98,7 +100,9 @@
 
                                                 <li class="menu-item {{ areActiveRoutes([
     'admin.forms.index','admin.forms.create','admin.forms.edit', 'admin.forms.show',
-    'admin.forms.form-fields.index','admin.forms.form-fields.create','admin.form-fields.forms.edit', 'admin.forms.form-fields.show',
+     'admin.forms.form-fields.index','admin.forms.form-fields.create','admin.forms.form-fields.edit', 'admin.forms.form-fields.show',
+                                                                                                'admin.forms.form-table-rows.index','admin.forms.form-table-rows.create','admin.forms.form-table-rows.forms.edit', 'admin.forms.form-table-rows.show',
+                                                                                                'admin.forms.form-table-columns.index','admin.forms.form-table-columns.create','admin.forms.form-table-columns.edit', 'admin.forms.form-table-columns.show',
     ]) }}" aria-haspopup="true">
                                                     <a href="{{ route('admin.forms.index') }}" class="menu-link">
                                                         <span class="menu-text text-white">Forms</span>

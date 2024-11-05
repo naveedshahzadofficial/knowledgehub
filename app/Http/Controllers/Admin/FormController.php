@@ -32,10 +32,12 @@ class FormController extends Controller
                 })
                 ->addColumn('action', function(Form $form){
                     $actionBtn = '';
-                    $actionBtn .= '<span onclick="toggleStatus(this); return false;"  data-href="' . route('admin.forms.destroy', $form) . '" class="edit btn btn-custom-color text-center btn-circle btn-icon btn-xs">' . ($form->form_status ? '<i class="fa fa-toggle-on text-white"></i>' : '<i class="fa fa-toggle-off text-danger"></i>') . '</span>';
-                    $actionBtn .= '&nbsp;&nbsp;<a  href="' . route('admin.forms.edit', $form) . '" class="edit btn btn-custom-color text-center btn-circle btn-icon btn-xs"><i class="flaticon-edit text-white"></i></a>';
-                    $actionBtn .= '&nbsp;&nbsp;<a  href="' . route('admin.forms.form-fields.index', $form) . '" class="edit btn btn-custom-color text-center btn-circle btn-icon btn-xs" title="Form Fields"><i class="flaticon-notes text-white"></i></a>';
-                    $actionBtn .= '&nbsp;&nbsp;<a  href="' . route('admin.forms.show', $form) . '" class="edit btn btn-custom-color text-center btn-circle btn-icon btn-xs"><i class="flaticon-eye text-white"></i></a>';
+                    $actionBtn .= '<span onclick="toggleStatus(this); return false;"  data-href="' . route('admin.forms.destroy', $form) . '" class="mt-2 edit btn btn-custom-color text-center btn-circle btn-icon btn-xs">' . ($form->form_status ? '<i class="fa fa-toggle-on text-white"></i>' : '<i class="fa fa-toggle-off text-danger"></i>') . '</span>';
+                    $actionBtn .= '&nbsp;&nbsp;<a  href="' . route('admin.forms.edit', $form) . '" class="mt-2 edit btn btn-custom-color text-center btn-circle btn-icon btn-xs"><i class="flaticon-edit text-white"></i></a>';
+                    $actionBtn .= '&nbsp;&nbsp;<a  href="' . route('admin.forms.form-fields.index', $form) . '" class="mt-2 edit btn btn-custom-color text-center btn-circle btn-icon btn-xs" title="Form Fields"><i class="flaticon-notes text-white"></i></a>';
+                    $actionBtn .= '&nbsp;&nbsp;<a  href="' . route('admin.forms.form-table-rows.index', $form) . '" class="mt-2 edit btn btn-custom-color text-center btn-circle btn-icon btn-xs" title="Form Table Rows"><i class="flaticon-attachment text-white"></i></a>';
+                    $actionBtn .= '&nbsp;&nbsp;<a  href="' . route('admin.forms.form-table-columns.index', $form) . '" class="mt-2 edit btn btn-custom-color text-center btn-circle btn-icon btn-xs" title="Form Table Columns"><i class="flaticon-attachment text-white"></i></a>';
+                    $actionBtn .= '&nbsp;&nbsp;<a  href="' . route('admin.forms.show', $form) . '" class="mt-2 edit btn btn-custom-color text-center btn-circle btn-icon btn-xs"><i class="flaticon-eye text-white"></i></a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['form_status','action'])

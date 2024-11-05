@@ -16,6 +16,24 @@
                     <div class="form-body col-xl-8 col-xs-12">
 
                         <div class="form-group">
+                            <label for="is_tabular">Tabular</label>
+                            <div class="radio-inline">
+                                <label class="radio radio-success">
+                                    <input type="radio"  @if(old('is_tabular')=='1')checked="checked"@endif name="is_tabular" value="1">
+                                    <span></span>Yes</label>
+
+                                <label class="radio radio-danger">
+                                    <input type="radio"  @if(old('is_tabular')=='0')checked="checked"@endif name="is_tabular" value="0">
+                                    <span></span>No</label>
+                            </div>
+                            @error('is_tabular')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
                             <label class="bmd-label-floating">Name <span class="color-red-700">*</span> </label>
 
                             <input maxlength="255" type="text" class="form-control  @error('form_name') is-invalid @enderror" name="form_name"
@@ -26,6 +44,19 @@
                                     {{ $message }}
                                 </div>
                                 @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label class="bmd-label-floating">Sub Heading <span class="color-red-700"></span> </label>
+
+                            <input maxlength="255" type="text" class="form-control  @error('form_sub_heading') is-invalid @enderror" name="form_sub_heading"
+                                   value="{{ old('form_sub_heading') }}"
+                                   id="form_sub_heading"  />
+                            @error('form_sub_heading')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
 
                         <div class="form-group">
@@ -73,7 +104,7 @@
                                 {{ $message }}
                             </div>
                             @enderror
-                        </div><!--form-group ends-->
+                        </div>
 
                         <div class="form-actions p-t-15">
                             <div class="row">
@@ -104,12 +135,16 @@
             // Basic Form
             $('#from').validate({
                 rules : {
+                    is_tabular: "required",
                     form_name: "required",
                     form_order: "required",
                     form_status: "required",
                     'rlco_ids[]': "required",
                 },
                 messages: {
+                    is_tabular: {
+                        required: "Tabular is required."
+                    },
                     form_name: {
                         required: "Form Name is required."
                     },

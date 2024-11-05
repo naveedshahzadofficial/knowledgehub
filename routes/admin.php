@@ -22,6 +22,8 @@ Route::get('/login', [Auth\LoginController::class, 'showLoginForm'])->name('logi
 
         Route::resource('forms', Admin\FormController::class);
         Route::resource('forms.form-fields', Admin\FormFieldController::class);
+        Route::resource('forms.form-table-rows', Admin\FormTableRowController::class);
+        Route::resource('forms.form-table-columns', Admin\FormTableColumnController::class);
 
         Route::post('rlcos/index-ajax', [ Admin\RlcoController::class,'indexAjax'])->name('rlcos.index-ajax');
         Route::get('rlcos/{rlco}/sectors-mapping', [Admin\RlcoController::class, 'sectors_mapping'])->name('rlocs.sectors-mapping');

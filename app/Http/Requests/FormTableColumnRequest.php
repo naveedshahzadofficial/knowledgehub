@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
-class FormRequest extends \Illuminate\Foundation\Http\FormRequest
+use Illuminate\Foundation\Http\FormRequest;
+
+class FormTableColumnRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +24,9 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
     public function rules()
     {
         return [
-            'is_tabular'=> 'required',
-            'form_name' => 'required|max:255',
-            'form_sub_heading' => 'sometimes|nullable',
-            'form_order' => 'required',
-            'rlco_ids' => 'required|array|min:1',
-            'form_status' => 'required',
+            'column_name' => 'required|max:255',
+            'column_order' => 'required',
+            'column_status' => 'required',
         ];
     }
 }

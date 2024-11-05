@@ -26,4 +26,14 @@ class Form extends Model
     {
         return $this->hasMany(FormField::class);
     }
+
+    public function formTableRows()
+    {
+        return $this->hasMany(FormTableRow::class);
+    }
+
+    public function formTableColumns()
+    {
+        return $this->hasMany(FormTableColumn::class);
+    }
 }

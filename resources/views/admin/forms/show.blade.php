@@ -18,14 +18,28 @@
             <div class="card-body p-0">
                 @component('_components.alerts-default')@endcomponent
                  <div class="form-body col-xl-12 col-xs-12">
-                     <div class="col-lg-12">
-                            <strong>RLCOs</strong>
-                            <ul class="list-group ">
-                                @foreach($form->rlcos as $rlco)
-                                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">{{ $rlco->rlco_name }}</li>
-                                @endforeach
-                            </ul>
-                    </div>
+                     <div class="row">
+                         <div class="col-lg-6">
+                             <strong>Tabular</strong>
+                             <label class="bmd-label-floating">{{ $form->is_tabular?'Yes':'No' }}</label><br>
+                         </div>
+
+                         <div class="col-lg-6">
+                             <strong>Sub Heading</strong>
+                             <label class="bmd-label-floating">{{ $form->form_sub_heading }}</label><br>
+                         </div>
+                     </div>
+
+                     <div class="row">
+                         <div class="col-lg-12">
+                                <strong>RLCOs</strong>
+                                <ul class="list-group ">
+                                    @foreach($form->rlcos as $rlco)
+                                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">{{ $rlco->rlco_name }}</li>
+                                    @endforeach
+                                </ul>
+                        </div>
+                     </div>
                     </div>
             </div>
 
