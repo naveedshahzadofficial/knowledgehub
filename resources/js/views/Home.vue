@@ -6,7 +6,8 @@ export default {
         return {
             activities: [],
             sectors: [],
-            business_activity_id:''
+            business_activity_id:'',
+            apply_ebiz_url: process.env.MIX_APPLY_EBIZ_URL,
         }
     },
     methods: {
@@ -19,7 +20,7 @@ export default {
         },
         search: function (){
             this.$router.push({'name':'services', params:{ 'id': 0,'id2': this.business_activity_id}});
-        }
+        },
     },
     mounted() {
         this.loadActivities();
@@ -131,7 +132,7 @@ export default {
                             <div class="d-flex productivityTabs">
                                 <ul>
                                     <li class="tabActive">
-                                        <a target="_blank" href="https://apply-ebiz.punjab.gov.pk">With eBiz Portal</a>
+                                        <a target="_blank" :href="apply_ebiz_url">With eBiz Portal</a>
                                     </li>
                                     <!-- <li>
                                         <a href="#">Without eBiz Punjab</a>
