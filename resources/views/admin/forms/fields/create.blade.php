@@ -14,6 +14,41 @@
                 <div class="card-body p-0">
                     {{ Form::open(array('route' => ['admin.forms.form-fields.store', $form],'class'=>'form form-horizontal','name'=>'from','id'=>'from', 'files'=>true)) }}
                     <div class="form-body col-xl-8 col-xs-12">
+                        @if($form->is_tabular)
+                        <div class="form-group">
+                            <label class="bmd-label-floating">Form Table Row <span class="color-red-700">*</span> </label>
+                            <select name="form_table_row_id" class="form-control select2  @error('form_table_row_id') is-invalid @enderror" required>
+                                <option value="">Select Table Row</option>
+                               @isset($form_table_rows)
+                                @foreach($form_table_rows as $form_table_row)
+                                        <option value="{{ $form_table_row->id }}" @if(old('form_table_row_id') == $form_table_row->id) selected @endif >{{ $form_table_row->row_name }}</option>
+                                    @endforeach
+                               @endisset
+                            </select>
+                            @error('form_table_row_id')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label class="bmd-label-floating">Form Table Column <span class="color-red-700">*</span> </label>
+                            <select name="form_table_column_id" class="form-control select2  @error('form_table_column_id') is-invalid @enderror" required>
+                                <option value="">Select Table Column</option>
+                                @isset($form_table_columns)
+                                    @foreach($form_table_columns as $form_table_column)
+                                        <option value="{{ $form_table_column->id }}" @if(old('form_table_column_id') == $form_table_column->id) selected @endif>{{ $form_table_column->column_name }}</option>
+                                    @endforeach
+                                @endisset
+                            </select>
+                            @error('form_table_column_id')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        @endif
 
                         <div class="form-group">
                             <label class="bmd-label-floating">Field Label <span class="color-red-700">*</span> </label>
@@ -146,7 +181,10 @@
             'use strict';
             // Basic Form
             $('#from').validate({
+                ignore: ":hidden",
                 rules : {
+                    form_table_row_id: "required",
+                    form_table_column_id: "required",
                     field_label: "required",
                     field_type: "required",
                     is_required: "required",
@@ -154,6 +192,12 @@
                     field_status: "required",
                 },
                 messages: {
+                    form_table_row_id: {
+                        required: "Form Table Row is required."
+                    },
+                    form_table_column_id: {
+                        required: "Form Table Column is required."
+                    },
                     field_label: {
                         required: "Field Label is required."
                     },

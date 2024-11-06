@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\FormFieldRequest;
 use App\Models\Form;
 use App\Models\FormField;
+use App\Models\FormTableColumn;
+use App\Models\FormTableRow;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -55,7 +57,9 @@ class FormFieldController extends Controller
     public function create(Form $form)
     {
         $field_types = ['text', 'number', 'date', 'textarea', 'select', 'radio', 'checkbox', 'file', 'email', 'password', 'hidden', 'url', 'phone', 'group'];
-        return View('admin.forms.fields.create', compact('form', 'field_types'));
+        $form_table_rows = FormTableRow::active()->where('form_id', $form->id)->get();
+        $form_table_columns = FormTableColumn::active()->where('form_id', $form->id)->get();
+        return View('admin.forms.fields.create', compact('form', 'field_types', 'form_table_rows', 'form_table_columns'));
     }
 
     /**
@@ -81,6 +85,7 @@ class FormFieldController extends Controller
      */
     public function show(Form $form, FormField $formField)
     {
+        $formField->load('formTableRow', 'formTableColumn');
         return View('admin.forms.fields.show',compact('form', 'formField'));
     }
 
@@ -94,7 +99,9 @@ class FormFieldController extends Controller
     public function edit(Form $form, FormField $formField)
     {
         $field_types = ['text', 'number', 'date', 'textarea', 'select', 'radio', 'checkbox', 'file', 'email', 'password', 'hidden', 'url', 'phone', 'group'];
-        return View('admin.forms.fields.edit',compact('form', 'formField', 'field_types'));
+        $form_table_rows = FormTableRow::active()->where('form_id', $form->id)->get();
+        $form_table_columns = FormTableColumn::active()->where('form_id', $form->id)->get();
+        return View('admin.forms.fields.edit',compact('form', 'formField', 'field_types', 'form_table_rows', 'form_table_columns'));
     }
 
     /**

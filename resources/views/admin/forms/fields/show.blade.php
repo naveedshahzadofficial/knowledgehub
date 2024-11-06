@@ -19,14 +19,29 @@
                 @component('_components.alerts-default')@endcomponent
                  <div class="form-body col-xl-12 col-xs-12">
 
-                     <div class="col-lg-12">
-                         <strong>Field Label</strong>
-                         <label class="bmd-label-floating">{{ $formField->field_label }}</label><br>
-                     </div>
+                   @if($form->is_tabular)
+                        <div class="row">
+                         <div class="col-lg-6">
+                             <strong>Form Table Row</strong>
+                             <label class="bmd-label-floating">{{ optional($formField->formTableRow)->row_name }}</label><br>
+                         </div>
+                         <div class="col-lg-6">
+                             <strong>Form Table Column</strong>
+                             <label class="bmd-label-floating">{{ optional($formField->formTableColumn)->column_name }}</label><br>
+                         </div>
+                        </div>
+                     @endif
 
-                     <div class="col-lg-12">
-                         <strong>Field Type</strong>
-                         <label class="bmd-label-floating">{{ $formField->field_type }}</label><br>
+
+                     <div class="row">
+                         <div class="col-lg-6">
+                             <strong>Field Label</strong>
+                             <label class="bmd-label-floating">{{ $formField->field_label }}</label><br>
+                         </div>
+                         <div class="col-lg-6">
+                             <strong>Field Type</strong>
+                             <label class="bmd-label-floating">{{ $formField->field_type }}</label><br>
+                         </div>
                      </div>
 
                      @if(!empty($formField->field_options))

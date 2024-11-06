@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class FormFieldRequest extends FormRequest
 {
@@ -24,6 +25,8 @@ class FormFieldRequest extends FormRequest
     public function rules()
     {
         return [
+            'form_table_row_id' => ['required_if:form.is_tabular,true'],
+            'form_table_column_id' => ['required_if:form.is_tabular,true'],
             'field_label' => 'required|max:255',
             'field_type' => 'required',
             'is_required' => 'required',
