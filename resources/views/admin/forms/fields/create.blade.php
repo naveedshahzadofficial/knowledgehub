@@ -237,5 +237,18 @@
 
         });
 
+        function generateSlug(text) {
+            return text
+                .toLowerCase()
+                .trim()
+                .replace(/[^\w\s-]/g, '')    // Remove non-word characters
+                .replace(/\s+/g, '_')        // Replace spaces with hyphens
+                .replace(/-+/g, '_');        // Replace multiple hyphens with single hyphen
+        }
+
+        document.getElementById('field_group').addEventListener('input', function() {
+            document.getElementById('field_group').value = generateSlug(this.value);
+        });
+
     </script>
 @endpush
