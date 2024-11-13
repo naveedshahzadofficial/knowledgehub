@@ -57,6 +57,7 @@
                     <th>Division Name</th>
                     <th>Group Name</th>
                     <th>Class Name</th>
+                    <th>Easy Class Name</th>
                 </tr>
                 <tbody>
                 @foreach($rlco->businessActivities as $activity)
@@ -66,6 +67,7 @@
                     <td>{{ $activity->division_name }}</td>
                     <td>{{ $activity->group_name }}</td>
                     <td>{{ $activity->class_name }}</td>
+                    <td>{{ $activity->easy_class_name }}</td>
                     </tr>
                 @endforeach
 
