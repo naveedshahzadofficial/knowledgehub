@@ -17,6 +17,7 @@ export default {
             is_first_time_variable: false,
             currentPage: 1,
             itemsPerPage: 12, // Define how many items per page
+            searchTerm: '',
         }
     },
     methods: {
@@ -43,9 +44,18 @@ export default {
         getActivityRlcos: function (activity_id) {
             axios.post(`activity-rlcos/${activity_id}`, {}).then(response => {
                 this.rlcos = response.data.rlcos;
-                if(!this.is_first_landing || this.$route.params.id || this.$route.params.id2)
+                    if (this.rlcos.length > 0) {
+                        const firstRlcoId = this.rlcos[0].id;
+
+                        // Navigate to the service-detail route with the first RLCO ID
+                        this.$router.push({
+                            name: 'service-detail',
+                            params: {rlco_id: firstRlcoId}
+                        });
+                    }
+                /*if(!this.is_first_landing || this.$route.params.id || this.$route.params.id2)
                  this.scrollToRlco();
-                this.is_first_landing = false;
+                this.is_first_landing = false;*/
             })
         },
         scrollToRlco() {
@@ -113,6 +123,15 @@ export default {
                 return  this.rlco_id ? rlco.id === this.rlco_id : true;
             });
         },
+        searchedRlcos() {
+            return this.filteredRlcos.filter(rlco => {
+                if (!this.searchTerm) {
+                    return true;
+                }
+                const term = this.searchTerm.toLowerCase();
+                return rlco.rlco_name.toLowerCase().includes(term);
+            });
+        },
         totalPages() {
             return Math.ceil(this.filteredRlcos.length / this.itemsPerPage);
         },
@@ -127,250 +146,213 @@ export default {
 </script>
 
 <style scoped>
+.v-select >>>  .vs__dropdown-toggle {
+    border: transparent !important;
+}
+.v-select >>> .vs__open-indicator{
+    display: none !important;
+}
+.form-select {
+    padding: 0.675rem 2.25rem .375rem .75rem;
+}
+
+.v-select >>> .vs__clear{
+    display: none !important;
+}
+.v-select >>> .vs__actions{
+    display: none !important;
+}
 .v-select >>> .vs__dropdown-menu {
     width: 500px !important;
 }
-.page-link {
-    color: #007bff;
+.filterServicesDiv .v-select {
+    border: 0.50px solid #c0c0d2;
+    border-radius: 20px;
+    height: 60px;
+    font-weight: 400;
+    font-size: 18px;
+    color: #3a3a3a;
     background-color: #fff;
-    border: 1px solid #dee2e6;
+}
+.service_sidebar {
+    max-height: 250vh; /* Limits the height of the sidebar */
+    overflow-y: auto; /* Enables vertical scrolling */
 }
 </style>
 <template>
-    <section>
-        <div class="top-section pb-4 services-page">
-            <div class="container py-2">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><i class="fas fa-angle-left"></i></li>
-                        <li class="breadcrumb-item"><router-link :to="{ name: 'home'}">Home</router-link></li>
-                        <li class="breadcrumb-item"><a href="#">Services</a></li>
-                    </ol>
-                </nav>
-            </div>
-            <div class="container">
+    <div class="servicesPageContent mb-5">
+        <header class="servicesPageHeader py-5">
+            <div class="container-fluid px-4">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="text-blue-color page-header-title mt-4">eBiz Services</h2>
-                        <p class="text-blue-color">Your trusted partner for personalised business support and guidance.</p>
+                        <h1 class="mb-1">Services</h1>
+                        <p class="mb-0">eBiz Punjab offers expert support to boost your business across various sectors.</p>
                     </div>
                 </div>
             </div>
+        </header>
+
+        <div class="lowerHeaderDiv px-4 d-flex align-items-center mb-5">
+            <p class="mb-0">Select sectors from the drop-down list and utilize advanced filters to efficiently search for your desired industry.</p>
         </div>
-        <div class="middel-section">
-            <div class="container mt-1">
-                <div class="row row-cols-1 row-cols-md-3 g-4 mt-3 service-categories">
-                    <div class="col-12">
-                        <div class="card d-block justify-content-between align-items-center p-3">
-                            <a href="javascript:void(0)" @click.prevent="getActivityRlcos(0)" class="card-link">
-                                <div class="card-body text-center d-flex flex-column gap-1 align-items-start">
-                                    <span class="card-icon w-auto">
-                                        <img :src="useAssets('activity-icon.svg')"/>
-                                    </span>
-                                    <span class="card-text">
-                                        All Services
-                                    </span>
-                                    <span class="pt-4">
-                                        <img :src="useAssets('arrow.svg')"/>
-                                    </span>
-                                </div>
-                            </a>
+
+        <div class="container-fluid px-4">
+            <div class="row filterServicesDiv mb-3">
+                <div class="col-md-5 mb-md-0 mb-3">
+                    <label class="form-label">Sectors</label>
+                    <v-select v-model="business_category_id" :options="categories"
+                              :reduce="category => category.id" label="category_name"
+                              placeholder="Sectors" class="vSelectClass form-select"
+                    >
+                    </v-select>
+                </div>
+
+                <div class="col-md-5 mb-md-0 mb-3">
+                    <label class="form-label">Business</label>
+                    <v-select v-model="business_activity_id" :options="filteredBusinessActivities"
+                              :reduce="sector => sector.id" label="easy_class_name"
+                              placeholder="Business Types" class="vSelectClass form-select" >
+                    </v-select>
+                </div>
+
+                <div class="col-12 my-4">
+                    <label class="form-label mb-0">Advance Filters</label>
+                </div>
+
+                <div class="col-12">
+                    <div class="dotted-line mb-3"></div>
+                </div>
+            </div>
+
+            <div class="row filterSerivcesDiv1 mb-4">
+                <div class="col-lg-3 col-sm-4 mb-sm-0 mb-3">
+                    <button class="d-flex align-items-center w-100 px-3">
+                        <span class="me-2">
+                            <img :src="useAssets('assets/owned-icon.svg')" alt="owned-icon" class="img-fluid">
+                        </span>
+                        <span>
+                            Owned
+                        </span>
+                    </button>
+                </div>
+
+                <div class="col-lg-3 col-sm-4 mb-sm-0 mb-3">
+                    <button class="d-flex align-items-center w-100 px-3">
+                        <span class="me-2">
+                            <img :src="useAssets('assets/rented-icon.svg')" alt="rented-icon" class="img-fluid">
+                        </span>
+                        <span>
+                            Rented
+                        </span>
+                    </button>
+                </div>
+
+                <div class="col-lg-3 col-sm-4 mb-sm-0 mb-3">
+                    <button class="d-flex align-items-center w-100 px-3">
+                        <span class="me-2">
+                            <img :src="useAssets('assets/allServices-icon.svg')" alt="allServices-icon" class="img-fluid">
+                        </span>
+                        <span>
+                            All Services
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="row servicesPageData mb-3" ref="rlco_position">
+                <div class="col-lg-3 mb-lg-0 mb-4">
+                    <div class="card shadow-none">
+                        <div class="card-header bg-transparent border-0 p-3 pb-0">
+                            <h5 class="card-title mb-2">Services</h5>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text border-0 bg-transparent" id="basic-addon1">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </span>
+                                <input type="text" class="form-control border-0 bg-transparent" v-model="searchTerm" placeholder="Search Services" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-4" v-for="(activity, index) in activities">
-                        <div class="card d-block justify-content-between align-items-center p-3">
-                            <a href="javascript:void(0)" @click.prevent="getActivityRlcos(activity.id)" class="card-link">
-                                <div class="card-body text-center d-flex flex-column gap-1 align-items-start">
-                                    <span class="card-icon w-auto">
-                                        <img :src="activity.activity_icon_url"/>
-                                    </span>
-                                    <span class="card-text">
-                                        {{ activity.activity_name }}
-                                    </span>
-                                    <span class="pt-4">
-                                        <img :src="useAssets('arrow.svg')"/>
-                                    </span>
-                                </div>
-                            </a>
+                        <div class="card-body px-0 service_sidebar" ref="service_sidebar">
+                            <ul class="nav nav-tabs flex-lg-column border-0 flex-row" id="eBizServicesTab1" v-for="rlco in searchedRlcos" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <router-link :to="{ name: 'service-detail', params: { rlco_id: rlco.id }, hash: '#eBizServicesTab1Content'}" class="nav-link px-2 py-3 w-100" aria-selected="true">
+                                        <div class="d-flex align-items center justify-content-between">
+                                            <div class="d-flex align-items-start">
+                                                <img :src="useAssets('assets/searched-service-icon.svg')" alt="department Icon" class="img-fluid" width="50" height="50">
+                                                <div class="searchedServiceData text-start ms-2">
+                                                    <h6 class="mb-1">{{ rlco.rlco_name }}</h6>
+                                                    <p class="mb-0 d-inline-block px-4 py-0">Provincial</p>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <img :src="useAssets('assets/viewAll-icon.svg')" alt="">
+                                            </div>
+                                        </div>
+                                    </router-link>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <div class="row justify-content-between align-items-center mb-3 mt-5">
-                    <!-- Left Side Dropdowns -->
-                    <div class="col-md-9">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <v-select v-model="business_category_id" :options="categories"
-                                          :reduce="category => category.id" label="category_name"
-                                          placeholder="Sectors" class="vSelectClass" style="width: 100% !important;"
-                                >
-                                </v-select>
-                            </div>
-                            <div class="col-md-3">
-                                <v-select v-model="business_activity_id" :options="filteredBusinessActivities"
-                                          :reduce="sector => sector.id" label="easy_class_name"
-                                          placeholder="Business Types" class="w-auto" style="width: 100% !important;">
-                                </v-select>
-                            </div>
-                            <div class="col-md-3">
-                                <v-select v-model="department_id" :options="departments"
-                                          :reduce="department => department.id" label="department_name"
-                                          placeholder="Licensing Authority" class="w-auto" style="width: 100% !important;">
-                                </v-select>
-                            </div>
-                            <div class="col-md-3">
-                                <v-select v-model="rlco_id" :options="filteredCommonRlcos"
-                                          :reduce="rlco => rlco.id" label="rlco_name"
-                                          placeholder="Service Types" class="w-auto" style="width: 100% !important;">
-                                </v-select>
+                <div class="col-lg-9">
+                    <div class="card shadow-none mb-4">
+                        <div class="card-body">
+                            <div class="tab-content" id="eBizServicesTab1Content">
+                                <router-view></router-view>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right Side Text and Dropdown -->
-                    <div class="col-md-3 d-flex justify-content-end align-items-center gap-2">
-                        <span>{{ filteredRlcos.length }} services</span>
-                        <select class="form-select w-auto">
-                            <option selected>Most Relevant</option>
-
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row row-cols-1 row-cols-md-3 g-4 mt-3 service-list" ref="rlco_position">
-                    <div v-if="paginatedItems.length" class="col-3" v-for="rlco in paginatedItems">
-                        <router-link class="card d-block justify-content-between align-items-center p-3" :to="{ name: 'service-detail', params: { id: rlco.id }}" target="_blank">
-                            <div class="card-link">
-                                <div class="d-flex align-items-center ">
-                                    <div class="card-body text-center d-flex align-items-center">
-                                        <span class="card-text">
-                                            {{ rlco.rlco_name }}
-                                        </span>
-                                        <span class="card-icon">
-                                             <img :src="useAssets('epd.png')">
-                                        </span>
-                                    </div>
+                    <div class="card shadow-none">
+                        <div class="card-body px-2 pt-4 pb-2">
+                            <div class="row mx-0 serviceCenterDiv">
+                                <div class="col-12 mb-2">
+                                    <h3>Visiting a service center</h3>
                                 </div>
-                                <div class="card-arrow">
-                                    <span>
-                                        <img :src="useAssets('arrow.svg')">
-                                    </span>
+
+                                <div class="col-xl-4 col-md-6 mb-3">
+                                    <button class="d-flex align-items-center justify-content-between px-3 py-2 w-100">
+                                        <span>Book a Appointment</span>
+                                        <span>
+                                            <img :src="useAssets('assets/viewAll-icon.svg')" alt="viewAll-icon">
+                                        </span>
+                                    </button>
+                                </div>
+
+                                <div class="col-xl-4 col-md-6 mb-3">
+                                    <button class="d-flex align-items-center justify-content-between px-3 py-2 w-100">
+                                        <span>Change or Cancel Booking</span>
+                                        <span>
+                                            <img :src="useAssets('assets/viewAll-icon.svg')" alt="viewAll-icon">
+                                        </span>
+                                    </button>
                                 </div>
                             </div>
-                        </router-link>
-                    </div>
-                    <div v-else class="col-12">No, Rlcos Found...</div>
-                </div>
-                <div class="row text-center mt-4" v-if="totalPages > 0">
-                    <div class="col-8">
-                        <span v-if="currentPage === totalPages" class="p-2 float-start" style="font-size: 12px">Showing {{ ((currentPage - 1) * itemsPerPage) + 1 }} to {{ filteredRlcos.length }} of {{ filteredRlcos.length }} Services</span>
-                        <span v-else class="p-2 float-start" style="font-size: 12px">Showing {{ ((currentPage - 1) * itemsPerPage) + 1 }} to {{ ((currentPage - 1) * itemsPerPage) + itemsPerPage }} of {{ filteredRlcos.length }} Services</span>
-                    </div>
-                    <div class="col-4 float-right">
-                        <div class="float-end">
-                            <button class="btn btn-sm btn-outline-info text-primary" @click="prevPage" :disabled="currentPage === 1">Previous</button>
-                            <span class="p-2" style="font-size: 12px">Page {{ currentPage }} of {{ totalPages }}</span>
-                            <button class="btn btn-sm btn-outline-info text-primary" @click="nextPage" :disabled="currentPage === totalPages">Next</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
-                    <div class="col-12">
-                        <hr />
-                    </div>
-                </div>
-                <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
-                    <div class="col-12">
-                        <h3 class="text-blue-color">Visiting a service center</h3>
-                    </div>
-                </div>
-                <div class="row row-cols-1 row-cols-md-3 g-4 mt-1 service-center-ops mb-5">
-                    <div class="col-3">
-                        <div class="card d-block justify-content-between align-items-center p-3">
-                            <a href="javascript:void(0)" class="card-link">
-                                <div class="d-flex align-items-center ">
-                                    <div class="card-body text-center d-flex align-items-left">
-                                        <span class="card-text w-auto">
-                                            Book an Appointment
+
+                            <div class="row mx-0 serviceCenterDiv">
+                                <div class="col-xl-4 col-md-6 mb-3">
+                                    <a href="https://bfc.punjab.gov.pk/" target="_blank" class="d-flex align-items-center justify-content-between px-3 py-2 w-100">
+                                        <span>Find a Facilitation Center</span>
+                                        <span>
+                                            <img :src="useAssets('assets/viewAll-icon.svg')" alt="viewAll-icon">
                                         </span>
-                                    </div>
+                                    </a>
                                 </div>
-                                <div class="card-arrow mt-3">
-                                    <span>
-                                        <img :src="useAssets('arrow.svg')"/>
-                                    </span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="card d-block justify-content-between align-items-center p-3">
-                            <a href="javascript:void(0)" class="card-link">
-                                <div class="d-flex align-items-center ">
-                                    <div class="card-body text-center d-flex align-items-left">
-                                        <span class="card-text w-auto">
-                                             Change or Cancel a Booking
+
+                                <div class="col-xl-4 col-md-6 mb-3">
+                                    <a href="https://bfc.punjab.gov.pk/#our_locations" target="_blank" class="d-flex align-items-center justify-content-between px-3 py-2 w-100">
+                                        <span>Our Location</span>
+                                        <span>
+                                            <img :src="useAssets('assets/viewAll-icon.svg')" alt="viewAll-icon">
                                         </span>
-                                    </div>
+                                    </a>
                                 </div>
-                                <div class="card-arrow mt-3">
-                                    <span>
-                                        <img :src="useAssets('arrow.svg')"/>
-                                    </span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="card d-block justify-content-between align-items-center p-3">
-                            <a href="https://bfc.punjab.gov.pk/" target="_blank" class="card-link">
-                                <div class="d-flex align-items-center ">
-                                    <div class="card-body text-center d-flex align-items-left">
-                                        <span class="card-text w-auto">
-                                            Find a Facilitation Center
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="card-arrow mt-3">
-                                    <span>
-                                        <img :src="useAssets('arrow.svg')"/>
-                                    </span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="card d-block justify-content-between align-items-center p-3">
-                            <a href="https://bfc.punjab.gov.pk/#our_locations" target="_blank" class="card-link">
-                                <div class="d-flex align-items-center ">
-                                    <div class="card-body text-center d-flex align-items-left">
-                                        <span class="card-text w-auto">
-                                            Our Locations
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="card-arrow mt-3">
-                                    <span>
-                                        <img :src="useAssets('arrow.svg')"/>
-                                    </span>
-                                </div>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="footer-section p-4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h4 class="text-blue-two fw-bold mb-4">Was the information on this page useful? <span class="thumbs-icon"><i class="fa fa-thumbs-up"></i></span></h4>
-                            <p class="text-blue-two underline">If you need a response, <span class="text-blue-color">send an enquery</span>  insted.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
 </template>
 

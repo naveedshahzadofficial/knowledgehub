@@ -9,6 +9,8 @@ import Services from "@/views/Services.vue";
 import AboutUs from "@/views/AboutUs.vue";
 import ContactUs from "@/views/ContactUs.vue";
 import ServiceDetail from "@/views/ServiceDetail.vue";
+import Connectivity from "@/views/Connectivity.vue";
+import Investment from "../views/Investment.vue";
 
 export const router = createRouter({
     history: createWebHistory('/'),
@@ -37,12 +39,21 @@ export const router = createRouter({
             path: "/services/:id?/:id2?",
             name: "services",
             component: Services,
+            children:
+            [
+                {
+                    path: "service-detail/:rlco_id",
+                    name: "service-detail",
+                    component: ServiceDetail,
+                    props: true,
+                },
+            ]
         },
-        {
-            path: "/service-detail/:id",
-            name: "service-detail",
-            component: ServiceDetail,
-        },
+        // {
+        //     path: "/service-detail/:id",
+        //     name: "service-detail",
+        //     component: ServiceDetail,
+        // },
         {
             path: "/about-us",
             name: "about-us",
@@ -75,6 +86,16 @@ export const router = createRouter({
             path: "/rlco/detail/:id",
             name: "rlcos.show",
             component: Detail,
+        },
+        {
+            path: "/connectivity",
+            name: "connectivity",
+            component: Connectivity,
+        },
+        {
+            path: "/investment",
+            name: "investment",
+            component: Investment,
         },
     ],
 });

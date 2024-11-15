@@ -20,16 +20,24 @@ export default {
     mounted() {
         this.loadRlcoDetail();
     },
+    watch: {
+        '$route.params.rlco_id': {
+            immediate: true,
+            handler(newId) {
+                this.loadRlcoDetail();
+            },
+        },
+    },
     methods: {
         loadRlcoDetail: function(){
             this.loading = true;
-            axios.get(`rlco-detail/${this.$route.params.id}`).then(response => {
+            axios.get(`rlco-detail/${this.$route.params.rlco_id}`).then(response => {
                 this.rlco_detail = response.data.rlco_detail;
                 this.loading = false;
             }).catch(error => {
                 this.loading = false;
             })
-        }
+        },
     }
 
 }
