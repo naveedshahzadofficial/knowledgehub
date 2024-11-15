@@ -20,6 +20,14 @@ export default {
             searchTerm: '',
         }
     },
+    watch: {
+        // Watch the searchedRlcos computed property
+        filteredRlcos(newVal) {
+            if (newVal.length > 0) {
+                this.navigateToFirstSearchedRlco(newVal[0].id);
+            }
+        }
+    },
     methods: {
         useAssets,
         loadActivities: function () {
@@ -82,6 +90,13 @@ export default {
                 this.currentPage--;
             }
         },
+        navigateToFirstSearchedRlco(firstRlcoId) {
+            // Navigate to the first RLCO's service detail
+            this.$router.push({
+                name: 'service-detail',
+                params: { rlco_id: firstRlcoId }
+            });
+        }
     },
     mounted() {
         this.loadActivities();
