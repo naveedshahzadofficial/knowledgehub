@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
         <nav id="eBiz-landingNavbar" class="navbar navbar-expand-lg px-3 position-fixed me-4 mt-3 z-3">
-            <router-link class="navbar-brand bg-transparent" :to="{ name: 'home' }">
+            <router-link class="navbar-brand bg-transparent" :to="{ name: 'home', hash: '#homeStartPage' }" @click.native="scrollToHash('homeStartPage')">
                 <img :src="useAssets('assets/dash-logo.svg')" alt="eBiz Logo" class="img-fluid">
             </router-link>
             <button class="navbar-toggler border-0 custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">

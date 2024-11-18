@@ -52,7 +52,7 @@ export default {
     <main>
         <div data-bs-spy="scroll" data-bs-target="#eBiz-landingNavbar" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="content" tabindex="0">
             <header class="mb-5">
-                <div class="container-fluid px-4">
+                <div class="container-fluid px-4" id="homeStartPage">
                     <div class="row align-items-center">
                         <div class="col-lg-6">
                             <h1 class="mb-4">Your gateway to seamless
