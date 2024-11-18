@@ -18,6 +18,7 @@ export default {
             currentPage: 1,
             itemsPerPage: 12, // Define how many items per page
             searchTerm: '',
+            noRlcoMessage: '',
         }
     },
     watch: {
@@ -25,6 +26,7 @@ export default {
         filteredRlcos(newVal) {
             if (newVal.length > 0) {
                 this.navigateToFirstSearchedRlco(newVal[0].id);
+                this.scrollToRlcoPosition('pageStartServices');
             }
         }
     },
@@ -61,9 +63,9 @@ export default {
                             params: {rlco_id: firstRlcoId}
                         });
                     }
-                /*if(!this.is_first_landing || this.$route.params.id || this.$route.params.id2)
-                 this.scrollToRlco();
-                this.is_first_landing = false;*/
+                // if(!this.is_first_landing || this.$route.params.id || this.$route.params.id2)
+                //  this.scrollToRlco();
+                // this.is_first_landing = false;
             })
         },
         scrollToRlco() {
@@ -95,6 +97,14 @@ export default {
             this.$router.push({
                 name: 'service-detail',
                 params: { rlco_id: firstRlcoId }
+            });
+        },
+        scrollToRlcoPosition(rlcoPosition) {
+            this.$nextTick(() => {
+                const element = document.getElementById(`${rlcoPosition}`);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
             });
         }
     },
@@ -131,12 +141,15 @@ export default {
             });
         },
         filteredRlcos: function () {
-            return this.filteredCommonRlcos.filter(rlco => {
+            const filtered = this.filteredCommonRlcos.filter(rlco => {
                 if (!this.rlco_id) {
                     return true;
                 }
-                return  this.rlco_id ? rlco.id === this.rlco_id : true;
+                return rlco.id === this.rlco_id;
             });
+            // Update the message if no RLCO is found
+            this.noRlcoMessage = filtered.length === 0 ? 'No RLCO Found' : '';
+            return filtered;
         },
         searchedRlcos() {
             return this.filteredRlcos.filter(rlco => {
@@ -207,7 +220,7 @@ export default {
             </div>
         </header>
 
-        <div class="lowerHeaderDiv px-4 d-flex align-items-center mb-5">
+        <div id="pageStartServices" class="lowerHeaderDiv px-4 d-flex align-items-center mb-5">
             <p class="mb-0">Select sectors from the drop-down list and utilize advanced filters to efficiently search for your desired industry.</p>
         </div>
 
@@ -274,7 +287,7 @@ export default {
                 </div>
             </div>
 
-            <div class="row servicesPageData mb-3" ref="rlco_position">
+            <div class="row servicesPageData mb-3" id="servicesPageData" ref="rlco_position">
                 <div class="col-lg-3 mb-lg-0 mb-4">
                     <div class="card shadow-none">
                         <div class="card-header bg-transparent border-0 p-3 pb-0">
@@ -289,7 +302,7 @@ export default {
                         <div class="card-body px-0 service_sidebar" ref="service_sidebar">
                             <ul class="nav nav-tabs flex-lg-column border-0 flex-row" id="eBizServicesTab1" v-for="rlco in searchedRlcos" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <router-link :to="{ name: 'service-detail', params: { rlco_id: rlco.id }, hash: '#eBizServicesTab1Content'}" class="nav-link px-2 py-3 w-100" aria-selected="true">
+                                    <router-link :to="{ name: 'service-detail', params: { rlco_id: rlco.id }, hash: '#pageStartServices'}" class="nav-link px-2 py-3 w-100" aria-selected="true">
                                         <div class="d-flex align-items center justify-content-between">
                                             <div class="d-flex align-items-start">
                                                 <img :src="useAssets('assets/searched-service-icon.svg')" alt="department Icon" class="img-fluid" width="50" height="50">
@@ -313,7 +326,12 @@ export default {
                     <div class="card shadow-none mb-4">
                         <div class="card-body">
                             <div class="tab-content" id="eBizServicesTab1Content">
-                                <router-view></router-view>
+                                <div v-if="noRlcoMessage" class="mt-3">
+                                    {{ noRlcoMessage }}
+                                </div>
+                                <div v-else>
+                                    <router-view></router-view>
+                                </div>
                             </div>
                         </div>
                     </div>

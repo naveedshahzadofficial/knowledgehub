@@ -15,6 +15,10 @@ import Investment from "../views/Investment.vue";
 export const router = createRouter({
     history: createWebHistory('/'),
     scrollBehavior(to, from, savedPosition) {
+        if (to.name === 'service-detail') {
+            // Disable scrolling for 'service-detail'
+            return false;
+        }
         if (savedPosition) {
             return savedPosition
         } else if (to.hash) {
