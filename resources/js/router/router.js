@@ -17,12 +17,18 @@ export const router = createRouter({
     scrollBehavior(to, from, savedPosition) {
         if (to.name === 'service-detail') {
             // Disable scrolling for 'service-detail'
+            if (to.hash) {
+                return { selector: to.hash , top:600};
+            }
+            return false;
+        }
+        if (to.name === 'home') {
+            // Disable scrolling for 'home'
             return false;
         }
         if (savedPosition) {
             return savedPosition
         } else if (to.hash) {
-            // If the route has a hash (e.g. #section1), scroll to that element
             return { selector: to.hash, top:100 };
         }  else {
             return new Promise((resolve, reject) => {

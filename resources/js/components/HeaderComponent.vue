@@ -34,17 +34,18 @@
                         </router-link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#scrollspyHeading4">
+                        <router-link class="nav-link bg-transparent" :to="{ name: 'home', hash: '#scrollspyHeading4' }" @click.native="scrollToHash('scrollspyHeading4')">
                             <span>
                                 <img :src="useAssets('assets/investments-icon.svg')" alt="Navbar Icons" class="img-fluid">
                             </span> Investments
-                        </a>
+                        </router-link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#scrollspyHeading5">
+                        <router-link class="nav-link bg-transparent" :to="{ name: 'home', hash: '#scrollspyHeading5' }" @click.native="scrollToHash('scrollspyHeading5')">
                             <span>
                                 <img :src="useAssets('assets/contact-icon.svg')" alt="Navbar Icons" class="img-fluid">
-                            </span> Contact us</a>
+                            </span> Contact us
+                            </router-link>
                     </li>
                 </ul>
                 <a target="_blank" :href="apply_ebiz_url" class="text-decoration-none eBizPortalBtn d-inline-flex align-items-center justify-content-center ps-3 pe-2">
@@ -66,11 +67,17 @@ export default {
     methods: {
         useAssets,
         scrollToHash(id) {
-            // Check if already on the home page
+            // Helper function to adjust scroll position to the top 5%
+            const scrollToTop7Percent = (element) => {
+                const topOffset = element.getBoundingClientRect().top + window.scrollY; // Get element's position relative to the viewport
+                const adjustment = window.innerHeight * 0.07; // Calculate 7% of the viewport height
+                window.scrollTo({ top: topOffset - adjustment, behavior: 'smooth' });
+            };
+
             if (this.$route.name === 'home') {
                 const element = document.getElementById(id);
                 if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
+                    scrollToTop7Percent(element);
                 }
             } else {
                 // Redirect to home and scroll after navigation
@@ -78,12 +85,12 @@ export default {
                     this.$nextTick(() => {
                         const element = document.getElementById(id);
                         if (element) {
-                            element.scrollIntoView({ behavior: 'smooth' });
+                            scrollToTop7Percent(element);
                         }
                     });
                 });
             }
-        },
+        }
     },
     props: {
         totalFavorite: 0,
