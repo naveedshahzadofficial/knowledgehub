@@ -195,7 +195,7 @@ export default {
                                 <div class="card">
                                     <img :src="useAssets('assets/information-img.svg')" class="comprehensiveBusinessImg img-fluid" alt="Business Img">
                                     <div class="card-body py-4">
-                                        <h6 class="card-title mb-0 py-2">Information & Commination</h6>
+                                        <h6 class="card-title mb-0 py-2">Information & Communication</h6>
                                     </div>
                                 </div>
                             </a>

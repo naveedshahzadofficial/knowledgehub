@@ -40,7 +40,9 @@
                                                 <p class="mb-0 text-start d-flex">
                                                     <span>Website :</span>
                                                     <span class="ms-2">
+                                                        <a href="https://pbit.gop.pk/" target="_blank" class="text-decoration-none">
                                                         https://pbit.gop.pk/
+                                                        </a>
                                                     </span>
                                                 </p>
                                             </div>
@@ -73,7 +75,9 @@
                                                 <p class="mb-0 text-start d-flex">
                                                     <span>Website :</span>
                                                     <span class="ms-2">
+                                                        <a href="https://psic.gop.pk/index.html" target="_blank" class="text-decoration-none">
                                                         https://psic.gop.pk/index.html
+                                                        </a>
                                                     </span>
                                                 </p>
                                             </div>
@@ -106,7 +110,9 @@
                                                 <p class="mb-0 text-start d-flex">
                                                     <span>Website :</span>
                                                     <span class="ms-2">
+                                                        <a href="https://www.pie.com.pk/" target="_blank" class="text-decoration-none">
                                                        https://www.pie.com.pk/
+                                                        </a>
                                                     </span>
                                                 </p>
                                             </div>
@@ -172,7 +178,9 @@
                                                 <p class="mb-0 text-start d-flex">
                                                     <span>Website :</span>
                                                     <span class="ms-2">
+                                                        <a href="https://www.lcci.com.pk/" target="_blank" class="text-decoration-none">
                                                        https://www.lcci.com.pk/
+                                                        </a>
                                                     </span>
                                                 </p>
                                             </div>
@@ -205,7 +213,9 @@
                                                 <p class="mb-0 text-start d-flex">
                                                     <span>Website :</span>
                                                     <span class="ms-2">
+                                                        <a href="https://www.agripunjab.gov.pk/" target="_blank" class="text-decoration-none">
                                                        https://www.agripunjab.gov.pk/
+                                                        </a>
                                                     </span>
                                                 </p>
                                             </div>
@@ -238,7 +248,9 @@
                                                 <p class="mb-0 text-start d-flex">
                                                     <span>Website :</span>
                                                     <span class="ms-2">
+                                                        <a href="https://parb.agripunjab.gov.pk/" target="_blank" class="text-decoration-none">
                                                        https://parb.agripunjab.gov.pk/
+                                                        </a>
                                                     </span>
                                                 </p>
                                             </div>
@@ -271,7 +283,9 @@
                                                 <p class="mb-0 text-start d-flex">
                                                     <span>Website :</span>
                                                     <span class="ms-2">
+                                                        <a href="https://invest.gov.pk/" target="_blank" class="text-decoration-none">
                                                       https://invest.gov.pk/
+                                                        </a>
                                                     </span>
                                                 </p>
                                             </div>
@@ -304,7 +318,9 @@
                                                 <p class="mb-0 text-start d-flex">
                                                     <span>Website :</span>
                                                     <span class="ms-2">
-                                                        Website:   https://smeda.org/
+                                                        <a href="https://smeda.org/" target="_blank" class="text-decoration-none">
+                                                        https://smeda.org/
+                                                        </a>
                                                     </span>
                                                 </p>
                                             </div>
@@ -337,7 +353,9 @@
                                                 <p class="mb-0 text-start d-flex">
                                                     <span>Website :</span>
                                                     <span class="ms-2">
+                                                        <a href="https://epza.gov.pk/" target="_blank" class="text-decoration-none">
                                                         https://epza.gov.pk/
+                                                        </a>
                                                     </span>
                                                 </p>
                                             </div>
@@ -370,7 +388,9 @@
                                                 <p class="mb-0 text-start d-flex">
                                                     <span>Website :</span>
                                                     <span class="ms-2">
+                                                        <a href="https://www.lgcc.org.pk/abstract projects/" target="_blank" class="text-decoration-none">
                                                         https://www.lgcc.org.pk/abstract projects/
+                                                        </a>
                                                     </span>
                                                 </p>
                                             </div>
@@ -403,7 +423,9 @@
                                                 <p class="mb-0 text-start d-flex">
                                                     <span>Website :</span>
                                                     <span class="ms-2">
+                                                        <a href="https://www.pbc.org.pk/" target="_blank" class="text-decoration-none">
                                                         https://www.pbc.org.pk/
+                                                        </a>
                                                     </span>
                                                 </p>
                                             </div>
@@ -436,7 +458,9 @@
                                                 <p class="mb-0 text-start d-flex">
                                                     <span>Website :</span>
                                                     <span class="ms-2">
+                                                        <a href="https://fpcci.org.pk/" target="_blank" class="text-decoration-none">
                                                        https://fpcci.org.pk/
+                                                        </a>
                                                     </span>
                                                 </p>
                                             </div>
@@ -469,7 +493,9 @@
                                                 <p class="mb-0 text-start d-flex">
                                                     <span>Website :</span>
                                                     <span class="ms-2">
+                                                        <a href="https://pac.com.pk/about-us/" target="_blank" class="text-decoration-none">
                                                        https://pac.com.pk/about-us/
+                                                        </a>
                                                     </span>
                                                 </p>
                                             </div>

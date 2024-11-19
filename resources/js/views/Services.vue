@@ -270,7 +270,7 @@ export default {
                             <img :src="useAssets('assets/rented-icon.svg')" alt="rented-icon" class="img-fluid">
                         </span>
                         <span>
-                            Rented
+                            Rented / Lease
                         </span>
                     </button>
                 </div>
