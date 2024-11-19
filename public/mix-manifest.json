@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
     "/js/app.js": "/js/app.js?id=6a78076f15fc52bed5f462df2b63beff",
+=======
+    "/js/app.js": "/js/app.js?id=e634ad6426f9ed08c9b2eb30a0df8f7f",
+>>>>>>> 90abb8866921d8154d68276b670f782e49c80ee8
     "/fonts/poppins-bold.woff": "/fonts/poppins-bold.woff?id=05551343c5acd525f596fa06bc0af890",
     "/fonts/poppins-bold.woff2": "/fonts/poppins-bold.woff2?id=92d44fce9d087075e431198f9c8112db",
     "/fonts/poppins-light-webfont.woff": "/fonts/poppins-light-webfont.woff?id=8a564dea126f1e959d61ba84bb810bdd",
