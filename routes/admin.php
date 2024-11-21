@@ -29,7 +29,10 @@ Route::get('/login', [Auth\LoginController::class, 'showLoginForm'])->name('logi
         Route::get('rlcos/{rlco}/sectors-mapping', [Admin\RlcoController::class, 'sectors_mapping'])->name('rlocs.sectors-mapping');
         Route::put('rlcos/{rlco}/sectors-mapping', [Admin\RlcoController::class, 'update_sectors_mapping'])->name('rlcos.sectors-mapping.update');
         Route::resource('rlcos', Admin\RlcoController::class);
-        Route::resource('rlcos.rlco-variable-fees', Admin\RlcoVariableFeeController::class);
+        Route::resource('rlcos.rlco-fee-types', Admin\RlcoFeeTypeController::class);
+        Route::resource('rlcos.rlco-fee-types.rlco-fee-rules', Admin\RlcoFeeRuleController::class);
+
+        Route::resource('rlcos.rlco-fee-types.rlco-fee-rules.rlco-user-inputs', Admin\RlcoUserInputController::class);
 
         Route::resource('rlcos.account-info', Admin\AccountInfoController::class);
 

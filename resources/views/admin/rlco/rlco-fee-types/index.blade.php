@@ -11,7 +11,7 @@
                     </div>
                     <div class="card-toolbar">
                         <!--begin::Button-->
-                        <a href="{{ route('admin.rlcos.rlco-variable-fees.create', $rlco) }}" class="btn btn-custom-color font-weight-bolder">
+                        <a href="{{ route('admin.rlcos.rlco-fee-types.create', $rlco) }}" class="btn btn-custom-color font-weight-bolder">
 											<span class="svg-icon svg-icon-white svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Code\Plus.svg--><svg
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -24,7 +24,7 @@
             fill="#000000"/>
     </g>
 </svg><!--end::Svg Icon--></span>
-                            New Variable Fee</a>
+                            New Variable Fee Rule</a>
                         <!--end::Button-->
                     </div>
                 </div>
@@ -35,12 +35,11 @@
                     <table class="table table-bordered table-checkable" id="my_datatable">
                         <thead>
                         <tr>
-                            <th>Variable Fee ID</th>
+                            <th>Variable Fee Rule ID</th>
                             <th>Sr. No.</th>
-                            <th>Title</th>
-                            <th class="text-center">Unit</th>
-                            <th class="text-center">Unit Quantity</th>
-                            <th>Price</th>
+                            <th>Name</th>
+                            <th class="text-center">Description</th>
+                            <th class="text-center">Calculation period</th>
                             <th>Order</th>
                             <th>Status</th>
                             <th style="width: 120px;" class="text-center">Action</th>
@@ -68,16 +67,15 @@
                 serverSide: true,
                 searching: false,
                 ajax: {
-                    url: '{{ route('admin.rlcos.rlco-variable-fees.index', $rlco) }}',
+                    url: '{{ route('admin.rlcos.rlco-fee-types.index', $rlco) }}',
                     type: "GET"
                 },
                 columns: [
                     {data: 'id', searchable: false, visible: false, printable: false},
                     {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
-                    {data: 'title', name: 'title'},
-                    {data: 'unit', name: 'unit', class:'text-center'},
-                    {data: 'unit_quantity', name: 'unit_quantity', class:'text-center'},
-                    {data: 'price', name: 'price'},
+                    {data: 'name', name: 'name'},
+                    {data: 'description', name: 'description', class:'text-center'},
+                    {data: 'calculation_period', name: 'calculation_period', class:'text-center'},
                     {data: 'order', name: 'order'},
                     {data: 'status', name: 'field_status'},
                     {data: 'action', name: 'action', orderable: false, searchable: false, class:'text-center'},

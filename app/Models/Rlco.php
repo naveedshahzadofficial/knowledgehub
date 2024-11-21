@@ -110,8 +110,8 @@ class Rlco extends Model
         return $this->belongsToMany(Form::class);
     }
 
-    public function rlcoVariableFees()
+    public function rlcoFeeTypes()
     {
-        return $this->hasMany(RlcoVariableFee::class);
+        return $this->hasMany(RlcoFeeType::class);
     }
 }
