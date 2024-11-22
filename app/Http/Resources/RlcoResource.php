@@ -72,6 +72,8 @@ class RlcoResource extends JsonResource
             "required_documents" => RequiredDocumentResource::collection($this->whenLoaded('requiredDocuments')), // array
             "business_activities" => BusinessActivityResource::collection($this->whenLoaded('businessActivities')), // array
             "last_updated_date" => $this->last_updated_date,
+            "construction_flag" => $this->construction_flag,
+            "common_flag" => $this->common_flag,
 
         ];
     }

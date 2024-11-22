@@ -19,14 +19,28 @@ export default {
             itemsPerPage: 12, // Define how many items per page
             searchTerm: '',
             noRlcoMessage: '',
+            construction_flag: 0,
+            searchTermConstruction: '',
+            construction_required: '',
+            construction_department_id: '',
+            common_required: '',
+            common_flag: '',
+            searchTermCommon: '',
         }
     },
     watch: {
         // Watch the searchedRlcos computed property
-        filteredRlcos(newVal) {
+        checkWhichFunctionRlcoLoad(newVal) {
             if (newVal.length > 0) {
                 this.navigateToFirstSearchedRlco(newVal[0].id);
                 this.scrollToRlcoPosition('pageStartServices');
+            }
+        },
+        construction_required(newVal){
+            if(newVal === '0'){
+                this.construction_department_id = '';
+                console.log(this.construction_department_id);
+
             }
         }
     },
@@ -140,6 +154,35 @@ export default {
                 return matchesBusinessActivity && matchesBusinessDepartment;
             });
         },
+        filteredConstructionRlcos: function () {
+            // Get the filteredRlcos IDs or unique identifiers for comparison
+            const filteredRlcosIds = this.filteredRlcos.map(rlco => rlco.id);
+
+            // Filter rlcos with construction_flag === 1 and not in filteredRlcos
+            return this.rlcos
+                .filter(rlco => rlco.construction_flag === 1)
+                .filter(rlco => !filteredRlcosIds.includes(rlco.id))
+                .filter(rlco => rlco.department_id && (!this.construction_department_id || rlco.department_id === this.construction_department_id));
+        },
+        filteredCommonRequiredRlcos: function () {
+            const filteredRlcosIds = this.filteredRlcos.map(rlco => rlco.id);
+            return this.rlcos
+                .filter(rlco => rlco.common_flag === 1)
+                .filter(rlco => !filteredRlcosIds.includes(rlco.id));
+        },
+        checkRlcosFound: function (){
+             return this.filteredConstructionRlcos.length === 0 && this.filteredRlcos.length === 0 && this.filteredCommonRequiredRlcos.length === 0 ? 'No RLCO Found' : '';
+        },
+        filteredDepartments: function () {
+            // Filter rlcos with construction_flag === 1
+            const rlcosWithConstructionFlag = this.rlcos.filter(rlco => rlco.construction_flag === 1);
+
+            // Extract the foreign keys (department IDs) from the filtered rlcos
+            const departmentIdsWithRlcos = rlcosWithConstructionFlag.map(rlco => rlco.department_id);
+
+            // Filter departments that have at least one matching department ID
+            return this.departments.filter(department => departmentIdsWithRlcos.includes(department.id));
+        },
         filteredRlcos: function () {
             const filtered = this.filteredCommonRlcos.filter(rlco => {
                 if (!this.rlco_id) {
@@ -148,7 +191,6 @@ export default {
                 return rlco.id === this.rlco_id;
             });
             // Update the message if no RLCO is found
-            this.noRlcoMessage = filtered.length === 0 ? 'No RLCO Found' : '';
             return filtered;
         },
         searchedRlcos() {
@@ -159,6 +201,36 @@ export default {
                 const term = this.searchTerm.toLowerCase();
                 return rlco.rlco_name.toLowerCase().includes(term);
             });
+        },
+        searchedConstructionRlcos() {
+            return this.filteredConstructionRlcos.filter(rlco => {
+                if (!this.searchTermConstruction) {
+                    return true;
+                }
+                const term = this.searchTermConstruction.toLowerCase();
+                return rlco.rlco_name.toLowerCase().includes(term);
+            });
+        },
+        searchedCommonRequiredRlcos() {
+            return this.filteredCommonRequiredRlcos.filter(rlco => {
+                if (!this.searchTermCommon) {
+                    return true;
+                }
+                const term = this.searchTermCommon.toLowerCase();
+                return rlco.rlco_name.toLowerCase().includes(term);
+            });
+        },
+        checkWhichFunctionRlcoLoad(){
+            if (this.filteredRlcos.length > 0) {
+               return this.filteredRlcos;
+            }
+            if (this.filteredConstructionRlcos.length > 0) {
+                return this.filteredConstructionRlcos;
+            }
+            if (this.filteredCommonRequiredRlcos.length > 0) {
+                return this.filteredCommonRequiredRlcos;
+            }
+            return null;
         },
         totalPages() {
             return Math.ceil(this.filteredRlcos.length / this.itemsPerPage);
@@ -203,7 +275,7 @@ export default {
     background-color: #fff;
 }
 .service_sidebar {
-    max-height: 250vh; /* Limits the height of the sidebar */
+    max-height: 214vh; /* Limits the height of the sidebar */
     overflow-y: auto; /* Enables vertical scrolling */
 }
 </style>
@@ -235,7 +307,7 @@ export default {
                     </v-select>
                 </div>
 
-                <div class="col-md-5 mb-md-0 mb-3">
+                <div class="col-md-5 mb-md-0">
                     <label class="form-label">Business</label>
                     <v-select v-model="business_activity_id" :options="filteredBusinessActivities"
                               :reduce="sector => sector.id" label="easy_class_name"
@@ -243,47 +315,48 @@ export default {
                     </v-select>
                 </div>
 
-                <div class="col-12 my-4">
-                    <label class="form-label mb-0">Advance Filters</label>
+                <div class="col-md-5 mb-md-0 mb-3 mt-3">
+                    <label class="form-label">Is Construction Required?</label>
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="constructionYes">
+                                <input class="form-check-input" type="radio" v-model="construction_required"
+                                       id="constructionYes" value="1">
+                                <span>Yes</span></label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="constructionNo">
+                                <input class="form-check-input" type="radio" v-model="construction_required"
+                                       id="constructionNo" value="0">
+                                <span>No</span></label>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="col-md-5 mb-md-0 mt-3" v-if="construction_required == 1">
+                    <label class="form-label">Issuance Authority</label>
+                    <v-select v-model="construction_department_id" :options="filteredDepartments"
+                              :reduce="sector => sector.id" label="department_name"
+                              placeholder="Issuance Authority" class="vSelectClass form-select" >
+                    </v-select>
+                </div>
+
+                <div class="col-md-5 mb-md-0 mb-3 mt-3">
+                    <label class="form-label">Common Required?</label>
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="commonRequired">
+                                <input class="form-check-input" type="checkbox" v-model="common_required"
+                                       id="commonRequired" value="1" >
+                                <span>Yes</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 my-4"></div>
 
                 <div class="col-12">
                     <div class="dotted-line mb-3"></div>
-                </div>
-            </div>
-
-            <div class="row filterSerivcesDiv1 mb-4">
-                <div class="col-lg-3 col-sm-4 mb-sm-0 mb-3">
-                    <button class="d-flex align-items-center w-100 px-3">
-                        <span class="me-2">
-                            <img :src="useAssets('assets/owned-icon.svg')" alt="owned-icon" class="img-fluid">
-                        </span>
-                        <span>
-                            Owned
-                        </span>
-                    </button>
-                </div>
-
-                <div class="col-lg-3 col-sm-4 mb-sm-0 mb-3">
-                    <button class="d-flex align-items-center w-100 px-3">
-                        <span class="me-2">
-                            <img :src="useAssets('assets/rented-icon.svg')" alt="rented-icon" class="img-fluid">
-                        </span>
-                        <span>
-                            Rented / Lease
-                        </span>
-                    </button>
-                </div>
-
-                <div class="col-lg-3 col-sm-4 mb-sm-0 mb-3">
-                    <button class="d-flex align-items-center w-100 px-3">
-                        <span class="me-2">
-                            <img :src="useAssets('assets/allServices-icon.svg')" alt="allServices-icon" class="img-fluid">
-                        </span>
-                        <span>
-                            All Services
-                        </span>
-                    </button>
                 </div>
             </div>
 
@@ -291,7 +364,7 @@ export default {
                 <div class="col-lg-3 mb-lg-0 mb-4">
                     <div class="card shadow-none">
                         <div class="card-header bg-transparent border-0 p-3 pb-0">
-                            <h5 class="card-title mb-2">Services</h5>
+                            <h5 class="card-title mb-2">Services ({{ searchedRlcos.length }})</h5>
                             <div class="input-group mb-3">
                                 <span class="input-group-text border-0 bg-transparent" id="basic-addon1">
                                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -300,7 +373,70 @@ export default {
                             </div>
                         </div>
                         <div class="card-body px-0 service_sidebar" ref="service_sidebar">
-                            <ul class="nav nav-tabs flex-lg-column border-0 flex-row" id="eBizServicesTab1" v-for="rlco in searchedRlcos" role="tablist">
+                            <ul class="nav nav-tabs flex-lg-column border-0 flex-row" id="eBizServicesTab1" v-for="rlco in searchedRlcos" role="tablist" :key="rlco.id">
+                                <li class="nav-item" role="presentation">
+                                    <router-link :to="{ name: 'service-detail', params: { rlco_id: rlco.id }, hash: '#pageStartServices'}" class="nav-link px-2 py-3 w-100" aria-selected="true">
+                                        <div class="d-flex align-items center justify-content-between">
+                                            <div class="d-flex align-items-start">
+                                                <img :src="useAssets('assets/searched-service-icon.svg')" alt="department Icon" class="img-fluid" width="50" height="50">
+                                                <div class="searchedServiceData text-start ms-2">
+                                                    <h6 class="mb-1">{{ rlco.rlco_name }}</h6>
+                                                    <p class="mb-0 d-inline-block px-4 py-0">Provincial</p>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <img :src="useAssets('assets/viewAll-icon.svg')" alt="">
+                                            </div>
+                                        </div>
+                                    </router-link>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="card shadow-none" style="margin-top: 20px !important;">
+                        <div class="card-header bg-transparent border-0 p-3 pb-0 pt-20">
+                            <h5 class="card-title mb-2">Construction Required Services ({{ searchedConstructionRlcos.length }})</h5>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text border-0 bg-transparent" id="basic-addon1">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </span>
+                                <input type="text" class="form-control border-0 bg-transparent" v-model="searchTermConstruction" placeholder="Search Construction Required Services" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="card-body px-0 service_sidebar" ref="service_sidebar">
+                            <ul class="nav nav-tabs flex-lg-column border-0 flex-row" id="eBizServicesTab2" v-for="rlco in searchedConstructionRlcos" role="tablist" :key="rlco.id">
+                                <li class="nav-item" role="presentation">
+                                    <router-link :to="{ name: 'service-detail', params: { rlco_id: rlco.id }, hash: '#pageStartServices'}" class="nav-link px-2 py-3 w-100" aria-selected="true">
+                                        <div class="d-flex align-items center justify-content-between">
+                                            <div class="d-flex align-items-start">
+                                                <img :src="useAssets('assets/searched-service-icon.svg')" alt="department Icon" class="img-fluid" width="50" height="50">
+                                                <div class="searchedServiceData text-start ms-2">
+                                                    <h6 class="mb-1">{{ rlco.rlco_name }}</h6>
+                                                    <p class="mb-0 d-inline-block px-4 py-0">Provincial</p>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <img :src="useAssets('assets/viewAll-icon.svg')" alt="">
+                                            </div>
+                                        </div>
+                                    </router-link>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card shadow-none" style="margin-top: 20px !important;">
+                        <div class="card-header bg-transparent border-0 p-3 pb-0 pt-20">
+                            <h5 class="card-title mb-2">Common Required Services ({{ searchedCommonRequiredRlcos.length }})</h5>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text border-0 bg-transparent" id="basic-addon1">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </span>
+                                <input type="text" class="form-control border-0 bg-transparent" v-model="searchTermCommon" placeholder="Search Common Required Services" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="card-body px-0 service_sidebar" ref="service_sidebar">
+                            <ul class="nav nav-tabs flex-lg-column border-0 flex-row" id="eBizServicesTab3" v-for="rlco in searchedCommonRequiredRlcos" role="tablist" :key="rlco.id">
                                 <li class="nav-item" role="presentation">
                                     <router-link :to="{ name: 'service-detail', params: { rlco_id: rlco.id }, hash: '#pageStartServices'}" class="nav-link px-2 py-3 w-100" aria-selected="true">
                                         <div class="d-flex align-items center justify-content-between">
@@ -326,8 +462,8 @@ export default {
                     <div class="card shadow-none mb-4">
                         <div class="card-body">
                             <div class="tab-content" id="eBizServicesTab1Content">
-                                <div v-if="noRlcoMessage" class="mt-3">
-                                    {{ noRlcoMessage }}
+                                <div v-if="checkRlcosFound" class="mt-3">
+                                    {{ checkRlcosFound }}
                                 </div>
                                 <div v-else>
                                     <router-view></router-view>
