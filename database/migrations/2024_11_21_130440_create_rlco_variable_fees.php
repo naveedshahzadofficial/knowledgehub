@@ -24,9 +24,9 @@ class CreateRlcoVariableFees extends Migration
             $table->foreignId('rlco_fee_type_id')->constrained('rlco_fee_types')->onDelete('cascade');
             $table->string('category'); // Category of the RLCO fee (e.g., Streamer Permission)
             $table->enum('calculation_type', ['rate_based', 'fixed_fee']); // Type of calculation
-            $table->decimal('rate', 10, 2)->nullable(); // Rate per unit (e.g., Rs. 50 per stream)
-            $table->decimal('minimum_fee', 10, 2)->nullable(); // Minimum fee (if applicable)
-            $table->decimal('fixed_fee', 10, 2)->nullable(); // Fixed fee (if applicable)
+            $table->decimal('rate', 20, 4)->nullable(); // Rate per unit (e.g., Rs. 50 per stream)
+            $table->decimal('minimum_fee', 20, 2)->nullable(); // Minimum fee (if applicable)
+            $table->decimal('fixed_fee', 20, 2)->nullable(); // Fixed fee (if applicable)
             $table->string('unit'); // Unit of fee (streams_per_week, polls_per_week)
             $table->timestamps();
         });

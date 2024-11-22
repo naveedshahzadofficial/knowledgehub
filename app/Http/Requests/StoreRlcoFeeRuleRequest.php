@@ -30,6 +30,7 @@ class StoreRlcoFeeRuleRequest extends FormRequest
             'minimum_fee' => 'required|numeric|min:0|max:99999999999.99',  // Up to 11 digits with 2 decimals
             'fixed_fee' => 'nullable|numeric|min:0|max:99999999999.99', // Optional, but valid if provided
             'unit' => 'nullable|max:255',  // Optional field, but if present, max length of 255
+            'percentage' => 'nullable|numeric|min:0|max:100', // Percentage validation
             'order' => 'required|integer|min:0',
             'status' => 'required|boolean',  // Accepts 0 or 1 (true or false)
         ];
@@ -60,6 +61,9 @@ class StoreRlcoFeeRuleRequest extends FormRequest
             'fixed_fee.min' => 'Fixed Fee cannot be less than 0.',
             'fixed_fee.max' => 'Fixed Fee cannot exceed 11 digits and 2 decimal places.',
             'unit.max' => 'Unit cannot exceed 255 characters.',
+            'percentage.numeric' => 'The percentage must be a valid number.',
+            'percentage.min' => 'The percentage cannot be less than 0.',
+            'percentage.max' => 'The percentage cannot exceed 100.',
             'order.required' => 'Order is required.',
             'order.integer' => 'Order must be a valid integer.',
             'order.min' => 'Order cannot be less than 0.',

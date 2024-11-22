@@ -20,5 +20,5 @@ class RlcoFeeRule extends Model
         return $this->belongsTo(RlcoFeeType::class);
     }
 
-    protected $fillable = ['rlco_fee_type_id', 'category', 'calculation_type', 'rate', 'minimum_fee', 'fixed_fee', 'unit', 'order', 'status'];
+    protected $fillable = ['rlco_fee_type_id', 'category', 'calculation_type', 'rate', 'minimum_fee', 'fixed_fee', 'unit', 'order', 'status', 'percentage'];
 }

@@ -79,6 +79,15 @@
                             </div>
                             @enderror
                         </div><!--form-group ends-->
+                        <div class="form-group">
+                            <label for="field_type">Percentage <span class="color-red-700"></span> </label>
+                            <input type="text" class="form-control  @error('percentage') is-invalid @enderror" name="percentage" value="{{ old('percentage',$rlcoFeeRule->percentage) }}" id="percentage"   />
+                            @error('percentage')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div><!--form-group ends-->
 
                         <div class="form-group">
                             <label class="bmd-label-floating">Order <span class="color-red-700">*</span> </label>
@@ -170,6 +179,11 @@
                     unit: {
                         maxlength: 255 // Unit can be nullable and a string
                     },
+                    percentage: {
+                        number: true,
+                        min: 0,
+                        max: 100
+                    },
                     order: {
                         required: true,
                         digits: true, // Ensures only integers
@@ -213,6 +227,11 @@
                     },
                     unit: {
                         maxlength: "Unit cannot exceed 255 characters."
+                    },
+                    percentage: {
+                        number: "The percentage must be a valid number.",
+                        min: "The percentage cannot be less than 0.",
+                        max: "The percentage cannot exceed 100."
                     },
                     order: {
                         required: "Order is required.",
