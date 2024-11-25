@@ -39,7 +39,6 @@ export default {
         construction_required(newVal){
             if(newVal === '0'){
                 this.construction_department_id = '';
-                console.log(this.construction_department_id);
 
             }
         }
@@ -386,7 +385,7 @@ export default {
                         </div>
                     </div>
                     <div class="clearfix"></div>
-                    <div class="card shadow-none" style="margin-top: 20px !important;">
+                    <div class="card shadow-none" v-if="construction_required == 1" style="margin-top: 20px !important;">
                         <div class="card-header bg-transparent border-0 p-3 pb-0 pt-20">
                             <h5 class="card-title mb-2">Construction Required Services ({{ searchedConstructionRlcos.length }})</h5>
                             <div class="input-group mb-3">
@@ -417,7 +416,7 @@ export default {
                             </ul>
                         </div>
                     </div>
-                    <div class="card shadow-none" style="margin-top: 20px !important;">
+                    <div class="card shadow-none" v-if="common_required == 1" style="margin-top: 20px !important;">
                         <div class="card-header bg-transparent border-0 p-3 pb-0 pt-20">
                             <h5 class="card-title mb-2">Common Required Services ({{ searchedCommonRequiredRlcos.length }})</h5>
                             <div class="input-group mb-3">
