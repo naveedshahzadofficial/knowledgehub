@@ -1,9 +1,9 @@
 <template>
-    <footer class="pt-5 pb-3">
-        <div class="container-fluid px-4">
+    <footer class="pt-md-5 pb-3">
+        <div class="container-fluid px-md-5 px-4">
             <div class="row align-items-start mb-5">
-                <div class="col-xl-2 col-sm-4 mb-xxl-0 mb-4 text-xl-center">
-                    <img :src="useAssets('assets/dash-logo.svg')" alt="eBiz Logo">
+                <div class="col-xl-6 col-sm-4 mb-xxl-0 mb-4 text-start">
+                    <img :src="useAssets('assets/dash-logo1.svg')" alt="eBiz Logo">
                 </div>
 
                 <div class="col-xl-2 col-sm-4 mb-xxl-0 mb-4">
@@ -13,26 +13,6 @@
                         <li class="mb-2">The Sales Suite</li>
                         <li class="mb-2">Support</li>
                         <li class="mb-2">Guide</li>
-                    </ul>
-                </div>
-
-                <div class="col-xl-2 col-sm-4 mb-xxl-0 mb-4">
-                    <h6>Top Features</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2">Ticketing System</li>
-                        <li class="mb-2">Knowledge Base</li>
-                        <li class="mb-2">Community Forums</li>
-                        <li class="mb-2">Help Desk Health</li>
-                    </ul>
-                </div>
-
-                <div class="col-xl-2 col-sm-4 mb-xxl-0 mb-4">
-                    <h6>Resources</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2">Product Support</li>
-                        <li class="mb-2">Request Demo</li>
-                        <li class="mb-2">Library</li>
-                        <li class="mb-2">Healthypower Blog</li>
                     </ul>
                 </div>
 

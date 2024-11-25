@@ -49,502 +49,576 @@ export default {
 }
 </style>
 <template>
-    <main>
-        <div data-bs-spy="scroll" data-bs-target="#eBiz-landingNavbar" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="content" tabindex="0">
-            <header class="mb-5">
-                <div class="container-fluid px-4" id="homeStartPage">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6">
-                            <h1 class="mb-4">Your gateway to seamless
-                                <span class="d-inline-block">Business Solutions</span>
-                            </h1>
-                            <p class="mb-4">Empowering business with efficient, transparent, and accessible services. Discover, apply, and manage all your business needs in one place</p>
-                            <div class="input-group mb-3">
+    <div data-bs-spy="scroll" id="homeStartPage" data-bs-target="#eBiz-landingNavbar" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="content z-2 position-relative" tabindex="0">
+        <header id="scrollspyHeading">
+            <div class="container-fluid px-lg-5 px-4">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 pe-lg-5">
+                        <h6>Driving Business Growth</h6>
+                        <h1 class="mb-3">Your gateway to seamless
+                            <span class="d-inline-block">Business Solutions</span>
+                        </h1>
+                        <p class="mb-4 pe-lg-5 position-relative">Empowering business with efficient, transparent, and accessible services. Discover, apply, and manage all your business needs in one place.
+                            <img :src="useAssets('assets/down-arrow-icon.svg')" alt="arrow icon" class="position-absolute">
+                        </p>
+                        <div class="input-group mb-3 w-75">
                             <span class="input-group-text bg-transparent border-0 ps-3" id="addon-wrapping">
                                 <i class="fa-solid fa-magnifying-glass fs-5"></i>
                             </span>
-                                <v-select v-model="business_activity_id" :options="sectors"
-                                          :reduce="sector => sector.id" label="easy_class_name"
-                                          placeholder="Search Business Type Name" class="form-control border-0 pt-1 bg-transparent ps-0">
-                                </v-select>
-<!--                                <input type="search" class="form-control border-0 bg-transparent ps-0" placeholder="Search your business type……" aria-label="Search" aria-describedby="button-addon2">-->
-                                <button class="btn findBusinessBtn m-2" @click.prevent="search" type="button" id="button-addon2">Find my Business</button>
+                            <v-select v-model="business_activity_id" :options="sectors"
+                                      :reduce="sector => sector.id" label="easy_class_name"
+                                      placeholder="Search Business Type Name" class="form-control border-0 pt-1 bg-transparent ps-0">
+                            </v-select>
+<!--                            <input type="search" class="form-control border-0 bg-transparent ps-0" placeholder="Search your business type……" aria-label="Search" aria-describedby="button-addon2">-->
+                            <button class="btn findBusinessBtn m-2 px-4" @click.prevent="search" type="button" id="button-addon2">Search</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 d-lg-block d-none ps-5">
+                        <img :src="useAssets('assets/landing_page_header_img.png')" alt="Img" class="img-fluid w-100">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="visionSection mb-5">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 ps-lg-0 mb-lg-0 mb-3">
+                        <img :src="useAssets('assets/cm-img.png')" alt="cm Img" class="img-fluid w-100">
+                    </div>
+                    <div class="col-lg-6 pt-lg-5 ps-lg-5">
+                        <h3 class="mb-2">Chief Minister’s vision</h3>
+                        <h4 class="mb-2">Promotes transparency efficiency and a business-friendly environment in Punjab</h4>
+                        <p class="mb-3">The launch of Knowledge Hub is a key step in streamlining business processes and reducing compliance burdens, supporting the Pakistan Regulatory Modernization Initiative.</p>
+                        <img :src="useAssets('assets/cm-signature.svg')" alt="">
+                        <p class="mb-0">CM PUNJAB</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="comprehensiveSolutions py-sm-5 py-4" id="scrollspyHeading1">
+            <div class="container-fluid px-lg-5 px-4">
+                <div class="row mb-4">
+                    <div class="col-12 text-center">
+                        <h2>Comprehensive <span>Business Solutions</span></h2>
+                    </div>
+
+                    <div class="col-lg-6 mx-auto col-12 text-center mb-3">
+                        <p>Dive into eBiz Punjab's extensive resources and opportunities designed to elevate your business, from essential services to strategic investments.</p>
+                    </div>
+
+                    <div class="col-12 mb-1 d-md-flex d-none gap-1 px-sm-5 px-4 justify-content-end">
+                        <div class="card border-0 shadow-none bg-transparent d-xl-block d-none">
+                            <div class="card-body text-start d-flex flex-column justify-content-between">
+                                <p class="mb-4 pe-xxl-4 text-start"></p>
+                                <img src="">
                             </div>
                         </div>
-                        <div class="col-lg-6 d-lg-block d-none">
-                            <img :src="useAssets('assets/landing_page_header_img.svg')" alt="Img" class="img-fluid">
+                        <div class="card border-0 shadow-none bg-transparent d-xl-block d-none">
+                            <div class="card-body text-start d-flex flex-column justify-content-between">
+                                <p class="mb-4 pe-xxl-4 text-start"></p>
+                                <img src="">
+                            </div>
+                        </div>
+                        <div class="card shadow-none">
+                            <div class="card-body text-start d-flex flex-column justify-content-between">
+                                <p class="mb-4 pe-xxl-4 text-start">Agriculture, forestry and fishing</p>
+                                <img :src="useAssets('assets/tractor-img.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
+                            </div>
+                        </div>
+
+                        <div class="card shadow-none">
+                            <div class="card-body text-start d-flex flex-column justify-content-between">
+                                <p class="mb-4 pe-xxl-4 text-start">Manufacturing</p>
+                                <img :src="useAssets('assets/manufacture-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
+                            </div>
+                        </div>
+
+                        <div class="card shadow-none">
+                            <div class="card-body text-start d-flex flex-column justify-content-between">
+                                <p class="mb-4 pe-xxl-4 text-start">Transportation and Storage</p>
+                                <img :src="useAssets('assets/transport-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
+                            </div>
+                        </div>
+
+                        <div class="card shadow-none">
+                            <div class="card-body text-start d-flex flex-column justify-content-between">
+                                <p class="mb-4 pe-xxl-4 text-start">Transportation and Storage</p>
+                                <img :src="useAssets('assets/transport-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
+                            </div>
+                        </div>
+                        <div class="card border-0 shadow-none bg-transparent d-lg-block d-none">
+                            <div class="card-body text-start d-flex flex-column justify-content-between">
+                                <p class="mb-4 pe-xxl-4 text-start"></p>
+                                <img src="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-1 d-lg-flex d-none gap-1 justify-content-xl-between px-sm-5 px-4 flex-xl-nowrap flex-wrap">
+                        <div class="card shadow-none">
+                            <div class="card-body text-start d-flex flex-column justify-content-between">
+                                <p class="mb-4 pe-xxl-4 text-start">Transportation and Storage</p>
+                                <img :src="useAssets('assets/transport-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
+                            </div>
+                        </div>
+
+                        <div class="card shadow-none">
+                            <div class="card-body text-start d-flex flex-column justify-content-between">
+                                <p class="mb-4 pe-xxl-4 text-start">Mining and quarrying</p>
+                                <img :src="useAssets('assets/mining-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
+                            </div>
+                        </div>
+
+                        <div class="card shadow-none">
+                            <div class="card-body text-start d-flex flex-column justify-content-between">
+                                <p class="mb-4 pe-xxl-4 text-start">Education</p>
+                                <img :src="useAssets('assets/education-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
+                            </div>
+                        </div>
+
+                        <div class="card shadow-none">
+                            <div class="card-body text-start d-flex flex-column justify-content-between">
+                                <p class="mb-4 pe-xxl-4 text-start">Education</p>
+                                <img :src="useAssets('assets/education-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
+                            </div>
+                        </div>
+
+                        <div class="card shadow-none">
+                            <div class="card-body text-start d-flex flex-column justify-content-between">
+                                <p class="mb-4 pe-xxl-4 text-start">Transportation and Storage</p>
+                                <img :src="useAssets('assets/transport-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
+                            </div>
+                        </div>
+
+                        <div class="card shadow-none">
+                            <div class="card-body text-start d-flex flex-column justify-content-between">
+                                <p class="mb-4 pe-xxl-4 text-start">Information & Commination</p>
+                                <img :src="useAssets('assets/communication-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
+                            </div>
+                        </div>
+
+                        <div class="card shadow-none">
+                            <div class="card-body text-start d-flex flex-column justify-content-between">
+                                <p class="mb-4 pe-xxl-4 text-start">Information & Commination</p>
+                                <img :src="useAssets('assets/communication-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-1 d-flex gap-1 justify-content-xl-between px-sm-5 px-4 flex-xl-nowrap flex-wrap">
+                        <div class="card shadow-none">
+                            <div class="card-body text-start d-flex flex-column justify-content-between">
+                                <p class="mb-4 pe-xxl-4 text-start">Transportation and Storage</p>
+                                <img :src="useAssets('assets/transport-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
+                            </div>
+                        </div>
+
+                        <div class="card shadow-none">
+                            <div class="card-body text-start d-flex flex-column justify-content-between">
+                                <p class="mb-4 pe-xxl-4 text-start">Education</p>
+                                <img :src="useAssets('assets/education-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
+                            </div>
+                        </div>
+
+                        <div class="card shadow-none">
+                            <div class="card-body text-start d-flex flex-column justify-content-between">
+                                <p class="mb-4 pe-xxl-4 text-start">Agriculture, forestry and fishing</p>
+                                <img :src="useAssets('assets/tractor-img.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
+                            </div>
+                        </div>
+
+                        <div class="card shadow-none d-lg-block d-none">
+                            <div class="card-body text-start d-flex flex-column justify-content-between">
+                                <p class="mb-4 pe-xxl-4 text-start">Manufacturing</p>
+                                <img :src="useAssets('assets/manufacture-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
+                            </div>
+                        </div>
+
+                        <div class="card shadow-none d-lg-block d-none">
+                            <div class="card-body text-start d-flex flex-column justify-content-between">
+                                <p class="mb-4 pe-xxl-4 text-start">Information & Commination</p>
+                                <img :src="useAssets('assets/communication-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
+                            </div>
+                        </div>
+
+                        <a href="#" class="card shadow-none viewAllSectorsBtn text-decoration-none">
+                            <div class="card-body text-start d-flex flex-column justify-content-between">
+                                <p class="mb-4 pe-5 text-start">View all Sectors</p>
+                                <img :src="useAssets('assets/viewAll-icon1.svg')">
+                            </div>
+                        </a>
+
+                        <div class="card shadow-none border-0 bg-transparent d-lg-block d-none">
+                            <div class="card-body text-start d-flex flex-column justify-content-between">
+                                <p class="mb-4 pe-xxl-4 text-start"></p>
+                                <img :src="useAssets('assets/tractor-img.svg')">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </header>
+            </div>
+        </section>
 
-            <section class="comprehensiveSolutions py-5" id="scrollspyHeading1">
-                <div class="container-fluid px-4 pt-sm-5 pt-0">
-                    <div class="row mb-4 pt-sm-5 pt-4">
-                        <div class="col-12 text-center">
-                            <h2>Comprehensive Business Solutions</h2>
-                        </div>
-
-                        <div class="col-md-6 mx-auto col-12 text-center mb-3">
-                            <p>Dive into eBiz Punjab's extensive resources and opportunities designed to elevate your business, from essential services to strategic investments.</p>
-                        </div>
-
-                        <div class="col-md-9 mx-auto col-12 text-center mb-3">
-                            <ul class="comprehensiveSolutionsTabsList p-0 mb-0 d-flex flex-wrap list-unstyled gap-4 align-items-center justify-content-center">
-                                <li class="nav-item">
-                                    <a class="nav-link text-center" href="#scrollspyHeading1">
-                                    <span class="d-block">
-                                        <img :src="useAssets('assets/business-sector-icon.svg')" alt="Navbar Icons" class="img-fluid">
-                                    </span> Business Advisory
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-center" href="#scrollspyHeading2">
-                                    <span class="d-block">
-                                        <img :src="useAssets('assets/business-entities-icon.svg')" alt="Navbar Icons" class="img-fluid">
-                                    </span> Business Essentials
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-center" href="#scrollspyHeading3">
-                                    <span class="d-block">
-                                        <img :src="useAssets('assets/connectivity-icon.svg')" alt="Navbar Icons" class="img-fluid">
-                                    </span> Connectivity
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-center" href="#scrollspyHeading4">
-                                    <span class="d-block">
-                                        <img :src="useAssets('assets/investments-icon.svg')" alt="Navbar Icons" class="img-fluid">
-                                    </span> Investments
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+        <section class="connectivityDiv py-sm-5 py-4" id="scrollspyHeading3">
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-12 text-center">
+                        <h2><span>Connectivity</span> Simplified</h2>
                     </div>
 
-                    <div class="row">
-                        <div class="col-xl-3 col-md-4 col-sm-6 mb-3">
-                            <a href="#" class="text-decoration-none">
-                                <div class="card">
-                                    <img :src="useAssets('assets/agri-img.svg')" class="comprehensiveBusinessImg img-fluid" alt="Business Img">
-                                    <div class="card-body py-4">
-                                        <h6 class="card-title mb-0 py-2">Agriculture, forestry and fishing</h6>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                    <div class="col-md-6 mx-auto col-12 text-center mb-3">
+                        <p>eBiz Punjab simplifies business operations with streamlined services, timely regulatory updates, and exclusive government support.</p>
+                    </div>
+                </div>
+            </div>
 
-                        <div class="col-xl-3 col-md-4 col-sm-6 mb-3">
-                            <a href="#" class="text-decoration-none">
-                                <div class="card">
-                                    <img :src="useAssets('assets/manufacture-img.svg')" class="comprehensiveBusinessImg img-fluid" alt="Business Img">
-                                    <div class="card-body py-4">
-                                        <h6 class="card-title mb-0 py-2">Manufacturing</h6>
-                                    </div>
-                                </div>
-                            </a>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="owl-carousel owl-theme">
+                        <div class="item">
+                            <img :src="useAssets('assets/fpcci-grey-icon.svg')" alt="">
                         </div>
-
-                        <div class="col-xl-3 col-md-4 col-sm-6 mb-3">
-                            <a href="#" class="text-decoration-none">
-                                <div class="card">
-                                    <img :src="useAssets('assets/storage-img.svg')" class="comprehensiveBusinessImg img-fluid" alt="Business Img">
-                                    <div class="card-body py-4">
-                                        <h6 class="card-title mb-0 py-2">Transportation and Storage</h6>
-                                    </div>
-                                </div>
-                            </a>
+                        <div class="item">
+                            <img :src="useAssets('assets/lcci-grey-icon.svg')" alt="">
                         </div>
-
-                        <div class="col-xl-3 col-md-4 col-sm-6 mb-3">
-                            <a href="#" class="text-decoration-none">
-                                <div class="card">
-                                    <img :src="useAssets('assets/education-img.svg')" class="comprehensiveBusinessImg img-fluid" alt="Business Img">
-                                    <div class="card-body py-4">
-                                        <h6 class="card-title mb-0 py-2">Education</h6>
-                                    </div>
-                                </div>
-                            </a>
+                        <div class="item">
+                            <img :src="useAssets('assets/fiedmc-grey-icon.svg')" alt="">
                         </div>
-
-                        <div class="col-xl-3 col-md-4 col-sm-6 mb-3">
-                            <a href="#" class="text-decoration-none">
-                                <div class="card">
-                                    <img :src="useAssets('assets/mining-img.svg')" class="comprehensiveBusinessImg img-fluid" alt="Business Img">
-                                    <div class="card-body py-4">
-                                        <h6 class="card-title mb-0 py-2">Mining and quarrying</h6>
-                                    </div>
-                                </div>
-                            </a>
+                        <div class="item">
+                            <img :src="useAssets('assets/epza-grey-icon.svg')" alt="">
                         </div>
-
-                        <div class="col-xl-3 col-md-4 col-sm-6 mb-3">
-                            <a href="#" class="text-decoration-none">
-                                <div class="card">
-                                    <img :src="useAssets('assets/construction-img.svg')" class="comprehensiveBusinessImg img-fluid" alt="Business Img">
-                                    <div class="card-body py-4">
-                                        <h6 class="card-title mb-0 py-2">Construction</h6>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="col-xl-3 col-md-4 col-sm-6 mb-3">
-                            <a href="#" class="text-decoration-none">
-                                <div class="card">
-                                    <img :src="useAssets('assets/information-img.svg')" class="comprehensiveBusinessImg img-fluid" alt="Business Img">
-                                    <div class="card-body py-4">
-                                        <h6 class="card-title mb-0 py-2">Information & Communication</h6>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="col-xl-3 col-md-4 col-sm-6 mb-3">
-                            <a href="#" class="text-decoration-none">
-                                <div class="card">
-                                    <img :src="useAssets('assets/otherActivities-img.svg')" class="comprehensiveBusinessImg img-fluid" alt="Business Img">
-                                    <div class="card-body py-4">
-                                        <h6 class="card-title mb-0 py-2">Other Service Activities</h6>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="col-12 text-center mt-4">
-                            <a href="#" class="py-2 px-3 viewAllBusinessSolutions d-inline-flex align-items-center justify-content-center text-decoration-none viewAllBtn">
-                                <span>View All</span>
-                                <span>
-                                <img :src="useAssets('assets/viewAll-icon.svg')" alt="arrow Icon">
-                            </span>
-                            </a>
+                        <div class="item">
+                            <img :src="useAssets('assets/piedmc-grey-icon.svg')" alt="">
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section class="businessEssentials py-5" id="scrollspyHeading2">
-                <div class="container-fluid px-4">
-                    <div class="row mb-4">
-                        <div class="col-12 text-center">
-                            <h2>Business Essentials</h2>
-                        </div>
+        <section class="businessEssentials py-sm-5 py-4" id="scrollspyHeading2">
+            <div class="container-fluid px-5">
+                <div class="row mb-4">
+                    <div class="col-12 businessEssentialsBgDiv py-sm-5 py-4">
+                        <div class="container px-md-5">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <h2>Business <span>Essentials</span></h2>
+                                </div>
 
-                        <div class="col-md-6 mx-auto col-12 text-center mb-3">
-                            <p>eBiz Punjab provides streamlined services, regulatory news, and exclusive government support.</p>
-                        </div>
-                    </div>
-                </div>
+                                <div class="col-lg-6 mx-auto col-12 text-center mb-3">
+                                    <p>eBiz Punjab provides streamlined services, regulatory news, and exclusive government support.</p>
+                                </div>
 
-                <div class="container px-5 pb-4">
-                    <div class="row">
-                        <div class="col-lg-6 mb-lg-0 mb-4">
-                            <div class="card border-0 bg-transparent h-100">
-                                <div class="card-body bg-transparent">
-                                    <img :src="useAssets('assets/business-essential-card-img-1.svg')" alt="card img 1" class="img-fluid mb-4">
-                                    <h4 class="mb-4">Apply for New / Renewal of Business Registration</h4>
-                                    <ul class="list-unstyled mb-0">
-                                        <li class="mb-1"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=0#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Sole Proprietorship</a></li>
-                                        <li class="mb-1"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=1#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Association of Persons (Firm)</a></li>
-                                        <li class="mb-1"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=2#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Single Member Company</a></li>
-                                        <li class="mb-1"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=3#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Private Limited Company</a></li>
-                                        <li class="mb-1"> <a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=4#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Public Limited Company</a></li>
-                                        <li> Labour</li>
-                                        <li> Pessi</li>
+                                <div class="row mx-0 mb-3">
+                                    <div class="col-12 mb-3">
+                                        <h4 class="d-flex align-items-center">
+                                            <span class="me-2">Apply now</span>
+                                            <img :src="useAssets('assets/right-arrow-icon.svg')" alt="">
+                                        </h4>
+                                        <h5>New or Renewal of Business Registration</h5>
+                                    </div>
+
+                                    <ul class="list-unstyled d-flex flex-wrap">
+                                        <li class="mb-3 me-5"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=0#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Sole Proprietorship</a></li>
+                                        <li class="mb-3 me-5"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=1#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Association of Persons (Firm)</a></li>
+                                        <li class="mb-3 me-5"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=2#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Single Member Company</a></li>
+                                        <li class="mb-3 me-5"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=3#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Private Limited Company</a></li>
+                                        <li class="mb-3 me-5"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=4#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Public Limited Company</a></li>
+                                        <li class="mb-3 me-5"> Labour</li>
+                                        <li class="mb-3 me-5"> Pessi</li>
+                                    </ul>
+                                </div>
+
+                                <div class="row mx-0">
+                                    <div class="col-12 mb-3">
+                                        <h4 class="d-flex align-items-center">
+                                            <span class="me-2">Requirements</span>
+                                            <img :src="useAssets('assets/right-arrow-icon.svg')" alt="">
+                                        </h4>
+                                        <h5>Registrations, Licenses, Certifications & other Permits (RLCO’s)</h5>
+                                    </div>
+
+                                    <ul class="list-unstyled d-flex flex-wrap">
+                                        <li class="mb-3 me-5"><router-link class="text-decoration-none text-white" :to="{ name: 'services'}" >Explore RLCOs</router-link></li>
+                                        <li class="mb-3 me-5"><a :href="apply_ebiz_url" class="text-decoration-none text-white">Apply RLCOs</a></li>
+                                        <li class="mb-3 me-5"><a :href="apply_ebiz_url" class="text-decoration-none text-white">Track the Progress of Applied RLCOs</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-lg-6 mb-lg-0 mb-4">
-                            <div class="card border-0 bg-transparent h-100">
-                                <div class="card-body bg-transparent">
-                                    <img :src="useAssets('assets/business-essential-card-img-2.svg')" alt="card img 1" class="img-fluid mb-4">
-                                    <h4 class="mb-4">Required Registrations, Licenses, Certifications and other Permits <strong>(RLCOs)</strong></h4>
-                                    <ul class="list-unstyled mb-0">
-                                        <li class="mb-1"><router-link class="text-decoration-none text-white" :to="{ name: 'services'}" >Explore RLCOs</router-link></li>
-                                        <li class="mb-1"><a :href="apply_ebiz_url" class="text-decoration-none text-white">Apply RLCOs</a></li>
-                                        <li class="mb-1"><a :href="apply_ebiz_url" class="text-decoration-none text-white">Track the Progress of Applied RLCOs</a></li>
-
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section class="connectivityDiv py-5" id="scrollspyHeading3">
-                <div class="container-fluid px-4">
-                    <div class="row mb-4">
-                        <div class="col-12 text-center">
-                            <h2>Connectivity</h2>
-                        </div>
-
-                        <div class="col-md-6 mx-auto col-12 text-center">
-                            <p class="mb-2">eBiz Punjab provides streamlined services, regulatory news, and exclusive government support.</p>
-                        </div>
-
-                        <div class="col-12 text-center">
-                            <router-link :to="{ name:'connectivity' }" class="py-2 px-3 viewAllBusinessSolutions d-inline-flex align-items-center justify-content-center text-decoration-none viewAllBtn">
-                                <span>View All</span>
-                                <span>
-                                <img :src="useAssets('assets/viewAll-icon.svg')" alt="arrow Icon">
-                            </span>
-                            </router-link>
-                        </div>
+        <section class="investmentsDiv py-sm-5 py-4" id="scrollspyHeading4">
+            <div class="container-fluid px-lg-5 px-4">
+                <div class="row mb-4">
+                    <div class="col-12 text-center">
+                        <h2>Investments <span>Sectors</span></h2>
                     </div>
 
-                    <div class="row">
-                        <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
-                            <div class="card border-0 shadow-none h-100">
-                                <div class="card-body">
-                                    <img :src="useAssets('assets/piedmc-icon.png')" alt="piedmc Icon" class="img-fluid mb-4">
-                                    <h6 class="mb-0 ps-4">Punjab Industrial Estates Development and Management Company (PIEDMC)</h6>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
-                            <div class="card border-0 shadow-none h-100">
-                                <div class="card-body">
-                                    <img :src="useAssets('assets/fiedmc-icon.png')" alt="fiedmc Icon" class="img-fluid mb-4">
-                                    <h6 class="mb-0 ps-4">Faisalabad Industrial Estates Development and Management Company (FIEDMC)</h6>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
-                            <div class="card border-0 shadow-none h-100">
-                                <div class="card-body">
-                                    <img :src="useAssets('assets/lcci-icon.png')" alt="lcci Icon" class="img-fluid mb-4">
-                                    <h6 class="mb-0 ps-4">Lahore Chamber of Commerce & Industry (LCCI)</h6>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
-                            <div class="card border-0 shadow-none h-100">
-                                <div class="card-body">
-                                    <img :src="useAssets('assets/fpcci-icon.png')" alt="fpcci Icon" class="img-fluid mb-4">
-                                    <h6 class="mb-0 ps-4"> Pakistan Chamber of Commerce and Industry (FPCCI)</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="investmentsDiv py-5" id="scrollspyHeading4">
-                <div class="container-fluid px-4">
-                    <div class="row mb-4">
-                        <div class="col-12 text-center">
-                            <h2>Investments</h2>
-                        </div>
-
-                        <div class="col-md-6 mx-auto col-12 text-center">
-                            <p class="mb-2">Discover growth opportunities and attract the investment your business needs to scale it up.</p>
-                        </div>
-
-                        <div class="col-12 text-center">
-                            <router-link :to="{ name:'investment' }" class="py-2 px-3 viewAllBusinessSolutions d-inline-flex align-items-center justify-content-center text-decoration-none viewAllBtn">
-                                <span>View All</span>
-                                <span>
-                                <img :src="useAssets('assets/viewAll-icon.svg')" alt="arrow Icon">
-                            </span>
-                            </router-link>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-4 col-sm-6 mb-3">
-                            <div class="card border-0 shadow-none">
-                                <div class="card-body">
-                                    <img :src="useAssets('assets/textile-icon.svg')" alt="textile Icon" class="img-fluid mb-3">
-                                    <h6 class="mb-3">Textile</h6>
-                                    <p class="mb-0 text-start">Pakistan is Asia's 8th largest textile exporter and the 4th largest cotton producer. Its textile sector, comprising 423 industries, makes up 46% of manufacturing and employs 40% of the workforce. Access to abundant raw
-                                        materials like cotton and rayon benefits production costs and efficiency.</p>
-                                    <a href="#" class="py-2 viewAllBusinessSolutions d-inline-flex align-items-center justify-content-center viewAllBtn">
-                                        <span>Learn More</span>
-                                        <span class="pe-2">
-                                        <img :src="useAssets('assets/viewAll-icon.svg')" alt="arrow Icon">
-                                    </span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-8 col-sm-6 mb-3">
-                            <img :src="useAssets('assets/investments-img-1.png')" alt="testile Img" class="img-fluid w-100 h-100 investments-img-1">
-                        </div>
-
-                        <div class="col-lg-8 col-sm-6 mb-3">
-                            <img :src="useAssets('assets/investments-img-2.png')" alt="testile Img" class="img-fluid w-100 h-100 investments-img-2">
-                        </div>
-
-                        <div class="col-lg-4 col-sm-6 mb-3">
-                            <div class="card border-0 shadow-none">
-                                <div class="card-body">
-                                    <img :src="useAssets('assets/logistics-icon.svg')" alt="Logistics Icon" class="img-fluid mb-3">
-                                    <h6 class="mb-3">Logistics</h6>
-                                    <p class="mb-0 text-start">Pakistan, with nearly 210 million people, is the sixth most populous country, growing at 2.4% annually. Transport contributes 22.3% to GDP and 6% to employment, supporting trade and a Gulf-based workforce, with increasing
-                                        ties to Central Asia.</p>
-                                    <a href="#" class="py-2 viewAllBusinessSolutions d-inline-flex align-items-center justify-content-center viewAllBtn">
-                                        <span>Learn More</span>
-                                        <span class="pe-2">
-                                        <img :src="useAssets('assets/viewAll-icon.svg')" alt="arrow Icon">
-                                    </span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="newsDiv py-5">
-                <div class="container-fluid px-4">
-                    <div class="row mb-4">
-                        <div class="col-12 text-center">
-                            <h2>Discover News</h2>
-                        </div>
-
-                        <div class="col-md-6 mx-auto col-12 text-center">
-                            <p class="mb-2">Find relevant, easy-to-read business articles to stay up-to-date on laws and regulations, useful resources, and government programs to help you start, run, and grow your business.</p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
-                            <div class="card">
-                                <img :src="useAssets('assets/news-img-1.png')" class="card-img-top" alt="news Img">
-                                <div class="card-body">
-                                    <p class="card-text text-start">Education & Health are on Top of My Priority List: PM Mian Shahbaz Sharif</p>
-                                    <h6>July 10, 2024</h6>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
-                            <div class="card">
-                                <img :src="useAssets('assets/news-img-2.png')" class="card-img-top" alt="news Img">
-                                <div class="card-body">
-                                    <p class="card-text text-start">Education & Health are on Top of My Priority List: PM Mian Shahbaz Sharif</p>
-                                    <h6>July 10, 2024</h6>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
-                            <div class="card">
-                                <img :src="useAssets('assets/news-img-3.png')" class="card-img-top" alt="news Img">
-                                <div class="card-body">
-                                    <p class="card-text text-start">Education & Health are on Top of My Priority List: CM Maryam Nawaz Sharif</p>
-                                    <h6>July 10, 2024</h6>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
-                            <div class="card">
-                                <img :src="useAssets('assets/news-img-4.png')" class="card-img-top" alt="news Img">
-                                <div class="card-body">
-                                    <p class="card-text text-start">Education & Health are on Top of My Priority List: CM Maryam Nawaz Sharif</p>
-                                    <h6>July 10, 2024</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="faqsDiv py-5" id="scrollspyHeading5">
-                <div class="container-fluid px-4">
-                    <div class="row mb-4">
-                        <div class="col-12 text-center">
-                            <h2>Frequently Asked Questions</h2>
-                        </div>
-
-                        <div class="col-md-6 mx-auto col-12 text-center">
-                            <p class="mb-2">Discover detailed information on services, application procedures, and troubleshooting tips, all conveniently located in one place. </p>
-                        </div>
+                    <div class="col-lg-6 mx-auto col-12 text-center">
+                        <p class="mb-2">Fuel your business's growth with strategic insights and investment capital. Discover new opportunities, optimize operations, and scale up your business.</p>
                     </div>
                 </div>
 
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="accordion faqsAccordion" id="accordionExample">
-                                <div class="accordion-item mb-3 expanded">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            What types of services are available on the eBiz Punjab platform?
-                                        </button>
-                                    </h2>
-                                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body pt-0">
-                                            eBiz offer services like <strong>Agriculture</strong>, <strong>forestry</strong> and <strong>fishing Rice Farming</strong>
-                                        </div>
+                <div class="row">
+                    <div class="col-lg-3 mb-lg-0 mb-3">
+                        <div class="card shdaow-none">
+                            <div class="card-body p-1">
+                                <ul class="nav nav-tabs d-flex flex-lg-column border-0 flex-row flex-nowrap overflow-x-auto overflow-y-hidden mx-lg-0 mx-3" id="investmentTabs" role="tablist">
+                                    <li class="nav-item border-bottom" role="presentation">
+                                        <button class="nav-link w-100 text-start p-3 my-1" id="textile-tab" data-bs-toggle="tab" data-bs-target="#textile-tab-pane" type="button" role="tab" aria-controls="textile-tab-pane" aria-selected="true">Textile</button>
+                                    </li>
+                                    <li class="nav-item border-bottom" role="presentation">
+                                        <button class="nav-link w-100 text-start p-3 my-1" id="logistics-tab" data-bs-toggle="tab" data-bs-target="#logistics-tab-pane" type="button" role="tab" aria-controls="logistics-tab-pane" aria-selected="false">Logistics</button>
+                                    </li>
+                                    <li class="nav-item border-bottom" role="presentation">
+                                        <button class="nav-link w-100 text-start p-3 my-1 active" id="foodProcessing-tab" data-bs-toggle="tab" data-bs-target="#foodProcessing-tab-pane" type="button" role="tab" aria-controls="foodProcessing-tab-pane" aria-selected="true">Food Processing</button>
+                                    </li>
+                                    <li class="nav-item border-bottom" role="presentation">
+                                        <button class="nav-link w-100 text-start p-3 my-1" id="autoMobile-tab" data-bs-toggle="tab" data-bs-target="#autoMobile-tab-pane" type="button" role="tab" aria-controls="autoMobile-tab-pane" aria-selected="false">Automobile</button>
+                                    </li>
+                                    <li class="nav-item border-bottom" role="presentation">
+                                        <button class="nav-link w-100 text-start p-3 my-1" id="InfoTech-tab" data-bs-toggle="tab" data-bs-target="#InfoTech-tab-pane" type="button" role="tab" aria-controls="InfoTech-tab-pane" aria-selected="false">Information Technology</button>
+                                    </li>
+                                    <li class="nav-item border-bottom" role="presentation">
+                                        <button class="nav-link w-100 text-start p-3 my-1" id="housing-tab" data-bs-toggle="tab" data-bs-target="#housing-tab-pane" type="button" role="tab" aria-controls="housing-tab-pane" aria-selected="false">Housing & Construction</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link w-100 text-start p-3" id="tourism-tab" data-bs-toggle="tab" data-bs-target="#tourism-tab-pane" type="button" role="tab" aria-controls="tourism-tab-pane" aria-selected="false">Tourism and Hospitality</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mb-lg-0 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="tab-content" id="InvestmentsTabContent">
+                                    <div class="tab-pane fade" id="textile-tab-pane" role="tabpanel" aria-labelledby="textile-tab" tabindex="0">
+                                        <img :src="useAssets('assets/textile-icon.svg')" alt="Textile Icon" class="img-fluid mb-3">
+                                        <h6 class="mb-2">Textile Industry</h6>
+                                        <p class="mb-2">The textile industry is Pakistan's largest manufacturing sector, contributing over 60% to exports and employing a significant portion of the workforce. The sector is known for its cotton production, garments, and
+                                            value-added products.</p>
+                                        <p class="mb-2">With government incentives and modernization efforts, the industry is poised to expand into technical textiles and sustainable production methods to meet global demands.</p>
+                                        <a href="#" class="learnMoreBtn">Learn More</a>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="logistics-tab-pane" role="tabpanel" aria-labelledby="logistics-tab" tabindex="0">
+                                        <img :src="useAssets('assets/logistics-icon.svg')" alt="Logistics Icon" class="img-fluid mb-3">
+                                        <h6 class="mb-2">Logistics and Supply Chain</h6>
+                                        <p class="mb-2">Pakistan's strategic location as a trade corridor makes logistics and supply chain management a critical sector. The development of modern ports, highways, and rail systems has opened new opportunities for international
+                                            trade.
+                                        </p>
+                                        <p class="mb-2">Key areas of investment include warehousing, cold storage, and e-commerce logistics, driven by the rise of digital marketplaces.</p>
+                                        <a href="#" class="learnMoreBtn">Learn More</a>
+                                    </div>
+
+                                    <div class="tab-pane fade show active" id="foodProcessing-tab-pane" role="tabpanel" aria-labelledby="foodProcessing-tab" tabindex="0">
+                                        <img :src="useAssets('assets/food-processing-icon1.svg')" alt="Investment Icon" class="img-fluid mb-3">
+                                        <h6 class="mb-2">Food Processing</h6>
+                                        <p class="mb-2">Pakistan's food processing industry, the second-largest after textiles, plays a vital role in the economy, providing 16% of manufacturing jobs and contributing 27% to the sector's production value. With a burgeoning
+                                            middle class of 102 million, the industry attracts $223.5 million annually in foreign direct investment (FDI).</p>
+                                        <p class="mb-2">Key growth areas include frozen foods, value-added agricultural products, and processed produce, which are driving both domestic consumption and international demand.</p>
+                                        <router-link :to="{ name: 'food-processing'}" class="learnMoreBtn">Learn More</router-link>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="autoMobile-tab-pane" role="tabpanel" aria-labelledby="autoMobile-tab" tabindex="0">
+                                        <img :src="useAssets('assets/automobile-icon.svg')" alt="Automobile Icon" class="img-fluid mb-3">
+                                        <h6 class="mb-2">Automobile Manufacturing</h6>
+                                        <p class="mb-2">The automobile industry in Pakistan is expanding rapidly, driven by increasing consumer demand and foreign investment. The sector includes the production of cars, motorbikes, and commercial vehicles.</p>
+                                        <p class="mb-2">Government policies promoting local assembly and electric vehicle adoption are set to transform the market, creating new avenues for growth and sustainability.</p>
+                                        <a href="#" class="learnMoreBtn">Learn More</a>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="InfoTech-tab-pane" role="tabpanel" aria-labelledby="InfoTech-tab" tabindex="0">
+                                        <img :src="useAssets('assets/it-icon.svg')" alt="Information Technology Icon" class="img-fluid mb-3">
+                                        <h6 class="mb-2">Information Technology</h6>
+                                        <p class="mb-2">Pakistan's IT sector is a rising star, with exports exceeding $2 billion annually. The industry is known for its skilled workforce, offering software development, BPO services, and digital solutions to global clients.</p>
+                                        <p class="mb-2">Investment opportunities abound in areas such as artificial intelligence, fintech, and cloud computing, supported by a thriving startup ecosystem.</p>
+                                        <a href="#" class="learnMoreBtn">Learn More</a>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="housing-tab-pane" role="tabpanel" aria-labelledby="housing-tab" tabindex="0">
+                                        <img :src="useAssets('assets/housing-icon.svg')" alt="Housing Icon" class="img-fluid mb-3">
+                                        <h6 class="mb-2">Housing and Construction</h6>
+                                        <p class="mb-2">The housing and construction sector in Pakistan is growing rapidly, driven by urbanization and government initiatives such as the Naya Pakistan Housing Program.</p>
+                                        <p class="mb-2">With a focus on affordable housing and infrastructure development, the sector offers lucrative opportunities for investment in real estate and building materials.</p>
+                                        <a href="#" class="learnMoreBtn">Learn More</a>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="tourism-tab-pane" role="tabpanel" aria-labelledby="tourism-tab" tabindex="0">
+                                        <img :src="useAssets('assets/tourism-icon.svg')" alt="Tourism Icon" class="img-fluid mb-3">
+                                        <h6 class="mb-2">Tourism Industry</h6>
+                                        <p class="mb-2">Pakistan's tourism industry is booming, with its stunning landscapes, cultural heritage, and adventure tourism attracting visitors from around the globe.</p>
+                                        <p class="mb-2">Investment opportunities include eco-tourism, resort development, and heritage site restoration, supported by government incentives and global recognition.</p>
+                                        <a href="#" class="learnMoreBtn">Learn More</a>
                                     </div>
                                 </div>
 
-                                <div class="accordion-item mb-3">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            What support options are available if I encounter issues on eBiz Punjab?
-                                        </button>
-                                    </h2>
-                                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body pt-0">
-                                            Eligibility criteria vary depending on the scheme's requirements.
-                                        </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 mb-lg-0 mb-3">
+                        <div class="image-container position-relative card border-0 shadow-none bg-transparent">
+                            <img id="investmentImg" :src="useAssets('assets/food-processing-img1.png')" alt="Investment Img" class="img-fluid fade show active">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="newsDiv py-sm-5 py-4">
+            <div class="container-fluid px-lg-5 px-4">
+                <div class="row mb-4">
+                    <div class="col-12 text-center">
+                        <h2>Discover <span>News</span></h2>
+                    </div>
+
+                    <div class="col-lg-6 mx-auto col-12 text-center">
+                        <p class="mb-2">Find relevant, easy-to-read business articles to stay up-to-date on laws and regulations, useful resources, and government programs to help you start, run, and grow your business.</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
+                        <div class="card">
+                            <img :src="useAssets('assets/news-img-3.png')" class="card-img-top" alt="news Img">
+                            <div class="card-body">
+                                <h5>Education & Health</h5>
+                                <p class="card-text text-start">Education &amp; Health are on Top of My Priority List: PM Mian Shahbaz Sharif</p>
+                                <h6>July 10, 2024</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
+                        <div class="card">
+                            <img :src="useAssets('assets/news-img-6.png')" class="card-img-top" alt="news Img">
+                            <div class="card-body">
+                                <h5>Lahore Garments City</h5>
+                                <p class="card-text text-start">Education &amp; Health are on Top of My Priority List: PM Mian Shahbaz Sharif</p>
+                                <h6>July 10, 2024</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
+                        <div class="card">
+                            <img :src="useAssets('assets/news-img-1.png')" class="card-img-top" alt="news Img">
+                            <div class="card-body">
+                                <h5>Education & Health</h5>
+                                <p class="card-text text-start">Education &amp; Health are on Top of My Priority List: CM Maryam Nawaz Sharif</p>
+                                <h6>July 10, 2024</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
+                        <div class="card">
+                            <img :src="useAssets('assets/news-img-5.png')" class="card-img-top" alt="news Img">
+                            <div class="card-body">
+                                <h5>Education & Health</h5>
+                                <p class="card-text text-start">Education &amp; Health are on Top of My Priority List: CM Maryam Nawaz Sharif</p>
+                                <h6>July 10, 2024</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faqsDiv py-sm-5 py-4" id="scrollspyHeading5">
+            <div class="container-fluid px-lg-5 px-4">
+                <div class="row mb-4">
+                    <div class="col-12 text-center">
+                        <h2>Frequently Asked <span>Questions</span></h2>
+                    </div>
+
+                    <div class="col-lg-6 mx-auto col-12 text-center">
+                        <p class="mb-2">Discover detailed information on services, application procedures, and troubleshooting tips, all conveniently located in one place. </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="accordion faqsAccordion" id="accordionExample">
+                            <div class="accordion-item mb-3 expanded">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        What types of services are available on the eBiz Punjab platform?
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body pt-0">
+                                        eBiz offer services like <strong>Agriculture</strong>, <strong>forestry</strong> and <strong>fishing Rice Farming</strong>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="accordion-item mb-3">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                            What are the steps to apply for licenses and permits through eBiz Punjab?
-                                        </button>
-                                    </h2>
-                                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body pt-0">
-                                            Some schemes may offer alternative application methods besides the web portal.
-                                        </div>
+                            <div class="accordion-item mb-3">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        What support options are available if I encounter issues on eBiz Punjab?
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body pt-0">
+                                        Eligibility criteria vary depending on the scheme's requirements.
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="accordion-item mb-3">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                            How can I track the status of my applications on eBiz Punjab?
-                                        </button>
-                                    </h2>
-                                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body pt-0">
-                                            Various types of bikes may be available, depending on the scheme's specifications.
-                                        </div>
+                            <div class="accordion-item mb-3">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        What are the steps to apply for licenses and permits through eBiz Punjab?
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body pt-0">
+                                        Some schemes may offer alternative application methods besides the web portal.
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="accordion-item mb-3">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                            Are there specific qualifications required to apply for petrol bikes?
-                                        </button>
-                                    </h2>
-                                    <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body pt-0">
-                                            Eligibility for petrol bikes may depend on scheme guidelines and applicant qualifications.
-                                        </div>
+                            <div class="accordion-item mb-3">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        How can I track the status of my applications on eBiz Punjab?
+                                    </button>
+                                </h2>
+                                <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body pt-0">
+                                        Various types of bikes may be available, depending on the scheme's specifications.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item mb-3">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                        Are there specific qualifications required to apply for petrol bikes?
+                                    </button>
+                                </h2>
+                                <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body pt-0">
+                                        Eligibility for petrol bikes may depend on scheme guidelines and applicant qualifications.
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-        </div>
-    </main>
+            </div>
+        </section>
+    </div>
 </template>

@@ -1,61 +1,66 @@
 <template>
+    <div class="preloader flex-column justify-content-center align-items-center">
+        <div class="logo-container">
+            <img class="logo-animation" :src="useAssets('assets/ebiz_login_logo.svg')" alt="EBiz Logo">
+            <div class="loading-circle"></div>
+        </div>
+    </div>
     <div class="container-fluid">
-        <nav id="eBiz-landingNavbar" class="navbar navbar-expand-lg px-3 position-fixed me-4 mt-3 z-3">
-            <router-link class="navbar-brand bg-transparent" :to="{ name: 'home', hash: '#homeStartPage' }" @click.native="scrollToHash('homeStartPage')">
-                <img :src="useAssets('assets/dash-logo.svg')" alt="eBiz Logo" class="img-fluid">
-            </router-link>
-            <button class="navbar-toggler border-0 custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
+        <div class="row">
+            <div class="col-12 px-0">
+                <nav id="eBiz-landingNavbar" class="navbar navbar-expand-lg position-fixed px-lg-5 px-4 bg-white z-3">
+                    <router-link class="navbar-brand" :to="{ name: 'home', hash: '#homeStartPage' }" @click.native="scrollToHash('homeStartPage')">
+                        <img :src="useAssets('assets/dash-logo1.svg')" alt="eBiz Logo" class="img-fluid">
+                    </router-link>
+                    <button class="navbar-toggler border-0 custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </button>
 
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <ul class="nav nav-pills mx-auto justify-content-between my-lg-0 my-3">
-                    <li class="nav-item">
-                        <router-link class="nav-link bg-transparent" :to="{ name: 'home', hash: '#scrollspyHeading1' }" @click.native="scrollToHash('scrollspyHeading1')">
+                    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                        <ul class="nav nav-pills ms-auto justify-content-between my-lg-0 my-3 pe-lg-5">
+                            <li class="nav-item">
+                                <router-link class="nav-link pb-1 px-1 mx-2" :to="{ name: 'home', hash: '#scrollspyHeading' }" @click.native="scrollToHash('scrollspyHeading')">
+                                    <span></span> Home
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link class="nav-link pb-1 px-1 mx-2" :to="{ name: 'home', hash: '#scrollspyHeading1' }" @click.native="scrollToHash('scrollspyHeading1')">
+                                    <span></span> Business Sector
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link class="nav-link pb-1 px-1 mx-2" :to="{ name: 'home', hash: '#scrollspyHeading2' }" @click.native="scrollToHash('scrollspyHeading2')">
+                                    <span></span> Business Essentials
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link class="nav-link pb-1 px-1 mx-2" :to="{ name: 'home', hash: '#scrollspyHeading3' }" @click.native="scrollToHash('scrollspyHeading3')">
+                                    <span></span> Connectivity
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link class="nav-link pb-1 px-1 mx-2" :to="{ name: 'home', hash: '#scrollspyHeading4' }" @click.native="scrollToHash('scrollspyHeading4')">
+                                    <span></span> Investments
+                                </router-link>
+                            </li>
+                        </ul>
+                        <a :href="apply_ebiz_url" class="text-decoration-none eBizUserAddPortalBtn d-inline-flex align-items-center justify-content-center ps-1 me-3">
                             <span>
-                                <img :src="useAssets('assets/business-sector-icon.svg')" alt="Navbar Icons" class="img-fluid">
-                            </span> Business Advisory
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link class="nav-link bg-transparent" :to="{ name: 'home', hash: '#scrollspyHeading2' }" @click.native="scrollToHash('scrollspyHeading2')">
+                                <img :src="useAssets('assets/user-add-icon.svg')" alt="user add icon" class="img-fluid">
+                            </span>
+                        </a>
+                        <a :href="apply_ebiz_url" class="text-decoration-none eBizPortalBtn d-inline-flex align-items-center justify-content-center ps-3 pe-2">
+                            <span>eBiz Portal</span>
                             <span>
-                                <img :src="useAssets('assets/business-entities-icon.svg')" alt="Navbar Icons" class="img-fluid">
-                            </span> Business Essentials
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link class="nav-link bg-transparent" :to="{ name: 'home', hash: '#scrollspyHeading3' }" @click.native="scrollToHash('scrollspyHeading3')">
-                            <span>
-                                <img :src="useAssets('assets/connectivity-icon.svg')" alt="Navbar Icons" class="img-fluid">
-                            </span> Connectivity
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link class="nav-link bg-transparent" :to="{ name: 'home', hash: '#scrollspyHeading4' }" @click.native="scrollToHash('scrollspyHeading4')">
-                            <span>
-                                <img :src="useAssets('assets/investments-icon.svg')" alt="Navbar Icons" class="img-fluid">
-                            </span> Investments
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link class="nav-link bg-transparent" :to="{ name: 'home', hash: '#scrollspyHeading5' }" @click.native="scrollToHash('scrollspyHeading5')">
-                            <span>
-                                <img :src="useAssets('assets/contact-icon.svg')" alt="Navbar Icons" class="img-fluid">
-                            </span> Contact us
-                            </router-link>
-                    </li>
-                </ul>
-                <a target="_blank" :href="apply_ebiz_url" class="text-decoration-none eBizPortalBtn d-inline-flex align-items-center justify-content-center ps-3 pe-2">
-                    <span>eBiz Portal</span>
-                    <span>
-                        <img :src="useAssets('assets/navbar_arrow_icon.svg')" alt="Navbar Icons" class="img-fluid">
-                    </span>
-                </a>
+                                <img :src="useAssets('assets/navbar_arrow_icon.svg')" alt="Navbar Icons" class="img-fluid">
+                            </span>
+                        </a>
+                    </div>
+                </nav>
             </div>
-        </nav>
+        </div>
     </div>
 </template>
 

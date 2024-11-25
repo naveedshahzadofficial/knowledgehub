@@ -11,6 +11,7 @@ import ContactUs from "@/views/ContactUs.vue";
 import ServiceDetail from "@/views/ServiceDetail.vue";
 import Connectivity from "@/views/Connectivity.vue";
 import Investment from "../views/Investment.vue";
+import FoodProcessing from "../views/FoodProcessing.vue";
 
 export const router = createRouter({
     history: createWebHistory('/'),
@@ -18,7 +19,7 @@ export const router = createRouter({
         if (to.name === 'service-detail') {
             // Disable scrolling for 'service-detail'
             if (to.hash) {
-                return { selector: to.hash , top:600};
+                return { selector: to.hash , top:400};
             }
             return false;
         }
@@ -64,6 +65,11 @@ export const router = createRouter({
         //     name: "service-detail",
         //     component: ServiceDetail,
         // },
+        {
+            path: "/food-processing",
+            name: "food-processing",
+            component: FoodProcessing,
+        },
         {
             path: "/about-us",
             name: "about-us",

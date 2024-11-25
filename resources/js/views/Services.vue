@@ -281,22 +281,18 @@ export default {
 </style>
 <template>
     <div class="servicesPageContent mb-5">
-        <header class="servicesPageHeader py-5">
-            <div class="container-fluid px-4">
+        <header class="servicesPageHeader pb-5">
+            <div class="container-fluid px-md-5 px-4">
                 <div class="row">
                     <div class="col-12">
                         <h1 class="mb-1">Services</h1>
-                        <p class="mb-0">eBiz Punjab offers expert support to boost your business across various sectors.</p>
+                        <p id="pageStartServices" class="mb-0">eBiz Punjab offers expert support to boost your business across various sectors.</p>
                     </div>
                 </div>
             </div>
         </header>
 
-        <div id="pageStartServices" class="lowerHeaderDiv px-4 d-flex align-items-center mb-5">
-            <p class="mb-0">Select sectors from the drop-down list and utilize advanced filters to efficiently search for your desired industry.</p>
-        </div>
-
-        <div class="container-fluid px-4">
+        <div class="container-fluid px-md-5 px-4">
             <div class="row filterServicesDiv mb-3">
                 <div class="col-md-5 mb-md-0 mb-3">
                     <label class="form-label">Sectors</label>
@@ -354,10 +350,6 @@ export default {
                 </div>
 
                 <div class="col-12 my-4"></div>
-
-                <div class="col-12">
-                    <div class="dotted-line mb-3"></div>
-                </div>
             </div>
 
             <div class="row servicesPageData mb-3" id="servicesPageData" ref="rlco_position">

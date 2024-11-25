@@ -396,7 +396,7 @@
                 </div>
                 <div
                     v-if="rlco_detail.last_updated_date"
-                    class="row detail-btn my-3 mb-2"
+                    class="row detail-btn my-3 mb-2 d-none"
                 >
                     <div class="col-lg-12 text-left">
                         <span class="last-updated-date"
@@ -407,7 +407,7 @@
                 </div>
                 <div
                     v-show="!isSubmitted && !checkFeedbackExits"
-                    class="row feedback-div"
+                    class="row feedback-div d-none"
                 >
                     <div class="col-lg-12">
                         <h3 class="detail-heading pt-3 pb-2">
@@ -420,7 +420,7 @@
                 </div>
                 <div
                     v-show="!isSubmitted && !checkFeedbackExits"
-                    class="row mb-4 feedback-div"
+                    class="row mb-4 feedback-div d-none"
                 >
                     <div class="col-lg-12 text-left">
                         <star-rating
@@ -453,7 +453,7 @@
                         </button>
                     </div>
                 </div>
-                <div v-show="isSubmitted" class="row mb-4 feedback-div">
+                <div v-show="isSubmitted" class="row mb-4 feedback-div d-none">
                     <div class="col-lg-12 text-center">
                         Thank you for your feedback!
                     </div>
