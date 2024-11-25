@@ -170,7 +170,7 @@ export default {
                 .filter(rlco => !filteredRlcosIds.includes(rlco.id));
         },
         checkRlcosFound: function (){
-             return this.filteredConstructionRlcos.length === 0 && this.filteredRlcos.length === 0 && this.filteredCommonRequiredRlcos.length === 0 ? 'No RLCO Found' : '';
+             return (this.construction_required === '0' || this.construction_required === '' || this.filteredConstructionRlcos.length === 0) && this.filteredRlcos.length === 0 && (this.filteredCommonRequiredRlcos.length === 0 || this.common_required === '0' || this.common_required === '') ? 'No RLCO Found' : '';
         },
         filteredDepartments: function () {
             // Filter rlcos with construction_flag === 1
