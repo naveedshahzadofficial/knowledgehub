@@ -176,7 +176,7 @@ export default {
                                         <button class="nav-link w-100 text-start p-3 my-1 h-100" id="fruits-dairy-tab" data-bs-toggle="tab" data-bs-target="#fruits-dairy-tab-pane" type="button" role="tab" aria-controls="fruits-dairy-tab-pane" aria-selected="false">Fruits, dairy, vegetables, and processed products</button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link w-100 text-start p-3 my-1 h-100" id="agri-food-processing-tab" data-bs-toggle="tab" data-bs-target="#agri-food-processing-tab-pane" type="button" role="tab" aria-controls="agri-food-processing-tab-pane" aria-selected="false">Agri food processing (Primary process foods)</button>
+                                        <button class="nav-link w-100 text-start p-3 my-1 h-100" id="frozen-food-processing-tab" data-bs-toggle="tab" data-bs-target="#frozen-food-processing-tab-pane" type="button" role="tab" aria-controls="frozen-food-processing-tab-pane" aria-selected="false">Agri food processing (Primary process foods)</button>
                                     </li>
                                 </ul>
                             </div>
@@ -224,7 +224,7 @@ export default {
                                         <a href="#" class="learnMoreBtn">Learn More</a>
                                     </div>
 
-                                    <div class="tab-pane fade h-100" id="agri-food-processing-tab-pane" role="tabpanel" aria-labelledby="agri-food-processing-tab" tabindex="0">
+                                    <div class="tab-pane fade h-100" id="frozen-food-processing-tab-pane" role="tabpanel" aria-labelledby="frozen-food-processing-tab" tabindex="0">
                                         <img :src="useAssets('assets/it-icon.svg')" alt="Information Technology Icon" class="img-fluid mb-3">
                                         <h6 class="mb-2">Agri Food Processing (Primary Process Foods)</h6>
                                         <p class="mb-2">Pakistan's IT sector is a rising star, with exports exceeding $2 billion annually. The industry is known for its skilled workforce, offering software development, BPO services, and digital solutions to global clients.</p>

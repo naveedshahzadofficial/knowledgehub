@@ -1,11 +1,18 @@
 <template>
     <div data-bs-spy="scroll" data-bs-target="#eBiz-landingNavbar" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="content connectivityPageContent" tabindex="0">
-        <header class="connectivityHeader">
-            <img :src="useAssets('assets/connectivity-page-bg.png')" alt="" class="img-fluid w-100 position-absolute z-1 pb-5">
-            <div class="container-fluid px-4">
+        <header id="scrollspyHeading3">
+            <div class="container-fluid px-lg-5 px-4">
                 <div class="row align-items-center">
                     <div class="col-12">
-                        <h1 class="mb-lg-4 position-relative z-1">Connectivity</h1>
+                        <h1 class="mb-3">Connectivity
+                            <span>Simplified</span>
+                        </h1>
+                    </div>
+                    <div class="col-lg-6">
+                        <p class="mb-4 pe-lg-5 position-relative">eBiz Punjab simplifies business operations with streamlined services, timely regulatory updates, and exclusive government support.</p>
+                    </div>
+                    <div class="col-12">
+                        <img :src="useAssets('assets/connectivity-page-bg1.png')" alt="Img" class="img-fluid w-100">
                     </div>
                 </div>
             </div>

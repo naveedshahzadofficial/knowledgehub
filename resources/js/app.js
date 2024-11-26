@@ -8,6 +8,7 @@ import pagination from 'v-pagination-3'
 import Select2 from 'vue3-select2-component';
 import print from 'vue3-print-nb'
 import vSelect from 'vue-select'
+import { createPinia } from 'pinia'
 
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -16,6 +17,7 @@ import {faStar, faDownload, faFolder, faArrowUp, faFile, faExpand, faPrint} from
 library.add(faStar,faFolder, faDownload, faArrowUp, faFile, faExpand, faPrint)
 
 const app = createApp(App);
+const pinia = createPinia();
 
 app.use(store);
 app.use(router);
@@ -23,7 +25,8 @@ app.component('pagination', pagination);
 app.component('Select2', Select2);
 app.component('v-select', vSelect)
 app.component('font-awesome-icon', FontAwesomeIcon)
-app.use(print)
+app.use(print);
+app.use(pinia);
 
 app.mount('#app');
 

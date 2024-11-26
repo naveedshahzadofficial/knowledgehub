@@ -1,5 +1,5 @@
 <template>
-    <div class="preloader flex-column justify-content-center align-items-center">
+    <div class="preloader flex-column justify-content-center align-items-center" :class="{'hidden':usePreLoaderStore().isShow}">
         <div class="logo-container">
             <img class="logo-animation" :src="useAssets('assets/ebiz_login_logo.svg')" alt="EBiz Logo">
             <div class="loading-circle"></div>
@@ -36,7 +36,7 @@
                                 </router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link class="nav-link pb-1 px-1 mx-2" :to="{ name: 'home', hash: '#scrollspyHeading3' }" @click.native="scrollToHash('scrollspyHeading3')">
+                                <router-link class="nav-link pb-1 px-1 mx-2" :to="{ name: 'connectivity' }" @click.native="scrollToHash('scrollspyHeading3')">
                                     <span></span> Connectivity
                                 </router-link>
                             </li>
@@ -66,10 +66,12 @@
 
 <script>
 import {useAssets} from "../composable/use-assets";
+import {usePreLoaderStore} from "../store/preloader";
 
 export default {
     name: "HeaderComponent",
     methods: {
+        usePreLoaderStore,
         useAssets,
         scrollToHash(id) {
             // Helper function to adjust scroll position to the top 5%

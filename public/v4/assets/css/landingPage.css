@@ -178,7 +178,9 @@ h1 span {
 }
 
 .foodProcessingPage header h1,
-.foodProcessingPage header h1 span {
+.foodProcessingPage header h1 span,
+.connectivityPageContent h1,
+.connectivityPageContent h1 span {
     font-size: 40px;
     color: #1b3249;
 }
@@ -465,13 +467,16 @@ header {
     width: 100px !important;
     margin: auto;
     height: 100px !important;
+    object-fit: contain;
 }
 
 .connectivityPageContent .connectivityDiv .card-body h6 {
+    font-family: "font2", sans-serif;
     min-height: 35px;
     font-weight: 500;
-    font-size: 24px;
-    color: #000;
+    font-size: 22px;
+    color: #1b3249;
+    line-height: 1.7;
 }
 
 .connectivityPageContent .connectivityDiv .card-body p {
@@ -482,8 +487,10 @@ header {
 }
 
 .connectivityPageContent .connectivityDiv .card-body p span:nth-child(1) {
+    font-family: "font3", sans-serif;
+    color: #1b3249;
     font-weight: 600;
-    min-width: 69px;
+    min-width: 76px;
 }
 
 .connectivityPageContent .connectivityDiv,
@@ -1087,6 +1094,7 @@ footer h5 {
 .sectorBriefDiv .card {
     background-color: rgb(235, 236, 242, 0.5);
     border-radius: 20px;
+    border: none;
 }
 
 .sectorBriefDiv .card img {
@@ -1100,7 +1108,8 @@ footer h5 {
     color: #1b3249;
 }
 
-.sectorBriefDiv .card p {
+.sectorBriefDiv .card p,
+.sectorBriefDiv .card ul li {
     font-family: "font2", sans-serif;
     font-weight: 400;
     font-size: 18px;
@@ -1120,6 +1129,7 @@ footer h5 {
 }
 
 .sectorHighLightDiv p {
+    font-family: "font2", sans-serif;
     font-weight: 400;
     font-size: 18px;
     text-align: center;
@@ -1262,7 +1272,7 @@ footer h5 {
 
 .economicZonesDiv ul li h5 {
     font-family: "font2", sans-serif;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 20px;
     color: #1b3249;
 }

@@ -37,6 +37,12 @@
  */
 
 /*!
+ * pinia v2.2.6
+ * (c) 2024 Eduardo San Martin Morote
+ * @license MIT
+ */
+
+/*!
  * vuex v4.1.0
  * (c) 2022 Evan You
  * @license MIT

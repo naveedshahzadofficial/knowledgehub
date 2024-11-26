@@ -1,5 +1,6 @@
 <script>
 import {useAssets} from "@/composable/use-assets";
+import {usePreLoaderStore} from "../store/preloader";
 export default {
     name: "ServicesPage",
     data() {
@@ -122,8 +123,11 @@ export default {
         }
     },
     mounted() {
+        usePreLoaderStore().setIsShow(false);
         this.loadActivities();
-
+        window.setTimeout(() => {
+            usePreLoaderStore().setIsShow(true);
+        }, 2000);
     },
     computed: {
         filteredBusinessActivities: function (){
@@ -154,14 +158,20 @@ export default {
             });
         },
         filteredConstructionRlcos: function () {
-            // Get the filteredRlcos IDs or unique identifiers for comparison
             const filteredRlcosIds = this.filteredRlcos.map(rlco => rlco.id);
-
-            // Filter rlcos with construction_flag === 1 and not in filteredRlcos
-            return this.rlcos
-                .filter(rlco => rlco.construction_flag === 1)
-                .filter(rlco => !filteredRlcosIds.includes(rlco.id))
-                .filter(rlco => rlco.department_id && (!this.construction_department_id || rlco.department_id === this.construction_department_id));
+            return this.rlcos.filter(rlco => {
+                // Always include rlcos with these IDs
+                const alwaysIncludeIds = [22, 23, 25, 123, 132, 134];
+                if (alwaysIncludeIds.includes(rlco.id)) {
+                    return true;
+                }
+                return (
+                    rlco.construction_flag === 1 &&
+                    !filteredRlcosIds.includes(rlco.id) &&
+                    rlco.department_id &&
+                    (!this.construction_department_id || rlco.department_id === this.construction_department_id)
+                );
+            });
         },
         filteredCommonRequiredRlcos: function () {
             const filteredRlcosIds = this.filteredRlcos.map(rlco => rlco.id);
@@ -177,8 +187,9 @@ export default {
             const rlcosWithConstructionFlag = this.rlcos.filter(rlco => rlco.construction_flag === 1);
 
             // Extract the foreign keys (department IDs) from the filtered rlcos
-            const departmentIdsWithRlcos = rlcosWithConstructionFlag.map(rlco => rlco.department_id);
-
+            const departmentIdsWithRlcos = rlcosWithConstructionFlag
+                .filter(rlco => rlco.department_id && ![56, 45, 134, 198].includes(rlco.department_id))
+                .map(rlco => rlco.department_id);
             // Filter departments that have at least one matching department ID
             return this.departments.filter(department => departmentIdsWithRlcos.includes(department.id));
         },

@@ -12,6 +12,10 @@ import ServiceDetail from "@/views/ServiceDetail.vue";
 import Connectivity from "@/views/Connectivity.vue";
 import Investment from "../views/Investment.vue";
 import FoodProcessing from "../views/FoodProcessing.vue";
+import AutoMobile from "../views/AutoMobile.vue";
+import Textile from "../views/Textile.vue";
+import Logistics from "../views/Logistics.vue";
+import SectorBusinessTypeList from "../views/SectorBusinessTypeList.vue";
 
 export const router = createRouter({
     history: createWebHistory('/'),
@@ -66,9 +70,29 @@ export const router = createRouter({
         //     component: ServiceDetail,
         // },
         {
+            path: "/business-sector-activities/:id?",
+            name: "business-sector-activities",
+            component: SectorBusinessTypeList,
+        },
+        {
             path: "/food-processing",
             name: "food-processing",
             component: FoodProcessing,
+        },
+        {
+            path: "/auto-mobile",
+            name: "auto-mobile",
+            component: AutoMobile,
+        },
+        {
+            path: "/textile",
+            name: "textile",
+            component: Textile,
+        },
+        {
+            path: "/logistics",
+            name: "logistics",
+            component: Logistics,
         },
         {
             path: "/about-us",

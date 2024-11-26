@@ -1,11 +1,14 @@
 <script>
 import {useAssets} from "@/composable/use-assets";
+import {usePreLoaderStore} from "../store/preloader";
+import {setTimeout} from "../../../public/assets/plugins/custom/tinymce/tinymce.bundle";
 export default {
     name: "HomePage",
     data() {
         return {
             activities: [],
             sectors: [],
+            categories: [],
             business_activity_id:'',
             apply_ebiz_url: process.env.MIX_APPLY_EBIZ_URL,
         }
@@ -16,6 +19,7 @@ export default {
             axios.get('activities').then(response => {
                 this.activities = response.data.activities;
                 this.sectors = response.data.sectors;
+                this.categories = response.data.categories;
             })
         },
         search: function (){
@@ -23,8 +27,33 @@ export default {
         },
     },
     mounted() {
+        usePreLoaderStore().setIsShow(false);
         this.loadActivities();
+        window.setTimeout(() => {
+            usePreLoaderStore().setIsShow(true);
+        }, 2000);
 
+    },
+    computed:{
+        filteredBusinessCategories: function () {
+            return this.categories.filter(category => category.category_is_sector === 1);
+        },
+        organizedCategories() {
+            const categories = [...this.filteredBusinessCategories];
+            const rows = [];
+            rows.push([
+                {}, {},
+                ...categories.splice(0, 4),
+                {},
+            ]);
+            rows.push(categories.splice(0, 7));
+            rows.push([
+                ...categories.splice(0, 5),
+                { category_short_name: 'View All', isViewAll: true },
+                {},
+            ]);
+            return rows;
+        },
     }
 };
 </script>
@@ -108,154 +137,24 @@ export default {
                         <p>Dive into eBiz Punjab's extensive resources and opportunities designed to elevate your business, from essential services to strategic investments.</p>
                     </div>
 
-                    <div class="col-12 mb-1 d-md-flex d-none gap-1 px-sm-5 px-4 justify-content-end">
-                        <div class="card border-0 shadow-none bg-transparent d-xl-block d-none">
-                            <div class="card-body text-start d-flex flex-column justify-content-between">
-                                <p class="mb-4 pe-xxl-4 text-start"></p>
-                                <img src="">
+                    <div v-for="(row, rowIndex) in organizedCategories" :key="'row-' + rowIndex" class="col-12 mb-1 d-lg-flex gap-1 justify-content-xl-between px-sm-5 px-4 flex-xl-nowrap flex-wrap">
+                        <template v-for="category in row">
+                            <router-link :to="{ name: 'business-sector-activities', params: { id: category.id }}" class="card shadow-none text-decoration-none" v-if="!category?.isViewAll && category?.category_short_name">
+                                <div class="card-body text-start d-flex flex-column justify-content-between">
+                                    <p class="mb-4 pe-xxl-4 text-start">{{ category.category_short_name }}</p>
+                                    <img :src="useAssets('assets/tractor-img.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
+                                </div>
+                            </router-link>
+                            <router-link :to="{ name: 'business-sector-activities', params: { id: '' }}" v-else-if="category?.isViewAll" class="card shadow-none viewAllSectorsBtn text-decoration-none">
+                                <div class="card-body text-start d-flex flex-column justify-content-between">
+                                    <p class="mb-4 pe-5 text-start">View all Sectors</p>
+                                    <img :src="useAssets('assets/viewAll-icon1.svg')">
+                                </div>
+                            </router-link>
+                            <div v-else class="card border-0 shadow-none bg-transparent d-xl-block d-none">
+                                <p>Empty Spot</p>
                             </div>
-                        </div>
-                        <div class="card border-0 shadow-none bg-transparent d-xl-block d-none">
-                            <div class="card-body text-start d-flex flex-column justify-content-between">
-                                <p class="mb-4 pe-xxl-4 text-start"></p>
-                                <img src="">
-                            </div>
-                        </div>
-                        <div class="card shadow-none">
-                            <div class="card-body text-start d-flex flex-column justify-content-between">
-                                <p class="mb-4 pe-xxl-4 text-start">Agriculture, forestry and fishing</p>
-                                <img :src="useAssets('assets/tractor-img.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
-                            </div>
-                        </div>
-
-                        <div class="card shadow-none">
-                            <div class="card-body text-start d-flex flex-column justify-content-between">
-                                <p class="mb-4 pe-xxl-4 text-start">Manufacturing</p>
-                                <img :src="useAssets('assets/manufacture-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
-                            </div>
-                        </div>
-
-                        <div class="card shadow-none">
-                            <div class="card-body text-start d-flex flex-column justify-content-between">
-                                <p class="mb-4 pe-xxl-4 text-start">Transportation and Storage</p>
-                                <img :src="useAssets('assets/transport-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
-                            </div>
-                        </div>
-
-                        <div class="card shadow-none">
-                            <div class="card-body text-start d-flex flex-column justify-content-between">
-                                <p class="mb-4 pe-xxl-4 text-start">Transportation and Storage</p>
-                                <img :src="useAssets('assets/transport-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
-                            </div>
-                        </div>
-                        <div class="card border-0 shadow-none bg-transparent d-lg-block d-none">
-                            <div class="card-body text-start d-flex flex-column justify-content-between">
-                                <p class="mb-4 pe-xxl-4 text-start"></p>
-                                <img src="">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 mb-1 d-lg-flex d-none gap-1 justify-content-xl-between px-sm-5 px-4 flex-xl-nowrap flex-wrap">
-                        <div class="card shadow-none">
-                            <div class="card-body text-start d-flex flex-column justify-content-between">
-                                <p class="mb-4 pe-xxl-4 text-start">Transportation and Storage</p>
-                                <img :src="useAssets('assets/transport-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
-                            </div>
-                        </div>
-
-                        <div class="card shadow-none">
-                            <div class="card-body text-start d-flex flex-column justify-content-between">
-                                <p class="mb-4 pe-xxl-4 text-start">Mining and quarrying</p>
-                                <img :src="useAssets('assets/mining-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
-                            </div>
-                        </div>
-
-                        <div class="card shadow-none">
-                            <div class="card-body text-start d-flex flex-column justify-content-between">
-                                <p class="mb-4 pe-xxl-4 text-start">Education</p>
-                                <img :src="useAssets('assets/education-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
-                            </div>
-                        </div>
-
-                        <div class="card shadow-none">
-                            <div class="card-body text-start d-flex flex-column justify-content-between">
-                                <p class="mb-4 pe-xxl-4 text-start">Education</p>
-                                <img :src="useAssets('assets/education-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
-                            </div>
-                        </div>
-
-                        <div class="card shadow-none">
-                            <div class="card-body text-start d-flex flex-column justify-content-between">
-                                <p class="mb-4 pe-xxl-4 text-start">Transportation and Storage</p>
-                                <img :src="useAssets('assets/transport-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
-                            </div>
-                        </div>
-
-                        <div class="card shadow-none">
-                            <div class="card-body text-start d-flex flex-column justify-content-between">
-                                <p class="mb-4 pe-xxl-4 text-start">Information & Commination</p>
-                                <img :src="useAssets('assets/communication-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
-                            </div>
-                        </div>
-
-                        <div class="card shadow-none">
-                            <div class="card-body text-start d-flex flex-column justify-content-between">
-                                <p class="mb-4 pe-xxl-4 text-start">Information & Commination</p>
-                                <img :src="useAssets('assets/communication-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 mb-1 d-flex gap-1 justify-content-xl-between px-sm-5 px-4 flex-xl-nowrap flex-wrap">
-                        <div class="card shadow-none">
-                            <div class="card-body text-start d-flex flex-column justify-content-between">
-                                <p class="mb-4 pe-xxl-4 text-start">Transportation and Storage</p>
-                                <img :src="useAssets('assets/transport-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
-                            </div>
-                        </div>
-
-                        <div class="card shadow-none">
-                            <div class="card-body text-start d-flex flex-column justify-content-between">
-                                <p class="mb-4 pe-xxl-4 text-start">Education</p>
-                                <img :src="useAssets('assets/education-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
-                            </div>
-                        </div>
-
-                        <div class="card shadow-none">
-                            <div class="card-body text-start d-flex flex-column justify-content-between">
-                                <p class="mb-4 pe-xxl-4 text-start">Agriculture, forestry and fishing</p>
-                                <img :src="useAssets('assets/tractor-img.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
-                            </div>
-                        </div>
-
-                        <div class="card shadow-none d-lg-block d-none">
-                            <div class="card-body text-start d-flex flex-column justify-content-between">
-                                <p class="mb-4 pe-xxl-4 text-start">Manufacturing</p>
-                                <img :src="useAssets('assets/manufacture-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
-                            </div>
-                        </div>
-
-                        <div class="card shadow-none d-lg-block d-none">
-                            <div class="card-body text-start d-flex flex-column justify-content-between">
-                                <p class="mb-4 pe-xxl-4 text-start">Information & Commination</p>
-                                <img :src="useAssets('assets/communication-icon.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
-                            </div>
-                        </div>
-
-                        <a href="#" class="card shadow-none viewAllSectorsBtn text-decoration-none">
-                            <div class="card-body text-start d-flex flex-column justify-content-between">
-                                <p class="mb-4 pe-5 text-start">View all Sectors</p>
-                                <img :src="useAssets('assets/viewAll-icon1.svg')">
-                            </div>
-                        </a>
-
-                        <div class="card shadow-none border-0 bg-transparent d-lg-block d-none">
-                            <div class="card-body text-start d-flex flex-column justify-content-between">
-                                <p class="mb-4 pe-xxl-4 text-start"></p>
-                                <img :src="useAssets('assets/tractor-img.svg')">
-                            </div>
-                        </div>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -406,7 +305,7 @@ export default {
                                         <p class="mb-2">The textile industry is Pakistan's largest manufacturing sector, contributing over 60% to exports and employing a significant portion of the workforce. The sector is known for its cotton production, garments, and
                                             value-added products.</p>
                                         <p class="mb-2">With government incentives and modernization efforts, the industry is poised to expand into technical textiles and sustainable production methods to meet global demands.</p>
-                                        <a href="#" class="learnMoreBtn">Learn More</a>
+                                        <router-link :to="{ name: 'textile'}" class="learnMoreBtn">Learn More</router-link>
                                     </div>
 
                                     <div class="tab-pane fade" id="logistics-tab-pane" role="tabpanel" aria-labelledby="logistics-tab" tabindex="0">
@@ -416,7 +315,7 @@ export default {
                                             trade.
                                         </p>
                                         <p class="mb-2">Key areas of investment include warehousing, cold storage, and e-commerce logistics, driven by the rise of digital marketplaces.</p>
-                                        <a href="#" class="learnMoreBtn">Learn More</a>
+                                        <router-link :to="{ name: 'logistics'}" class="learnMoreBtn">Learn More</router-link>
                                     </div>
 
                                     <div class="tab-pane fade show active" id="foodProcessing-tab-pane" role="tabpanel" aria-labelledby="foodProcessing-tab" tabindex="0">
@@ -433,7 +332,7 @@ export default {
                                         <h6 class="mb-2">Automobile Manufacturing</h6>
                                         <p class="mb-2">The automobile industry in Pakistan is expanding rapidly, driven by increasing consumer demand and foreign investment. The sector includes the production of cars, motorbikes, and commercial vehicles.</p>
                                         <p class="mb-2">Government policies promoting local assembly and electric vehicle adoption are set to transform the market, creating new avenues for growth and sustainability.</p>
-                                        <a href="#" class="learnMoreBtn">Learn More</a>
+                                        <router-link :to="{ name: 'auto-mobile'}" class="learnMoreBtn">Learn More</router-link>
                                     </div>
 
                                     <div class="tab-pane fade" id="InfoTech-tab-pane" role="tabpanel" aria-labelledby="InfoTech-tab" tabindex="0">

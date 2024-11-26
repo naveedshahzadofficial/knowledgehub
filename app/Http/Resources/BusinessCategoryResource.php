@@ -16,7 +16,10 @@ class BusinessCategoryResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'category_name' => $this->category_name=='Select All'?'All types of business':$this->category_name
+            'category_name' => $this->category_name=='Select All'?'All types of business':$this->category_name,
+            'category_short_name' => $this->category_short_name,
+            'category_icon' => $this->category_icon,
+            'category_is_sector' => $this->category_is_sector
         ];
     }
 }

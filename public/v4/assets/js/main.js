@@ -1,11 +1,11 @@
-document.addEventListener("DOMContentLoaded", () => {
+/*document.addEventListener("DOMContentLoaded", () => {
     window.onload = () => {
         const preloader = document.querySelector(".preloader");
         if (preloader) {
             preloader.classList.add("hidden");
         }
     };
-});
+});*/
 
 document.querySelectorAll('#eBiz-landingNavbar .nav-link, #eBiz-landingNavbar .dropdown-item').forEach(link => {
     link.addEventListener('click', function (event) {
@@ -59,7 +59,21 @@ const images = {
     "textile-tab": "v4/assets/food-processing-img1.png",
     "InfoTech-tab": "v4/assets/food-processing-img1.png",
     "housing-tab": "v4/assets/food-processing-img1.png",
-    "tourism-tab": "v4/assets/food-processing-img1.png"
+    "tourism-tab": "v4/assets/food-processing-img1.png",
+    "frozen-food-tab": "v4/assets/frozen-food-img1.png",
+    "edible-oils-tab": "v4/assets/frozen-food-img1.png",
+    "value-addition-tab": "v4/assets/frozen-food-img1.png",
+    "fruits-dairy-tab": "v4/assets/frozen-food-img1.png",
+    "frozen-food-processing-tab": "v4/assets/frozen-food-img1.png",
+    "supply-chain-tab": "v4/assets/supply-chain-img.png",
+    "railway-network-tab": "v4/assets/supply-chain-img.png",
+    "public-private-tab": "v4/assets/supply-chain-img.png",
+    "geographic-location-tab": "v4/assets/supply-chain-img.png",
+    "agri-food-processing-tab": "v4/assets/supply-chain-img.png",
+    "productivity-tab": "v4/assets/productivity-img.png",
+    "domestic-garment-tab": "v4/assets/productivity-img.png",
+    "employment-tab": "v4/assets/productivity-img.png",
+    "comparative-advantage-tab": "v4/assets/productivity-img.png"
 };
 
 document.querySelectorAll('#investmentTabs .nav-link').forEach(tab => {
