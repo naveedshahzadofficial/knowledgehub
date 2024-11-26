@@ -142,7 +142,7 @@ export default {
                             <router-link :to="{ name: 'business-sector-activities', params: { id: category.id }}" class="card shadow-none text-decoration-none" v-if="!category?.isViewAll && category?.category_short_name">
                                 <div class="card-body text-start d-flex flex-column justify-content-between">
                                     <p class="mb-4 pe-xxl-4 text-start">{{ category.category_short_name }}</p>
-                                    <img :src="useAssets('assets/tractor-img.svg')" alt="Business Icon" class="comprehensiveBusinessImg">
+                                    <img :src="useAssets(category.category_icon)" alt="Business Icon" class="comprehensiveBusinessImg">
                                 </div>
                             </router-link>
                             <router-link :to="{ name: 'business-sector-activities', params: { id: '' }}" v-else-if="category?.isViewAll" class="card shadow-none viewAllSectorsBtn text-decoration-none">
