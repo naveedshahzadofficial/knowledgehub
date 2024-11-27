@@ -52,14 +52,62 @@ $('.owl-carousel').owlCarousel({
     }
 });
 
+    $('.owl-carousel:not(.sectorObjectiveCarousel)').owlCarousel({
+        loop: true,
+        margin: 10,
+        dots: false,
+        autoplay: true,
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 1,
+                nav: false
+            },
+            600: {
+                items: 3,
+                nav: false
+            },
+            1000: {
+                items: 6,
+                nav: false
+            }
+        }
+    });
+
+    $('.sectorObjectiveCarousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        dots: false,
+        autoplay: true,
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 1,
+                nav: false
+            },
+            600: {
+                items: 3,
+                nav: false
+            },
+            1000: {
+                items: 3,
+                nav: false
+            },
+            1200: {
+                items: 5,
+                nav: false
+            },
+        }
+    });
+
 const images = {
     "foodProcessing-tab": "v4/assets/food-processing-img1.png",
-    "logistics-tab": "v4/assets/food-processing-img1.png",
-    "autoMobile-tab": "v4/assets/food-processing-img1.png",
-    "textile-tab": "v4/assets/food-processing-img1.png",
-    "InfoTech-tab": "v4/assets/food-processing-img1.png",
-    "housing-tab": "v4/assets/food-processing-img1.png",
-    "tourism-tab": "v4/assets/food-processing-img1.png",
+    "logistics-tab": "v4/assets/logistics-landing-img.png",
+    "autoMobile-tab": "v4/assets/automobile-landing-img.png",
+    "textile-tab": "v4/assets/textile-landing-img.png",
+    "InfoTech-tab": "v4/assets/info-tech-landing-img.png",
+    "housing-tab": "v4/assets/housing-landing-img.png",
+    "tourism-tab": "v4/assets/tourism-landing-img.png",
     "frozen-food-tab": "v4/assets/frozen-food-img1.png",
     "edible-oils-tab": "v4/assets/frozen-food-img1.png",
     "value-addition-tab": "v4/assets/frozen-food-img1.png",
@@ -73,7 +121,9 @@ const images = {
     "productivity-tab": "v4/assets/productivity-img.png",
     "domestic-garment-tab": "v4/assets/productivity-img.png",
     "employment-tab": "v4/assets/productivity-img.png",
-    "comparative-advantage-tab": "v4/assets/productivity-img.png"
+    "comparative-advantage-tab": "v4/assets/productivity-img.png",
+    "hotels-tab": "v4/assets/hotels-img.png",
+    "foodService-tab": "v4/assets/hotels-img.png"
 };
 
 document.querySelectorAll('#investmentTabs .nav-link').forEach(tab => {

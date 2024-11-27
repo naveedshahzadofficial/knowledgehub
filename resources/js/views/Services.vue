@@ -296,7 +296,7 @@ export default {
                 <div class="row">
                     <div class="col-12">
                         <h1 class="mb-1">Services</h1>
-                        <p id="pageStartServices" class="mb-0">eBiz Punjab offers expert support to boost your business across various sectors.</p>
+                        <p id="pageStartServices" class="mb-0">Explore and search your business’ regulatory Registration, Licenses, Certificate and Other Permits</p>
                     </div>
                 </div>
             </div>
@@ -317,12 +317,12 @@ export default {
                     <label class="form-label">Business</label>
                     <v-select v-model="business_activity_id" :options="filteredBusinessActivities"
                               :reduce="sector => sector.id" label="easy_class_name"
-                              placeholder="Business Types" class="vSelectClass form-select" >
+                              placeholder="Search your business" class="vSelectClass form-select" >
                     </v-select>
                 </div>
 
                 <div class="col-md-5 mb-md-0 mb-3 mt-3">
-                    <label class="form-label">Is Construction Required?</label>
+                    <label class="form-label">Does your business require new construction or development?</label>
                     <div>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label" for="constructionYes">

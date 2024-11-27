@@ -16,6 +16,9 @@ import AutoMobile from "../views/AutoMobile.vue";
 import Textile from "../views/Textile.vue";
 import Logistics from "../views/Logistics.vue";
 import SectorBusinessTypeList from "../views/SectorBusinessTypeList.vue";
+import InformationTechnology from "../views/InformationTechnology.vue";
+import HousingConstruction from "../views/HousingConstruction.vue";
+import TourismHospitality from "../views/TourismHospitality.vue";
 
 export const router = createRouter({
     history: createWebHistory('/'),
@@ -93,6 +96,21 @@ export const router = createRouter({
             path: "/logistics",
             name: "logistics",
             component: Logistics,
+        },
+        {
+            path: "/information-technology",
+            name: "information-technology",
+            component: InformationTechnology,
+        },
+        {
+            path: "/housing-construction",
+            name: "housing-construction",
+            component: HousingConstruction,
+        },
+        {
+            path: "/tourism-hospitality",
+            name: "tourism-hospitality",
+            component: TourismHospitality,
         },
         {
             path: "/about-us",

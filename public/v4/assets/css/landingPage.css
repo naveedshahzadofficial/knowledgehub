@@ -259,11 +259,18 @@ header {
 }
 
 .visionSection p {
-    font-family: "font1", sans-serif;
     font-weight: 400;
     font-family: "font2", sans-serif;
     font-size: 22px;
     color: #1b3249;
+}
+
+.visionSection a {
+    font-family: "font2", sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: #1b3249;
+    text-decoration: underline;
 }
 
 
@@ -464,9 +471,9 @@ header {
 }
 
 .owl-carousel img {
-    width: 100px !important;
+    max-width: 160px !important;
     margin: auto;
-    height: 100px !important;
+    height: 80px !important;
     object-fit: contain;
 }
 
@@ -851,7 +858,6 @@ footer h5 {
 }
 
 .servicesPageData .col-lg-3 .card {
-    background: #fafafa;
     border: 0.50px solid #c0c0d2;
     border-radius: 30px;
 }
@@ -883,7 +889,7 @@ footer h5 {
 
 #eBizServicesTab1 button.active {
     border-radius: 10px;
-    background-color: rgb(0, 0, 0, 0.04);
+    background-color: rgb(40, 180, 104, 0.1);
 }
 
 .servicesPageData .card-title {
@@ -934,7 +940,7 @@ footer h5 {
 #eBizServicesTab2Content .card {
     border: 0.50px solid #c0c0d2;
     border-radius: 20px;
-    background: #fafafa;
+    background: #f4f5f8;
 }
 
 #eBizServicesTab2Content table thead td {
@@ -1001,7 +1007,7 @@ footer h5 {
     border: 0.50px solid #c0c0d2;
     border-radius: 20px;
     height: 50px;
-    background-color: #fafafa;
+    background-color: #f4f5f8;
 }
 
 #eBizServicesTab2 li button {
@@ -1139,6 +1145,27 @@ footer h5 {
 .sectorHighLightBgDiv {
     border-radius: 30px;
     background-image: url("../sectorHighLight-bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.sectorHighLightBgDiv-infoTech {
+    border-radius: 30px;
+    background-image: url("../sectorHighLightImg-infoTech.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.sectorHighLightBgDiv-textile {
+    border-radius: 30px;
+    background-image: url("../sectorHighLightImg-textile.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.sectorHighLightBgDiv-housing {
+    border-radius: 30px;
+    background-image: url("../sectorHighLightImg-housing.png");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -1299,6 +1326,104 @@ footer h5 {
 }
 
 
+/* Sector Details Page */
+
+.sectorDetailPage .row .card {
+    border: 1px solid #c9c9c9;
+    border-radius: 20px;
+}
+
+.sectorDetailBtn img {
+    width: 30px;
+    height: 30px;
+}
+
+
+/* Table Styling */
+
+table th {
+    font-size: 16px;
+    font-family: "font3", sans-serif;
+    font-weight: 600;
+    color: #3a3a3a !important;
+}
+
+table td {
+    font-weight: 400;
+    font-size: 18px;
+    font-family: "font2", sans-serif;
+    vertical-align: middle !important;
+    color: #1b3249 !important;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+    border-top: none !important;
+}
+
+div.dataTables_wrapper div.dataTables_length select,
+.dataTables_filter input {
+    width: 60px !important;
+    height: 35px !important;
+    line-height: 1;
+    padding: 5px;
+}
+
+.dataTables_filter input {
+    width: auto !important;
+}
+
+.page-link {
+    border: none;
+}
+
+.page-item.active .page-link {
+    border: 0.88px solid #28B468!important;
+    background-color: #fff !important;
+    border-radius: 3px !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    color: #28B468!important;
+}
+
+.page-link {
+    border: 0.88px solid #dfe3e8 !important;
+    background-color: #fff !important;
+    border-radius: 3px !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    color: #374c5b!important;
+    margin: 0 5px;
+}
+
+table thead th {
+    background-color: #f4f5f8 !important;
+    vertical-align: middle;
+    box-shadow: none !important;
+    border-bottom: none !important;
+}
+
+table thead th:nth-child(1),
+table tbody tr td:nth-child(1) {
+    padding-left: 16px;
+}
+
+table.dataTable.table-striped>tbody>tr:nth-of-type(2n+1)>* {
+    box-shadow: none !important;
+    background-color: rgb(244, 245, 248, 0.4);
+}
+
+.dataTables_wrapper .row {
+    padding: 0px 15px;
+}
+
+.dataTables_wrapper .dt-row {
+    padding: 0px;
+}
+
+.dataTables_wrapper .row:nth-child(3) {
+    margin-top: 10px !important;
+}
+
+
 /* Preloader */
 
 .preloader {
@@ -1397,6 +1522,9 @@ footer h5 {
     .comprehensiveSolutions .card {
         width: 16.2%;
     }
+    .allComprehensiveSolutions .card {
+        width: 16.65%;
+    }
     header p img {
         right: 2%;
     }
@@ -1423,6 +1551,9 @@ footer h5 {
     .comprehensiveSolutions .card {
         width: 24.6%;
     }
+    .allComprehensiveSolutions .card {
+        width: 25%;
+    }
     .businessEssentials h2,
     .faqsDiv h2,
     .newsDiv h2,
@@ -1447,11 +1578,17 @@ footer h5 {
     .comprehensiveSolutions .card {
         width: 24.5%;
     }
+    .allComprehensiveSolutions .card {
+        width: 25%;
+    }
 }
 
 @media screen and (max-width:767px) {
     .comprehensiveSolutions .card {
         width: 49.5%;
+    }
+    .allComprehensiveSolutions .card {
+        width: 49.6%;
     }
 }
 

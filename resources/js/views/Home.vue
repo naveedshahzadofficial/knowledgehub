@@ -31,7 +31,7 @@ export default {
         this.loadActivities();
         window.setTimeout(() => {
             usePreLoaderStore().setIsShow(true);
-        }, 2000);
+        }, 1000);
 
     },
     computed:{
@@ -83,11 +83,13 @@ export default {
             <div class="container-fluid px-lg-5 px-4">
                 <div class="row align-items-center">
                     <div class="col-lg-6 pe-lg-5">
-                        <h6>Driving Business Growth</h6>
+                        <h6>Driving Business Growth in Punjab</h6>
                         <h1 class="mb-3">Your gateway to seamless
                             <span class="d-inline-block">Business Solutions</span>
                         </h1>
-                        <p class="mb-4 pe-lg-5 position-relative">Empowering business with efficient, transparent, and accessible services. Discover, apply, and manage all your business needs in one place.
+                        <p class="mb-4 pe-lg-5 position-relative"><span style="font-weight: 600">All-in-one Business Centric Simplicity:</span> Empower your business with a
+                            platform designed for efficiency, transparency, and accessibility.
+                            Explore, apply, and manage like never before.
                             <img :src="useAssets('assets/down-arrow-icon.svg')" alt="arrow icon" class="position-absolute">
                         </p>
                         <div class="input-group mb-3 w-75">
@@ -118,7 +120,11 @@ export default {
                     <div class="col-lg-6 pt-lg-5 ps-lg-5">
                         <h3 class="mb-2">Chief Minister’s vision</h3>
                         <h4 class="mb-2">Promotes transparency efficiency and a business-friendly environment in Punjab</h4>
-                        <p class="mb-3">The launch of Knowledge Hub is a key step in streamlining business processes and reducing compliance burdens, supporting the Pakistan Regulatory Modernization Initiative.</p>
+                        <p class="mb-3">The launch of Knowledge Hub is a key step in streamlining business processes and reducing compliance burdens, supporting the Pakistan Regulatory Modernization Initiative.
+                            <span>
+                                <a href="#">Learn More</a>
+                            </span>
+                        </p>
                         <img :src="useAssets('assets/cm-signature.svg')" alt="">
                         <p class="mb-0">CM PUNJAB</p>
                     </div>
@@ -130,11 +136,12 @@ export default {
             <div class="container-fluid px-lg-5 px-4">
                 <div class="row mb-4">
                     <div class="col-12 text-center">
-                        <h2>Comprehensive <span>Business Solutions</span></h2>
+                        <h2><span>Business Sector</span></h2>
                     </div>
 
                     <div class="col-lg-6 mx-auto col-12 text-center mb-3">
-                        <p>Dive into eBiz Punjab's extensive resources and opportunities designed to elevate your business, from essential services to strategic investments.</p>
+                        <p>Discover the power of eBiz Punjab, where essential business-centric knowledge meets strategic
+                            opportunities to drive your business forward.</p>
                     </div>
 
                     <div v-for="(row, rowIndex) in organizedCategories" :key="'row-' + rowIndex" class="col-12 mb-1 d-lg-flex gap-1 justify-content-xl-between px-sm-5 px-4 flex-xl-nowrap flex-wrap">
@@ -207,16 +214,19 @@ export default {
                                 </div>
 
                                 <div class="col-lg-6 mx-auto col-12 text-center mb-3">
-                                    <p>eBiz Punjab provides streamlined services, regulatory news, and exclusive government support.</p>
+                                    <p>Unlock a new level of efficiency with eBiz Punjab’s services—designed for easy access, real-time
+                                        tracking, and complete traceability.</p>
                                 </div>
 
                                 <div class="row mx-0 mb-3">
                                     <div class="col-12 mb-3">
                                         <h4 class="d-flex align-items-center">
-                                            <span class="me-2">Apply now</span>
+                                            <span class="me-2">Registrations to Establish a Business</span>
                                             <img :src="useAssets('assets/right-arrow-icon.svg')" alt="">
                                         </h4>
-                                        <h5>New or Renewal of Business Registration</h5>
+                                        <h5>Starting a new business requires several essential registrations and licenses to ensure legal compliance
+                                            and smooth operations. Below is a list of key initial registrations that a business in Punjab may need,
+                                            depending on its nature</h5>
                                     </div>
 
                                     <ul class="list-unstyled d-flex flex-wrap">
@@ -233,10 +243,12 @@ export default {
                                 <div class="row mx-0">
                                     <div class="col-12 mb-3">
                                         <h4 class="d-flex align-items-center">
-                                            <span class="me-2">Requirements</span>
+                                            <span class="me-2">Regulatory Registrations, Licenses, Certification and other Permits (RLCOs) for Businesses to Operate</span>
                                             <img :src="useAssets('assets/right-arrow-icon.svg')" alt="">
                                         </h4>
-                                        <h5>Registrations, Licenses, Certifications & other Permits (RLCO’s)</h5>
+                                        <h5>When starting a new business or expanding an existing one in Pakistan, it's important to secure the
+                                            relevant Registrations, Licenses, Certifications, and Other Permits (RLCOs). Below is a comprehensive
+                                            guide outlining the key requirements</h5>
                                     </div>
 
                                     <ul class="list-unstyled d-flex flex-wrap">
@@ -256,7 +268,7 @@ export default {
             <div class="container-fluid px-lg-5 px-4">
                 <div class="row mb-4">
                     <div class="col-12 text-center">
-                        <h2>Investments <span>Sectors</span></h2>
+                        <h2>Key Investments <span>Sectors</span></h2>
                     </div>
 
                     <div class="col-lg-6 mx-auto col-12 text-center">
@@ -340,7 +352,7 @@ export default {
                                         <h6 class="mb-2">Information Technology</h6>
                                         <p class="mb-2">Pakistan's IT sector is a rising star, with exports exceeding $2 billion annually. The industry is known for its skilled workforce, offering software development, BPO services, and digital solutions to global clients.</p>
                                         <p class="mb-2">Investment opportunities abound in areas such as artificial intelligence, fintech, and cloud computing, supported by a thriving startup ecosystem.</p>
-                                        <a href="#" class="learnMoreBtn">Learn More</a>
+                                        <router-link :to="{ name: 'information-technology'}" class="learnMoreBtn">Learn More</router-link>
                                     </div>
 
                                     <div class="tab-pane fade" id="housing-tab-pane" role="tabpanel" aria-labelledby="housing-tab" tabindex="0">
@@ -348,7 +360,7 @@ export default {
                                         <h6 class="mb-2">Housing and Construction</h6>
                                         <p class="mb-2">The housing and construction sector in Pakistan is growing rapidly, driven by urbanization and government initiatives such as the Naya Pakistan Housing Program.</p>
                                         <p class="mb-2">With a focus on affordable housing and infrastructure development, the sector offers lucrative opportunities for investment in real estate and building materials.</p>
-                                        <a href="#" class="learnMoreBtn">Learn More</a>
+                                        <router-link :to="{ name: 'housing-construction'}" class="learnMoreBtn">Learn More</router-link>
                                     </div>
 
                                     <div class="tab-pane fade" id="tourism-tab-pane" role="tabpanel" aria-labelledby="tourism-tab" tabindex="0">
@@ -356,7 +368,7 @@ export default {
                                         <h6 class="mb-2">Tourism Industry</h6>
                                         <p class="mb-2">Pakistan's tourism industry is booming, with its stunning landscapes, cultural heritage, and adventure tourism attracting visitors from around the globe.</p>
                                         <p class="mb-2">Investment opportunities include eco-tourism, resort development, and heritage site restoration, supported by government incentives and global recognition.</p>
-                                        <a href="#" class="learnMoreBtn">Learn More</a>
+                                        <router-link :to="{ name: 'tourism-hospitality'}" class="learnMoreBtn">Learn More</router-link>
                                     </div>
                                 </div>
 
