@@ -25,6 +25,29 @@ export default {
         search: function (){
             this.$router.push({'name':'services', params:{ 'id': 0,'id2': this.business_activity_id}});
         },
+        initOwlCarousel() {
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 10,
+                dots: false,
+                autoplay: true,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: false
+                    },
+                    600: {
+                        items: 3,
+                        nav: false
+                    },
+                    1000: {
+                        items: 6,
+                        nav: false
+                    }
+                }
+            });
+        },
     },
     created() {
         usePreLoaderStore().setIsShow(false);
@@ -34,6 +57,10 @@ export default {
     },
     mounted() {
         this.loadActivities();
+        this.initOwlCarousel();
+    },
+    beforeUnmount() {
+        $('.owl-carousel').trigger('destroy.owl.carousel');
     },
     computed:{
         filteredBusinessCategories: function () {

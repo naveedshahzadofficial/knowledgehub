@@ -5,6 +5,35 @@ export default {
     name: "FoodProcessingPage",
     methods: {
         useAssets,
+        initOwlCarousel() {
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 10,
+                dots: false,
+                autoplay: true,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: false
+                    },
+                    600: {
+                        items: 3,
+                        nav: false
+                    },
+                    1000: {
+                        items: 6,
+                        nav: false
+                    }
+                }
+            });
+        },
+    },
+    mounted() {
+        this.initOwlCarousel();
+    },
+    beforeUnmount() {
+        $('.owl-carousel').trigger('destroy.owl.carousel');
     },
     created() {
         usePreLoaderStore().setIsShow(false);
