@@ -26,13 +26,14 @@ export default {
             this.$router.push({'name':'services', params:{ 'id': 0,'id2': this.business_activity_id}});
         },
     },
-    mounted() {
+    created() {
         usePreLoaderStore().setIsShow(false);
-        this.loadActivities();
         window.setTimeout(() => {
             usePreLoaderStore().setIsShow(true);
         }, 1000);
-
+    },
+    mounted() {
+        this.loadActivities();
     },
     computed:{
         filteredBusinessCategories: function () {
@@ -98,7 +99,7 @@ export default {
                             </span>
                             <v-select v-model="business_activity_id" :options="sectors"
                                       :reduce="sector => sector.id" label="easy_class_name"
-                                      placeholder="Search Business Type Name" class="form-control border-0 pt-1 bg-transparent ps-0">
+                                      placeholder="Search Your Business" class="form-control border-0 pt-1 bg-transparent ps-0">
                             </v-select>
 <!--                            <input type="search" class="form-control border-0 bg-transparent ps-0" placeholder="Search your business type……" aria-label="Search" aria-describedby="button-addon2">-->
                             <button class="btn findBusinessBtn m-2 px-4" @click.prevent="search" type="button" id="button-addon2">Search</button>

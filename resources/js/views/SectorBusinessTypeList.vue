@@ -30,12 +30,14 @@ export default {
             this.currentPage = page;
         },
     },
-    mounted() {
+    created() {
         usePreLoaderStore().setIsShow(false);
-        this.loadActivities();
         window.setTimeout(() => {
             usePreLoaderStore().setIsShow(true);
         }, 1000);
+    },
+    mounted() {
+        this.loadActivities();
         if(this.$route.params.id)
             this.business_category_id = parseInt(this.$route.params.id)
     },

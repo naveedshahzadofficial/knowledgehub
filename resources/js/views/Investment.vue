@@ -167,10 +167,17 @@
 
 <script>
 import {useAssets} from "@/composable/use-assets";
+import {usePreLoaderStore} from "../store/preloader";
 
 export default {
     name: "investment",
     methods: {useAssets},
+    created() {
+        usePreLoaderStore().setIsShow(false);
+        window.setTimeout(() => {
+            usePreLoaderStore().setIsShow(true);
+        }, 1000);
+    },
 };
 </script>
 

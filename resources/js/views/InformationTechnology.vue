@@ -6,12 +6,11 @@ export default {
     methods: {
         useAssets,
     },
-    mounted() {
+    created() {
         usePreLoaderStore().setIsShow(false);
         window.setTimeout(() => {
             usePreLoaderStore().setIsShow(true);
-        }, 2000);
-
+        }, 1000);
     },
 };
 </script>

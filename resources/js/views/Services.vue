@@ -122,12 +122,14 @@ export default {
             });
         }
     },
-    mounted() {
+    created() {
         usePreLoaderStore().setIsShow(false);
-        this.loadActivities();
         window.setTimeout(() => {
             usePreLoaderStore().setIsShow(true);
-        }, 2000);
+        }, 1000);
+    },
+    mounted() {
+        this.loadActivities();
     },
     computed: {
         filteredBusinessActivities: function (){
