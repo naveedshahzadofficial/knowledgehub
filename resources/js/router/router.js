@@ -19,6 +19,7 @@ import SectorBusinessTypeList from "../views/SectorBusinessTypeList.vue";
 import InformationTechnology from "../views/InformationTechnology.vue";
 import HousingConstruction from "../views/HousingConstruction.vue";
 import TourismHospitality from "../views/TourismHospitality.vue";
+import CmMessage from "@/views/CmMessage.vue";
 
 export const router = createRouter({
     history: createWebHistory('/'),
@@ -154,6 +155,11 @@ export const router = createRouter({
             path: "/investment",
             name: "investment",
             component: Investment,
+        },
+        {
+            path: "/cm-message",
+            name: "cm-message",
+            component: CmMessage,
         },
     ],
 });

@@ -1,12 +1,15 @@
-<script>
-import {useAssets} from "@/composable/use-assets";
-export default {
-    name: "AboutUsPage",
-    methods: {
-        useAssets,
-    },
+<script setup>
+import {useAssets} from "../composable/use-assets";
+import {onBeforeMount} from "vue";
+import {usePreLoaderStore} from "../store/preloader";
 
-};
+usePreLoaderStore().setIsShow(false);
+
+onBeforeMount(() => {
+    window.setTimeout(() => {
+        usePreLoaderStore().setIsShow(true);
+    }, 1000);
+})
 </script>
 
 <style scoped></style>

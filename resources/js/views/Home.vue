@@ -139,7 +139,7 @@ export default {
             </div>
         </header>
 
-        <section class="visionSection mb-5">
+        <section class="visionSection py-sm-5 py-4">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-lg-6 ps-lg-0 mb-lg-0 mb-3">
@@ -150,7 +150,7 @@ export default {
                         <h4 class="mb-2">Promotes transparency efficiency and a business-friendly environment in Punjab</h4>
                         <p class="mb-3">The launch of Knowledge Hub is a key step in streamlining business processes and reducing compliance burdens, supporting the Pakistan Regulatory Modernization Initiative.
                             <span>
-                                <a href="#">Learn More</a>
+                                <router-link :to="{ name: 'cm-message'} " >Learn More</router-link>
                             </span>
                         </p>
                         <img :src="useAssets('assets/cm-signature.svg')" alt="">
@@ -202,15 +202,15 @@ export default {
                         <h2><span>Connectivity</span> Simplified</h2>
                     </div>
 
-                    <div class="col-md-6 mx-auto col-12 text-center mb-3">
+                    <div class="col-xl-9 mx-auto col-12 text-center mb-3">
                         <p>eBiz Punjab simplifies business operations with streamlined services, timely regulatory updates, and exclusive government support.</p>
                     </div>
                 </div>
             </div>
 
             <div class="container-fluid">
-                <div class="row">
-                    <div class="owl-carousel owl-theme">
+                <div class="row mb-4">
+                    <div class="owl-carousel owl-theme mb-sm-5 mb-4">
                         <div class="item">
                             <img :src="useAssets('assets/fpcci-grey-icon.svg')" alt="">
                         </div>
@@ -223,9 +223,34 @@ export default {
                         <div class="item">
                             <img :src="useAssets('assets/epza-grey-icon.svg')" alt="">
                         </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="owl-carousel owl-theme">
+                        <div class="item">
+                            <img :src="useAssets('assets/lcci-grey-icon.svg')" alt="">
+                        </div>
+                        <div class="item">
+                            <img :src="useAssets('assets/fiedmc-grey-icon.svg')" alt="">
+                        </div>
+                        <div class="item">
+                            <img :src="useAssets('assets/epza-grey-icon.svg')" alt="">
+                        </div>
                         <div class="item">
                             <img :src="useAssets('assets/piedmc-grey-icon.svg')" alt="">
                         </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <router-link :to="{ name: 'connectivity'}" class="eBizPortalBtn border-0 p-4 d-inline-flex align-items-center justify-content-center text-decoration-none">
+                            <span class="me-2">Learn More</span>
+                            <span>
+                                <img :src="useAssets('assets/viewAll-icon.svg')">
+                            </span>
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -241,7 +266,7 @@ export default {
                                     <h2>Business <span>Essentials</span></h2>
                                 </div>
 
-                                <div class="col-lg-6 mx-auto col-12 text-center mb-3">
+                                <div class="col-xl-9 mx-auto col-12 text-center mb-3">
                                     <p>Unlock a new level of efficiency with eBiz Punjab’s services—designed for easy access, real-time
                                         tracking, and complete traceability.</p>
                                 </div>
@@ -257,14 +282,14 @@ export default {
                                             depending on its nature</h5>
                                     </div>
 
-                                    <ul class="list-unstyled d-flex flex-wrap">
-                                        <li class="mb-3 me-5"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=0#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Sole Proprietorship</a></li>
-                                        <li class="mb-3 me-5"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=1#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Association of Persons (Firm)</a></li>
-                                        <li class="mb-3 me-5"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=2#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Single Member Company</a></li>
-                                        <li class="mb-3 me-5"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=3#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Private Limited Company</a></li>
-                                        <li class="mb-3 me-5"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=4#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Public Limited Company</a></li>
-                                        <li class="mb-3 me-5"> Labour</li>
-                                        <li class="mb-3 me-5"> Pessi</li>
+                                    <ul class="list-unstyled row mx-0">
+                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=0#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Sole Proprietorship</a></li>
+                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=1#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Association of Persons (Firm)</a></li>
+                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=2#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Single Member Company</a></li>
+                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=3#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Private Limited Company</a></li>
+                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=4#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Public Limited Company</a></li>
+                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"> Labour</li>
+                                        <li class="col-xxl-3 col-xl-4 col-md-6"> Pessi</li>
                                     </ul>
                                 </div>
 
@@ -286,6 +311,7 @@ export default {
                                     </ul>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -427,47 +453,47 @@ export default {
 
                 <div class="row">
                     <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
-                        <div class="card">
+                        <a class="text-decoration-none card" href="https://www.brecorder.com/news/40320190/cheap-electricity-to-industries-punjab-examining-proposals-to-lay-direct-transmission-lines" target="_blank">
                             <img :src="useAssets('assets/news-img-1.png')" class="card-img-top" alt="news Img">
                             <div class="card-body">
                                 <h5>Cheap Electricity to Industries</h5>
                                 <p class="card-text text-start">Chief Minister Punjab Maryam Nawaz Sharif here met with a delegation of . . .</p>
                                 <h6>Business Recorder - August 31, 2024</h6>
                             </div>
-                        </div>
+                        </a>
                     </div>
 
                     <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
-                        <div class="card">
+                        <a class="text-decoration-none card"  href="https://arynews.tv/punjab-green-tractor-scheme-maryam-nawaz-conducts-lucky-draw/" target="_blank">
                             <img :src="useAssets('assets/news-img-6.png')" class="card-img-top" alt="news Img">
                             <div class="card-body">
                                 <h5>Punjab Green Tractor Scheme</h5>
                                 <p class="card-text text-start">Punjab Chief Minister (CM) Maryam Nawaz on Friday launched . . .</p>
                                 <h6>ARY News – November 1, 2024</h6>
                             </div>
-                        </div>
+                        </a>
                     </div>
 
                     <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
-                        <div class="card">
+                        <a class="text-decoration-none card"  href="https://profit.pakistantoday.com.pk/2024/11/05/cm-punjabs-livestock-card-a-gift-for-livestock-farmers/" target="_blank">
                             <img :src="useAssets('assets/news-img-3.png')" class="card-img-top" alt="news Img">
                             <div class="card-body">
                                 <h5>CM Punjab’s Livestock Card</h5>
                                 <p class="card-text text-start">The signing ceremony for the Memorandum of Understanding . . .</p>
                                 <h6>Pakistan Today – November 5, 2024</h6>
                             </div>
-                        </div>
+                        </a>
                     </div>
 
                     <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
-                        <div class="card">
+                        <a class="text-decoration-none card"  href="https://www.brecorder.com/news/40333662/cpec-38-projects-worth-25bn-already-completed#:~:text=ISLAMABAD%3A%20A%20total%20of%2038,Pakistan%20Economic%20Corridor%20(CPEC)" target="_blank">
                             <img :src="useAssets('assets/news-img-5.png')" class="card-img-top" alt="news Img">
                             <div class="card-body">
                                 <h5>CPEC: 38 projects</h5>
                                 <p class="card-text text-start">A total of 38 projects worth over $25 billion have been completed . . .</p>
                                 <h6>Business Recorder – Print 2024-11-21</h6>
                             </div>
-                        </div>
+                        </a>
                     </div>
 
 

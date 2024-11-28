@@ -1,39 +1,29 @@
+<script setup>
+
+import {useAssets} from "../composable/use-assets";
+</script>
 <template>
     <footer class="pt-md-5 pb-3">
         <div class="container-fluid px-md-5 px-4">
-            <div class="row align-items-start mb-5">
-                <div class="col-xl-6 col-sm-4 mb-xxl-0 mb-4 text-start">
+            <div class="row align-items-start mb-3">
+                <div class="col-12 mb-4 text-center">
                     <img :src="useAssets('assets/dash-logo1.svg')" alt="eBiz Logo">
                 </div>
 
-                <div class="col-xl-2 col-sm-4 mb-xxl-0 mb-4">
-                    <h6>Our Services</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2">The Support Suite</li>
-                        <li class="mb-2">The Sales Suite</li>
-                        <li class="mb-2">Support</li>
-                        <li class="mb-2">Guide</li>
-                    </ul>
-                </div>
+                <div class="col-12 d-flex text-center justify-content-center">
+                    <h6>
+                        <router-link :to="{ name: 'about-us'}" class="text-decoration-none border-end px-2">About Us</router-link>
+                    </h6>
+                    <h6>
+                        <router-link :to="{ name: 'contact-us'}" class="text-decoration-none border-end px-2">Contact Us</router-link>
 
-                <div class="col-xl-2 col-sm-4 mb-xxl-0 mb-4">
-                    <h6>Company</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2">About Us</li>
-                        <li class="mb-2">Press</li>
-                        <li class="mb-2">Investors</li>
-                        <li class="mb-2">Events</li>
-                    </ul>
-                </div>
-
-                <div class="col-xl-2 col-sm-4 mb-xxl-0 mb-4">
-                    <h6>Favourite Things</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2">For Enterprise </li>
-                        <li class="mb-2">For Startups</li>
-                        <li class="mb-2">For Benchmark</li>
-                        <li class="mb-2">For Small Business</li>
-                    </ul>
+                    </h6>
+                    <h6>
+                        <router-link :to="{ name: 'services'}" class="text-decoration-none border-end px-2">Services</router-link>
+                    </h6>
+                    <h6>
+                        <router-link :to="{ name: 'contact-us'}" class="text-decoration-none px-2">Helpdesk</router-link>
+                    </h6>
                 </div>
             </div>
             <div class="row">
@@ -44,20 +34,3 @@
         </div>
     </footer>
 </template>
-
-<script>
-import services from "../views/Services.vue";
-import {useAssets} from "../composable/use-assets";
-
-export default {
-    name: "FooterComponent",
-    methods: {useAssets},
-    computed: {
-        services() {
-            return services
-        }
-    },
-};
-</script>
-
-<style scoped></style>

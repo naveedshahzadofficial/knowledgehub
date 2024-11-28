@@ -306,7 +306,7 @@ export default {
 
         <div class="container-fluid px-md-5 px-4">
             <div class="row filterServicesDiv filterServicesDiv2 mx-0 mb-5 px-2 pt-3 pb-4 align-items-end">
-                <div class="col-md-5 mb-md-0 mb-3">
+                <div class="col-lg-6 mb-4">
                     <label class="form-label">Sectors</label>
                     <v-select v-model="business_category_id" :options="categories"
                               :reduce="category => category.id" label="category_name"
@@ -315,7 +315,7 @@ export default {
                     </v-select>
                 </div>
 
-                <div class="col-md-5 mb-md-0">
+                <div class="col-lg-6 mb-4">
                     <label class="form-label">Business</label>
                     <v-select v-model="business_activity_id" :options="filteredBusinessActivities"
                               :reduce="sector => sector.id" label="easy_class_name"
@@ -323,8 +323,8 @@ export default {
                     </v-select>
                 </div>
 
-                <div class="col-md-5 mb-md-0 mb-3 mt-3">
-                    <label class="form-label">Does your business require new construction or development?</label>
+                <div class="col-lg-6 mb-lg-0 mb-4">
+                    <label class="form-label d-block">Does your business require new construction or development?</label>
                     <div>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label" for="constructionYes">
@@ -341,7 +341,7 @@ export default {
                     </div>
                 </div>
 
-                <div class="col-md-5 mb-md-0 mt-3" v-if="construction_required == 1">
+                <div class="col-lg-4 mb-lg-0 mb-4" v-if="construction_required == 1">
                     <label class="form-label">Issuance Authority</label>
                     <v-select v-model="construction_department_id" :options="filteredDepartments"
                               :reduce="sector => sector.id" label="department_name"
@@ -349,19 +349,25 @@ export default {
                     </v-select>
                 </div>
 
-                <div class="col-md-5 mb-md-0 mb-3 mt-3">
-                    <label class="form-label">Common Required?</label>
+                <div :class="construction_required == 1?'col-lg-2':'col-lg-6'" class="d-flex justify-content-between parent-div align-items-end">
                     <div>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label" for="commonRequired">
-                                <input class="form-check-input" type="checkbox" v-model="common_required"
-                                       id="commonRequired" value="1" >
-                                <span>Yes</span></label>
+                        <label class="form-label d-block">Add on</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label" for="commonRequired">
+                                    <input class="form-check-input" type="checkbox" v-model="common_required"
+                                           id="commonRequired" value="1" >
+                                    <span>Yes</span></label>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="searchServiceBtn d-flex align-items-center justify-content-center">
+                        <button class="bg-transparent border-0">
+                            <img :src="useAssets('assets/search-icon.svg')" alt="">
+                        </button>
+                    </div>
 
-                <div class="col-12 my-4"></div>
+                </div>
             </div>
 
             <div class="row servicesPageData mb-3" id="servicesPageData" ref="rlco_position">
