@@ -180,9 +180,6 @@
                         maxlength: 14 // Allows for 11 digits, 1 decimal, and 2 decimal places
                     },
                     maximum_fee: {
-                        required: true,
-                        number: true,
-                        min: 0, // Ensure the minimum fee is a positive number
                         maxlength: 14 // Allows for 11 digits, 1 decimal, and 2 decimal places
                     },
                     fixed_fee: {

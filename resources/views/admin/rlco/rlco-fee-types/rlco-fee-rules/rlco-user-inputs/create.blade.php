@@ -34,6 +34,27 @@
                             </div>
                             @enderror
                         </div><!--form-group ends-->
+
+                        <div class="form-group">
+                            <label for="field_type">Minimum Value <span class="color-red-700"></span> </label>
+                            <input type="text" class="form-control  @error('minimum_value') is-invalid @enderror" name="minimum_value" value="{{ old('minimum_value') }}" id="minimum_value"   />
+                            @error('minimum_value')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div><!--form-group ends-->
+
+                        <div class="form-group">
+                            <label for="field_type">Maximum Value <span class="color-red-700"></span> </label>
+                            <input type="text" class="form-control  @error('maximum_value') is-invalid @enderror" name="maximum_value" value="{{ old('maximum_value') }}" id="maximum_value"   />
+                            @error('maximum_value')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div><!--form-group ends-->
+
                         <div class="form-group">
                             <label for="field_status">Field Type <span class="color-red-700">*</span></label>
                             <div class="radio-inline">
@@ -108,7 +129,7 @@
                 rules: {
                     rlco_fee_rule_id: {
                         required: true,
-                        digits: true // Ensures only integers are allowed
+                        digits: true
                     },
                     input_name: {
                         required: true,
@@ -118,12 +139,18 @@
                         required: true,
                         maxlength: 255
                     },
+                    minimum_value: {
+                        maxlength: 14 // Allows for 11 digits, 1 decimal, and 2 decimal places
+                    },
+                    maximum_value: {
+                        maxlength: 14 // Allows for 11 digits, 1 decimal, and 2 decimal places
+                    },
                     input_type: {
                         required: true,
                         maxlength: 255
                     },
                     validation_rules: {
-                        maxlength: 1000 // Optional field
+                        maxlength: 1000
                     },
                     status: {
                         required: true,

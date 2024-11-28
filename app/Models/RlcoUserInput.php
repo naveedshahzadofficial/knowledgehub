@@ -14,5 +14,5 @@ class RlcoUserInput extends Model
         return $this->belongsTo(RlcoFeeRule::class);
     }
 
-    protected $fillable = ['rlco_fee_rule_id', 'input_name', 'input_label', 'input_type', 'validation_rules', 'status'];
+    protected $fillable = ['rlco_fee_rule_id', 'input_name', 'input_label','minimum_value' , 'maximum_value' ,'input_type', 'validation_rules', 'status'];
 }

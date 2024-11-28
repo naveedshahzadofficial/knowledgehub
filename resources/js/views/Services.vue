@@ -305,7 +305,7 @@ export default {
         </header>
 
         <div class="container-fluid px-md-5 px-4">
-            <div class="row filterServicesDiv mb-3">
+            <div class="row filterServicesDiv filterServicesDiv2 mx-0 mb-5 px-2 pt-3 pb-4 align-items-end">
                 <div class="col-md-5 mb-md-0 mb-3">
                     <label class="form-label">Sectors</label>
                     <v-select v-model="business_category_id" :options="categories"

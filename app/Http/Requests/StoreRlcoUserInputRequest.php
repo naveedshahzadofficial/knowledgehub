@@ -26,6 +26,8 @@ class StoreRlcoUserInputRequest extends FormRequest
         return [
             'input_name' => 'required|string|max:255',
             'input_label' => 'required|string|max:255',
+            'minimum_value' => 'nullable|max:99999999999.99',
+            'maximum_value' => 'nullable|max:99999999999.99',
             'input_type' => 'required|string|max:255',
             'validation_rules' => 'nullable|string|max:1000',
             'status' => 'required|boolean',
