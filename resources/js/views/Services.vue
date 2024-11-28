@@ -440,12 +440,12 @@ export default {
                     </div>
                     <div class="card shadow-none" v-if="common_required == 1" style="margin-top: 20px !important;">
                         <div class="card-header bg-transparent border-0 p-3 pb-0 pt-20">
-                            <h5 class="card-title mb-2">Common Required Services ({{ searchedCommonRequiredRlcos.length }})</h5>
+                            <h5 class="card-title mb-2">Add on ({{ searchedCommonRequiredRlcos.length }})</h5>
                             <div class="input-group mb-3">
                                 <span class="input-group-text border-0 bg-transparent" id="basic-addon1">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </span>
-                                <input type="text" class="form-control border-0 bg-transparent" v-model="searchTermCommon" placeholder="Search Common Required Services" aria-label="Username" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control border-0 bg-transparent" v-model="searchTermCommon" placeholder="Search Add on" aria-label="Username" aria-describedby="basic-addon1">
                             </div>
                         </div>
                         <div class="card-body px-0 service_sidebar" ref="service_sidebar">
