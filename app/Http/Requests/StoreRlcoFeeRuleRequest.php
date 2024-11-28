@@ -28,6 +28,7 @@ class StoreRlcoFeeRuleRequest extends FormRequest
             'calculation_type' => 'required',
             'rate' => 'required|numeric|min:0|max:99999999999.99',  // Up to 11 digits with 2 decimals
             'minimum_fee' => 'required|numeric|min:0|max:99999999999.99',  // Up to 11 digits with 2 decimals
+            'maximum_fee' => 'required|numeric|min:0|max:99999999999.99',  // Up to 11 digits with 2 decimals
             'fixed_fee' => 'nullable|numeric|min:0|max:99999999999.99', // Optional, but valid if provided
             'unit' => 'nullable|max:255',  // Optional field, but if present, max length of 255
             'percentage' => 'nullable|numeric|min:0|max:100', // Percentage validation

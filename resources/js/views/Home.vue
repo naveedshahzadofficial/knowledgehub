@@ -428,11 +428,11 @@ export default {
                 <div class="row">
                     <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
                         <div class="card">
-                            <img :src="useAssets('assets/news-img-3.png')" class="card-img-top" alt="news Img">
+                            <img :src="useAssets('assets/news-img-1.png')" class="card-img-top" alt="news Img">
                             <div class="card-body">
-                                <h5>Education & Health</h5>
-                                <p class="card-text text-start">Education &amp; Health are on Top of My Priority List: PM Mian Shahbaz Sharif</p>
-                                <h6>July 10, 2024</h6>
+                                <h5>Cheap Electricity to Industries</h5>
+                                <p class="card-text text-start">Chief Minister Punjab Maryam Nawaz Sharif here met with a delegation of . . .</p>
+                                <h6>Business Recorder - August 31, 2024</h6>
                             </div>
                         </div>
                     </div>
@@ -441,20 +441,20 @@ export default {
                         <div class="card">
                             <img :src="useAssets('assets/news-img-6.png')" class="card-img-top" alt="news Img">
                             <div class="card-body">
-                                <h5>Lahore Garments City</h5>
-                                <p class="card-text text-start">Education &amp; Health are on Top of My Priority List: PM Mian Shahbaz Sharif</p>
-                                <h6>July 10, 2024</h6>
+                                <h5>Punjab Green Tractor Scheme</h5>
+                                <p class="card-text text-start">Punjab Chief Minister (CM) Maryam Nawaz on Friday launched . . .</p>
+                                <h6>ARY News – November 1, 2024</h6>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
                         <div class="card">
-                            <img :src="useAssets('assets/news-img-1.png')" class="card-img-top" alt="news Img">
+                            <img :src="useAssets('assets/news-img-3.png')" class="card-img-top" alt="news Img">
                             <div class="card-body">
-                                <h5>Education & Health</h5>
-                                <p class="card-text text-start">Education &amp; Health are on Top of My Priority List: CM Maryam Nawaz Sharif</p>
-                                <h6>July 10, 2024</h6>
+                                <h5>CM Punjab’s Livestock Card</h5>
+                                <p class="card-text text-start">The signing ceremony for the Memorandum of Understanding . . .</p>
+                                <h6>Pakistan Today – November 5, 2024</h6>
                             </div>
                         </div>
                     </div>
@@ -463,12 +463,14 @@ export default {
                         <div class="card">
                             <img :src="useAssets('assets/news-img-5.png')" class="card-img-top" alt="news Img">
                             <div class="card-body">
-                                <h5>Education & Health</h5>
-                                <p class="card-text text-start">Education &amp; Health are on Top of My Priority List: CM Maryam Nawaz Sharif</p>
-                                <h6>July 10, 2024</h6>
+                                <h5>CPEC: 38 projects</h5>
+                                <p class="card-text text-start">A total of 38 projects worth over $25 billion have been completed . . .</p>
+                                <h6>Business Recorder – Print 2024-11-21</h6>
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </section>

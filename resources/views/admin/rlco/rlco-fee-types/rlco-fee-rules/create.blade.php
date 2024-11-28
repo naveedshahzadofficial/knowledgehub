@@ -61,6 +61,17 @@
                             </div>
                             @enderror
                         </div><!--form-group ends-->
+
+                        <div class="form-group">
+                            <label for="field_type">Maximum Fee <span class="color-red-700"></span> </label>
+                            <input type="text" class="form-control  @error('maximum_fee') is-invalid @enderror" name="maximum_fee" value="{{ old('maximum_fee') }}" id="maximum_fee"   />
+                            @error('maximum_fee')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div><!--form-group ends-->
+
                         <div class="form-group">
                             <label for="field_type">Fixed Fee <span class="color-red-700"></span> </label>
                             <input type="text" class="form-control  @error('fixed_fee') is-invalid @enderror" name="fixed_fee" value="{{ old('fixed_fee') }}" id="fixed_fee"   />
@@ -170,6 +181,12 @@
                         min: 0, // Ensure the minimum fee is a positive number
                         maxlength: 14 // Allows for 11 digits, 1 decimal, and 2 decimal places
                     },
+                    maximum_fee: {
+                        required: true,
+                        number: true,
+                        min: 0, // Ensure the minimum fee is a positive number
+                        maxlength: 14 // Allows for 11 digits, 1 decimal, and 2 decimal places
+                    },
                     fixed_fee: {
                         required: false, // Only required if you need it to be mandatory
                         number: true,
@@ -219,6 +236,12 @@
                         number: "Minimum Fee must be a valid number.",
                         min: "Minimum Fee cannot be less than 0.",
                         maxlength: "Minimum Fee cannot exceed 14 digits and 2 decimal places."
+                    },
+                    maximum_fee: {
+                        required: "Maximum Fee is required.",
+                        number: "Maximum Fee must be a valid number.",
+                        min: "Maximum Fee cannot be less than 0.",
+                        maxlength: "Maximum Fee cannot exceed 14 digits and 2 decimal places."
                     },
                     fixed_fee: {
                         number: "Fixed Fee must be a valid number.",
