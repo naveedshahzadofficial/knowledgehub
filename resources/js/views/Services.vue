@@ -120,6 +120,9 @@ export default {
                     element.scrollIntoView({ behavior: 'smooth' });
                 }
             });
+        },
+        handleSearch() {
+
         }
     },
     created() {
@@ -362,7 +365,7 @@ export default {
                         </div>
                     </div>
                     <div class="searchServiceBtn d-flex align-items-center justify-content-center">
-                        <button class="bg-transparent border-0">
+                        <button class="bg-transparent border-0" @click.prevent="handleSearch">
                             <img :src="useAssets('assets/search-icon.svg')" alt="">
                         </button>
                     </div>
@@ -468,7 +471,7 @@ export default {
                     </div>
                 </div>
 
-                <div class="col-lg-9">
+                <div class="col-lg-9 mb-3">
                     <div class="card shadow-none mb-4">
                         <div class="card-body">
                             <div class="tab-content" id="eBizServicesTab1Content">
@@ -481,15 +484,17 @@ export default {
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="card shadow-none">
+                <div class="col-12 mt-3 d-none">
+                    <div class="card shadow-none rounded-5">
                         <div class="card-body px-2 pt-4 pb-2">
                             <div class="row mx-0 serviceCenterDiv">
                                 <div class="col-12 mb-2">
                                     <h3>Visiting a service center</h3>
                                 </div>
 
-                                <div class="col-xl-4 col-md-6 mb-3">
+                                <div class="col-xxl-3 col-md-6 mb-3">
                                     <button class="d-flex align-items-center justify-content-between px-3 py-2 w-100">
                                         <span>Book a Appointment</span>
                                         <span>
@@ -498,7 +503,7 @@ export default {
                                     </button>
                                 </div>
 
-                                <div class="col-xl-4 col-md-6 mb-3">
+                                <div class="col-xxl-3 col-md-6 mb-3">
                                     <button class="d-flex align-items-center justify-content-between px-3 py-2 w-100">
                                         <span>Change or Cancel Booking</span>
                                         <span>
@@ -506,25 +511,23 @@ export default {
                                         </span>
                                     </button>
                                 </div>
-                            </div>
 
-                            <div class="row mx-0 serviceCenterDiv">
-                                <div class="col-xl-4 col-md-6 mb-3">
-                                    <a href="https://bfc.punjab.gov.pk/" target="_blank" class="d-flex align-items-center justify-content-between px-3 py-2 w-100">
+                                <div class="col-xxl-3 col-md-6 mb-3">
+                                    <button class="d-flex align-items-center justify-content-between px-3 py-2 w-100">
                                         <span>Find a Facilitation Center</span>
                                         <span>
                                             <img :src="useAssets('assets/viewAll-icon.svg')" alt="viewAll-icon">
                                         </span>
-                                    </a>
+                                    </button>
                                 </div>
 
-                                <div class="col-xl-4 col-md-6 mb-3">
-                                    <a href="https://bfc.punjab.gov.pk/#our_locations" target="_blank" class="d-flex align-items-center justify-content-between px-3 py-2 w-100">
+                                <div class="col-xxl-3 col-md-6 mb-3">
+                                    <button class="d-flex align-items-center justify-content-between px-3 py-2 w-100">
                                         <span>Our Location</span>
                                         <span>
                                             <img :src="useAssets('assets/viewAll-icon.svg')" alt="viewAll-icon">
                                         </span>
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         </div>
