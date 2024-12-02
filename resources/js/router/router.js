@@ -31,6 +31,12 @@ export const router = createRouter({
             }
             return false;
         }
+        if (to.name === 'contact-us') {
+            // Disable scrolling for 'service-detail'
+            if (to.hash) {
+                return { selector: to.hash , top:600};
+            }
+        }
         if (to.name === 'home') {
             // Disable scrolling for 'home'
             return false;

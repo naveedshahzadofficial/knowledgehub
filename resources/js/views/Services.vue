@@ -102,6 +102,7 @@ export default {
             }
         },
         navigateToFirstSearchedRlco(firstRlcoId) {
+            console.log(1234567);
             // Navigate to the first RLCO's service detail
             this.$router.push({
                 name: 'service-detail',
@@ -156,18 +157,6 @@ export default {
                 const term = this.searchTermCommon.toLowerCase();
                 return rlco.rlco_name.toLowerCase().includes(term);
             });
-        },
-        checkWhichFunctionRlcoLoad(){
-            if (this.filteredRlcos().length > 0) {
-                return this.filteredRlcos();
-            }
-            if (this.filteredConstructionRlcos().length > 0) {
-                return this.filteredConstructionRlcos();
-            }
-            if (this.filteredCommonRequiredRlcos().length > 0) {
-                return this.filteredCommonRequiredRlcos();
-            }
-            return null;
         },
         filteredDepartments: function () {
             // Filter rlcos with construction_flag === 1
@@ -254,6 +243,18 @@ export default {
                 }
                 return this.business_category_id ? sector.business_category_id === this.business_category_id : true;
             });
+        },
+        checkWhichFunctionRlcoLoad(){
+            if (this.searchedRlcos().length > 0 && this.business_activity_id) {
+                return this.searchedRlcos();
+            }
+            if (this.searchedConstructionRlcos().length > 0 && this.construction_department_id) {
+                return this.searchedConstructionRlcos();
+            }
+            if (this.searchedCommonRequiredRlcos().length > 0) {
+                return this.searchedCommonRequiredRlcos();
+            }
+            return null;
         },
     }
 
@@ -442,7 +443,6 @@ export default {
                             </ul>
                         </div>
                     </div>
-                    <div class="clearfix"></div>
                     <div class="card shadow-none" v-if="construction_required_tile == 1" style="margin-top: 20px !important;">
                         <div class="card-header bg-transparent border-0 p-3 pb-0 pt-20">
                             <h5 class="card-title mb-2">Construction Required Services</h5>
@@ -507,7 +507,7 @@ export default {
                     </div>
                 </div>
 
-                <div class="col-lg-7 mb-3">
+                <div class="col-lg-7 mb-3" v-if="business_activity_id_flag === 1 || common_addon_flag === 1 || construction_required_tile === 1">
                     <div class="card shadow-none mb-4">
                         <div class="card-body">
                             <div class="tab-content" id="eBizServicesTab1Content">
