@@ -111,7 +111,7 @@ export default {
             <div class="container-fluid px-lg-5 px-4">
                 <div class="row align-items-center">
                     <div class="col-lg-6 pe-xl-5">
-                        <h6>Driving Business Growth</h6>
+                        <h6>Driving Business Growth in Punjab</h6>
                         <h1 class="mb-3">Your gateway to seamless
                             <span class="d-inline-block">Business Solutions</span>
                         </h1>

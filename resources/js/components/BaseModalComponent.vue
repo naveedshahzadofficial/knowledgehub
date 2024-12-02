@@ -1,13 +1,11 @@
 <template>
     <div>
-    <div class="modal fade show" tabindex="-1" style="display: block; !important;">
+    <div class="modal show" tabindex="-1" style="display: block; !important;">
         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">{{  title  }}</h5>
-                    <button type="button" class="close" @click.prevent="$emit('toggle-modal')" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" @click.prevent="$emit('toggle-modal')" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <p><slot></slot></p>

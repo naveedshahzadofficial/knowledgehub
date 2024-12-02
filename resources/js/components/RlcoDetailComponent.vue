@@ -120,6 +120,7 @@
                                     "
                                         @click.prevent="toggleModal"
                                         class="make-link"
+                                        style="cursor: pointer;"
                                     >Fee Details</span
                                     >
                                     <span
