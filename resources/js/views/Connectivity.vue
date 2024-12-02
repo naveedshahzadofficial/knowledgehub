@@ -31,7 +31,7 @@
                                                 <img :src="useAssets('assets/pbit-icon.png')" alt="piedmc Icon" class="img-fluid">
                                             </div>
                                             <div class="div col-md-10">
-                                                <h6 class="ps-4 mb-4">Punjab Industrial Estates Development and Management Company (PIEDMC)</h6>
+                                                <h6 class="ps-4 mb-4">Punjab Board of Investment and Trade</h6>
                                                 <p class="mb-2 text-start d-flex">
                                                     <span>Role : </span>
                                                     <span class="ms-2">
@@ -505,39 +505,6 @@
                                                         </a>
                                                     </span>
                                                 </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="mb-3">
-                                <div class="card shadow-none bg-white">
-                                    <div class="card-body px-4 py-3">
-                                        <div class="row">
-                                            <div class="col-md-2 mb-md-0 mb-3 text-md-start text-center">
-                                                <img :src="useAssets('assets/private-banks-icon.png')" alt="piedmc Icon" class="img-fluid">
-                                            </div>
-                                            <div class="div col-md-10">
-                                                <h6 class="ps-4 mb-4">Private Commercial Banks</h6>
-                                                <p class="mb-2 text-start d-flex">
-                                                    <span>Role : </span>
-                                                    <span class="ms-2">
-                                                        Many private banks, such as Meezan  Bank, MCB, and HBL, offer business loans and  specialized financing options for new  enterprises.
-                                                    </span>
-                                                </p>
-                                                <p class="mb-2 text-start d-flex">
-                                                    <span>Services :</span>
-                                                    <span class="ms-2">
-                                                        Loans, leasing options, and financial  advisory services tailored for various industries,  including agriculture, SMEs, and large  enterprises.
-                                                    </span>
-                                                </p>
-                                                <!-- <p class="mb-0 text-start d-flex">
-                                                    <span>Website :</span>
-                                                    <span class="ms-2">
-
-                                                    </span>
-                                                </p> -->
                                             </div>
                                         </div>
                                     </div>

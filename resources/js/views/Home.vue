@@ -70,15 +70,12 @@ export default {
             const categories = [...this.filteredBusinessCategories];
             const rows = [];
             rows.push([
-                {}, {},
-                ...categories.splice(0, 4),
-                {},
+                ...categories.splice(0, 7),
             ]);
             rows.push(categories.splice(0, 7));
             rows.push([
-                ...categories.splice(0, 5),
+                ...categories.splice(0, 6),
                 { category_short_name: 'View All', isViewAll: true },
-                {},
             ]);
             return rows;
         },
@@ -106,12 +103,12 @@ export default {
 }
 </style>
 <template>
-    <div data-bs-spy="scroll" id="homeStartPage" data-bs-target="#eBiz-landingNavbar" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="content z-2 position-relative" tabindex="0">
-        <header id="scrollspyHeading">
+    <div data-bs-spy="scroll" data-bs-target="#eBiz-landingNavbar" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="content z-2 position-relative landingContent" tabindex="0">
+        <header id="scrollspyHeading" class="landingHeader">
             <div class="container-fluid px-lg-5 px-4">
                 <div class="row align-items-center">
-                    <div class="col-lg-6 pe-lg-5">
-                        <h6>Driving Business Growth in Punjab</h6>
+                    <div class="col-lg-6 pe-xl-5">
+                        <h6>Driving Business Growth</h6>
                         <h1 class="mb-3">Your gateway to seamless
                             <span class="d-inline-block">Business Solutions</span>
                         </h1>
@@ -128,12 +125,11 @@ export default {
                                       :reduce="sector => sector.id" label="easy_class_name"
                                       placeholder="Search Your Business" class="form-control border-0 pt-1 bg-transparent ps-0">
                             </v-select>
-<!--                            <input type="search" class="form-control border-0 bg-transparent ps-0" placeholder="Search your business type……" aria-label="Search" aria-describedby="button-addon2">-->
                             <button class="btn findBusinessBtn m-2 px-4" @click.prevent="search" type="button" id="button-addon2">Search</button>
                         </div>
                     </div>
-                    <div class="col-lg-6 d-lg-block d-none ps-5">
-                        <img :src="useAssets('assets/landing_page_header_img.png')" alt="Img" class="img-fluid w-100">
+                    <div class="col-lg-6 d-lg-block d-none ps-xl-5 text-end">
+                        <img :src="useAssets('assets/landing_page_header_img.png')" alt="Img" class="img-fluid">
                     </div>
                 </div>
             </div>
@@ -154,7 +150,7 @@ export default {
                             </span>
                         </p>
                         <img :src="useAssets('assets/cm-signature.svg')" alt="">
-                        <p class="mb-0">CM PUNJAB</p>
+                        <p class="mb-0">Chief Minister Punjab</p>
                     </div>
                 </div>
             </div>
@@ -164,10 +160,10 @@ export default {
             <div class="container-fluid px-lg-5 px-4">
                 <div class="row mb-4">
                     <div class="col-12 text-center">
-                        <h2><span>Business Sector</span></h2>
+                        <h2>Business <span>Sector</span></h2>
                     </div>
 
-                    <div class="col-lg-6 mx-auto col-12 text-center mb-3">
+                    <div class="col-lg-6 mx-auto col-12 text-center">
                         <p>Discover the power of eBiz Punjab, where essential business-centric knowledge meets strategic
                             opportunities to drive your business forward.</p>
                     </div>
@@ -176,13 +172,13 @@ export default {
                         <template v-for="category in row">
                             <router-link :to="{ name: 'business-sector-activities', params: { id: category.id }}" class="card shadow-none text-decoration-none" v-if="!category?.isViewAll && category?.category_short_name">
                                 <div class="card-body text-start d-flex flex-column justify-content-between">
-                                    <p class="mb-4 pe-xxl-4 text-start">{{ category.category_short_name }}</p>
-                                    <img :src="useAssets(category.category_icon)" alt="Business Icon" class="comprehensiveBusinessImg">
+                                    <p class="mb-2 text-start">{{ category.category_short_name }}</p>
+                                    <img :src="useAssets(category.category_icon)" alt="Business Icon" class="comprehensiveBusinessImg comprehensiveBusinessImg1">
                                 </div>
                             </router-link>
                             <router-link :to="{ name: 'business-sector-activities', params: { id: '' }}" v-else-if="category?.isViewAll" class="card shadow-none viewAllSectorsBtn text-decoration-none">
                                 <div class="card-body text-start d-flex flex-column justify-content-between">
-                                    <p class="mb-4 pe-5 text-start">View all Sectors</p>
+                                    <p class="mb-4 pe-2 text-start">View all Businesses</p>
                                     <img :src="useAssets('assets/viewAll-icon1.svg')">
                                 </div>
                             </router-link>
@@ -190,6 +186,66 @@ export default {
                                 <p>Empty Spot</p>
                             </div>
                         </template>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="businessEssentials py-sm-5 py-4" id="scrollspyHeading2">
+            <div class="container-fluid px-5">
+                <div class="row mb-4">
+                    <div class="col-12 businessEssentialsBgDiv py-sm-5 py-4">
+                        <div class="container px-md-5">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <h2>Business <span>Essentials</span></h2>
+                                </div>
+
+                                <div class="col-xl-9 mx-auto col-12 text-center mb-3">
+                                    <p>Unlock a new level of efficiency with eBiz Punjab’s services—designed for easy access, real-time
+                                        tracking, and complete traceability.</p>
+                                </div>
+
+                                <div class="row mx-0 mb-3">
+                                    <div class="col-12 mb-3">
+                                        <h4 class="d-flex align-items-center">
+                                            <span class="me-2">Registrations to Establish a Business</span>
+                                        </h4>
+                                        <h5>Starting a new business requires several essential registrations and licenses to ensure legal compliance
+                                            and smooth operations. Below is a list of key initial registrations that a business in Punjab may need,
+                                            depending on its nature</h5>
+                                    </div>
+
+                                    <ul class="list-unstyled row mx-0">
+                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://iris.fbr.gov.pk/login" target="_blank" class="text-decoration-none text-white">Sole Proprietorship</a></li>
+                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://register.business.punjab.gov.pk/" target="_blank" class="text-decoration-none text-white">Association of Persons (Firm)</a></li>
+                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://leap.secp.gov.pk/#/landing-page" target="_blank" class="text-decoration-none text-white">Single Member Company</a></li>
+                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://leap.secp.gov.pk/#/landing-page" target="_blank" class="text-decoration-none text-white">Private Limited Company</a></li>
+                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://leap.secp.gov.pk/#/landing-page" target="_blank" class="text-decoration-none text-white">Public Limited Company</a></li>
+                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://register.business.punjab.gov.pk/" target="_blank" class="text-decoration-none text-white">Labour</a></li>
+                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://register.business.punjab.gov.pk/" target="_blank" class="text-decoration-none text-white">PESSI</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="row mx-0">
+                                    <div class="col-12 mb-3">
+                                        <h4 class="d-flex align-items-center">
+                                            <span class="me-2">Regulatory Registrations, Licenses, Certification and other Permits (RLCOs) for Businesses to Operate</span>
+                                        </h4>
+                                        <h5>When starting a new business or expanding an existing one in Pakistan, it's important to secure the
+                                            relevant Registrations, Licenses, Certifications, and Other Permits (RLCOs). Below is a comprehensive
+                                            guide outlining the key requirements</h5>
+                                    </div>
+
+                                    <ul class="list-unstyled d-flex flex-wrap">
+                                        <li class="col-xxl-3 col-xl-4 col-md-6"><router-link class="text-decoration-none text-white" :to="{ name: 'services'}" >Explore RLCOs</router-link></li>
+                                        <li class="col-xxl-3 col-xl-4 col-md-6"><a :href="apply_ebiz_url" class="text-decoration-none text-white">Apply RLCOs</a></li>
+                                        <li class="col-xxl-3 col-xl-4 col-md-6"><a :href="apply_ebiz_url" class="text-decoration-none text-white">Track the Progress of Applied RLCOs</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -256,68 +312,6 @@ export default {
             </div>
         </section>
 
-        <section class="businessEssentials py-sm-5 py-4" id="scrollspyHeading2">
-            <div class="container-fluid px-5">
-                <div class="row mb-4">
-                    <div class="col-12 businessEssentialsBgDiv py-sm-5 py-4">
-                        <div class="container px-md-5">
-                            <div class="row">
-                                <div class="col-12 text-center">
-                                    <h2>Business <span>Essentials</span></h2>
-                                </div>
-
-                                <div class="col-xl-9 mx-auto col-12 text-center mb-3">
-                                    <p>Unlock a new level of efficiency with eBiz Punjab’s services—designed for easy access, real-time
-                                        tracking, and complete traceability.</p>
-                                </div>
-
-                                <div class="row mx-0 mb-3">
-                                    <div class="col-12 mb-3">
-                                        <h4 class="d-flex align-items-center">
-                                            <span class="me-2">Registrations to Establish a Business</span>
-                                            <img :src="useAssets('assets/right-arrow-icon.svg')" alt="">
-                                        </h4>
-                                        <h5>Starting a new business requires several essential registrations and licenses to ensure legal compliance
-                                            and smooth operations. Below is a list of key initial registrations that a business in Punjab may need,
-                                            depending on its nature</h5>
-                                    </div>
-
-                                    <ul class="list-unstyled row mx-0">
-                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=0#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Sole Proprietorship</a></li>
-                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=1#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Association of Persons (Firm)</a></li>
-                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=2#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Single Member Company</a></li>
-                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=3#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Private Limited Company</a></li>
-                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://business.punjab.gov.pk/starting-business?qt-types_of_business_entities=4#qt-types_of_business_entities" target="_blank" class="text-decoration-none text-white">Public Limited Company</a></li>
-                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"> Labour</li>
-                                        <li class="col-xxl-3 col-xl-4 col-md-6"> Pessi</li>
-                                    </ul>
-                                </div>
-
-                                <div class="row mx-0">
-                                    <div class="col-12 mb-3">
-                                        <h4 class="d-flex align-items-center">
-                                            <span class="me-2">Regulatory Registrations, Licenses, Certification and other Permits (RLCOs) for Businesses to Operate</span>
-                                            <img :src="useAssets('assets/right-arrow-icon.svg')" alt="">
-                                        </h4>
-                                        <h5>When starting a new business or expanding an existing one in Pakistan, it's important to secure the
-                                            relevant Registrations, Licenses, Certifications, and Other Permits (RLCOs). Below is a comprehensive
-                                            guide outlining the key requirements</h5>
-                                    </div>
-
-                                    <ul class="list-unstyled d-flex flex-wrap">
-                                        <li class="mb-3 me-5"><router-link class="text-decoration-none text-white" :to="{ name: 'services'}" >Explore RLCOs</router-link></li>
-                                        <li class="mb-3 me-5"><a :href="apply_ebiz_url" class="text-decoration-none text-white">Apply RLCOs</a></li>
-                                        <li class="mb-3 me-5"><a :href="apply_ebiz_url" class="text-decoration-none text-white">Track the Progress of Applied RLCOs</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section class="investmentsDiv py-sm-5 py-4" id="scrollspyHeading4">
             <div class="container-fluid px-lg-5 px-4">
                 <div class="row mb-4">
@@ -326,7 +320,7 @@ export default {
                     </div>
 
                     <div class="col-lg-6 mx-auto col-12 text-center">
-                        <p class="mb-2">Fuel your business's growth with strategic insights and investment capital. Discover new opportunities, optimize operations, and scale up your business.</p>
+                        <p class="mb-2">Fuel your business's growth with strategic insights and investment capital.</p>
                     </div>
                 </div>
 
@@ -439,24 +433,24 @@ export default {
             </div>
         </section>
 
-        <section class="newsDiv py-sm-5 py-4">
+        <section class="newsDiv py-sm-5 py-4" id="scrollspyHeading6">
             <div class="container-fluid px-lg-5 px-4">
-                <div class="row mb-4">
+                <div class="row mb-1">
                     <div class="col-12 text-center">
                         <h2>Discover <span>News</span></h2>
                     </div>
 
-                    <div class="col-lg-6 mx-auto col-12 text-center">
+                    <div class="col-xl-6 mx-auto col-12 text-center">
                         <p class="mb-2">Find relevant, easy-to-read business articles to stay up-to-date on laws and regulations, useful resources, and government programs to help you start, run, and grow your business.</p>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
-                        <a class="text-decoration-none card" href="https://www.brecorder.com/news/40320190/cheap-electricity-to-industries-punjab-examining-proposals-to-lay-direct-transmission-lines" target="_blank">
+                        <a class="card text-decoration-none h-100" href="https://www.brecorder.com/news/40320190/cheap-electricity-to-industries-punjab-examining-proposals-to-lay-direct-transmission-lines" target="_blank">
                             <img :src="useAssets('assets/news-img-1.png')" class="card-img-top" alt="news Img">
                             <div class="card-body">
-                                <h5>Cheap Electricity to Industries</h5>
+                                <h5>Cheap Electricity to Industries </h5>
                                 <p class="card-text text-start">Chief Minister Punjab Maryam Nawaz Sharif here met with a delegation of . . .</p>
                                 <h6>Business Recorder - August 31, 2024</h6>
                             </div>
@@ -464,7 +458,7 @@ export default {
                     </div>
 
                     <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
-                        <a class="text-decoration-none card"  href="https://arynews.tv/punjab-green-tractor-scheme-maryam-nawaz-conducts-lucky-draw/" target="_blank">
+                        <a class="text-decoration-none card h-100"  href="https://arynews.tv/punjab-green-tractor-scheme-maryam-nawaz-conducts-lucky-draw/" target="_blank">
                             <img :src="useAssets('assets/news-img-6.png')" class="card-img-top" alt="news Img">
                             <div class="card-body">
                                 <h5>Punjab Green Tractor Scheme</h5>
@@ -475,7 +469,7 @@ export default {
                     </div>
 
                     <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
-                        <a class="text-decoration-none card"  href="https://profit.pakistantoday.com.pk/2024/11/05/cm-punjabs-livestock-card-a-gift-for-livestock-farmers/" target="_blank">
+                        <a class="text-decoration-none card h-100"  href="https://profit.pakistantoday.com.pk/2024/11/05/cm-punjabs-livestock-card-a-gift-for-livestock-farmers/" target="_blank">
                             <img :src="useAssets('assets/news-img-3.png')" class="card-img-top" alt="news Img">
                             <div class="card-body">
                                 <h5>CM Punjab’s Livestock Card</h5>
@@ -486,7 +480,7 @@ export default {
                     </div>
 
                     <div class="col-xl-3 col-lg-4 col-sm-6 mb-xl-0 mb-3">
-                        <a class="text-decoration-none card"  href="https://www.brecorder.com/news/40333662/cpec-38-projects-worth-25bn-already-completed#:~:text=ISLAMABAD%3A%20A%20total%20of%2038,Pakistan%20Economic%20Corridor%20(CPEC)" target="_blank">
+                        <a class="text-decoration-none card h-100"  href="https://www.brecorder.com/news/40333662/cpec-38-projects-worth-25bn-already-completed#:~:text=ISLAMABAD%3A%20A%20total%20of%2038,Pakistan%20Economic%20Corridor%20(CPEC)" target="_blank">
                             <img :src="useAssets('assets/news-img-5.png')" class="card-img-top" alt="news Img">
                             <div class="card-body">
                                 <h5>CPEC: 38 projects</h5>
@@ -495,20 +489,18 @@ export default {
                             </div>
                         </a>
                     </div>
-
-
                 </div>
             </div>
         </section>
 
-        <section class="faqsDiv py-sm-5 py-4" id="scrollspyHeading5">
+        <section class="faqsDiv py-sm-5 py-4" id="scrollspyHeading7">
             <div class="container-fluid px-lg-5 px-4">
-                <div class="row mb-4">
+                <div class="row mb-2">
                     <div class="col-12 text-center">
                         <h2>Frequently Asked <span>Questions</span></h2>
                     </div>
 
-                    <div class="col-lg-6 mx-auto col-12 text-center">
+                    <div class="col-xl-6 mx-auto col-12 text-center">
                         <p class="mb-2">Discover detailed information on services, application procedures, and troubleshooting tips, all conveniently located in one place. </p>
                     </div>
                 </div>
@@ -521,12 +513,14 @@ export default {
                             <div class="accordion-item mb-3 expanded">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        What types of services are available on the eBiz Punjab platform?
+                                        What type of services are available on eBiz Portal?
                                     </button>
                                 </h2>
                                 <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                                     <div class="accordion-body pt-0">
-                                        eBiz offer services like <strong>Agriculture</strong>, <strong>forestry</strong> and <strong>fishing Rice Farming</strong>
+                                        The <strong>eBiz Portal</strong> simplifies the process of obtaining essential business services by providing a centralized business centric platform where businesses can access registrations, licenses, certifications,
+                                        and other permits required by various government departments and agencies. This integrated approach ensures that businesses can easily navigate regulatory requirements and comply with the necessary legal frameworks.
+                                        By working closely with government bodies, the portal streamlines these processes, reducing hurdles and enabling businesses to focus on growth and innovation with greater efficiency.
                                     </div>
                                 </div>
                             </div>
@@ -534,12 +528,12 @@ export default {
                             <div class="accordion-item mb-3">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        What support options are available if I encounter issues on eBiz Punjab?
+                                        Who can use eBiz Punjab?
                                     </button>
                                 </h2>
                                 <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                                     <div class="accordion-body pt-0">
-                                        Eligibility criteria vary depending on the scheme's requirements.
+                                        The platform is available to entrepreneurs, investors, and businesses of all sizes operating in Punjab.
                                     </div>
                                 </div>
                             </div>
@@ -547,12 +541,14 @@ export default {
                             <div class="accordion-item mb-3">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        What are the steps to apply for licenses and permits through eBiz Punjab?
+                                        What are the steps to apply for license and permits through eBiz Portal?
                                     </button>
                                 </h2>
                                 <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                                     <div class="accordion-body pt-0">
-                                        Some schemes may offer alternative application methods besides the web portal.
+                                        The <strong>eBiz Punjab</strong> Portal offers detailed information on the necessary registrations, licenses, certifications, and permits (RLCOs) required by different government departments and agencies for both
+                                        new and existing businesses. To apply for these RLCOs, users must first create an account on eBiz Portal and set up a business profile for the business they intend to get RLCOs. After completing the profile, users
+                                        can easily access the application portal to submit their RLCO applications, streamlining the entire process.
                                     </div>
                                 </div>
                             </div>
@@ -560,12 +556,12 @@ export default {
                             <div class="accordion-item mb-3">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                        How can I track the status of my applications on eBiz Punjab?
+                                        Can I track the status of my application?
                                     </button>
                                 </h2>
                                 <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                                     <div class="accordion-body pt-0">
-                                        Various types of bikes may be available, depending on the scheme's specifications.
+                                        Yes, the platform provides real-time tracking. Simply log in, go to your dashboard, and check the status of your application.
                                     </div>
                                 </div>
                             </div>
@@ -573,12 +569,12 @@ export default {
                             <div class="accordion-item mb-3">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                        Are there specific qualifications required to apply for petrol bikes?
+                                        How do I provide feedback or suggestions for the platform?
                                     </button>
                                 </h2>
                                 <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                                     <div class="accordion-body pt-0">
-                                        Eligibility for petrol bikes may depend on scheme guidelines and applicant qualifications.
+                                        You can submit feedback via “Help Desk” section on the portal.
                                     </div>
                                 </div>
                             </div>

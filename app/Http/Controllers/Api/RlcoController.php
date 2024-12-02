@@ -94,7 +94,7 @@ class RlcoController extends Controller
         $activities = ActivityResource::collection(Activity::active()->orderBy('activity_order')->get());
         $categories = BusinessCategoryResource::collection(BusinessCategory::where('category_status',1)->get());
         $departments = DepartmentResource::collection(Department::active()->get());
-        $sectors = BusinessActivity::where('activity_status',1)->get();
+        $sectors = BusinessActivity::where('activity_status',1)->orderBy('easy_class_name','ASC')->get();
         return response()->json(['activities'=>$activities,'categories'=>$categories,'sectors'=>$sectors,'departments'=>$departments]);
     }
 

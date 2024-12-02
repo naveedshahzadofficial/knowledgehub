@@ -76,15 +76,15 @@ onBeforeMount(() => {
             </div>
         </section>
 
-        <section class="contactUsHelpDeskDiv py-sm-5 py-4 position-relative" id="scrollspyHeading4">
-            <img src="assets/contact-us-bg.png" alt="" class="z-n1 position-absolute top-0 w-100">
+        <section class="contactUsHelpDeskDiv py-sm-5 py-4 position-relative" id="scrollspyHeading44">
+            <img :src="useAssets('assets/contact-us-bg.png')" alt="" class="z-n1 position-absolute top-0 w-100">
             <div class="container-fluid px-md-5">
                 <div class="row mb-4">
                     <div class="col-12 py-sm-5 py-4">
                         <div class="container px-md-5">
                             <div class="row">
                                 <div class="col-12 text-center mb-3">
-                                    <h2>Help <span>Desk</span></h2>
+                                    <h2>Leave <span>Your Feedback</span></h2>
                                 </div>
 
                                 <div class="col-12">
@@ -120,7 +120,7 @@ onBeforeMount(() => {
                                                 </div>
 
                                                 <div class="col-12">
-                                                    <textarea class="form-control" id="validationMessage" rows="5" required placeholder="Message"></textarea>
+                                                    <textarea class="form-control" id="validationMessage" rows="2" required placeholder="Message"></textarea>
                                                     <div class="invalid-feedback">
                                                         Please provide Message
                                                     </div>
@@ -140,6 +140,7 @@ onBeforeMount(() => {
                 </div>
             </div>
         </section>
+
     </div>
 </template>
 

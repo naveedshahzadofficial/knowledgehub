@@ -78,7 +78,8 @@
     flex-grow: 1;
     flex-wrap: wrap;
     padding: 0 2px;
-    position: relative
+    position: relative;
+    width: 100%;
 }
 
 .vs__actions {
@@ -200,7 +201,10 @@
 
 .vs--single .vs__selected {
     background-color: transparent;
-    border-color: transparent
+    border-color: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .vs--single.vs--open .vs__selected {

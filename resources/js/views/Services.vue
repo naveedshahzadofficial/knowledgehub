@@ -24,7 +24,6 @@ export default {
             searchTermConstruction: '',
             construction_required: '',
             construction_department_id: '',
-            common_required: '',
             common_flag: '',
             searchTermCommon: '',
         }
@@ -122,7 +121,8 @@ export default {
             });
         },
         handleSearch() {
-
+            this.searchedRlcos();
+            this.searchedConstructionRlcos();
         }
     },
     created() {
@@ -185,7 +185,7 @@ export default {
                 .filter(rlco => !filteredRlcosIds.includes(rlco.id));
         },
         checkRlcosFound: function (){
-             return (this.construction_required === '0' || this.construction_required === '' || this.filteredConstructionRlcos.length === 0) && this.filteredRlcos.length === 0 && (this.filteredCommonRequiredRlcos.length === 0 || this.common_required === '0' || this.common_required === '') ? 'No RLCO Found' : '';
+             return (this.construction_required === '0' || this.construction_required === '' || this.filteredConstructionRlcos.length === 0) && this.filteredRlcos.length === 0 && (this.filteredCommonRequiredRlcos.length === 0 ) ? 'No RLCO Found' : '';
         },
         filteredDepartments: function () {
             // Filter rlcos with construction_flag === 1
@@ -207,6 +207,18 @@ export default {
             });
             // Update the message if no RLCO is found
             return filtered;
+        },
+        checkWhichFunctionRlcoLoad(){
+            if (this.filteredRlcos.length > 0) {
+               return this.filteredRlcos;
+            }
+            if (this.filteredConstructionRlcos.length > 0) {
+                return this.filteredConstructionRlcos;
+            }
+            if (this.filteredCommonRequiredRlcos.length > 0) {
+                return this.filteredCommonRequiredRlcos;
+            }
+            return null;
         },
         searchedRlcos() {
             return this.filteredRlcos.filter(rlco => {
@@ -234,18 +246,6 @@ export default {
                 const term = this.searchTermCommon.toLowerCase();
                 return rlco.rlco_name.toLowerCase().includes(term);
             });
-        },
-        checkWhichFunctionRlcoLoad(){
-            if (this.filteredRlcos.length > 0) {
-               return this.filteredRlcos;
-            }
-            if (this.filteredConstructionRlcos.length > 0) {
-                return this.filteredConstructionRlcos;
-            }
-            if (this.filteredCommonRequiredRlcos.length > 0) {
-                return this.filteredCommonRequiredRlcos;
-            }
-            return null;
         },
         totalPages() {
             return Math.ceil(this.filteredRlcos.length / this.itemsPerPage);
@@ -308,7 +308,7 @@ export default {
         </header>
 
         <div class="container-fluid px-md-5 px-4">
-            <div class="row filterServicesDiv filterServicesDiv2 mx-0 mb-5 px-2 pt-3 pb-4 align-items-end">
+            <div class="row filterServicesDiv filterServicesDiv2 mx-0 mb-4 px-2 pt-3 pb-4 align-items-end">
                 <div class="col-lg-6 mb-4">
                     <label class="form-label">Sectors</label>
                     <v-select v-model="business_category_id" :options="categories"
@@ -353,17 +353,6 @@ export default {
                 </div>
 
                 <div :class="construction_required == 1?'col-lg-2':'col-lg-6'" class="d-flex justify-content-between parent-div align-items-end">
-                    <div>
-                        <label class="form-label d-block">Add on</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <label class="form-check-label" for="commonRequired">
-                                    <input class="form-check-input" type="checkbox" v-model="common_required"
-                                           id="commonRequired" value="1" >
-                                    <span>Yes</span></label>
-                            </div>
-                        </div>
-                    </div>
                     <div class="searchServiceBtn d-flex align-items-center justify-content-center">
                         <button class="bg-transparent border-0" @click.prevent="handleSearch">
                             <img :src="useAssets('assets/search-icon.svg')" alt="">
@@ -373,11 +362,53 @@ export default {
                 </div>
             </div>
 
-            <div class="row servicesPageData mb-3" id="servicesPageData" ref="rlco_position">
-                <div class="col-lg-3 mb-lg-0 mb-4">
+            <div class="row mb-4 filterServicesDiv3">
+                <div class="col-xl-4 col-lg-6 mb-xl-0 mb-3" v-if="searchedRlcos.length > 0">
                     <div class="card shadow-none">
+                        <div class="card-body d-flex align-items-center p-2">
+                            <div class="d-inline-flex align-items-center justify-content-center me-3">
+                                <img :src="useAssets('assets/business-icon.svg')" alt="" class="img-fluid">
+                            </div>
+                            <div>
+                                <p class="mb-2">Business Specific</p>
+                                <h6 class="mb-0">{{ searchedRlcos.length }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6 mb-xl-0 mb-3">
+                    <div class="card shadow-none">
+                        <div class="card-body d-flex align-items-center p-2">
+                            <div class="d-inline-flex align-items-center justify-content-center me-3">
+                                <img :src="useAssets('assets/construction-icon.svg')" alt="" class="img-fluid">
+                            </div>
+                            <div>
+                                <p class="mb-2">Construction</p>
+                                <h6 class="mb-0">{{ searchedConstructionRlcos.length }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6">
+                    <div class="card shadow-none">
+                        <div class="card-body d-flex align-items-center p-2">
+                            <div class="d-inline-flex align-items-center justify-content-center me-3">
+                                <img :src="useAssets('assets/add-on-icon.svg')" alt="" class="img-fluid">
+                            </div>
+                            <div>
+                                <p class="mb-2">Add On (s)</p>
+                                <h6 class="mb-0">{{ searchedCommonRequiredRlcos.length }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row servicesPageData mb-3" id="servicesPageData" ref="rlco_position">
+                <div class="col-lg-5 mb-3">
+                    <div class="card shadow-none" v-if="searchedRlcos.length > 0">
                         <div class="card-header bg-transparent border-0 p-3 pb-0">
-                            <h5 class="card-title mb-2">Services ({{ searchedRlcos.length }})</h5>
+                            <h5 class="card-title mb-2">Business Specific</h5>
                             <div class="input-group mb-3">
                                 <span class="input-group-text border-0 bg-transparent" id="basic-addon1">
                                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -409,7 +440,7 @@ export default {
                     <div class="clearfix"></div>
                     <div class="card shadow-none" v-if="construction_required == 1" style="margin-top: 20px !important;">
                         <div class="card-header bg-transparent border-0 p-3 pb-0 pt-20">
-                            <h5 class="card-title mb-2">Construction Required Services ({{ searchedConstructionRlcos.length }})</h5>
+                            <h5 class="card-title mb-2">Construction Required Services</h5>
                             <div class="input-group mb-3">
                                 <span class="input-group-text border-0 bg-transparent" id="basic-addon1">
                                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -438,9 +469,9 @@ export default {
                             </ul>
                         </div>
                     </div>
-                    <div class="card shadow-none" v-if="common_required == 1" style="margin-top: 20px !important;">
+                    <div class="card shadow-none" style="margin-top: 20px !important;">
                         <div class="card-header bg-transparent border-0 p-3 pb-0 pt-20">
-                            <h5 class="card-title mb-2">Add on ({{ searchedCommonRequiredRlcos.length }})</h5>
+                            <h5 class="card-title mb-2">Add on (s)</h5>
                             <div class="input-group mb-3">
                                 <span class="input-group-text border-0 bg-transparent" id="basic-addon1">
                                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -471,7 +502,7 @@ export default {
                     </div>
                 </div>
 
-                <div class="col-lg-9 mb-3">
+                <div class="col-lg-7 mb-3">
                     <div class="card shadow-none mb-4">
                         <div class="card-body">
                             <div class="tab-content" id="eBizServicesTab1Content">
@@ -486,7 +517,7 @@ export default {
                     </div>
                 </div>
 
-                <div class="col-12 mt-3 d-none">
+                <div class="col-12">
                     <div class="card shadow-none rounded-5">
                         <div class="card-body px-2 pt-4 pb-2">
                             <div class="row mx-0 serviceCenterDiv">

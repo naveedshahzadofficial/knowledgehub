@@ -14,6 +14,10 @@
     src: url('../font/NeueHaasDisplayMediu.ttf') format('truetype');
 }
 
+:root {
+    --head-font-size1: 45px;
+}
+
 
 /* scroll bar */
 
@@ -41,7 +45,6 @@
 .navbar {
     width: -webkit-fill-available;
     width: -moz-available;
-    /* For Firefox */
     width: fill-available;
     width: 100vw;
 }
@@ -98,7 +101,7 @@ header .input-group button:hover,
 
 .navbar .nav-pills li .nav-link.active,
 .navbar .nav-pills li .nav-link:hover {
-    color: #28B468;
+    color: #28B468 !important;
     font-family: "font2", sans-serif;
     background-color: transparent;
     font-weight: 600;
@@ -175,7 +178,6 @@ h1 {
     font-family: "font2", sans-serif;
     font-size: 40px;
     color: #3a3a3a;
-    font-family: "font1", sans-serif;
 }
 
 h1 span {
@@ -199,7 +201,6 @@ h1 span {
     font-size: 73px;
     text-align: center;
     color: #fff;
-    font-family: "font3", sans-serif;
     padding: 90px 0px;
 }
 
@@ -304,6 +305,15 @@ header {
     width: 45px;
 }
 
+.comprehensiveBusinessImg1 {
+    width: 40px;
+}
+
+.comprehensiveBusinessImg2 {
+    width: 35px;
+    height: 40px;
+}
+
 .comprehensiveSolutions h6 {
     font-weight: 500;
     font-size: 18px;
@@ -324,7 +334,6 @@ header {
     font-family: "font2", sans-serif;
     font-size: 40px;
     color: #1b3249;
-    font-family: "font2", sans-serif;
 }
 
 .comprehensiveSolutions h2 span {
@@ -335,7 +344,6 @@ header {
 .comprehensiveSolutions p {
     font-family: "font2", sans-serif;
     font-weight: 400;
-    font-family: "font2", sans-serif;
     font-size: 18px;
     text-align: center;
     color: #1b3249;
@@ -354,7 +362,11 @@ header {
     background-color: #1b3249;
     transition: all 0.3s linear;
     width: 14.28%;
-    height: 163px;
+    height: 154px;
+}
+
+.comprehensiveSolutions .card .card-body {
+    height: 100%;
 }
 
 .viewAllSectorsBtn {
@@ -398,7 +410,7 @@ header {
 .businessEssentials h2 {
     font-weight: 400;
     font-family: "font2", sans-serif;
-    font-size: 55px;
+    font-size: var(--head-font-size1);
     color: #ffffff;
     font-family: "font2", sans-serif;
 }
@@ -429,12 +441,14 @@ header {
     color: #97a6b5;
 }
 
-.businessEssentials ul li {
+.businessEssentials ul li,
+.businessEssentials ul li a {
     font-family: "font2", sans-serif;
     font-weight: 400;
     font-size: 18px;
     color: #fff;
-    padding-left: 33px;
+    padding-left: 17px;
+    display: block;
     position: relative;
 }
 
@@ -447,7 +461,7 @@ header {
     height: 20px;
     position: absolute;
     left: 0;
-    top: 14px;
+    top: 13px;
     transform: translateY(-50%);
 }
 
@@ -457,7 +471,7 @@ header {
 .connectivityDiv h2 {
     font-weight: 400;
     font-family: "font2", sans-serif;
-    font-size: 55px;
+    font-size: var(--head-font-size1);
     color: #3a3a3a;
     font-family: "font2", sans-serif;
 }
@@ -509,7 +523,8 @@ header {
     line-height: 1.7;
 }
 
-.connectivityPageContent .connectivityDiv .card-body p {
+.connectivityPageContent .connectivityDiv .card-body p,
+.connectivityPageContent .connectivityDiv .card-body a {
     font-weight: 400;
     font-family: "font2", sans-serif;
     font-size: 18px;
@@ -545,7 +560,7 @@ header {
 .investmentsDiv h2 {
     font-weight: 400;
     font-family: "font2", sans-serif;
-    font-size: 55px;
+    font-size: var(--head-font-size1);
     color: #1b3249;
 }
 
@@ -564,7 +579,7 @@ header {
 
 .investmentsDiv .card {
     background-color: #f4f5f8;
-    border-radius: 20px;
+    border-radius: 15px;
 }
 
 #investmentTabs .nav-link {
@@ -572,7 +587,7 @@ header {
     font-weight: 400;
     font-size: 18px;
     color: #1b3249;
-    border-radius: 20px;
+    border-radius: 15px;
 }
 
 #investmentTabs .nav-link.active {
@@ -584,7 +599,8 @@ header {
 #investmentTabs .nav-link.active::after {
     content: url('../white-arrow-icon.svg');
     position: absolute;
-    right: 10px;
+    right: 20px;
+    width: 29px;
     top: 50%;
     transform: translateY(-50%);
 }
@@ -601,6 +617,11 @@ header {
 
 .fade.show.active {
     opacity: 1;
+}
+
+.tab-pane.active {
+    display: flex;
+    flex-direction: column;
 }
 
 #InvestmentsTabContent h6 {
@@ -631,7 +652,7 @@ header {
 .newsDiv h2 {
     font-weight: 400;
     font-family: "font2", sans-serif;
-    font-size: 55px;
+    font-size: var(--head-font-size1);
     color: #1b3249;
 }
 
@@ -692,7 +713,7 @@ header {
 .faqsDiv h2 {
     font-weight: 400;
     font-family: "font2", sans-serif;
-    font-size: 55px;
+    font-size: var(--head-font-size1);
     color: #1b3249;
 }
 
@@ -730,7 +751,7 @@ header {
 }
 
 .faqsAccordion .accordion-button {
-    font-weight: 500;
+    font-weight: 600;
     font-family: "font2", sans-serif;
     font-size: 18px;
     color: #1b3249;
@@ -896,12 +917,12 @@ footer h5 {
     filter: brightness(0) saturate(100%) invert(62%) sepia(94%) saturate(3843%) hue-rotate(113deg) brightness(104%) contrast(69%);
 }
 
-.servicesPageData .col-lg-3 .card {
+.servicesPageData .col-lg-5 .card {
     border: 0.50px solid #c0c0d2;
     border-radius: 30px;
 }
 
-.servicesPageData .col-lg-9 .card {
+.servicesPageData .col-lg-7 .card {
     border: 1px solid #c0c0d2;
     border-radius: 30px;
 }
@@ -1147,7 +1168,7 @@ footer h5 {
 .sectorBriefDiv h2 {
     font-weight: 400;
     font-family: "font2", sans-serif;
-    font-size: 55px;
+    font-size: var(--head-font-size1);
     color: #1b3249;
 }
 
@@ -1192,7 +1213,7 @@ footer h5 {
 .sectorHighLightDiv h2 {
     font-weight: 400;
     font-family: "font2", sans-serif;
-    font-size: 55px;
+    font-size: var(--head-font-size1);
     color: #ffffff;
 }
 
@@ -1259,7 +1280,7 @@ footer h5 {
 .majorInvestorsDiv h2 {
     font-weight: 400;
     font-family: "font2", sans-serif;
-    font-size: 55px;
+    font-size: var(--head-font-size1);
     color: #1b3249;
 }
 
@@ -1279,7 +1300,7 @@ footer h5 {
 .keyInformationDiv h2 {
     font-weight: 400;
     font-family: "font2", sans-serif;
-    font-size: 55px;
+    font-size: var(--head-font-size1);
     color: #1b3249;
 }
 
@@ -1299,7 +1320,7 @@ footer h5 {
 .areaOfInvestmentDiv h2 {
     font-weight: 400;
     font-family: "font2", sans-serif;
-    font-size: 55px;
+    font-size: var(--head-font-size1);
     color: #1b3249;
 }
 
@@ -1342,7 +1363,7 @@ footer h5 {
 .economicZonesDiv h2 {
     font-weight: 400;
     font-family: "font2", sans-serif;
-    font-size: 55px;
+    font-size: var(--head-font-size1);
     color: #1b3249;
 }
 
@@ -1511,7 +1532,92 @@ footer h5 {
 }
 
 .contactUsHelpDeskDiv textarea {
-    min-height: 304px;
+    min-height: 120px;
+}
+
+strong {
+    font-weight: 600;
+    font-family: "font3", sans-serif;
+}
+
+/* stats tiles */
+
+.filterServicesDiv3 .col-xl-4:nth-child(1) .card {
+    border: 1px solid #1b3249;
+    border-radius: 20px;
+}
+
+.filterServicesDiv3 .col-xl-4:nth-child(1) .card p {
+    color: #1b3249;
+    font-size: 19px;
+    font-family: "font2", sans-serif;
+    font-weight: 500;
+}
+
+.filterServicesDiv3 .col-xl-4:nth-child(1) .card h6 {
+    font-size: 35px;
+    font-family: "font3", sans-serif;
+    font-weight: 600;
+}
+
+.filterServicesDiv3 .col-xl-4 .card .card-body div:nth-child(1) {
+    height: 75px;
+    width: 75px;
+    border-radius: 50%;
+    object-fit: contain;
+}
+
+.filterServicesDiv3 .col-xl-4 .card .card-body div:nth-child(1) img {
+    width: 35px;
+    height: 35px;
+}
+
+.filterServicesDiv3 .col-xl-4:nth-child(2) .card {
+    border: 1px solid #28B468;
+    border-radius: 20px;
+}
+
+.filterServicesDiv3 .col-xl-4:nth-child(2) .card p {
+    color: #28B468;
+    font-size: 19px;
+    font-family: "font2", sans-serif;
+    font-weight: 500;
+}
+
+.filterServicesDiv3 .col-xl-4:nth-child(2) .card h6 {
+    font-size: 35px;
+    font-family: "font3", sans-serif;
+    font-weight: 600;
+}
+
+.filterServicesDiv3 .col-xl-4:nth-child(3) .card {
+    border: 1px solid #5740cb;
+    border-radius: 20px;
+}
+
+.filterServicesDiv3 .col-xl-4:nth-child(3) .card p {
+    color: #5740cb;
+    font-size: 19px;
+    font-family: "font2", sans-serif;
+    font-weight: 500;
+}
+
+.filterServicesDiv3 .col-xl-4:nth-child(3) .card h6 {
+    font-size: 35px;
+    font-family: "font3", sans-serif;
+    font-weight: 600;
+}
+
+.filterServicesDiv3 .col-xl-4:nth-child(1) .card .card-body div:nth-child(1) {
+    background-color: #1b3249;
+}
+
+.filterServicesDiv3 .col-xl-4:nth-child(2) .card .card-body div:nth-child(1) {
+    background-color: #28B468;
+}
+
+.filterServicesDiv3 .col-xl-4:nth-child(3) .card .card-body div:nth-child(1) {
+    background-color: #5740cb;
 }
 
 
@@ -1600,6 +1706,13 @@ table.dataTable.table-striped>tbody>tr:nth-of-type(2n+1)>* {
 }
 
 
+/* Custom classes */
+
+.text-justify {
+    text-align: justify;
+}
+
+
 /* Preloader */
 
 .preloader {
@@ -1667,33 +1780,36 @@ table.dataTable.table-striped>tbody>tr:nth-of-type(2n+1)>* {
     }
 }
 
+@media screen and (max-width: 1400px) {
+    .comprehensiveSolutions p {
+        line-height: 1.3;
+    }
+}
+
 @media screen and (min-width:992px) {
     .sectorHighLightDiv .card h5 {
         min-height: 50.4px;
     }
 }
 
-@media screen and (max-width:1370px){
-    .businessEssentials h2,
-    .faqsDiv h2,
-    .newsDiv h2,
-    .investmentsDiv h2,
-    .connectivityDiv h2,
-    .economicZonesDiv h2,
-    .areaOfInvestmentDiv h2,
-    .keyInformationDiv h2,
-    .majorInvestorsDiv h2,
-    .sectorHighLightDiv h2 {
-        font-size: 45px;
-    }
-}
-
 @media screen and (max-width:1200px) {
-    h1 {
+    /* h1 {
         font-size: 63px;
     }
     h1 span {
         font-size: 54px;
+    } */
+    header h6 {
+        font-size: 18px;
+    }
+    h1 span {
+        font-size: 45px;
+    }
+    header p {
+        font-size: 18px;
+    }
+    .navbar .nav-pills li .nav-link {
+        font-size: 15px;
     }
     .connectivityHeader h1 {
         padding: 50px 0px;
@@ -1728,6 +1844,9 @@ table.dataTable.table-striped>tbody>tr:nth-of-type(2n+1)>* {
     h1 span {
         font-size: 44px;
     }
+    .landingHeader {
+        height: auto;
+    }
     .connectivityHeader h1 {
         padding: 33px 0px;
     }
@@ -1745,9 +1864,26 @@ table.dataTable.table-striped>tbody>tr:nth-of-type(2n+1)>* {
     .allComprehensiveSolutions .card {
         width: 25%;
     }
-
+    .businessEssentials h2,
+    .faqsDiv h2,
+    .newsDiv h2,
+    .investmentsDiv h2,
+    .connectivityDiv h2,
+    .economicZonesDiv h2,
+    .areaOfInvestmentDiv h2,
+    .keyInformationDiv h2,
+    .majorInvestorsDiv h2,
+    .sectorHighLightDiv h2 {
+        font-size: 45px;
+    }
     #investmentTabs .nav-link {
         width: 204px !important;
+    }
+    .visionSection .col-lg-6:nth-child(1) img {
+        width: auto !important;
+    }
+    footer h6 a {
+        font-size: 16px;
     }
 }
 

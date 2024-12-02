@@ -35,7 +35,7 @@ onBeforeMount(() => {
                             together to build a stronger, more prosperous Punjab where innovation, industry and progress go hand in hand.
                         </p>
                         <img src="assets/cm-signature.svg" alt="">
-                        <p class="mb-0">CM PUNJAB</p>
+                        <p class="mb-0">Chief Minister Punjab</p>
                     </div>
                 </div>
             </div>

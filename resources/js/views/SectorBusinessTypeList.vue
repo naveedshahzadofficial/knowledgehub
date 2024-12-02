@@ -154,7 +154,7 @@ export default {
                             <label class="form-label">Select Sector</label>
                             <v-select v-model="business_category_id" :options="filteredBusinessCategories"
                                       :reduce="category => category.id" label="category_name"
-                                      placeholder="Business Sector" class="vSelectClass form-select" >
+                                      placeholder="All Businesses" class="vSelectClass form-select" >
                             </v-select>
                         </div>
                     </div>

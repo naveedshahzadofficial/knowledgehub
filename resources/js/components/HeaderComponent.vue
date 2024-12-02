@@ -19,8 +19,8 @@
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                        <ul class="nav nav-pills ms-auto justify-content-between my-lg-0 my-3 pe-lg-5">
-                            <li class="nav-item">
+                        <ul class="nav nav-pills ms-auto justify-content-lg-between justify-content-start my-lg-0 my-3 pe-xl-5">
+                        <li class="nav-item">
                                 <router-link class="nav-link pb-1 px-1 mx-2" :to="{ name: 'home', hash: '#scrollspyHeading' }" @click.native="scrollToHash('scrollspyHeading')">
                                     <span></span> Home
                                 </router-link>
@@ -36,7 +36,7 @@
                                 </router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link class="nav-link pb-1 px-1 mx-2" :to="{ name: 'connectivity' }" @click.native="scrollToHash('scrollspyHeading3')">
+                                <router-link class="nav-link pb-1 px-1 mx-2" :to="{ name: 'home' , hash: '#scrollspyHeading3' }" @click.native="scrollToHash('scrollspyHeading3')">
                                     <span></span> Connectivity
                                 </router-link>
                             </li>
@@ -44,6 +44,18 @@
                                 <router-link class="nav-link pb-1 px-1 mx-2" :to="{ name: 'home', hash: '#scrollspyHeading4' }" @click.native="scrollToHash('scrollspyHeading4')">
                                     <span></span> Investments
                                 </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pb-1 px-1 mx-2" href="#scrollspyHeading6">
+                                    <span>
+                                    </span> News
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link pb-1 px-1 mx-2" href="#scrollspyHeading7">
+                                    <span>
+                                    </span> Faqs
+                                </a>
                             </li>
                         </ul>
                         <a :href="apply_ebiz_url" class="text-decoration-none eBizUserAddPortalBtn d-inline-flex align-items-center justify-content-center ps-1 me-3">

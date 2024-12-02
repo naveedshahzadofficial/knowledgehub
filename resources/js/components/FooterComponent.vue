@@ -12,17 +12,17 @@ import {useAssets} from "../composable/use-assets";
 
                 <div class="col-12 d-flex text-center justify-content-center">
                     <h6>
-                        <router-link :to="{ name: 'about-us'}" class="text-decoration-none border-end px-2">About Us</router-link>
+                        <router-link :to="{ name: 'about-us'}" class="text-decoration-none bg-transparent border-end px-2">About Us</router-link>
                     </h6>
                     <h6>
-                        <router-link :to="{ name: 'contact-us'}" class="text-decoration-none border-end px-2">Contact Us</router-link>
+                        <router-link :to="{ name: 'contact-us'}" class="text-decoration-none bg-transparent border-end px-2">Contact Us</router-link>
 
                     </h6>
                     <h6>
-                        <router-link :to="{ name: 'services'}" class="text-decoration-none border-end px-2">Services</router-link>
+                        <router-link :to="{ name: 'services'}" class="text-decoration-none bg-transparent border-end px-2">Services</router-link>
                     </h6>
                     <h6>
-                        <router-link :to="{ name: 'contact-us'}" class="text-decoration-none px-2">Helpdesk</router-link>
+                        <router-link :to="{ name: 'contact-us', hash: '#scrollspyHeading44' }" class="text-decoration-none bg-transparent px-2">Helpdesk</router-link>
                     </h6>
                 </div>
             </div>
