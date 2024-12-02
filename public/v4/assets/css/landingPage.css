@@ -1948,3 +1948,8 @@ table.dataTable.table-striped>tbody>tr:nth-of-type(2n+1)>* {
         padding-top: 15px;
     }
 }
+
+.hover-text-underline:hover {
+    text-decoration: underline !important;
+    cursor: pointer !important;
+}

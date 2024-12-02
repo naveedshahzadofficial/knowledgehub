@@ -98,6 +98,17 @@ class RlcoController extends Controller
         return response()->json(['activities'=>$activities,'categories'=>$categories,'sectors'=>$sectors,'departments'=>$departments]);
     }
 
+    public function get_services()
+    {
+        $business_categories = BusinessCategoryResource::collection(BusinessCategory::where('category_status',1)->get());
+        $departments = DepartmentResource::collection((Department::whereRelation('rlcos', 'construction_flag', "1")->active()->orderBy('department_name')->get()));
+        $business_activities = BusinessActivity::where('activity_status',1)->orderBy('easy_class_name','ASC')->get();
+        $rlcos = RlcoResource::collection(Rlco::with('scopes','businessActivities')->active()
+            ->orderBy('rlco_name','ASC')
+            ->get());
+        return response()->json(['business_categories'=>$business_categories,'departments'=>$departments,'business_activities'=>$business_activities,'rlcos'=>$rlcos]);
+    }
+
     public function activityRlcos($activity_id = null)
     {
             $rlcos = RlcoResource::collection(Rlco::with('scopes','businessActivities')->active()

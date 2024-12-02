@@ -220,13 +220,13 @@ export default {
                                     </div>
 
                                     <ul class="list-unstyled row mx-0">
-                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://iris.fbr.gov.pk/login" target="_blank" class="text-decoration-none text-white">Sole Proprietorship</a></li>
-                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://register.business.punjab.gov.pk/" target="_blank" class="text-decoration-none text-white">Association of Persons (Firm)</a></li>
-                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://leap.secp.gov.pk/#/landing-page" target="_blank" class="text-decoration-none text-white">Single Member Company</a></li>
-                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://leap.secp.gov.pk/#/landing-page" target="_blank" class="text-decoration-none text-white">Private Limited Company</a></li>
-                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://leap.secp.gov.pk/#/landing-page" target="_blank" class="text-decoration-none text-white">Public Limited Company</a></li>
-                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://register.business.punjab.gov.pk/" target="_blank" class="text-decoration-none text-white">Labour</a></li>
-                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://register.business.punjab.gov.pk/" target="_blank" class="text-decoration-none text-white">PESSI</a></li>
+                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://iris.fbr.gov.pk/login" target="_blank" class="text-decoration-none text-white hover-text-underline">Sole Proprietorship</a></li>
+                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://register.business.punjab.gov.pk/" target="_blank" class="text-decoration-none text-white hover-text-underline">Association of Persons (Firm)</a></li>
+                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://leap.secp.gov.pk/#/landing-page" target="_blank" class="text-decoration-none text-white hover-text-underline">Single Member Company</a></li>
+                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://leap.secp.gov.pk/#/landing-page" target="_blank" class="text-decoration-none text-white hover-text-underline">Private Limited Company</a></li>
+                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://leap.secp.gov.pk/#/landing-page" target="_blank" class="text-decoration-none text-white hover-text-underline">Public Limited Company</a></li>
+                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://register.business.punjab.gov.pk/" target="_blank" class="text-decoration-none text-white hover-text-underline">Labour</a></li>
+                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://register.business.punjab.gov.pk/" target="_blank" class="text-decoration-none text-white hover-text-underline">PESSI</a></li>
                                     </ul>
                                 </div>
 
@@ -241,9 +241,9 @@ export default {
                                     </div>
 
                                     <ul class="list-unstyled d-flex flex-wrap">
-                                        <li class="col-xxl-3 col-xl-4 col-md-6"><router-link class="text-decoration-none text-white" :to="{ name: 'services'}" >Explore RLCOs</router-link></li>
-                                        <li class="col-xxl-3 col-xl-4 col-md-6"><a :href="apply_ebiz_url" class="text-decoration-none text-white">Apply RLCOs</a></li>
-                                        <li class="col-xxl-3 col-xl-4 col-md-6"><a :href="apply_ebiz_url" class="text-decoration-none text-white">Track the Progress of Applied RLCOs</a></li>
+                                        <li class="col-xxl-3 col-xl-4 col-md-6"><router-link class="text-decoration-none text-white hover-text-underline" :to="{ name: 'services'}" >Explore RLCOs</router-link></li>
+                                        <li class="col-xxl-3 col-xl-4 col-md-6"><a :href="apply_ebiz_url" class="text-decoration-none text-white hover-text-underline">Apply RLCOs</a></li>
+                                        <li class="col-xxl-3 col-xl-4 col-md-6"><a :href="apply_ebiz_url" class="text-decoration-none text-white hover-text-underline">Track the Progress of Applied RLCOs</a></li>
                                     </ul>
                                 </div>
                             </div>

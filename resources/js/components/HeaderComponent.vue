@@ -54,7 +54,7 @@
                             <li class="nav-item">
                                 <a class="nav-link pb-1 px-1 mx-2" href="#scrollspyHeading7">
                                     <span>
-                                    </span> Faqs
+                                    </span> FAQs
                                 </a>
                             </li>
                         </ul>
