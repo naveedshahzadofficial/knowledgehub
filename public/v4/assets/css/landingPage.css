@@ -1885,6 +1885,9 @@ table.dataTable.table-striped>tbody>tr:nth-of-type(2n+1)>* {
     footer h6 a {
         font-size: 16px;
     }
+    .landingHeader .input-group{
+        width: 100% !important;
+    }
 }
 
 @media screen and (max-width:768px) {

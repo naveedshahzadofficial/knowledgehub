@@ -9,7 +9,7 @@
                 <h4 class="d-inline-block px-3 py-2 mb-3">
                     <span class="d-inline-block me-2"></span> {{ rlco_detail.department?.department_name }}
                 </h4>
-                <h5 class="mb-0" v-html="rlco_detail.description"></h5>
+                <h5 class="mb-0 text-justify" v-html="rlco_detail.description"></h5>
             </div>
             <div class="col-1 pt-4">
                 <button v-if="rlco_detail?.id && isOverFlow" v-print="printObj" class="bg-transparent border-0">

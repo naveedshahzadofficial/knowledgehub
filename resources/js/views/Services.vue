@@ -23,6 +23,9 @@ export default {
             construction_flag: 0,
             searchTermConstruction: '',
             construction_required: '',
+            construction_required_tile: 0,
+            construction_required_flag: 0,
+            construction_required_department_flag: 0,
             construction_department_id: '',
             common_flag: '',
             searchTermCommon: '',
@@ -39,12 +42,19 @@ export default {
         construction_required(newVal){
             if(newVal === '0'){
                 this.construction_department_id = '';
-
+                this.construction_required_tile = 0;
             }
+            this.construction_required_flag = 0;
+        },
+        construction_department_id(newVal){
+            this.construction_required_department_flag = 0;
         }
     },
     methods: {
         useAssets,
+        resetBusiness: function (){
+            this.business_activity_id = '';
+        },
         loadActivities: function () {
             axios.get('activities').then(response => {
                 this.activities = response.data.activities;
@@ -81,25 +91,6 @@ export default {
                 // this.is_first_landing = false;
             })
         },
-        scrollToRlco() {
-            let refDiv = this.$refs.rlco_position;
-            if (refDiv) {
-                // Get the element's position relative to the document
-                const elementPosition = refDiv.getBoundingClientRect().top + window.pageYOffset;
-                // Calculate the scroll position with a -10% offset of the window's height
-                const offset = window.innerHeight * 0.25; // 10% of the window height
-                // Scroll to the element minus the offset
-                window.scrollTo({
-                    top: elementPosition - offset,
-                    behavior: "smooth", // Enables smooth scrolling
-                });
-            }
-        },
-        nextPage() {
-            if (this.currentPage < this.totalPages) {
-                this.currentPage++;
-            }
-        },
         prevPage() {
             if (this.currentPage > 1) {
                 this.currentPage--;
@@ -120,32 +111,6 @@ export default {
                 }
             });
         },
-        handleSearch() {
-            this.searchedRlcos();
-            this.searchedConstructionRlcos();
-        }
-    },
-    created() {
-        usePreLoaderStore().setIsShow(false);
-        window.setTimeout(() => {
-            usePreLoaderStore().setIsShow(true);
-        }, 1000);
-    },
-    mounted() {
-        this.loadActivities();
-    },
-    computed: {
-        filteredBusinessActivities: function (){
-            return this.sectors.filter(sector => {
-                if(!this.is_first_time_variable)
-                this.business_activity_id = '';
-                if (!this.business_category_id) {
-                    return true;
-                }
-                this.is_first_time_variable = false;
-                return this.business_category_id ? sector.business_category_id === this.business_category_id : true;
-            });
-        },
         filteredCommonRlcos: function () {
             return this.rlcos.filter(rlco => {
                 // Check if business_type_id or business_activity_id are empty, return all rlcos if so
@@ -162,8 +127,74 @@ export default {
                 return matchesBusinessActivity && matchesBusinessDepartment;
             });
         },
+        filteredRlcos: function () {
+            const filtered = this.filteredCommonRlcos().filter(rlco => {
+                if (!this.rlco_id) {
+                    return true;
+                }
+                return rlco.id === this.rlco_id;
+            });
+            // Update the message if no RLCO is found
+            return filtered;
+        },
+        filteredCommonRequiredRlcos: function () {
+            const filteredRlcosIds = this.filteredRlcos().map(rlco => rlco.id);
+            return this.rlcos
+                .filter(rlco => rlco.common_flag === 1)
+                .filter(rlco => !filteredRlcosIds.includes(rlco.id));
+        },
+        searchedCommonRequiredRlcos() {
+            return this.filteredCommonRequiredRlcos().filter(rlco => {
+                if (!this.searchTermCommon) {
+                    return true;
+                }
+                const term = this.searchTermCommon.toLowerCase();
+                return rlco.rlco_name.toLowerCase().includes(term);
+            });
+        },
+        checkWhichFunctionRlcoLoad(){
+            if (this.filteredRlcos().length > 0) {
+                return this.filteredRlcos();
+            }
+            if (this.filteredConstructionRlcos.length > 0) {
+                return this.filteredConstructionRlcos;
+            }
+            if (this.filteredCommonRequiredRlcos().length > 0) {
+                return this.filteredCommonRequiredRlcos();
+            }
+            return null;
+        },
+        filteredDepartments: function () {
+            // Filter rlcos with construction_flag === 1
+            const rlcosWithConstructionFlag = this.rlcos.filter(rlco => rlco.construction_flag === 1);
+
+            // Extract the foreign keys (department IDs) from the filtered rlcos
+            const departmentIdsWithRlcos = rlcosWithConstructionFlag
+                .filter(rlco => rlco.department_id && ![56, 45, 134, 198].includes(rlco.department_id))
+                .map(rlco => rlco.department_id);
+            // Filter departments that have at least one matching department ID
+            return this.departments.filter(department => departmentIdsWithRlcos.includes(department.id));
+        },
+        searchedRlcos() {
+            return this.filteredRlcos().filter(rlco => {
+                if (!this.searchTerm) {
+                    return true;
+                }
+                const term = this.searchTerm.toLowerCase();
+                return rlco.rlco_name.toLowerCase().includes(term);
+            });
+        },
+        searchedConstructionRlcos() {
+            return this.filteredConstructionRlcos().filter(rlco => {
+                if (!this.searchTermConstruction) {
+                    return true;
+                }
+                const term = this.searchTermConstruction.toLowerCase();
+                return rlco.rlco_name.toLowerCase().includes(term);
+            });
+        },
         filteredConstructionRlcos: function () {
-            const filteredRlcosIds = this.filteredRlcos.map(rlco => rlco.id);
+            const filteredRlcosIds = this.filteredRlcos().map(rlco => rlco.id);
             return this.rlcos.filter(rlco => {
                 // Always include rlcos with these IDs
                 const alwaysIncludeIds = [22, 23, 25, 123, 132, 134];
@@ -178,82 +209,41 @@ export default {
                 );
             });
         },
-        filteredCommonRequiredRlcos: function () {
-            const filteredRlcosIds = this.filteredRlcos.map(rlco => rlco.id);
-            return this.rlcos
-                .filter(rlco => rlco.common_flag === 1)
-                .filter(rlco => !filteredRlcosIds.includes(rlco.id));
-        },
         checkRlcosFound: function (){
-             return (this.construction_required === '0' || this.construction_required === '' || this.filteredConstructionRlcos.length === 0) && this.filteredRlcos.length === 0 && (this.filteredCommonRequiredRlcos.length === 0 ) ? 'No RLCO Found' : '';
+            return (this.construction_required === '0' || this.construction_required === '' || this.filteredConstructionRlcos().length === 0) && this.filteredRlcos().length === 0 && (this.filteredCommonRequiredRlcos().length === 0 ) ? 'No RLCO Found' : '';
         },
-        filteredDepartments: function () {
-            // Filter rlcos with construction_flag === 1
-            const rlcosWithConstructionFlag = this.rlcos.filter(rlco => rlco.construction_flag === 1);
-
-            // Extract the foreign keys (department IDs) from the filtered rlcos
-            const departmentIdsWithRlcos = rlcosWithConstructionFlag
-                .filter(rlco => rlco.department_id && ![56, 45, 134, 198].includes(rlco.department_id))
-                .map(rlco => rlco.department_id);
-            // Filter departments that have at least one matching department ID
-            return this.departments.filter(department => departmentIdsWithRlcos.includes(department.id));
-        },
-        filteredRlcos: function () {
-            const filtered = this.filteredCommonRlcos.filter(rlco => {
-                if (!this.rlco_id) {
-                    return true;
-                }
-                return rlco.id === this.rlco_id;
-            });
-            // Update the message if no RLCO is found
-            return filtered;
-        },
-        checkWhichFunctionRlcoLoad(){
-            if (this.filteredRlcos.length > 0) {
-               return this.filteredRlcos;
+        handleSearch() {
+            if(this.construction_required === ''){
+                this.construction_required_flag = 1;
+                return false;
             }
-            if (this.filteredConstructionRlcos.length > 0) {
-                return this.filteredConstructionRlcos;
+            if(this.construction_department_id === ''){
+                this.construction_required_department_flag = 1;
+                return false;
             }
-            if (this.filteredCommonRequiredRlcos.length > 0) {
-                return this.filteredCommonRequiredRlcos;
-            }
-            return null;
-        },
-        searchedRlcos() {
-            return this.filteredRlcos.filter(rlco => {
-                if (!this.searchTerm) {
+            this.construction_required_tile = 1;
+            this.searchedRlcos();
+            this.searchedConstructionRlcos();
+            this.searchedCommonRequiredRlcos();
+        }
+    },
+    created() {
+        usePreLoaderStore().setIsShow(false);
+        window.setTimeout(() => {
+            usePreLoaderStore().setIsShow(true);
+        }, 1000);
+    },
+    mounted() {
+        this.loadActivities();
+    },
+    computed: {
+        filteredBusinessActivities: function (){
+            return this.sectors.filter(sector => {
+                if (!this.business_category_id || this.business_category_id===1) {
                     return true;
                 }
-                const term = this.searchTerm.toLowerCase();
-                return rlco.rlco_name.toLowerCase().includes(term);
+                return this.business_category_id ? sector.business_category_id === this.business_category_id : true;
             });
-        },
-        searchedConstructionRlcos() {
-            return this.filteredConstructionRlcos.filter(rlco => {
-                if (!this.searchTermConstruction) {
-                    return true;
-                }
-                const term = this.searchTermConstruction.toLowerCase();
-                return rlco.rlco_name.toLowerCase().includes(term);
-            });
-        },
-        searchedCommonRequiredRlcos() {
-            return this.filteredCommonRequiredRlcos.filter(rlco => {
-                if (!this.searchTermCommon) {
-                    return true;
-                }
-                const term = this.searchTermCommon.toLowerCase();
-                return rlco.rlco_name.toLowerCase().includes(term);
-            });
-        },
-        totalPages() {
-            return Math.ceil(this.filteredRlcos.length / this.itemsPerPage);
-        },
-        paginatedItems() {
-            const start = (this.currentPage - 1) * this.itemsPerPage;
-            const end = start + this.itemsPerPage;
-            return this.filteredRlcos.slice(start, end);
         },
     }
 
@@ -313,6 +303,7 @@ export default {
                     <label class="form-label">Sectors</label>
                     <v-select v-model="business_category_id" :options="categories"
                               :reduce="category => category.id" label="category_name"
+                              @option:selected="resetBusiness()"
                               placeholder="Sectors" class="vSelectClass form-select"
                     >
                     </v-select>
@@ -342,14 +333,17 @@ export default {
                                 <span>No</span></label>
                         </div>
                     </div>
+                    <div class="text-danger" v-if="construction_required_flag === 1">Please select construction required</div>
                 </div>
 
                 <div class="col-lg-4 mb-lg-0 mb-4" v-if="construction_required == 1">
                     <label class="form-label">Issuance Authority</label>
-                    <v-select v-model="construction_department_id" :options="filteredDepartments"
+                    <v-select v-model="construction_department_id" :options="filteredDepartments()"
                               :reduce="sector => sector.id" label="department_name"
                               placeholder="Issuance Authority" class="vSelectClass form-select" >
                     </v-select>
+                    <div class="text-danger" v-if="construction_required_department_flag === 1">Please select construction required</div>
+
                 </div>
 
                 <div :class="construction_required == 1?'col-lg-2':'col-lg-6'" class="d-flex justify-content-between parent-div align-items-end">
@@ -363,7 +357,7 @@ export default {
             </div>
 
             <div class="row mb-4 filterServicesDiv3">
-                <div class="col-xl-4 col-lg-6 mb-xl-0 mb-3" v-if="searchedRlcos.length > 0">
+                <div class="col-xl-4 col-lg-6 mb-xl-0 mb-3" v-if="searchedRlcos().length > 0">
                     <div class="card shadow-none">
                         <div class="card-body d-flex align-items-center p-2">
                             <div class="d-inline-flex align-items-center justify-content-center me-3">
@@ -371,12 +365,12 @@ export default {
                             </div>
                             <div>
                                 <p class="mb-2">Business Specific</p>
-                                <h6 class="mb-0">{{ searchedRlcos.length }}</h6>
+                                <h6 class="mb-0">{{ searchedRlcos().length }}</h6>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-4 col-lg-6 mb-xl-0 mb-3">
+                <div class="col-xl-4 col-lg-6 mb-xl-0 mb-3" v-if="construction_required_tile === 1">
                     <div class="card shadow-none">
                         <div class="card-body d-flex align-items-center p-2">
                             <div class="d-inline-flex align-items-center justify-content-center me-3">
@@ -384,7 +378,7 @@ export default {
                             </div>
                             <div>
                                 <p class="mb-2">Construction</p>
-                                <h6 class="mb-0">{{ searchedConstructionRlcos.length }}</h6>
+                                <h6 class="mb-0">{{ searchedConstructionRlcos().length }}</h6>
                             </div>
                         </div>
                     </div>
@@ -397,7 +391,7 @@ export default {
                             </div>
                             <div>
                                 <p class="mb-2">Add On (s)</p>
-                                <h6 class="mb-0">{{ searchedCommonRequiredRlcos.length }}</h6>
+                                <h6 class="mb-0">{{ searchedCommonRequiredRlcos().length }}</h6>
                             </div>
                         </div>
                     </div>
@@ -406,7 +400,7 @@ export default {
 
             <div class="row servicesPageData mb-3" id="servicesPageData" ref="rlco_position">
                 <div class="col-lg-5 mb-3">
-                    <div class="card shadow-none" v-if="searchedRlcos.length > 0">
+                    <div class="card shadow-none" v-if="searchedRlcos().length > 0">
                         <div class="card-header bg-transparent border-0 p-3 pb-0">
                             <h5 class="card-title mb-2">Business Specific</h5>
                             <div class="input-group mb-3">
@@ -417,7 +411,7 @@ export default {
                             </div>
                         </div>
                         <div class="card-body px-0 service_sidebar" ref="service_sidebar">
-                            <ul class="nav nav-tabs flex-lg-column border-0 flex-row" id="eBizServicesTab1" v-for="rlco in searchedRlcos" role="tablist" :key="rlco.id">
+                            <ul class="nav nav-tabs flex-lg-column border-0 flex-row" id="eBizServicesTab1" v-for="rlco in searchedRlcos()" role="tablist" :key="rlco.id">
                                 <li class="nav-item" role="presentation">
                                     <router-link :to="{ name: 'service-detail', params: { rlco_id: rlco.id }, hash: '#pageStartServices'}" class="nav-link px-2 py-3 w-100" aria-selected="true">
                                         <div class="d-flex align-items center justify-content-between">
@@ -438,7 +432,7 @@ export default {
                         </div>
                     </div>
                     <div class="clearfix"></div>
-                    <div class="card shadow-none" v-if="construction_required == 1" style="margin-top: 20px !important;">
+                    <div class="card shadow-none" v-if="construction_required_tile == 1" style="margin-top: 20px !important;">
                         <div class="card-header bg-transparent border-0 p-3 pb-0 pt-20">
                             <h5 class="card-title mb-2">Construction Required Services</h5>
                             <div class="input-group mb-3">
@@ -449,7 +443,7 @@ export default {
                             </div>
                         </div>
                         <div class="card-body px-0 service_sidebar" ref="service_sidebar">
-                            <ul class="nav nav-tabs flex-lg-column border-0 flex-row" id="eBizServicesTab2" v-for="rlco in searchedConstructionRlcos" role="tablist" :key="rlco.id">
+                            <ul class="nav nav-tabs flex-lg-column border-0 flex-row" id="eBizServicesTab2" v-for="rlco in searchedConstructionRlcos()" role="tablist" :key="rlco.id">
                                 <li class="nav-item" role="presentation">
                                     <router-link :to="{ name: 'service-detail', params: { rlco_id: rlco.id }, hash: '#pageStartServices'}" class="nav-link px-2 py-3 w-100" aria-selected="true">
                                         <div class="d-flex align-items center justify-content-between">
@@ -480,7 +474,7 @@ export default {
                             </div>
                         </div>
                         <div class="card-body px-0 service_sidebar" ref="service_sidebar">
-                            <ul class="nav nav-tabs flex-lg-column border-0 flex-row" id="eBizServicesTab3" v-for="rlco in searchedCommonRequiredRlcos" role="tablist" :key="rlco.id">
+                            <ul class="nav nav-tabs flex-lg-column border-0 flex-row" id="eBizServicesTab3" v-for="rlco in searchedCommonRequiredRlcos()" role="tablist" :key="rlco.id">
                                 <li class="nav-item" role="presentation">
                                     <router-link :to="{ name: 'service-detail', params: { rlco_id: rlco.id }, hash: '#pageStartServices'}" class="nav-link px-2 py-3 w-100" aria-selected="true">
                                         <div class="d-flex align-items center justify-content-between">
@@ -506,8 +500,8 @@ export default {
                     <div class="card shadow-none mb-4">
                         <div class="card-body">
                             <div class="tab-content" id="eBizServicesTab1Content">
-                                <div v-if="checkRlcosFound" class="mt-3">
-                                    {{ checkRlcosFound }}
+                                <div v-if="checkRlcosFound()" class="mt-3">
+                                    {{ checkRlcosFound() }}
                                 </div>
                                 <div v-else>
                                     <router-view></router-view>
@@ -517,7 +511,7 @@ export default {
                     </div>
                 </div>
 
-                <div class="col-12">
+                <div class="col-12 d-none">
                     <div class="card shadow-none rounded-5">
                         <div class="card-body px-2 pt-4 pb-2">
                             <div class="row mx-0 serviceCenterDiv">

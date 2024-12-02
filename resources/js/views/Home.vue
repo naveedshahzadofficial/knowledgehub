@@ -23,6 +23,9 @@ export default {
             })
         },
         search: function (){
+            // if(this.business_activity_id === ''){
+            //     return false;
+            // }
             this.$router.push({'name':'services', params:{ 'id': 0,'id2': this.business_activity_id}});
         },
         initOwlCarousel() {
@@ -282,7 +285,7 @@ export default {
                     </div>
                 </div>
 
-                <div class="row mb-4">
+                <div class="row mb-5">
                     <div class="owl-carousel owl-theme">
                         <div class="item">
                             <img :src="useAssets('assets/lcci-grey-icon.svg')" alt="">
