@@ -28,11 +28,12 @@ export default {
             construction_required_department_flag: 0,
             construction_department_id: '',
             common_flag: '',
+            common_addon_flag: 0,
+            business_activity_id_flag: 0,
             searchTermCommon: '',
         }
     },
     watch: {
-        // Watch the searchedRlcos computed property
         checkWhichFunctionRlcoLoad(newVal) {
             if (newVal.length > 0) {
                 this.navigateToFirstSearchedRlco(newVal[0].id);
@@ -48,6 +49,10 @@ export default {
         },
         construction_department_id(newVal){
             this.construction_required_department_flag = 0;
+        },
+        business_activity_id(newVal){
+            this.business_activity_id_flag = 0;
+            this.common_addon_flag = 1;
         }
     },
     methods: {
@@ -156,8 +161,8 @@ export default {
             if (this.filteredRlcos().length > 0) {
                 return this.filteredRlcos();
             }
-            if (this.filteredConstructionRlcos.length > 0) {
-                return this.filteredConstructionRlcos;
+            if (this.filteredConstructionRlcos().length > 0) {
+                return this.filteredConstructionRlcos();
             }
             if (this.filteredCommonRequiredRlcos().length > 0) {
                 return this.filteredCommonRequiredRlcos();
@@ -210,9 +215,13 @@ export default {
             });
         },
         checkRlcosFound: function (){
-            return (this.construction_required === '0' || this.construction_required === '' || this.filteredConstructionRlcos().length === 0) && this.filteredRlcos().length === 0 && (this.filteredCommonRequiredRlcos().length === 0 ) ? 'No RLCO Found' : '';
+            return (this.construction_required === '0' || this.construction_required === '' || this.filteredConstructionRlcos().length === 0) && (this.filteredRlcos().length === 0 || this.business_activity_id === 0 || this.business_activity_id === '') && (this.filteredCommonRequiredRlcos().length === 0 ) ? 'No RLCO Found' : '';
         },
         handleSearch() {
+            if(this.business_activity_id === ''){
+                this.business_activity_id_flag = 1;
+                return false;
+            }
             if(this.construction_required === ''){
                 this.construction_required_flag = 1;
                 return false;
@@ -222,6 +231,7 @@ export default {
                 return false;
             }
             this.construction_required_tile = 1;
+            this.common_addon_flag = 1;
             this.searchedRlcos();
             this.searchedConstructionRlcos();
             this.searchedCommonRequiredRlcos();
@@ -315,6 +325,7 @@ export default {
                               :reduce="sector => sector.id" label="easy_class_name"
                               placeholder="Search your business" class="vSelectClass form-select" >
                     </v-select>
+                    <div class="text-danger" v-if="business_activity_id_flag === 1">Please select Business</div>
                 </div>
 
                 <div class="col-lg-6 mb-lg-0 mb-4">
@@ -357,7 +368,7 @@ export default {
             </div>
 
             <div class="row mb-4 filterServicesDiv3">
-                <div class="col-xl-4 col-lg-6 mb-xl-0 mb-3" v-if="searchedRlcos().length > 0">
+                <div class="col-xl-4 col-lg-6 mb-xl-0 mb-3" v-if="searchedRlcos().length > 0 && business_activity_id">
                     <div class="card shadow-none">
                         <div class="card-body d-flex align-items-center p-2">
                             <div class="d-inline-flex align-items-center justify-content-center me-3">
@@ -383,7 +394,7 @@ export default {
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-4 col-lg-6">
+                <div class="col-xl-4 col-lg-6" v-if="common_addon_flag === 1">
                     <div class="card shadow-none">
                         <div class="card-body d-flex align-items-center p-2">
                             <div class="d-inline-flex align-items-center justify-content-center me-3">
@@ -400,7 +411,7 @@ export default {
 
             <div class="row servicesPageData mb-3" id="servicesPageData" ref="rlco_position">
                 <div class="col-lg-5 mb-3">
-                    <div class="card shadow-none" v-if="searchedRlcos().length > 0">
+                    <div class="card shadow-none" v-if="searchedRlcos().length > 0 && business_activity_id">
                         <div class="card-header bg-transparent border-0 p-3 pb-0">
                             <h5 class="card-title mb-2">Business Specific</h5>
                             <div class="input-group mb-3">
@@ -463,7 +474,7 @@ export default {
                             </ul>
                         </div>
                     </div>
-                    <div class="card shadow-none" style="margin-top: 20px !important;">
+                    <div class="card shadow-none" v-if="common_addon_flag === 1" style="margin-top: 20px !important;">
                         <div class="card-header bg-transparent border-0 p-3 pb-0 pt-20">
                             <h5 class="card-title mb-2">Add on (s)</h5>
                             <div class="input-group mb-3">
