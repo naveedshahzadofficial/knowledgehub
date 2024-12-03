@@ -481,20 +481,20 @@ export default {
             <div class="container-fluid px-md-5 px-4">
                 <div class="row justify-content-center">
                     <div class="col-lg-4 col-sm-6 mb-lg-0 mb-3">
-                        <button class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
+                        <a href="https://invest.gov.pk/textile?language_id=en#gallery-1" target="_blank" class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
                             <span class="me-4">Download Sector Profile</span>
                             <span>
                                 <img :src="useAssets('assets/download-icon.svg')" alt="">
                             </span>
-                        </button>
+                        </a>
                     </div>
                     <div class="col-lg-4 col-sm-6 mb-lg-0 mb-3">
-                        <button class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
+                        <a href="https://invest.gov.pk/textile?language_id=en#gallery-1" target="_blank" class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
                             <span class="me-4">Download Sector Profile (Updated)</span>
                             <span>
                                 <img :src="useAssets('assets/download-icon.svg')" alt="">
                             </span>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

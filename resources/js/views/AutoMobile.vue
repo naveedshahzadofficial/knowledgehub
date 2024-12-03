@@ -251,19 +251,22 @@ export default {
                 <div class="row">
                     <div class="owl-carousel owl-theme">
                         <div class="item">
-                            <img :src="useAssets('assets/tcs-logo.svg')" alt="">
+                            <img :src="useAssets('assets/hino-logo.svg')" alt="">
                         </div>
                         <div class="item">
-                            <img :src="useAssets('assets/dhl-logo.svg')" alt="">
+                            <img :src="useAssets('assets/honda-logo.svg')" alt="">
                         </div>
                         <div class="item">
-                            <img :src="useAssets('assets/skynet-logo.svg')" alt="">
+                            <img :src="useAssets('assets/nissan-logo.svg')" alt="">
                         </div>
                         <div class="item">
-                            <img :src="useAssets('assets/fedex-logo.png')" alt="">
+                            <img :src="useAssets('assets/toyota-logo.svg')" alt="">
                         </div>
                         <div class="item">
-                            <img :src="useAssets('assets/bykea-logo.svg')" alt="">
+                            <img :src="useAssets('assets/kia-logo.svg')" alt="">
+                        </div>
+                        <div class="item">
+                            <img :src="useAssets('assets/suzuki-logo.svg')" alt="">
                         </div>
                     </div>
                 </div>
@@ -310,20 +313,20 @@ export default {
             <div class="container px-md-5 px-4">
                 <div class="row justify-content-center">
                     <div class="col-lg-4 col-sm-6 mb-lg-0 mb-3">
-                        <button class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
+                        <a href="https://invest.gov.pk/textile?language_id=en#gallery-1" target="_blank" class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
                             <span class="me-4">Download Sector Profile</span>
                             <span>
                                 <img :src="useAssets('assets/download-icon.svg')" alt="">
                             </span>
-                        </button>
+                        </a>
                     </div>
                     <div class="col-lg-4 col-sm-6 mb-lg-0 mb-3">
-                        <button class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
+                        <a href="https://invest.gov.pk/textile?language_id=en#gallery-1" target="_blank" class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
                             <span class="me-4">Download Sector Profile (Updated)</span>
                             <span>
                                 <img :src="useAssets('assets/download-icon.svg')" alt="">
                             </span>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

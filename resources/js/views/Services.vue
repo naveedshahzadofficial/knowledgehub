@@ -207,7 +207,7 @@ const searchCommonRlcos= computed(() => {
                     <ErrorMessage :error="errors.is_construction_required" />
                 </div>
 
-                <div class="col-lg-4 mb-lg-0 mb-4" v-if="searchForm.is_construction_required == 1">
+                <div class="col-lg-5 mb-lg-0 mb-4" v-if="searchForm.is_construction_required == 1">
                     <label class="form-label">Issuance Authority</label>
                     <v-select v-model="searchForm.construction_department_id" :options="departments"
                               :reduce="dept => dept.id" label="department_name"
@@ -217,7 +217,7 @@ const searchCommonRlcos= computed(() => {
 
                 </div>
 
-                <div :class="searchForm.is_construction_required == 1?'col-lg-2':'col-lg-6'" class="d-flex justify-content-between parent-div align-items-end">
+                <div :class="searchForm.is_construction_required == 1?'col-lg-1':'col-lg-6'" class="d-flex parent-div align-items-end justify-content-end">
                     <div class="searchServiceBtn d-flex align-items-center justify-content-center">
                         <button class="bg-transparent border-0" @click.prevent="handleSearch">
                             <img :src="useAssets('assets/search-icon.svg')" alt="">

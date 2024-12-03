@@ -42,7 +42,7 @@ onBeforeMount(() => {
                                 <span class="me-2">
                                     <img :src="useAssets('assets/contact-us-icon1.svg')" alt="Contact icon">
                                 </span>
-                                <span>Arfa  Tower, Ferozpur Road, Nishter Town, Lahore</span>
+                                <span>Arfa Software Technology Park, 346-B, Ferozepur Road, Lahore</span>
                             </li>
 
                             <li class="mb-2 d-flex">
@@ -63,7 +63,7 @@ onBeforeMount(() => {
                                 <span class="me-2">
                                     <img :src="useAssets('assets/contact-us-icon1.svg')" alt="Contact icon">
                                 </span>
-                                <span>info@pitb.gov.pk</span>
+                                <span>info@ebiz.punjab.gov.pk</span>
                             </li>
                         </ul>
                     </div>

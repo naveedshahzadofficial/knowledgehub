@@ -136,7 +136,7 @@ export default {
         <section class="sectorHighLightDiv py-sm-5 py-4" id="scrollspyHeading4">
             <div class="container-fluid px-5">
                 <div class="row mb-4">
-                    <div class="col-12 sectorHighLightBgDiv py-sm-5 py-4">
+                    <div class="col-12 sectorHighLightBgDiv-textile py-sm-5 py-4">
                         <div class="container px-md-5">
                             <div class="row">
                                 <div class="col-12 text-center">
@@ -199,7 +199,7 @@ export default {
 
                 <div class="row">
                     <div class="col-lg-3 mb-lg-0 mb-3">
-                        <div class="card shdaow-none h-100">
+                        <div class="card shdaow-none h-100 border-0">
                             <div class="card-body p-1">
                                 <ul class="nav nav-tabs d-flex flex-lg-column border-0 flex-row flex-nowrap overflow-x-auto overflow-y-hidden mx-lg-0 mx-3" id="investmentTabs" role="tablist">
                                     <li class="nav-item border-bottom" role="presentation">
@@ -228,7 +228,7 @@ export default {
                     </div>
 
                     <div class="col-lg-6 mb-lg-0 mb-3">
-                        <div class="card h-100">
+                        <div class="card h-100 border-0">
                             <div class="card-body">
                                 <div class="tab-content h-100" id="InvestmentsTabContent">
                                     <div class="tab-pane fade h-100 show active" id="productivity-tab-pane" role="tabpanel" aria-labelledby="productivity-tab" tabindex="0">
@@ -242,7 +242,7 @@ export default {
                                     </div>
 
                                     <div class="tab-pane fade h-100" id="domestic-garment-tab-pane" role="tabpanel" aria-labelledby="domestic-garment-tab" tabindex="0">
-                                        <img :src="useAssets('assets/logistics-icon.svg')" alt="Logistics Icon" class="img-fluid mb-3">
+                                        <img :src="useAssets('assets/productivity-icon1.svg')" alt="Logistics Icon" class="img-fluid mb-3">
                                         <h6 class="mb-2">Domestic Garment Market</h6>
                                         <p class="mb-2">Pakistan's domestic garment market holds immense potential for growth. Supporting local manufacturers can help meet growing consumer demand and reduce reliance on imports.</p>
                                         <p class="mb-2">Fostering a vibrant local garment industry involves improved access to resources, skill development, and marketing strategies to enhance visibility and competitiveness in the global market.</p>
@@ -250,7 +250,7 @@ export default {
                                     </div>
 
                                     <div class="tab-pane fade h-100" id="employment-tab-pane" role="tabpanel" aria-labelledby="employment-tab" tabindex="0">
-                                        <img :src="useAssets('assets/food-processing-icon1.svg')" alt="Investment Icon" class="img-fluid mb-3">
+                                        <img :src="useAssets('assets/productivity-icon2.svg')" alt="Investment Icon" class="img-fluid mb-3">
                                         <h6 class="mb-2">Employment</h6>
                                         <p class="mb-2">Employment generation in Pakistan's textile and garment sector is a critical driver of economic growth. Enhancing workforce training programs and improving labor conditions are key priorities.</p>
                                         <p class="mb-2">By creating more job opportunities and fostering skill development, the industry can contribute significantly to poverty reduction and national economic stability.</p>
@@ -258,7 +258,7 @@ export default {
                                     </div>
 
                                     <div class="tab-pane fade h-100" id="comparative-advantage-tab-pane" role="tabpanel" aria-labelledby="comparative-advantage-tab" tabindex="0">
-                                        <img :src="useAssets('assets/automobile-icon.svg')" alt="Automobile Icon" class="img-fluid mb-3">
+                                        <img :src="useAssets('assets/productivity-icon3.svg')" alt="Automobile Icon" class="img-fluid mb-3">
                                         <h6 class="mb-2">Comparative Advantage</h6>
                                         <p class="mb-2">Pakistan's strategic geographic location positions it as a central hub for trade routes connecting South Asia, Central Asia, and the Middle East.</p>
                                         <p class="mb-2">This advantage is amplified by infrastructure projects like the China-Pakistan Economic Corridor (CPEC), which boosts trade and investment potential in key economic zones.</p>
@@ -286,7 +286,7 @@ export default {
                         <h2>Policy <span>Goals <sub class="fs-5">(2014-19)</sub></span></h2>
                     </div>
 
-                    <div class="col-lg-6 mx-auto col-12 text-center mb-3">
+                    <div class="col-xl-6 col-lg-8 mx-auto col-12 text-center mb-3">
                         <p class="mb-2">The textile sector aims to boost exports, double value-addition, attract $5 billion in investments, ensure international standards, and improve efficiency and technology.</p>
                     </div>
 
@@ -328,19 +328,22 @@ export default {
                 <div class="row">
                     <div class="owl-carousel owl-theme">
                         <div class="item">
-                            <img :src="useAssets('assets/tcs-logo.svg')" alt="">
+                            <img :src="useAssets('assets/nishat-logo.svg')" alt="">
                         </div>
                         <div class="item">
-                            <img :src="useAssets('assets/dhl-logo.svg')" alt="">
+                            <img :src="useAssets('assets/h&m-logo.svg')" alt="">
                         </div>
                         <div class="item">
-                            <img :src="useAssets('assets/skynet-logo.svg')" alt="">
+                            <img :src="useAssets('assets/chenone-logo.svg')" alt="">
                         </div>
                         <div class="item">
-                            <img :src="useAssets('assets/fedex-logo.png')" alt="">
+                            <img :src="useAssets('assets/khaadi-logo.svg')" alt="">
                         </div>
                         <div class="item">
-                            <img :src="useAssets('assets/bykea-logo.svg')" alt="">
+                            <img :src="useAssets('assets/levi-logo.svg')" alt="">
+                        </div>
+                        <div class="item">
+                            <img :src="useAssets('assets/gulahmad-logo.svg')" alt="">
                         </div>
                     </div>
                 </div>
@@ -354,7 +357,7 @@ export default {
                         <h2>Key <span>Information</span></h2>
                     </div>
 
-                    <div class="col-lg-6 mx-auto col-12 text-center mb-3">
+                    <div class="col-xl-6 col-lg-8 mx-auto col-12 text-center mb-3">
                         <p class="mb-2">Explore collaboration opportunities with leading textile manufacturers and the impact of energy projects on enhancing Pakistan's textile industry capacity and growth.</p>
                     </div>
 
@@ -376,27 +379,28 @@ export default {
         </section>
 
         <section class="downloadButtonsDiv mb-5" id="scrollspyHeading4">
-            <div class="container px-md-5 px-4">
+            <div class="container-fluid px-md-5 px-4">
                 <div class="row justify-content-center">
                     <div class="col-lg-4 col-sm-6 mb-lg-0 mb-3">
-                        <button class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
+                        <a href="https://invest.gov.pk/textile?language_id=en#gallery-1" target="_blank" class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
                             <span class="me-4">Download Sector Profile</span>
                             <span>
                                 <img :src="useAssets('assets/download-icon.svg')" alt="">
                             </span>
-                        </button>
+                        </a>
                     </div>
                     <div class="col-lg-4 col-sm-6 mb-lg-0 mb-3">
-                        <button class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
+                        <a href="https://invest.gov.pk/textile?language_id=en#gallery-1" target="_blank" class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
                             <span class="me-4">Download Sector Profile (Updated)</span>
                             <span>
                                 <img :src="useAssets('assets/download-icon.svg')" alt="">
                             </span>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
+
     </div>
 </template>
 

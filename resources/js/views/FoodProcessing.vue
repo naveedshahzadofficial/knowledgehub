@@ -181,7 +181,7 @@ export default {
             </div>
         </section>
 
-        <section class="investmentsDiv investmentsDiv py-sm-5 py-4" id="scrollspyHeading4">
+        <section class="investmentsDiv py-sm-5 py-4" id="scrollspyHeading4">
             <div class="container-fluid px-lg-5 px-4">
                 <div class="row mb-4">
                     <div class="col-12 text-center">
@@ -195,7 +195,7 @@ export default {
 
                 <div class="row">
                     <div class="col-lg-3 mb-lg-0 mb-3">
-                        <div class="card shdaow-none">
+                        <div class="card shdaow-none h-100 border-0">
                             <div class="card-body p-1">
                                 <ul class="nav nav-tabs d-flex flex-lg-column border-0 flex-row flex-nowrap overflow-x-auto overflow-y-hidden mx-lg-0 mx-3" id="investmentTabs" role="tablist">
                                     <li class="nav-item border-bottom" role="presentation">
@@ -211,7 +211,7 @@ export default {
                                         <button class="nav-link w-100 text-start p-3 my-1 h-100" id="fruits-dairy-tab" data-bs-toggle="tab" data-bs-target="#fruits-dairy-tab-pane" type="button" role="tab" aria-controls="fruits-dairy-tab-pane" aria-selected="false">Fruits, dairy, vegetables, and processed products</button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link w-100 text-start p-3 my-1 h-100" id="frozen-food-processing-tab" data-bs-toggle="tab" data-bs-target="#frozen-food-processing-tab-pane" type="button" role="tab" aria-controls="frozen-food-processing-tab-pane" aria-selected="false">Agri food processing (Primary process foods)</button>
+                                        <button class="nav-link w-100 text-start p-3 my-1 h-100" id="agri2-food-processing-tab" data-bs-toggle="tab" data-bs-target="#agri2-food-processing-tab-pane" type="button" role="tab" aria-controls="agri2-food-processing-tab-pane" aria-selected="false">Agri food processing (Primary process foods)</button>
                                     </li>
                                 </ul>
                             </div>
@@ -219,47 +219,52 @@ export default {
                     </div>
 
                     <div class="col-lg-6 mb-lg-0 mb-3">
-                        <div class="card h-100">
+                        <div class="card h-100 border-0">
                             <div class="card-body">
                                 <div class="tab-content h-100" id="InvestmentsTabContent">
                                     <div class="tab-pane fade h-100" id="frozen-food-tab-pane" role="tabpanel" aria-labelledby="frozen-food-tab" tabindex="0">
-                                        <img :src="useAssets('assets/textile-icon.svg')" alt="Textile Icon" class="img-fluid mb-3">
+                                        <img :src="useAssets('assets/frozen-food-icon.svg')" alt="Textile Icon" class="img-fluid mb-3">
                                         <h6 class="mb-2">Frozen Foods</h6>
                                         <p class="mb-2">The growing population and urban lifestyles are driving demand for frozen foods, supported by the rise of modern retail formats like malls and supermarkets (e.g., Metro, Al Fatah, Hyperstar) replacing traditional
                                             stores.
                                         </p>
                                         <p class="mb-2">Local brands like Dawn Foods, Season Foods, K&N’s, Sabroso, and Sufi are making a notable impact in this market.</p>
+                                        <a href="#" class="learnMoreBtn">Learn More</a>
                                     </div>
 
                                     <div class="tab-pane fade h-100" id="edible-oils-tab-pane" role="tabpanel" aria-labelledby="edible-oils-tab" tabindex="0">
-                                        <img :src="useAssets('assets/logistics-icon.svg')" alt="Logistics Icon" class="img-fluid mb-3">
+                                        <img :src="useAssets('assets/edible-oil-icon.svg')" alt="Logistics Icon" class="img-fluid mb-3">
                                         <h6 class="mb-2">Edible Oils and Fats</h6>
                                         <p class="mb-2">Pakistan's strategic location as a trade corridor makes logistics and supply chain management a critical sector. The development of modern ports, highways, and rail systems has opened new opportunities for international
                                             trade.
                                         </p>
                                         <p class="mb-2">Key areas of investment include warehousing, cold storage, and e-commerce logistics, driven by the rise of digital marketplaces.</p>
+                                        <a href="#" class="learnMoreBtn">Learn More</a>
                                     </div>
 
                                     <div class="tab-pane fade h-100 show active" id="value-addition-tab-pane" role="tabpanel" aria-labelledby="value-addition-tab" tabindex="0">
-                                        <img :src="useAssets('assets/food-processing-icon1.svg')" alt="Investment Icon" class="img-fluid mb-3">
+                                        <img :src="useAssets('assets/value-addition-icon.svg')" alt="Investment Icon" class="img-fluid mb-3">
                                         <h6 class="mb-2">Food Processing (Value Addition)</h6>
                                         <p class="mb-2">Pakistan's food processing industry, the second-largest after textiles, plays a vital role in the economy, providing 16% of manufacturing jobs and contributing 27% to the sector's production value. With a burgeoning
                                             middle class of 102 million, the industry attracts $223.5 million annually in foreign direct investment (FDI).</p>
                                         <p class="mb-2">Key growth areas include frozen foods, value-added agricultural products, and processed produce, which are driving both domestic consumption and international demand.</p>
+                                        <a href="#" class="learnMoreBtn">Learn More</a>
                                     </div>
 
                                     <div class="tab-pane fade h-100" id="fruits-dairy-tab-pane" role="tabpanel" aria-labelledby="fruits-dairy-tab" tabindex="0">
-                                        <img :src="useAssets('assets/automobile-icon.svg')" alt="Automobile Icon" class="img-fluid mb-3">
+                                        <img :src="useAssets('assets/fruits-dairy-icon.svg')" alt="Automobile Icon" class="img-fluid mb-3">
                                         <h6 class="mb-2">Fruits, Dairy, Vegetables, and Processed Products</h6>
                                         <p class="mb-2">The automobile industry in Pakistan is expanding rapidly, driven by increasing consumer demand and foreign investment. The sector includes the production of cars, motorbikes, and commercial vehicles.</p>
                                         <p class="mb-2">Government policies promoting local assembly and electric vehicle adoption are set to transform the market, creating new avenues for growth and sustainability.</p>
+                                        <a href="#" class="learnMoreBtn">Learn More</a>
                                     </div>
 
-                                    <div class="tab-pane fade h-100" id="frozen-food-processing-tab-pane" role="tabpanel" aria-labelledby="frozen-food-processing-tab" tabindex="0">
-                                        <img :src="useAssets('assets/it-icon.svg')" alt="Information Technology Icon" class="img-fluid mb-3">
+                                    <div class="tab-pane fade h-100" id="agri2-food-processing-tab-pane" role="tabpanel" aria-labelledby="agri2-food-processing-tab" tabindex="0">
+                                        <img :src="useAssets('assets/agri-foods-icon.svg')" alt="Information Technology Icon" class="img-fluid mb-3">
                                         <h6 class="mb-2">Agri Food Processing (Primary Process Foods)</h6>
                                         <p class="mb-2">Pakistan's IT sector is a rising star, with exports exceeding $2 billion annually. The industry is known for its skilled workforce, offering software development, BPO services, and digital solutions to global clients.</p>
                                         <p class="mb-2">Investment opportunities abound in areas such as artificial intelligence, fintech, and cloud computing, supported by a thriving startup ecosystem.</p>
+                                        <a href="#" class="learnMoreBtn">Learn More</a>
                                     </div>
                                 </div>
                             </div>
@@ -275,7 +280,7 @@ export default {
             </div>
         </section>
 
-        <section class="areaOfInvestmentDiv investmentsDiv py-sm-5 py-4" id="scrollspyHeading4">
+        <section class="areaOfInvestmentDiv py-sm-5 py-4" id="scrollspyHeading4">
             <div class="container-fluid px-md-5 px-4">
                 <div class="row mb-4">
                     <div class="col-12 text-center">
@@ -291,7 +296,7 @@ export default {
                 <div class="row gx-3">
                     <div class="col-xxl col-lg-4 mb-xxl-0 mb-3 col-sm-6">
                         <div class="card shadow-none bg-transaprent h-100 text-center">
-                            <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                            <div class="card-body d-flex flex-column align-items-center justify-content-center px-4 py-5">
                                 <img :src="useAssets('assets/olive-oil-icon.svg')" alt="Icon" class="img-fluid mb-3">
                                 <h6>Olive Oil Extraction Units</h6>
                             </div>
@@ -300,7 +305,7 @@ export default {
 
                     <div class="col-xxl col-lg-4 mb-xxl-0 mb-3 col-sm-6">
                         <div class="card shadow-none bg-transaprent h-100 text-center">
-                            <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                            <div class="card-body d-flex flex-column align-items-center justify-content-center px-4 py-5">
                                 <img :src="useAssets('assets/olive-oil-icon.svg')" alt="Icon" class="img-fluid mb-3">
                                 <h6>Value addition in fruits</h6>
                             </div>
@@ -309,7 +314,7 @@ export default {
 
                     <div class="col-xxl col-lg-4 mb-xxl-0 mb-3 col-sm-6">
                         <div class="card shadow-none bg-transaprent h-100 text-center">
-                            <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                            <div class="card-body d-flex flex-column align-items-center justify-content-center px-4 py-5">
                                 <img :src="useAssets('assets/olive-oil-icon.svg')" alt="Icon" class="img-fluid mb-3">
                                 <h6>Dairy</h6>
                             </div>
@@ -318,7 +323,7 @@ export default {
 
                     <div class="col-xxl col-lg-4 mb-xxl-0 mb-3 col-sm-6">
                         <div class="card shadow-none bg-transaprent h-100 text-center">
-                            <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                            <div class="card-body d-flex flex-column align-items-center justify-content-center px-4 py-5">
                                 <img :src="useAssets('assets/olive-oil-icon.svg')" alt="Icon" class="img-fluid mb-3">
                                 <h6>Frozen foods(fruits, vegetables & meat)</h6>
                             </div>
@@ -327,7 +332,7 @@ export default {
 
                     <div class="col-xxl col-lg-4 mb-xxl-0 mb-3 col-sm-6">
                         <div class="card shadow-none bg-transaprent h-100 text-center">
-                            <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                            <div class="card-body d-flex flex-column align-items-center justify-content-center px-4 py-5">
                                 <img :src="useAssets('assets/olive-oil-icon.svg')" alt="Icon" class="img-fluid mb-3">
                                 <h6>Potato Powder & Flakes Production Unit</h6>
                             </div>
@@ -337,9 +342,9 @@ export default {
             </div>
         </section>
 
-        <section class="majorInvestorsDiv investmentsDiv py-sm-5 py-4" id="scrollspyHeading4">
+        <section class="majorInvestorsDiv py-sm-5 py-4" id="scrollspyHeading4">
             <div class="container-fluid">
-                <div class="row mb-4">
+                <div class="row">
                     <div class="col-12 text-center">
                         <h2><span>Major </span> Investors</h2>
                     </div>
@@ -367,7 +372,7 @@ export default {
             </div>
         </section>
 
-        <section class="economicZonesDiv investmentsDiv py-sm-5 py-4" id="scrollspyHeading4">
+        <section class="economicZonesDiv py-sm-5 py-4" id="scrollspyHeading4">
             <div class="container px-lg-5 px-4">
                 <div class="row mb-4">
                     <div class="col-12 text-center">
@@ -431,7 +436,7 @@ export default {
             </div>
         </section>
 
-        <section class="keyInformationDiv investmentsDiv py-sm-5 py-4" id="scrollspyHeading4">
+        <section class="keyInformationDiv py-sm-5 py-4" id="scrollspyHeading4">
             <div class="container-fluid">
                 <div class="row mb-4">
                     <div class="col-12 text-center">
@@ -464,32 +469,32 @@ export default {
             </div>
         </section>
 
-        <section class="downloadButtonsDiv investmentsDiv mb-5" id="scrollspyHeading4">
-            <div class="container px-md-5 px-4">
+        <section class="downloadButtonsDiv mb-5" id="scrollspyHeading4">
+            <div class="container-fluid px-md-5 px-4">
                 <div class="row">
                     <div class="col-lg-4 col-sm-6 mb-lg-0 mb-3">
-                        <button class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
+                        <a href="https://invest.gov.pk/textile?language_id=en#gallery-1" target="_blank" class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
                             <span class="me-4">Download Sector Profile</span>
                             <span>
                                 <img :src="useAssets('assets/download-icon.svg')" alt="">
                             </span>
-                        </button>
+                        </a>
                     </div>
                     <div class="col-lg-4 col-sm-6 mb-lg-0 mb-3">
-                        <button class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
+                        <a href="https://invest.gov.pk/textile?language_id=en#gallery-1" target="_blank" class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
                             <span class="me-4">Download Sector Profile (Updated)</span>
                             <span>
                                 <img :src="useAssets('assets/download-icon.svg')" alt="">
                             </span>
-                        </button>
+                        </a>
                     </div>
                     <div class="col-lg-4 col-sm-6 mb-lg-0 mb-3">
-                        <button class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
+                        <a href="https://invest.gov.pk/textile?language_id=en#gallery-1" target="_blank" class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
                             <span class="me-4">Download Horticulture Sector Study Report</span>
                             <span>
                                 <img :src="useAssets('assets/download-icon.svg')" alt="">
                             </span>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

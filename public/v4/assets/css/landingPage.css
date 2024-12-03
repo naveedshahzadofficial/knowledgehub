@@ -290,7 +290,7 @@ header {
 }
 
 .visionSection a {
-    font-family: "font2", sans-serif;
+    font-family: "font3", sans-serif;
     font-weight: 600;
     font-size: 21px;
     color: #1b3249;
@@ -1410,6 +1410,22 @@ footer h5 {
 }
 
 .downloadButtonsDiv button:hover {
+    background-color: #cbd7fc;
+}
+
+.downloadButtonsDiv a {
+    font-family: "font2", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: #1b3249;
+    background-color: #f4f5f8;
+    border-radius: 15px;
+    transition: all 0.3s linear;
+    text-decoration: none;
+    text-align: center;
+}
+
+.downloadButtonsDiv a:hover {
     background-color: #cbd7fc;
 }
 

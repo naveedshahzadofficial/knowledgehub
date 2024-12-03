@@ -189,7 +189,7 @@ export default {
 
                 <div class="row">
                     <div class="col-lg-3 mb-lg-0 mb-3">
-                        <div class="card shdaow-none h-100">
+                        <div class="card shdaow-none h-100 border-0">
                             <div class="card-body p-1">
                                 <ul class="nav nav-tabs d-flex flex-lg-column border-0 flex-row flex-nowrap overflow-x-auto overflow-y-hidden mx-lg-0 mx-3" id="investmentTabs" role="tablist">
                                     <li class="nav-item border-bottom" role="presentation">
@@ -211,7 +211,7 @@ export default {
                     </div>
 
                     <div class="col-lg-6 mb-lg-0 mb-3">
-                        <div class="card h-100">
+                        <div class="card h-100 border-0">
                             <div class="card-body">
                                 <div class="tab-content h-100" id="InvestmentsTabContent">
                                     <div class="tab-pane fade h-100 show active" id="supply-chain-tab-pane" role="tabpanel" aria-labelledby="supply-chain-tab" tabindex="0">
@@ -223,7 +223,7 @@ export default {
                                     </div>
 
                                     <div class="tab-pane fade h-100" id="railway-network-tab-pane" role="tabpanel" aria-labelledby="railway-network-tab" tabindex="0">
-                                        <img :src="useAssets('assets/logistics-icon.svg')" alt="Logistics Icon" class="img-fluid mb-3">
+                                        <img :src="useAssets('assets/railway-icon.svg')" alt="Logistics Icon" class="img-fluid mb-3">
                                         <h6 class="mb-2">Significant Railway Network</h6>
                                         <p class="mb-2">Pakistan's railway network is a crucial asset for the country's logistics and transportation sector. It plays a significant role in connecting industries, cities, and ports for smooth trade operations.</p>
                                         <p class="mb-2">With ongoing investments in infrastructure, including modern freight systems and railway electrification, this network is poised to boost economic growth and regional connectivity.</p>
@@ -231,7 +231,7 @@ export default {
                                     </div>
 
                                     <div class="tab-pane fade h-100" id="public-private-tab-pane" role="tabpanel" aria-labelledby="public-private-tab" tabindex="0">
-                                        <img :src="useAssets('assets/food-processing-icon1.svg')" alt="Investment Icon" class="img-fluid mb-3">
+                                        <img :src="useAssets('assets/public-private-icon.svg')" alt="Investment Icon" class="img-fluid mb-3">
                                         <h6 class="mb-2">Public Private Initiatives</h6>
                                         <p class="mb-2">Public-private partnerships are driving transformative change in Pakistan’s development landscape. These initiatives enhance infrastructure, utilities, and services through shared resources and expertise.</p>
                                         <p class="mb-2">This collaborative model fosters innovation, accelerates project timelines, and ensures long-term sustainability for critical sectors such as healthcare, education, and transport.</p>
@@ -239,7 +239,7 @@ export default {
                                     </div>
 
                                     <div class="tab-pane fade h-100" id="geographic-location-tab-pane" role="tabpanel" aria-labelledby="geographic-location-tab" tabindex="0">
-                                        <img :src="useAssets('assets/automobile-icon.svg')" alt="Automobile Icon" class="img-fluid mb-3">
+                                        <img :src="useAssets('assets/geographic-icon.svg')" alt="Automobile Icon" class="img-fluid mb-3">
                                         <h6 class="mb-2">Strategic Geographic Location</h6>
                                         <p class="mb-2">Pakistan's strategic geographic location positions it as a central hub for trade routes connecting South Asia, Central Asia, and the Middle East.</p>
                                         <p class="mb-2">This advantage is amplified by infrastructure projects like the China-Pakistan Economic Corridor (CPEC), which boosts trade and investment potential in key economic zones.</p>
@@ -367,7 +367,7 @@ export default {
                         <h2>CPEC’S Special <span>Economic Zones</span></h2>
                     </div>
 
-                    <div class="col-lg-6 mx-auto col-12 text-center mb-3">
+                    <div class="col-xl-6 col-lg-8 mx-auto col-12 text-center mb-3">
                         <p class="mb-2">Key sectors include warehousing, air freight, courier services, transport networks, and ports & shipping, crucial for logistics and trade.</p>
                     </div>
 
@@ -438,23 +438,23 @@ export default {
         </section>
 
         <section class="downloadButtonsDiv mb-5" id="scrollspyHeading4">
-            <div class="container px-md-5 px-4">
+            <div class="container-fluid px-md-5 px-4">
                 <div class="row justify-content-center">
                     <div class="col-lg-4 col-sm-6 mb-lg-0 mb-3">
-                        <button class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
+                        <a href="https://invest.gov.pk/textile?language_id=en#gallery-1" target="_blank" class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
                             <span class="me-4">Download Sector Profile</span>
                             <span>
                                 <img :src="useAssets('assets/download-icon.svg')" alt="">
                             </span>
-                        </button>
+                        </a>
                     </div>
                     <div class="col-lg-4 col-sm-6 mb-lg-0 mb-3">
-                        <button class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
+                        <a href="https://invest.gov.pk/textile?language_id=en#gallery-1" target="_blank" class="w-100 p-3 d-flex align-items-center justify-content-center border-0 h-100">
                             <span class="me-4">Download Sector Profile (Updated)</span>
                             <span>
                                 <img :src="useAssets('assets/download-icon.svg')" alt="">
                             </span>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

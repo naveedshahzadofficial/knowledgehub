@@ -109,21 +109,22 @@ const images = {
     "housing-tab": "v4/assets/housing-landing-img.png",
     "tourism-tab": "v4/assets/tourism-landing-img.png",
     "frozen-food-tab": "v4/assets/frozen-food-img1.png",
-    "edible-oils-tab": "v4/assets/frozen-food-img1.png",
-    "value-addition-tab": "v4/assets/frozen-food-img1.png",
-    "fruits-dairy-tab": "v4/assets/frozen-food-img1.png",
+    "edible-oils-tab": "v4/assets/edible-oil-img.png",
+    "value-addition-tab": "v4/assets/value-addition-img.png",
+    "fruits-dairy-tab": "v4/assets/fruits-dairy-img.png",
+    "agri2-food-processing-tab": "v4/assets/agri-foods-img.png",
     "frozen-food-processing-tab": "v4/assets/frozen-food-img1.png",
     "supply-chain-tab": "v4/assets/supply-chain-img.png",
-    "railway-network-tab": "v4/assets/supply-chain-img.png",
-    "public-private-tab": "v4/assets/supply-chain-img.png",
-    "geographic-location-tab": "v4/assets/supply-chain-img.png",
+    "railway-network-tab": "v4/assets/railway-img.png",
+    "public-private-tab": "v4/assets/public-private-img.png",
+    "geographic-location-tab": "v4/assets/geographic-img.png",
     "agri-food-processing-tab": "v4/assets/supply-chain-img.png",
     "productivity-tab": "v4/assets/productivity-img.png",
-    "domestic-garment-tab": "v4/assets/productivity-img.png",
-    "employment-tab": "v4/assets/productivity-img.png",
-    "comparative-advantage-tab": "v4/assets/productivity-img.png",
+    "domestic-garment-tab": "v4/assets/garment-img.png",
+    "employment-tab": "v4/assets/employment-img.png",
+    "comparative-advantage-tab": "v4/assets/comparative-advantage-img.png",
     "hotels-tab": "v4/assets/hotels-img.png",
-    "foodService-tab": "v4/assets/hotels-img.png"
+    "foodService-tab": "v4/assets/food-service-img.png"
 };
 
 document.querySelectorAll('#investmentTabs .nav-link').forEach(tab => {
