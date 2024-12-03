@@ -20,8 +20,8 @@ export default {
                     image: "assets/textile-landing-img.png",
                     route: "textile",
                     descriptions: [
-                        "The textile industry is Pakistan's largest manufacturing sector, contributing over 60% to exports and employing a significant portion of the workforce.",
-                        "With government incentives and modernization efforts, the industry is poised to expand into technical textiles and sustainable production methods.",
+                        "The textile industry is Pakistan's largest manufacturing sector, contributing over 60% to exports and employing a significant portion of the workforce. The sector is known for its cotton production, garments, and value-added products.",
+                        "With government incentives and modernization efforts, the industry is poised to expand into technical textiles and sustainable production methods to meet global demands.",
                     ],
                 },
                 {
@@ -32,8 +32,8 @@ export default {
                     image: "assets/logistics-landing-img.png",
                     route: "logistics",
                     descriptions: [
-                        "Pakistan's strategic location as a trade corridor makes logistics a critical sector.",
-                        "Key areas of investment include warehousing, cold storage, and e-commerce logistics.",
+                        "Pakistan's strategic location as a trade corridor makes logistics and supply chain management a critical sector. The development of modern ports, highways, and rail systems has opened new opportunities for international trade.",
+                        "Key areas of investment include warehousing, cold storage, and e-commerce logistics, driven by the rise of digital marketplaces.",
                     ],
                 },
                 {
@@ -44,8 +44,8 @@ export default {
                     image: "assets/food-processing-img1.png",
                     route: "food-processing",
                     descriptions: [
-                        "Pakistan's food processing industry, the second-largest after textiles, plays a vital role in the economy.",
-                        "Key growth areas include frozen foods, value-added agricultural products, and processed produce.",
+                        "Pakistan's food processing industry, the second-largest after textiles, plays a vital role in the economy, providing 16% of manufacturing jobs and contributing 27% to the sector's production value. With a burgeoning middle class of 102 million, the industry attracts $223.5 million annually in foreign direct investment (FDI).",
+                        "Key growth areas include frozen foods, value-added agricultural products, and processed produce, which are driving both domestic consumption and international demand.",
                     ],
                 },
                 {
@@ -56,8 +56,8 @@ export default {
                     image: "assets/automobile-landing-img.png",
                     route: "auto-mobile",
                     descriptions: [
-                        "The automobile industry in Pakistan is expanding rapidly, driven by increasing consumer demand and foreign investment.",
-                        "Government policies promoting local assembly and electric vehicle adoption are set to transform the market.",
+                        "The automobile industry in Pakistan is expanding rapidly, driven by increasing consumer demand and foreign investment. The sector includes the production of cars, motorbikes, and commercial vehicles.",
+                        "Government policies promoting local assembly and electric vehicle adoption are set to transform the market, creating new avenues for growth and sustainability.",
                     ],
                 },
                 {
@@ -68,8 +68,8 @@ export default {
                     image: "assets/info-tech-landing-img.png",
                     route: "information-technology",
                     descriptions: [
-                        "Pakistan's IT sector is a rising star, with exports exceeding $2 billion annually.",
-                        "Investment opportunities abound in areas such as artificial intelligence, fintech, and cloud computing.",
+                        "Pakistan's IT sector is a rising star, with exports exceeding $2 billion annually. The industry is known for its skilled workforce, offering software development, BPO services, and digital solutions to global clients.",
+                        "Investment opportunities abound in areas such as artificial intelligence, fintech, and cloud computing, supported by a thriving startup ecosystem.",
                     ],
                 },
                 {
@@ -80,8 +80,8 @@ export default {
                     image: "assets/housing-landing-img.png",
                     route: "housing-construction",
                     descriptions: [
-                        "The housing and construction sector in Pakistan is growing rapidly, driven by urbanization.",
-                        "The sector offers lucrative opportunities for investment in real estate and building materials.",
+                        "The housing and construction sector in Pakistan is growing rapidly, driven by urbanization and government initiatives such as the Naya Pakistan Housing Program.",
+                        "With a focus on affordable housing and infrastructure development, the sector offers lucrative opportunities for investment in real estate and building materials.",
                     ],
                 },
                 {
@@ -92,8 +92,8 @@ export default {
                     image: "assets/tourism-landing-img.png",
                     route: "tourism-hospitality",
                     descriptions: [
-                        "Pakistan's tourism industry is booming, with its stunning landscapes and cultural heritage.",
-                        "Investment opportunities include eco-tourism, resort development, and heritage site restoration.",
+                        "Pakistan's tourism industry is booming, with its stunning landscapes, cultural heritage, and adventure tourism attracting visitors from around the globe.",
+                        "Investment opportunities include eco-tourism, resort development, and heritage site restoration, supported by government incentives and global recognition.",
                     ],
                 },
             ],
