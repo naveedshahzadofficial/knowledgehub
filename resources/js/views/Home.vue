@@ -408,7 +408,6 @@ export default {
             </div>
         </section>
 
-
         <section class="investmentsDiv py-sm-5 py-4" id="scrollspyHeading4">
             <div class="container-fluid px-lg-5 px-4">
                 <div class="row mb-4">
@@ -437,18 +436,18 @@ export default {
                     <div class="col-lg-6 mb-lg-0 mb-3">
                         <div class="card h-100">
                             <div class="card-body">
-
-                                <div class="tab-content" id="InvestmentsTabContent">
+                                <div class="tab-content h-100" id="InvestmentsTabContent">
                                     <template v-for="tab in tabs" :key="tab.id">
-                                    <div v-if="activeTab === tab.id" class="tab-pane fade show active" role="tabpanel" aria-labelledby="textile-tab" tabindex="0">
-                                        <img :src="useAssets(tab.icon)" alt="Textile Icon" class="img-fluid mb-3">
-                                        <h6 class="mb-2">{{ tab.title  }}</h6>
-                                        <p v-for="desc in tab.descriptions" class="mb-2">{{ desc }}</p>
+                                    <div v-if="activeTab === tab.id" class="tab-pane fade show active h-100" role="tabpanel" aria-labelledby="textile-tab" tabindex="0">
+                                        <div class="flex-grow-1">
+                                            <img :src="useAssets(tab.icon)" alt="Textile Icon" class="img-fluid mb-3">
+                                            <h6 class="mb-2">{{ tab.title  }}</h6>
+                                            <p v-for="desc in tab.descriptions" class="mb-2">{{ desc }}</p>
+                                        </div>
                                         <router-link :to="{ name: tab.route}" class="learnMoreBtn">Learn More</router-link>
                                     </div>
                                     </template>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -461,9 +460,6 @@ export default {
                 </div>
             </div>
         </section>
-
-
-
 
         <section class="newsDiv py-sm-5 py-4" id="scrollspyHeading6">
             <div class="container-fluid px-lg-5 px-4">
