@@ -229,7 +229,6 @@ export default {
                                             stores.
                                         </p>
                                         <p class="mb-2">Local brands like Dawn Foods, Season Foods, K&N’s, Sabroso, and Sufi are making a notable impact in this market.</p>
-                                        <a href="#" class="learnMoreBtn">Learn More</a>
                                     </div>
 
                                     <div class="tab-pane fade h-100" id="edible-oils-tab-pane" role="tabpanel" aria-labelledby="edible-oils-tab" tabindex="0">
@@ -239,7 +238,6 @@ export default {
                                             trade.
                                         </p>
                                         <p class="mb-2">Key areas of investment include warehousing, cold storage, and e-commerce logistics, driven by the rise of digital marketplaces.</p>
-                                        <a href="#" class="learnMoreBtn">Learn More</a>
                                     </div>
 
                                     <div class="tab-pane fade h-100 show active" id="value-addition-tab-pane" role="tabpanel" aria-labelledby="value-addition-tab" tabindex="0">
@@ -248,7 +246,6 @@ export default {
                                         <p class="mb-2">Pakistan's food processing industry, the second-largest after textiles, plays a vital role in the economy, providing 16% of manufacturing jobs and contributing 27% to the sector's production value. With a burgeoning
                                             middle class of 102 million, the industry attracts $223.5 million annually in foreign direct investment (FDI).</p>
                                         <p class="mb-2">Key growth areas include frozen foods, value-added agricultural products, and processed produce, which are driving both domestic consumption and international demand.</p>
-                                        <a href="#" class="learnMoreBtn">Learn More</a>
                                     </div>
 
                                     <div class="tab-pane fade h-100" id="fruits-dairy-tab-pane" role="tabpanel" aria-labelledby="fruits-dairy-tab" tabindex="0">
@@ -256,7 +253,6 @@ export default {
                                         <h6 class="mb-2">Fruits, Dairy, Vegetables, and Processed Products</h6>
                                         <p class="mb-2">The automobile industry in Pakistan is expanding rapidly, driven by increasing consumer demand and foreign investment. The sector includes the production of cars, motorbikes, and commercial vehicles.</p>
                                         <p class="mb-2">Government policies promoting local assembly and electric vehicle adoption are set to transform the market, creating new avenues for growth and sustainability.</p>
-                                        <a href="#" class="learnMoreBtn">Learn More</a>
                                     </div>
 
                                     <div class="tab-pane fade h-100" id="frozen-food-processing-tab-pane" role="tabpanel" aria-labelledby="frozen-food-processing-tab" tabindex="0">
@@ -264,7 +260,6 @@ export default {
                                         <h6 class="mb-2">Agri Food Processing (Primary Process Foods)</h6>
                                         <p class="mb-2">Pakistan's IT sector is a rising star, with exports exceeding $2 billion annually. The industry is known for its skilled workforce, offering software development, BPO services, and digital solutions to global clients.</p>
                                         <p class="mb-2">Investment opportunities abound in areas such as artificial intelligence, fintech, and cloud computing, supported by a thriving startup ecosystem.</p>
-                                        <a href="#" class="learnMoreBtn">Learn More</a>
                                     </div>
                                 </div>
                             </div>

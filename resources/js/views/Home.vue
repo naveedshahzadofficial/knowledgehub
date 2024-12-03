@@ -1,7 +1,6 @@
 <script>
 import {useAssets} from "@/composable/use-assets";
 import {usePreLoaderStore} from "../store/preloader";
-import {setTimeout} from "../../../public/assets/plugins/custom/tinymce/tinymce.bundle";
 export default {
     name: "HomePage",
     data() {
@@ -11,10 +10,100 @@ export default {
             categories: [],
             business_activity_id:'',
             apply_ebiz_url: process.env.MIX_APPLY_EBIZ_URL,
+            activeTab: "foodProcessing",
+            tabs: [
+                {
+                    id: "textile",
+                    name: "Textile",
+                    title: "Textile Industry",
+                    icon: "assets/textile-landing-icon.svg",
+                    image: "assets/textile-landing-img.png",
+                    route: "textile",
+                    descriptions: [
+                        "The textile industry is Pakistan's largest manufacturing sector, contributing over 60% to exports and employing a significant portion of the workforce.",
+                        "With government incentives and modernization efforts, the industry is poised to expand into technical textiles and sustainable production methods.",
+                    ],
+                },
+                {
+                    id: "logistics",
+                    name: "Logistics",
+                    title: "Logistics and Supply Chain",
+                    icon: "assets/logistics-landing-icon.svg",
+                    image: "assets/logistics-landing-img.png",
+                    route: "logistics",
+                    descriptions: [
+                        "Pakistan's strategic location as a trade corridor makes logistics a critical sector.",
+                        "Key areas of investment include warehousing, cold storage, and e-commerce logistics.",
+                    ],
+                },
+                {
+                    id: "foodProcessing",
+                    name: "Food Processing",
+                    title: "Food Processing",
+                    icon: "assets/food-processing-icon1.svg",
+                    image: "assets/food-processing-img1.png",
+                    route: "food-processing",
+                    descriptions: [
+                        "Pakistan's food processing industry, the second-largest after textiles, plays a vital role in the economy.",
+                        "Key growth areas include frozen foods, value-added agricultural products, and processed produce.",
+                    ],
+                },
+                {
+                    id: "autoMobile",
+                    name: "Automobile",
+                    title: "Automobile Manufacturing",
+                    icon: "assets/automobile-landing-icon.svg",
+                    image: "assets/automobile-landing-img.png",
+                    route: "auto-mobile",
+                    descriptions: [
+                        "The automobile industry in Pakistan is expanding rapidly, driven by increasing consumer demand and foreign investment.",
+                        "Government policies promoting local assembly and electric vehicle adoption are set to transform the market.",
+                    ],
+                },
+                {
+                    id: "InfoTech",
+                    name: "Information Technology",
+                    title: "Information Technology",
+                    icon: "assets/info-tech-landing-icon.svg",
+                    image: "assets/info-tech-landing-img.png",
+                    route: "information-technology",
+                    descriptions: [
+                        "Pakistan's IT sector is a rising star, with exports exceeding $2 billion annually.",
+                        "Investment opportunities abound in areas such as artificial intelligence, fintech, and cloud computing.",
+                    ],
+                },
+                {
+                    id: "housing",
+                    name: "Housing",
+                    title: "Housing and Construction",
+                    icon: "assets/housing-landing-icon.svg",
+                    image: "assets/housing-landing-img.png",
+                    route: "housing-construction",
+                    descriptions: [
+                        "The housing and construction sector in Pakistan is growing rapidly, driven by urbanization.",
+                        "The sector offers lucrative opportunities for investment in real estate and building materials.",
+                    ],
+                },
+                {
+                    id: "tourism",
+                    name: "Tourism",
+                    title: "Tourism Industry",
+                    icon: "assets/tourism-landing-icon.svg",
+                    image: "assets/tourism-landing-img.png",
+                    route: "tourism-hospitality",
+                    descriptions: [
+                        "Pakistan's tourism industry is booming, with its stunning landscapes and cultural heritage.",
+                        "Investment opportunities include eco-tourism, resort development, and heritage site restoration.",
+                    ],
+                },
+            ],
         }
     },
     methods: {
         useAssets,
+        setActiveTab(id) {
+            this.activeTab = id;
+        },
         loadActivities: function () {
             axios.get('activities').then(response => {
                 this.activities = response.data.activities;
@@ -66,6 +155,10 @@ export default {
         $('.owl-carousel').trigger('destroy.owl.carousel');
     },
     computed:{
+        activeImage() {
+            const activeTabData = this.tabs.find((tab) => tab.id === this.activeTab);
+            return activeTabData ? activeTabData.image : "";
+        },
         filteredBusinessCategories: function () {
             return this.categories.filter(category => category.category_is_sector === 1);
         },
@@ -315,6 +408,7 @@ export default {
             </div>
         </section>
 
+
         <section class="investmentsDiv py-sm-5 py-4" id="scrollspyHeading4">
             <div class="container-fluid px-lg-5 px-4">
                 <div class="row mb-4">
@@ -332,26 +426,8 @@ export default {
                         <div class="card shdaow-none">
                             <div class="card-body p-1">
                                 <ul class="nav nav-tabs d-flex flex-lg-column border-0 flex-row flex-nowrap overflow-x-auto overflow-y-hidden mx-lg-0 mx-3" id="investmentTabs" role="tablist">
-                                    <li class="nav-item border-bottom" role="presentation">
-                                        <button class="nav-link w-100 text-start p-3 my-1" id="textile-tab" data-bs-toggle="tab" data-bs-target="#textile-tab-pane" type="button" role="tab" aria-controls="textile-tab-pane" aria-selected="true">Textile</button>
-                                    </li>
-                                    <li class="nav-item border-bottom" role="presentation">
-                                        <button class="nav-link w-100 text-start p-3 my-1" id="logistics-tab" data-bs-toggle="tab" data-bs-target="#logistics-tab-pane" type="button" role="tab" aria-controls="logistics-tab-pane" aria-selected="false">Logistics</button>
-                                    </li>
-                                    <li class="nav-item border-bottom" role="presentation">
-                                        <button class="nav-link w-100 text-start p-3 my-1 active" id="foodProcessing-tab" data-bs-toggle="tab" data-bs-target="#foodProcessing-tab-pane" type="button" role="tab" aria-controls="foodProcessing-tab-pane" aria-selected="true">Food Processing</button>
-                                    </li>
-                                    <li class="nav-item border-bottom" role="presentation">
-                                        <button class="nav-link w-100 text-start p-3 my-1" id="autoMobile-tab" data-bs-toggle="tab" data-bs-target="#autoMobile-tab-pane" type="button" role="tab" aria-controls="autoMobile-tab-pane" aria-selected="false">Automobile</button>
-                                    </li>
-                                    <li class="nav-item border-bottom" role="presentation">
-                                        <button class="nav-link w-100 text-start p-3 my-1" id="InfoTech-tab" data-bs-toggle="tab" data-bs-target="#InfoTech-tab-pane" type="button" role="tab" aria-controls="InfoTech-tab-pane" aria-selected="false">Information Technology</button>
-                                    </li>
-                                    <li class="nav-item border-bottom" role="presentation">
-                                        <button class="nav-link w-100 text-start p-3 my-1" id="housing-tab" data-bs-toggle="tab" data-bs-target="#housing-tab-pane" type="button" role="tab" aria-controls="housing-tab-pane" aria-selected="false">Housing & Construction</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link w-100 text-start p-3" id="tourism-tab" data-bs-toggle="tab" data-bs-target="#tourism-tab-pane" type="button" role="tab" aria-controls="tourism-tab-pane" aria-selected="false">Tourism and Hospitality</button>
+                                    <li v-for="tab in tabs" :key="tab.id" class="nav-item border-bottom" role="presentation">
+                                        <button class="nav-link w-100 text-start p-3 my-1" :class="{ active: (activeTab === tab.id) }" @click.prevent="setActiveTab(tab.id)">{{ tab.name }}</button>
                                     </li>
                                 </ul>
                             </div>
@@ -361,66 +437,16 @@ export default {
                     <div class="col-lg-6 mb-lg-0 mb-3">
                         <div class="card h-100">
                             <div class="card-body">
+
                                 <div class="tab-content" id="InvestmentsTabContent">
-                                    <div class="tab-pane fade" id="textile-tab-pane" role="tabpanel" aria-labelledby="textile-tab" tabindex="0">
-                                        <img :src="useAssets('assets/textile-icon.svg')" alt="Textile Icon" class="img-fluid mb-3">
-                                        <h6 class="mb-2">Textile Industry</h6>
-                                        <p class="mb-2">The textile industry is Pakistan's largest manufacturing sector, contributing over 60% to exports and employing a significant portion of the workforce. The sector is known for its cotton production, garments, and
-                                            value-added products.</p>
-                                        <p class="mb-2">With government incentives and modernization efforts, the industry is poised to expand into technical textiles and sustainable production methods to meet global demands.</p>
-                                        <router-link :to="{ name: 'textile'}" class="learnMoreBtn">Learn More</router-link>
+                                    <template v-for="tab in tabs" :key="tab.id">
+                                    <div v-if="activeTab === tab.id" class="tab-pane fade show active" role="tabpanel" aria-labelledby="textile-tab" tabindex="0">
+                                        <img :src="useAssets(tab.icon)" alt="Textile Icon" class="img-fluid mb-3">
+                                        <h6 class="mb-2">{{ tab.title  }}</h6>
+                                        <p v-for="desc in tab.descriptions" class="mb-2">{{ desc }}</p>
+                                        <router-link :to="{ name: tab.route}" class="learnMoreBtn">Learn More</router-link>
                                     </div>
-
-                                    <div class="tab-pane fade" id="logistics-tab-pane" role="tabpanel" aria-labelledby="logistics-tab" tabindex="0">
-                                        <img :src="useAssets('assets/logistics-icon.svg')" alt="Logistics Icon" class="img-fluid mb-3">
-                                        <h6 class="mb-2">Logistics and Supply Chain</h6>
-                                        <p class="mb-2">Pakistan's strategic location as a trade corridor makes logistics and supply chain management a critical sector. The development of modern ports, highways, and rail systems has opened new opportunities for international
-                                            trade.
-                                        </p>
-                                        <p class="mb-2">Key areas of investment include warehousing, cold storage, and e-commerce logistics, driven by the rise of digital marketplaces.</p>
-                                        <router-link :to="{ name: 'logistics'}" class="learnMoreBtn">Learn More</router-link>
-                                    </div>
-
-                                    <div class="tab-pane fade show active" id="foodProcessing-tab-pane" role="tabpanel" aria-labelledby="foodProcessing-tab" tabindex="0">
-                                        <img :src="useAssets('assets/food-processing-icon1.svg')" alt="Investment Icon" class="img-fluid mb-3">
-                                        <h6 class="mb-2">Food Processing</h6>
-                                        <p class="mb-2">Pakistan's food processing industry, the second-largest after textiles, plays a vital role in the economy, providing 16% of manufacturing jobs and contributing 27% to the sector's production value. With a burgeoning
-                                            middle class of 102 million, the industry attracts $223.5 million annually in foreign direct investment (FDI).</p>
-                                        <p class="mb-2">Key growth areas include frozen foods, value-added agricultural products, and processed produce, which are driving both domestic consumption and international demand.</p>
-                                        <router-link :to="{ name: 'food-processing'}" class="learnMoreBtn">Learn More</router-link>
-                                    </div>
-
-                                    <div class="tab-pane fade" id="autoMobile-tab-pane" role="tabpanel" aria-labelledby="autoMobile-tab" tabindex="0">
-                                        <img :src="useAssets('assets/automobile-icon.svg')" alt="Automobile Icon" class="img-fluid mb-3">
-                                        <h6 class="mb-2">Automobile Manufacturing</h6>
-                                        <p class="mb-2">The automobile industry in Pakistan is expanding rapidly, driven by increasing consumer demand and foreign investment. The sector includes the production of cars, motorbikes, and commercial vehicles.</p>
-                                        <p class="mb-2">Government policies promoting local assembly and electric vehicle adoption are set to transform the market, creating new avenues for growth and sustainability.</p>
-                                        <router-link :to="{ name: 'auto-mobile'}" class="learnMoreBtn">Learn More</router-link>
-                                    </div>
-
-                                    <div class="tab-pane fade" id="InfoTech-tab-pane" role="tabpanel" aria-labelledby="InfoTech-tab" tabindex="0">
-                                        <img :src="useAssets('assets/it-icon.svg')" alt="Information Technology Icon" class="img-fluid mb-3">
-                                        <h6 class="mb-2">Information Technology</h6>
-                                        <p class="mb-2">Pakistan's IT sector is a rising star, with exports exceeding $2 billion annually. The industry is known for its skilled workforce, offering software development, BPO services, and digital solutions to global clients.</p>
-                                        <p class="mb-2">Investment opportunities abound in areas such as artificial intelligence, fintech, and cloud computing, supported by a thriving startup ecosystem.</p>
-                                        <router-link :to="{ name: 'information-technology'}" class="learnMoreBtn">Learn More</router-link>
-                                    </div>
-
-                                    <div class="tab-pane fade" id="housing-tab-pane" role="tabpanel" aria-labelledby="housing-tab" tabindex="0">
-                                        <img :src="useAssets('assets/housing-icon.svg')" alt="Housing Icon" class="img-fluid mb-3">
-                                        <h6 class="mb-2">Housing and Construction</h6>
-                                        <p class="mb-2">The housing and construction sector in Pakistan is growing rapidly, driven by urbanization and government initiatives such as the Naya Pakistan Housing Program.</p>
-                                        <p class="mb-2">With a focus on affordable housing and infrastructure development, the sector offers lucrative opportunities for investment in real estate and building materials.</p>
-                                        <router-link :to="{ name: 'housing-construction'}" class="learnMoreBtn">Learn More</router-link>
-                                    </div>
-
-                                    <div class="tab-pane fade" id="tourism-tab-pane" role="tabpanel" aria-labelledby="tourism-tab" tabindex="0">
-                                        <img :src="useAssets('assets/tourism-icon.svg')" alt="Tourism Icon" class="img-fluid mb-3">
-                                        <h6 class="mb-2">Tourism Industry</h6>
-                                        <p class="mb-2">Pakistan's tourism industry is booming, with its stunning landscapes, cultural heritage, and adventure tourism attracting visitors from around the globe.</p>
-                                        <p class="mb-2">Investment opportunities include eco-tourism, resort development, and heritage site restoration, supported by government incentives and global recognition.</p>
-                                        <router-link :to="{ name: 'tourism-hospitality'}" class="learnMoreBtn">Learn More</router-link>
-                                    </div>
+                                    </template>
                                 </div>
 
                             </div>
@@ -429,12 +455,15 @@ export default {
 
                     <div class="col-lg-3 mb-lg-0 mb-3">
                         <div class="image-container position-relative card border-0 shadow-none bg-transparent">
-                            <img id="investmentImg" :src="useAssets('assets/food-processing-img1.png')" alt="Investment Img" class="img-fluid fade show active">
+                            <img v-if="activeImage" id="investmentImg" :src="useAssets(activeImage)" :alt="activeTab + ' Image'" class="img-fluid fade show active" />
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
+
+
 
         <section class="newsDiv py-sm-5 py-4" id="scrollspyHeading6">
             <div class="container-fluid px-lg-5 px-4">
