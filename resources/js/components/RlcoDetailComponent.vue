@@ -1,3 +1,161 @@
+<script>
+import BaseModalComponent from "./BaseModalComponent";
+import StarRating from "vue-star-rating";
+import {useAssets} from "../composable/use-assets";
+
+export default {
+    name: "RlcoDetailComponent",
+    components: {
+        BaseModalComponent,
+        StarRating,
+    },
+    props: {
+        rlco_detail: Object,
+        isOverFlow: Boolean,
+    },
+    data: () => ({
+        base_url: process.env.MIX_BASE_URL,
+        isShowModal: false,
+        isShowModalRenewal: false,
+        isShowModalDocumentRequirement: [],
+        feedbackForm: {
+            rating: null,
+            feedback: "",
+        },
+        feedback_label: "Glad to know any additional feedback",
+        isSubmitted: false,
+        printObj: {
+            id: "eBizService1-tab-pane",
+            popTitle: "Knowledge Hub",
+            extraCss: process.env.MIX_BASE_URL + "/assets/print.css",
+        },
+        isExpand: false,
+        tabs : [
+            { id: "requirement-tab", label: "Requirements" },
+            { id: "mistakes-tab", label: "Common Mistakes" },
+            { id: "helpDocuments-tab", label: "Help Documents" },
+            { id: "faqs-tab", label: "FAQs" },
+            { id: "dependencies-tab", label: "Dependencies" },
+        ],
+        activeTab: 0,
+
+    }),
+    mounted() {
+        if (!this.isOverFlow) {
+            window.addEventListener("scroll", this.handleScroll);
+            this.$refs.detail_page.addEventListener(
+                "scroll",
+                this.handleDetailScroll
+            );
+        }
+    },
+    watch: {
+        rlco_detail: function (newVal, oldVal) {
+            // watch it
+            if (oldVal && !this.isOverFlow) {
+                this.$refs.detail_page.scrollTo(0, 0);
+                this.isShowModalRenewal = false;
+                this.isShowModalDocumentRequirement = Array(this.rlco_detail.required_documents).fill(false);
+                this.feedbackForm = { rating: null, feedback: "" };
+                this.feedback_label = "Glad to know any additional feedback";
+                this.isSubmitted = false;
+                this.activeTab=0;
+            }
+        },
+    },
+    computed: {
+        currentRatingText() {
+            return this.feedbackForm.rating
+                ? "You have selected " + this.feedbackForm.rating + " stars"
+                : "Please select your rating";
+        },
+        currentFeedbackLabel() {
+            if (this.feedbackForm.rating <= 3) {
+                this.feedback_label = "Tell us how can we improve";
+            } else {
+                this.feedback_label = "Glad to know any additional feedback";
+            }
+            return this.feedback_label;
+        },
+        feedbacks() {
+            if (localStorage.getItem("rlcoFeedbacks")) {
+                return JSON.parse(localStorage.getItem("rlcoFeedbacks"));
+            }
+            return [];
+        },
+        checkFeedbackExits() {
+            let rlco = this.feedbacks.filter(
+                (rlco) => rlco.rlco_id === this.rlco_detail?.id
+            );
+            return !!(rlco && rlco.length);
+        },
+    },
+    methods: {
+        useAssets,
+        setActiveTab(index) {
+            this.activeTab = index;
+        },
+        getTabClasses(index){
+            return {
+                "nav-link": true,
+                 active: this.activeTab === index,
+            }
+        },
+        toggleModal() {
+            this.isShowModal = !this.isShowModal;
+        },
+        toggleModalRenewal() {
+            this.isShowModalRenewal = !this.isShowModalRenewal;
+        },
+        toggleModalDocumentRequirement(index) {
+            this.isShowModalDocumentRequirement[index] = !this.isShowModalDocumentRequirement[index];
+        },
+        scrollToTop() {
+            let refDiv = this.$refs.detail_page;
+            refDiv.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
+        },
+        handleScroll: function () {
+            let scrollY = window.scrollY;
+            document.querySelector(".scroll-top").style.bottom =
+                50 + scrollY + "px";
+        },
+        handleDetailScroll: function () {
+            let scrollTop = this.$refs.detail_page.scrollTop;
+            if (scrollTop > 200) {
+                document.querySelector(".scroll-top").style.display = "block";
+            } else {
+                document.querySelector(".scroll-top").style.display = "none";
+            }
+        },
+        submitFeedback: function () {
+            this.isSubmitted = true;
+            axios
+                .post(`review/${this.rlco_detail?.id}`, this.feedbackForm)
+                .then((response) => {
+                    let feedback = { rlco_id: response.data.id };
+                    localStorage.setItem(
+                        "rlcoFeedbacks",
+                        JSON.stringify([...this.feedbacks, feedback])
+                    );
+                    this.loading = false;
+                })
+                .catch((error) => {
+                    this.loading = false;
+                });
+        },
+        openDetailPage: function () {
+            let routeData = this.$router.resolve({
+                name: "rlcos.show",
+                params: { id: this.rlco_detail.id },
+            });
+            window.open(routeData.href, "_blank");
+        },
+    },
+};
+</script>
 <template>
     <div class="tab-pane fade show active" id="eBizService1-tab-pane" role="tabpanel" aria-labelledby="eBizService1-tab" tabindex="0">
         <div class="row">
@@ -20,27 +178,34 @@
                 <div class="dotted-line my-4"></div>
             </div>
             <div class="col-12 mb-4">
-                <ul class="nav nav-tabs border-0 justify-content-between overflow-x-auto overflow-y-hidden flex-nowrap" id="eBizServicesTab2" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="requirement-tab" data-bs-toggle="tab" data-bs-target="#requirement-tab-pane" type="button" role="tab" aria-controls="requirement-tab-pane" aria-selected="true">Requirements</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="mistakes-tab" data-bs-toggle="tab" data-bs-target="#mistakes-tab-pane" type="button" role="tab" aria-controls="mistakes-tab-pane" aria-selected="false">Common Mistakes</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="helpDocuments-tab" data-bs-toggle="tab" data-bs-target="#helpDocuments-tab-pane" type="button" role="tab" aria-controls="helpDocuments-tab-pane" aria-selected="false">Help Documents</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="faqs-tab" data-bs-toggle="tab" data-bs-target="#faqs-tab-pane" type="button" role="tab" aria-controls="faqs-tab-pane" aria-selected="false">FAQs</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="dependencies-tab" data-bs-toggle="tab" data-bs-target="#dependencies-tab-pane" type="button" role="tab" aria-controls="dependencies-tab-pane" aria-selected="false">Dependencies</button>
+                <ul
+                    class="nav nav-tabs border-0 justify-content-between overflow-x-auto overflow-y-hidden flex-nowrap"
+                    id="eBizServicesTab2"
+                    role="tablist"
+                >
+                    <li
+                        class="nav-item"
+                        role="presentation"
+                        v-for="(tab, index) in tabs"
+                        :key="tab.id"
+                    >
+                        <button
+                            :class="getTabClasses(index)"
+                            :id="tab.id"
+                            type="button"
+                            role="tab"
+                            :aria-controls="`${tab.id}-pane`"
+                            :aria-selected="activeTab === index"
+                            @click="setActiveTab(index)"
+                        >
+                            {{ tab.label }}
+                        </button>
                     </li>
                 </ul>
             </div>
             <div class="col-12">
                 <div class="tab-content" id="eBizServicesTab2Content">
-                    <div class="tab-pane fade show active" id="requirement-tab-pane" role="tabpanel" aria-labelledby="requirement-tab" tabindex="0">
+                    <div v-if="activeTab === 0"  :class="{ show: activeTab === 0, active: activeTab === 0 }" class="tab-pane fade" id="requirement-tab-pane" role="tabpanel" aria-labelledby="requirement-tab" tabindex="0">
                         <div class="card mb-3">
                             <div class="card-body" v-if="rlco_detail.required_documents?.length > 0">
                                 <div class="table-responsive">
@@ -253,7 +418,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="mistakes-tab-pane" role="tabpanel" aria-labelledby="mistakes-tab" tabindex="0">
+                    <div v-else-if="activeTab === 1" :class="{ show: activeTab === 1, active: activeTab === 1 }" class="tab-pane fade" id="mistakes-tab-pane" role="tabpanel" aria-labelledby="mistakes-tab" tabindex="0">
                         <div class="row" v-if="rlco_detail.foss?.length > 0">
                             <div class="col-12"  v-for="(fos, index) in rlco_detail.foss">
                                 <div class="card mb-3">
@@ -273,7 +438,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="helpDocuments-tab-pane" role="tabpanel" aria-labelledby="helpDocuments-tab" tabindex="0">
+                    <div v-else-if="activeTab === 2" :class="{ show: activeTab === 2, active: activeTab === 2 }" class="tab-pane fade" id="helpDocuments-tab-pane" role="tabpanel" aria-labelledby="helpDocuments-tab" tabindex="0">
                         <div class="row" v-if="rlco_detail.other_documents?.length > 0">
                             <div class="col-12" v-for="(document, index) in rlco_detail.other_documents">
                                 <div class="card mb-3">
@@ -313,7 +478,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="faqs-tab-pane" role="tabpanel" aria-labelledby="faqs-tab" tabindex="0">
+                    <div v-else-if="activeTab === 3" :class="{ show: activeTab === 3, active: activeTab === 3 }" class="tab-pane fade" id="faqs-tab-pane" role="tabpanel" aria-labelledby="faqs-tab" tabindex="0">
                         <div class="row">
                             <div class="col-12" v-if="rlco_detail.faqs?.length > 0">
                                 <div class="accordion faqsServiceAccordion" id="accordionExample" v-if="rlco_detail.faqs?.length > 0">
@@ -343,7 +508,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="dependencies-tab-pane" role="tabpanel" aria-labelledby="dependencies-tab" tabindex="0">
+                    <div v-else-if="activeTab === 4" :class="{ show: activeTab === 4, active: activeTab === 4 }" class="tab-pane fade" id="dependencies-tab-pane" role="tabpanel" aria-labelledby="dependencies-tab" tabindex="0">
                         <div class="row">
                             <div class="col-12" v-if="rlco_detail.dependencies?.length > 0">
                                 <div class="accordion faqsServiceAccordion" id="accordionExample">
@@ -479,145 +644,6 @@
     </div>
 </template>
 
-<script>
-import BaseModalComponent from "./BaseModalComponent";
-import StarRating from "vue-star-rating";
-import {useAssets} from "../composable/use-assets";
 
-export default {
-    name: "RlcoDetailComponent",
-    components: {
-        BaseModalComponent,
-        StarRating,
-    },
-    props: {
-        rlco_detail: Object,
-        isOverFlow: Boolean,
-    },
-    data: () => ({
-        base_url: process.env.MIX_BASE_URL,
-        isShowModal: false,
-        isShowModalRenewal: false,
-        isShowModalDocumentRequirement: [],
-        feedbackForm: {
-            rating: null,
-            feedback: "",
-        },
-        feedback_label: "Glad to know any additional feedback",
-        isSubmitted: false,
-        printObj: {
-            id: "eBizService1-tab-pane",
-            popTitle: "Knowledge Hub",
-            extraCss: process.env.MIX_BASE_URL + "/assets/print.css",
-        },
-        isExpand: false,
-    }),
-    mounted() {
-        if (!this.isOverFlow) {
-            window.addEventListener("scroll", this.handleScroll);
-            this.$refs.detail_page.addEventListener(
-                "scroll",
-                this.handleDetailScroll
-            );
-        }
-    },
-    watch: {
-        rlco_detail: function (newVal, oldVal) {
-            // watch it
-            if (oldVal && !this.isOverFlow) {
-                this.$refs.detail_page.scrollTo(0, 0);
-                this.isShowModalRenewal = false;
-                this.isShowModalDocumentRequirement = Array(this.rlco_detail.required_documents).fill(false);
-                this.feedbackForm = { rating: null, feedback: "" };
-                this.feedback_label = "Glad to know any additional feedback";
-                this.isSubmitted = false;
-            }
-        },
-    },
-    computed: {
-        currentRatingText() {
-            return this.feedbackForm.rating
-                ? "You have selected " + this.feedbackForm.rating + " stars"
-                : "Please select your rating";
-        },
-        currentFeedbackLabel() {
-            if (this.feedbackForm.rating <= 3) {
-                this.feedback_label = "Tell us how can we improve";
-            } else {
-                this.feedback_label = "Glad to know any additional feedback";
-            }
-            return this.feedback_label;
-        },
-        feedbacks() {
-            if (localStorage.getItem("rlcoFeedbacks")) {
-                return JSON.parse(localStorage.getItem("rlcoFeedbacks"));
-            }
-            return [];
-        },
-        checkFeedbackExits() {
-            let rlco = this.feedbacks.filter(
-                (rlco) => rlco.rlco_id === this.rlco_detail?.id
-            );
-            return !!(rlco && rlco.length);
-        },
-    },
-    methods: {
-        useAssets,
-
-        toggleModal() {
-            this.isShowModal = !this.isShowModal;
-        },
-        toggleModalRenewal() {
-            this.isShowModalRenewal = !this.isShowModalRenewal;
-        },
-        toggleModalDocumentRequirement(index) {
-            this.isShowModalDocumentRequirement[index] = !this.isShowModalDocumentRequirement[index];
-        },
-        scrollToTop() {
-            let refDiv = this.$refs.detail_page;
-            refDiv.scrollTo({
-                top: 0,
-                behavior: "smooth",
-            });
-        },
-        handleScroll: function () {
-            let scrollY = window.scrollY;
-            document.querySelector(".scroll-top").style.bottom =
-                50 + scrollY + "px";
-        },
-        handleDetailScroll: function () {
-            let scrollTop = this.$refs.detail_page.scrollTop;
-            if (scrollTop > 200) {
-                document.querySelector(".scroll-top").style.display = "block";
-            } else {
-                document.querySelector(".scroll-top").style.display = "none";
-            }
-        },
-        submitFeedback: function () {
-            this.isSubmitted = true;
-            axios
-                .post(`review/${this.rlco_detail?.id}`, this.feedbackForm)
-                .then((response) => {
-                    let feedback = { rlco_id: response.data.id };
-                    localStorage.setItem(
-                        "rlcoFeedbacks",
-                        JSON.stringify([...this.feedbacks, feedback])
-                    );
-                    this.loading = false;
-                })
-                .catch((error) => {
-                    this.loading = false;
-                });
-        },
-        openDetailPage: function () {
-            let routeData = this.$router.resolve({
-                name: "rlcos.show",
-                params: { id: this.rlco_detail.id },
-            });
-            window.open(routeData.href, "_blank");
-        },
-    },
-};
-</script>
 
 <style scoped></style>
