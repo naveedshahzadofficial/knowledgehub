@@ -874,7 +874,7 @@ footer h5 {
 
 .filterServicesDiv label {
     font-family: "font2", sans-serif;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 17px;
     color: #3a3a3a;
 }
@@ -947,12 +947,16 @@ footer h5 {
 }
 
 #eBizServicesTab1 button {
-    border-radius: none;
+    border-radius: unset;
 }
 
 #eBizServicesTab1 button.active {
     border-radius: 10px;
     background-color: rgb(40, 180, 104, 0.1);
+}
+.servicesPageData .nav-tabs .router-link-exact-active {
+    border-radius: 10px;
+    background-color: rgb(40, 180, 104, 0.1) !important;
 }
 
 .servicesPageData .card-title {
@@ -1722,6 +1726,45 @@ table.dataTable.table-striped>tbody>tr:nth-of-type(2n+1)>* {
 
 .dataTables_wrapper .row:nth-child(3) {
     margin-top: 10px !important;
+}
+
+
+/* services page 2*/
+
+#servicesPageTab li button {
+    font-weight: 400;
+    font-size: 18px;
+    color: rgb(58, 58, 58, 0.6);
+}
+
+#servicesPageTab li button:hover {
+    border-color: transparent;
+}
+
+#servicesPageTab li button.active {
+    color: #28b468;
+    border-color: transparent;
+    border-bottom: 2px solid #28b468;
+}
+
+#servicesPageTab li button .serviceCountDiv {
+    border: 0.50px solid #c0c0d2;
+    border-radius: 10px;
+    width: 39px;
+    height: 27px;
+}
+
+#servicesPageTab li button.active .serviceCountDiv {
+    border: 0.50px solid #c0c0d2;
+    border-radius: 10px;
+    width: 39px;
+    height: 27px;
+    background-color: #28b468;
+    color: #fff;
+}
+
+#servicesPageTab li button.active img {
+    filter: brightness(0) saturate(100%) invert(50%) sepia(72%) saturate(447%) hue-rotate(95deg) brightness(100%) contrast(88%);
 }
 
 
