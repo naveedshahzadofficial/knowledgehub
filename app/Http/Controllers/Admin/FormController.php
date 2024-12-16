@@ -24,11 +24,16 @@ class FormController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $query = Form::query();
+            $query = Form::with('rlcos');
             return DataTables::of($query)
                 ->addIndexColumn()
                 ->editColumn('form_status', function (Form $form) {
                     return '<span class="btn btn-circle btn-sm border-0 active ' . ($form->form_status ? 'btn-hover-success' : 'btn-hover-danger') . '">' . ($form->form_status ? 'Active' : 'Inactive') . '</span>';
+                })
+                ->addColumn('rlco_names', function (Form $form){
+                    return $form->rlcos->pluck('rlco_name')->map(function ($name, $index) {
+                        return ($index + 1) . '. ' . $name;
+                    })->implode("<br/>");
                 })
                 ->addColumn('action', function(Form $form){
                     $actionBtn = '';
@@ -40,7 +45,7 @@ class FormController extends Controller
                     $actionBtn .= '&nbsp;&nbsp;<a  href="' . route('admin.forms.show', $form) . '" class="mt-2 edit btn btn-custom-color text-center btn-circle btn-icon btn-xs"><i class="flaticon-eye text-white"></i></a>';
                     return $actionBtn;
                 })
-                ->rawColumns(['form_status','action'])
+                ->rawColumns(['form_status','rlco_names', 'action'])
                 ->make(true);
         }
         return View('admin.forms.index');

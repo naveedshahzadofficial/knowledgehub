@@ -44,6 +44,13 @@
                          </div>
                      </div>
 
+                       <div class="row">
+                           <div class="col-lg-6">
+                               <strong>Is Array</strong>
+                               <label class="bmd-label-floating">{{ $formField->is_array?'Yes':'No' }}</label><br>
+                           </div>
+                       </div>
+
                      @if(!empty($formField->field_options))
                      <div class="col-lg-12">
                             <strong>Field Options</strong>

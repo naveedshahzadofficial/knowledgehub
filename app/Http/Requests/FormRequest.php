@@ -23,11 +23,19 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
     {
         return [
             'is_tabular'=> 'required',
+            'is_add_more'=> 'required_if:is_tabular,1',
             'form_name' => 'required|max:255',
             'form_sub_heading' => 'sometimes|nullable',
             'form_order' => 'required',
             'rlco_ids' => 'required|array|min:1',
             'form_status' => 'required',
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        if ($this->input('is_tabular') == '0') {
+            $this->merge(['is_add_more' => '0',]);
+        }
     }
 }

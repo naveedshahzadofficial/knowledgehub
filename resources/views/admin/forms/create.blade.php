@@ -33,6 +33,24 @@
                             @enderror
                         </div>
 
+                        <div class="form-group" id="is-add-more-section" @if(old('is_tabular')=='0') style="display: none;" @endif>
+                            <label for="is_add_more">Add More</label>
+                            <div class="radio-inline">
+                                <label class="radio radio-success">
+                                    <input type="radio"  @if(old('is_add_more')=='1')checked="checked"@endif name="is_add_more" value="1">
+                                    <span></span>Yes</label>
+
+                                <label class="radio radio-danger">
+                                    <input type="radio"  @if(old('is_add_more')=='0')checked="checked"@endif name="is_add_more" value="0">
+                                    <span></span>No</label>
+                            </div>
+                            @error('is_add_more')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
                         <div class="form-group">
                             <label class="bmd-label-floating">Name <span class="color-red-700">*</span> </label>
 
@@ -134,8 +152,10 @@
             'use strict';
             // Basic Form
             $('#from').validate({
+                ignore: ":hidden",
                 rules : {
                     is_tabular: "required",
+                    is_add_more: "required",
                     form_name: "required",
                     form_order: "required",
                     form_status: "required",
@@ -143,7 +163,10 @@
                 },
                 messages: {
                     is_tabular: {
-                        required: "Tabular is required."
+                        required: "Please select an option for Tabular."
+                    },
+                    is_add_more: {
+                        required: "Please select an option for Add More."
                     },
                     form_name: {
                         required: "Form Name is required."
@@ -175,7 +198,18 @@
                 }
             });
 
-
+            function toggleAddMoreSection() {
+                const isTabular = $('input[name="is_tabular"]:checked').val();
+                if (isTabular === '1') {
+                    $('#is-add-more-section').show();
+                } else {
+                    $('#is-add-more-section').hide();
+                }
+            }
+            toggleAddMoreSection();
+            $('input[name="is_tabular"]').change(function () {
+                toggleAddMoreSection();
+            });
         });
 
     </script>

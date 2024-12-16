@@ -24,7 +24,15 @@
                              <label class="bmd-label-floating">{{ $form->is_tabular?'Yes':'No' }}</label><br>
                          </div>
 
+                         @if($form->is_tabular)
                          <div class="col-lg-6">
+                             <strong>Add More</strong>
+                             <label class="bmd-label-floating">{{ $form->is_add_more?'Yes':'No' }}</label><br>
+                         </div>
+                         @endif
+                     </div>
+                     <div class="row">
+                         <div class="col-lg-12">
                              <strong>Sub Heading</strong>
                              <label class="bmd-label-floating">{{ $form->form_sub_heading }}</label><br>
                          </div>

@@ -81,6 +81,25 @@
                         </div><!--form-group ends-->
 
                         <div class="form-group">
+                            <label for="is_required">Is Array</label>
+                            <div class="radio-inline">
+                                <label class="radio radio-success">
+                                    <input type="radio"  @if(old('is_array')=='1')checked="checked"@endif name="is_array" value="1">
+                                    <span></span>Yes</label>
+
+                                <label class="radio radio-danger">
+                                    <input type="radio"  @if(old('is_array')=='0')checked="checked"@endif name="is_array" value="0">
+                                    <span></span>No</label>
+                            </div>
+                            @error('is_array')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
+
+                            <div class="form-group">
                             <label for="is_required">Required</label>
                             <div class="radio-inline">
                                 <label class="radio radio-success">
@@ -187,6 +206,7 @@
                     form_table_column_id: "required",
                     field_label: "required",
                     field_type: "required",
+                    is_array: "required",
                     is_required: "required",
                     field_order: "required",
                     field_status: "required",
@@ -203,6 +223,9 @@
                     },
                     field_type: {
                         required: "Field Type is required."
+                    },
+                    is_array: {
+                        required: "Is Array is required."
                     },
                     is_required: {
                         required: "Please select required."
