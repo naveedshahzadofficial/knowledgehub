@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RlcoFeeType extends Model
 {
+    protected $fillable = ['rlco_id', 'name', 'description', 'applicable_to', 'order', 'status'];
 
     // Define the relationship to RlcoFeeRule (one-to-many)
     public function rlcoFeeRules()
@@ -20,5 +21,4 @@ class RlcoFeeType extends Model
         return $this->belongsTo(Rlco::class);
     }
 
-    protected $fillable = ['rlco_id', 'name', 'description', 'calculation_period', 'order', 'status'];
 }

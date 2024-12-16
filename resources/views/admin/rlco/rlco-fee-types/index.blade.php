@@ -39,7 +39,7 @@
                             <th>Sr. No.</th>
                             <th>Name</th>
                             <th class="text-center">Description</th>
-                            <th class="text-center">Calculation period</th>
+                            <th class="text-center">Applicable To</th>
                             <th>Order</th>
                             <th>Status</th>
                             <th style="width: 120px;" class="text-center">Action</th>
@@ -75,7 +75,7 @@
                     {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
                     {data: 'name', name: 'name'},
                     {data: 'description', name: 'description', class:'text-center'},
-                    {data: 'calculation_period', name: 'calculation_period', class:'text-center'},
+                    {data: 'applicable_to', name: 'applicable_to', class:'text-center'},
                     {data: 'order', name: 'order'},
                     {data: 'status', name: 'field_status'},
                     {data: 'action', name: 'action', orderable: false, searchable: false, class:'text-center'},

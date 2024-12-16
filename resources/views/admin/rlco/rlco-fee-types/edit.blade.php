@@ -37,14 +37,26 @@
                         </div><!--form-group ends-->
 
                         <div class="form-group">
-                            <label for="field_type">Calculation Period <span class="color-red-700"></span> </label>
-                            <input maxlength="255" type="text" class="form-control  @error('calculation_period') is-invalid @enderror" name="calculation_period" value="{{ old('calculation_period', $rlcoFeeType->calculation_period) }}" id="calculation_period"   />
-                            @error('calculation_period')
+                            <label for="applicable_to">Applicable To <span class="color-red-700">*</span></label>
+                            <div class="radio-inline">
+                                <label class="radio radio-success">
+                                    <input type="radio"  @if(old('applicable_to', $rlcoFeeType->applicable_to)=='1')checked="checked"@endif name="applicable_to" value="1">
+                                    <span></span>First Fee</label>
+
+                                <label class="radio radio-warning">
+                                    <input type="radio"  @if(old('applicable_to', $rlcoFeeType->applicable_to)=='2')checked="checked"@endif name="applicable_to" value="2">
+                                    <span></span>Further Fee</label>
+
+                                <label class="radio radio-danger">
+                                    <input type="radio"  @if(old('applicable_to', $rlcoFeeType->applicable_to)=='3')checked="checked"@endif name="applicable_to" value="3">
+                                    <span></span>Both Fees</label>
+                            </div>
+                            @error('applicable_to')
                             <div class="invalid-feedback d-block">
                                 {{ $message }}
                             </div>
                             @enderror
-                        </div><!--form-group ends-->
+                        </div>
 
                         <div class="form-group">
                             <label class="bmd-label-floating">Order <span class="color-red-700">*</span> </label>
@@ -111,9 +123,8 @@
                     description: {
                         maxlength: 255, // 'description' can be nullable but max length of 255.
                     },
-                    calculation_period: {
-                        required: false, // Assuming it's required, adjust if necessary.
-                        maxlength: 255, // Max length of the 'calculation_period' string.
+                    applicable_to: {
+                        required: true,
                     },
                     order: {
                         required: true,
@@ -134,8 +145,8 @@
                     description: {
                         maxlength: "Description cannot exceed 255 characters.",
                     },
-                    calculation_period: {
-                        maxlength: "Calculation period cannot exceed 255 characters.",
+                    applicable_to: {
+                        required: "Applicable is required.",
                     },
                     order: {
                         required: "Order is required.",

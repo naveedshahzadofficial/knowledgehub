@@ -26,7 +26,7 @@ class StoreRlcoFeeTypeRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
-            'calculation_period' => 'string|max:255',
+            'applicable_to' => 'integer|min:1',
             'order' => 'integer|min:0',
             'status' => 'required|boolean', // Accepts 0 or 1 for boolean
         ];
@@ -38,7 +38,8 @@ class StoreRlcoFeeTypeRequest extends FormRequest
             'name.required' => 'Title is required.',
             'name.max' => 'Title cannot exceed 255 characters.',
             'description.max' => 'Description cannot exceed 255 characters.',
-            'calculation_period.max' => 'Calculation period cannot exceed 255 characters.',
+            'applicable_to.integer' => 'Applicable is required.',
+            'applicable_to.min' => 'Applicable is required.',
             'order.integer' => 'Order must be a valid integer.',
             'order.min' => 'Order cannot be less than 0.',
             'status.required' => 'Status is required.',

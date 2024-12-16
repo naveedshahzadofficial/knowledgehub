@@ -24,6 +24,9 @@ class RlcoFeeTypeController extends Controller
                 ->editColumn('status', function (RlcoFeeType $rlcoFeeType) {
                     return '<span class="btn btn-circle btn-sm border-0 active ' . ($rlcoFeeType->status ? 'btn-hover-success' : 'btn-hover-danger') . '">' . ($rlcoFeeType->status ? 'Active' : 'Inactive') . '</span>';
                 })
+                ->editColumn('applicable_to', function (RlcoFeeType $rlcoFeeType) {
+                    return '<span class="btn btn-circle btn-sm border-0 active ' . ($rlcoFeeType->applicable_to ==1 ? 'btn-hover-success' : ($rlcoFeeType->applicable_to ==2?'btn-hover-warning':'btn-hover-danger')) . '">' . ($rlcoFeeType->applicable_to==1 ? 'First Fee' : ($rlcoFeeType->applicable_to==2?'Further Fee':'Both Fees')) . '</span>';
+                })
                 ->addColumn('action', function(RlcoFeeType $rlcoFeeType) use ($rlco) {
                     $actionBtn = '';
                     $actionBtn .= '<span onclick="toggleStatus(this); return false;"  data-href="' . route('admin.rlcos.rlco-fee-types.destroy', [$rlco, $rlcoFeeType]) . '" class="edit btn btn-custom-color text-center btn-circle btn-icon btn-xs">' . ($rlcoFeeType->status ? '<i class="fa fa-toggle-on text-white"></i>' : '<i class="fa fa-toggle-off text-danger"></i>') . '</span>';
@@ -31,7 +34,7 @@ class RlcoFeeTypeController extends Controller
                     $actionBtn .= '&nbsp;&nbsp;<a  href="' . route('admin.rlcos.rlco-fee-types.rlco-fee-rules.index', [$rlco, $rlcoFeeType]) . '" class="btn btn-custom-color text-center btn-circle btn-icon btn-xs"><i class="flaticon-list text-white"></i></a>';
                     return $actionBtn;
                 })
-                ->rawColumns(['status','action'])
+                ->rawColumns(['status','applicable_to','action'])
                 ->make(true);
         }
         return View('admin.rlco.rlco-fee-types.index', compact('rlco'));
