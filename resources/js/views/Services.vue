@@ -237,6 +237,7 @@ const searchAddOnRlcos= computed(() => {
                     <v-select v-model="searchForm.construction_department_id" :options="departments"
                               :reduce="dept => dept.id" label="department_name"
                               @option:selected="handleSearch()"
+                              :clearable="true"
                               placeholder="Issuance Authority" class="vSelectClass form-select" >
                     </v-select>
                     <ErrorMessage :error="errors.construction_department_id" />
@@ -382,12 +383,7 @@ const searchAddOnRlcos= computed(() => {
     padding: 0.675rem 2.25rem .375rem .75rem;
 }
 
-.v-select >>> .vs__clear{
-    display: none !important;
-}
-.v-select >>> .vs__actions{
-    display: none !important;
-}
+
 .v-select >>> .vs__dropdown-menu {
     width: 500px !important;
 }
