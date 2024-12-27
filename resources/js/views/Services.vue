@@ -72,7 +72,25 @@ const setActiveTab = (index, tabId) => {
         router.push({name: 'service-detail', params: {rlco_id: rlco_id}});
     }
 };
+const updateActiveTab = () => {
+    let rlco_id = '';
+    if (businessSpecificRlcos.value.length !== 0) {
+        rlco_id = businessSpecificRlcos.value[0].id;
+        activeTab.value = 0; // Set to Business Specific tab
+    } else if (constructionRlcos.value.length !== 0) {
+        rlco_id = constructionRlcos.value[0].id;
+        activeTab.value = 1; // Set to Construction tab
+    } else if (addOnRlcos.value.length !== 0) {
+        rlco_id = addOnRlcos.value[0].id;
+        activeTab.value = 2; // Set to Add On(s) tab
+    } else {
+        activeTab.value = 0; // Default to first tab if no data
+    }
 
+    if (rlco_id) {
+        router.push({ name: 'service-detail', params: { rlco_id: rlco_id } });
+    }
+};
 
 
 
@@ -113,7 +131,18 @@ onMounted(() => {
 const handleSelectedBusinessCategory = () => {
     searchForm.business_activity_id = '';
     searchForm.construction_department_id = '';
-    filteredBusinessActivities.value = business_activities.value.filter(businessActivity => searchForm.business_category_id===1 || businessActivity.business_category_id === searchForm.business_category_id);
+    // filteredBusinessActivities.value = business_activities.value.filter(businessActivity => searchForm.business_category_id===1 || businessActivity.business_category_id === searchForm.business_category_id);
+    if (!searchForm.business_category_id) {
+        // If deselected, reset `filteredBusinessActivities` to include all activities
+        filteredBusinessActivities.value = business_activities.value;
+    } else {
+        // Filter based on the selected business category
+        filteredBusinessActivities.value = business_activities.value.filter(
+            (businessActivity) =>
+                searchForm.business_category_id===1 ||
+                businessActivity.business_category_id === searchForm.business_category_id
+        );
+    }
 }
 
 
@@ -160,6 +189,21 @@ const handleSearchCommonBasedRlcos = () => {
     const filteredCommonRlcosIds = businessSpecificRlcos.value?.map(rlco => rlco.id);
     addOnRlcos.value = rlcos.value
         .filter(rlco => !filteredCommonRlcosIds.includes(rlco.id) && rlco.common_flag)
+};
+const handleBusinessActivityChange = (value) => {
+    if (!value) {
+        businessSpecificRlcos.value = [];
+        handleSearchConstructionRlcos();
+        handleSearchCommonBasedRlcos();
+    }
+};
+const handleConstructionDepartmentChange = (value) => {
+    if (!value) {
+        constructionRlcos.value = [];
+    } else {
+        handleSearchConstructionRlcos();
+    }
+    updateActiveTab();
 };
 
 
@@ -216,6 +260,7 @@ const searchAddOnRlcos= computed(() => {
                     <v-select v-model="searchForm.business_category_id" :options="business_categories"
                               :reduce="category => category.id" label="category_name"
                               @option:selected="handleSelectedBusinessCategory()"
+                              @update:modelValue="handleSelectedBusinessCategory"
                               placeholder="Select Sector" class="vSelectClass form-select"
                     >
                     </v-select>
@@ -227,6 +272,7 @@ const searchAddOnRlcos= computed(() => {
                     <v-select v-model="searchForm.business_activity_id" :options="filteredBusinessActivities"
                               :reduce="sector => String(sector.id)" label="easy_class_name"
                               @option:selected="handleSearch()"
+                              @update:modelValue="handleBusinessActivityChange"
                               placeholder="Search your business" class="vSelectClass form-select" >
                     </v-select>
                     <ErrorMessage :error="errors.business_activity_id" />
@@ -238,6 +284,7 @@ const searchAddOnRlcos= computed(() => {
                               :reduce="dept => dept.id" label="department_name"
                               @option:selected="handleSearch()"
                               :clearable="true"
+                              @update:modelValue="handleConstructionDepartmentChange"
                               placeholder="Issuance Authority" class="vSelectClass form-select" >
                     </v-select>
                     <ErrorMessage :error="errors.construction_department_id" />
