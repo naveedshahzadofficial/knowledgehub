@@ -10,7 +10,7 @@ export default {
             categories: [],
             business_activity_id:'',
             apply_ebiz_url: process.env.MIX_APPLY_EBIZ_URL,
-            activeTab: "foodProcessing",
+            activeTab: "textile",
             tabs: [
                 {
                     id: "textile",
@@ -313,7 +313,7 @@ export default {
                                     </div>
 
                                     <ul class="list-unstyled row mx-0">
-                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://iris.fbr.gov.pk/login" target="_blank" class="text-decoration-none text-white hover-text-underline">Sole Proprietorship</a></li>
+                                        <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://register.business.punjab.gov.pk/" target="_blank" class="text-decoration-none text-white hover-text-underline">Sole Proprietorship</a></li>
                                         <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://register.business.punjab.gov.pk/" target="_blank" class="text-decoration-none text-white hover-text-underline">Association of Persons (Firm)</a></li>
                                         <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://leap.secp.gov.pk/#/landing-page" target="_blank" class="text-decoration-none text-white hover-text-underline">Single Member Company</a></li>
                                         <li class="mb-3 col-xxl-3 col-xl-4 col-md-6"><a href="https://leap.secp.gov.pk/#/landing-page" target="_blank" class="text-decoration-none text-white hover-text-underline">Private Limited Company</a></li>
