@@ -233,12 +233,12 @@ const searchAddOnRlcos= computed(() => {
                 </div>
 
                 <div class="col-xl-4">
-                    <label class="form-label">Construction &amp; Issuance Authority (If Required )</label>
+                    <label class="form-label">Construction & Development Authority</label>
                     <v-select v-model="searchForm.construction_department_id" :options="departments"
                               :reduce="dept => dept.id" label="department_name"
                               @option:selected="handleSearch()"
                               :clearable="true"
-                              placeholder="Issuance Authority" class="vSelectClass form-select" >
+                              placeholder="Development Authority" class="vSelectClass form-select" >
                     </v-select>
                     <ErrorMessage :error="errors.construction_department_id" />
                 </div>

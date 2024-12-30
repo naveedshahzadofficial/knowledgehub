@@ -58,11 +58,6 @@
                                 </a>
                             </li>
                         </ul>
-                        <a :href="apply_ebiz_url" class="text-decoration-none eBizUserAddPortalBtn d-inline-flex align-items-center justify-content-center ps-1 me-3">
-                            <span>
-                                <img :src="useAssets('assets/user-add-icon.svg')" alt="user add icon" class="img-fluid">
-                            </span>
-                        </a>
                         <a :href="apply_ebiz_url" class="text-decoration-none eBizPortalBtn d-inline-flex align-items-center justify-content-center ps-3 pe-2">
                             <span>eBiz Portal</span>
                             <span>
