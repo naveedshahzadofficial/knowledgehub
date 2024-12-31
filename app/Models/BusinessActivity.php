@@ -16,4 +16,9 @@ class BusinessActivity extends Model
     public function scopeActive($query) {
         return $query->where('activity_status', true);
     }
+
+    public function rlcos()
+    {
+        return $this->belongsToMany(Rlco::class);
+    }
 }
