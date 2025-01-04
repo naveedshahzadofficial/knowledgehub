@@ -92,7 +92,7 @@ class RlcoController extends Controller
     public function activities()
     {
         $activities = ActivityResource::collection(Activity::active()->orderBy('activity_order')->get());
-        $categories = BusinessCategoryResource::collection(BusinessCategory::where('category_status',1)->orderBy('sort_order','asc')->get());
+        $categories = BusinessCategoryResource::collection(BusinessCategory::active()->whereRelation('businessActivities', 'activity_status', true)->orderBy('sort_order','asc')->get());
         $departments = DepartmentResource::collection(Department::active()->get());
         $sectors = BusinessActivity::active()->orderBy('easy_class_name')->get();
         return response()->json(['activities'=>$activities,'categories'=>$categories,'sectors'=>$sectors,'departments'=>$departments]);
@@ -100,7 +100,7 @@ class RlcoController extends Controller
 
     public function get_services()
     {
-        $business_categories = BusinessCategoryResource::collection(BusinessCategory::where('category_status',1)->orderBy('sort_order','asc')->get());
+        $business_categories = BusinessCategoryResource::collection(BusinessCategory::active()->whereRelation('businessActivities', 'activity_status', true)->orderBy('sort_order','asc')->get());
         $departments = DepartmentResource::collection((Department::whereRelation('rlcos', 'construction_flag', "1")->active()->orderBy('department_name')->get()));
         $business_activities = BusinessActivity::active()->orderBy('easy_class_name')->get();
         $rlcos = RlcoResource::collection(Rlco::with('scopes','businessActivities')->active()
