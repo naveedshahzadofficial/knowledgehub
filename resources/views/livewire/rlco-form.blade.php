@@ -211,7 +211,7 @@
                                     <x-multi-column-checkbox-select2 :listing="$business_activities"
                                                             wire:model.defer="form.business_activity_ids"
                                                             setFieldName="form.business_activity_ids"
-                                                            id="business_activity_ids" fieldName="class_name"/>
+                                                            id="business_activity_ids" fieldName="easy_class_name"/>
                                 </div>
                                 @error('form.business_activity_id')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>

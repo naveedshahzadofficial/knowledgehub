@@ -46,14 +46,14 @@
         let formatTemplate = function (result) {
 
             if (result.id!=undefined && result.id.length==0) {
-                return '<div class="row" style="z-index: 10; position: absolute; top: 0; width: 100%; background-color: #30807D; padding: 6px; color: white; "><div class="col-md-1"><label class="checkbox checkbox-primary"><input type="checkbox" name="activity_all_sectors" id="activity_all_sectors" onclick="all_activity_checked(this)" value="all_sectors"><span></span>&nbsp;</label></div><div class="col-md-2"><b>Section Name</b></div><div class="col-md-3"><b>Division Name</b></div><div class="col-md-3"><b>Group Name</b></div><div class="col-md-3"><b>Class Name</b></div></div>';
+                return '<div class="row" style="z-index: 10; position: absolute; top: 0; width: 100%; background-color: #30807D; padding: 6px; color: white; "><div class="col-md-1"><label class="checkbox checkbox-primary"><input type="checkbox" name="activity_all_sectors" id="activity_all_sectors" onclick="all_activity_checked(this)" value="all_sectors"><span></span>&nbsp;</label></div><div class="col-md-2"><b>Section Name</b></div><div class="col-md-3"><b>Division Name</b></div><div class="col-md-3"><b>Group Name</b></div><div class="col-md-3"><b>Easy Class Name</b></div></div>';
             }
             let activity = $(result.element).data('json');
 
             if(activity==undefined || activity==null || activity=="" ||  activity=="undefined")
                 return false;
 
-            return '<div class="row"><div class="col-md-1"><label class="checkbox checkbox-primary"><input type="checkbox" name="business_activity_'+activity.id+'" id="business_activity_'+activity.id+'" value="'+activity.id+'"><span></span>&nbsp;</label></div><div class="col-md-2">'+activity.section_name+'</div><div class="col-md-3">'+activity.division_name+'</div><div class="col-md-3">'+activity.group_name+'</div><div class="col-md-3">'+activity.class_name+'</div></div>';
+            return '<div class="row"><div class="col-md-1"><label class="checkbox checkbox-primary"><input type="checkbox" name="business_activity_'+activity.id+'" id="business_activity_'+activity.id+'" value="'+activity.id+'"><span></span>&nbsp;</label></div><div class="col-md-2">'+activity.section_name+'</div><div class="col-md-3">'+activity.division_name+'</div><div class="col-md-3">'+activity.group_name+'</div><div class="col-md-3">'+activity.easy_class_name+'</div></div>';
         }
 
 
