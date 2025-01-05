@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RlcoFeeRule extends Model
 {
-    protected $fillable = ['rlco_fee_type_id', 'category', 'calculation_type', 'rate', 'minimum_fee','maximum_fee', 'fixed_fee', 'unit', 'order', 'status', 'percentage'];
+    protected $fillable = ['rlco_fee_type_id', 'category', 'calculation_type', 'rate', 'minimum_fee','maximum_fee', 'fixed_fee', 'processing_fee', 'unit', 'order', 'status', 'percentage'];
 
     // Define the relationship to RlcoUserInput (one-to-many)
     public function rlcoUserInputs()

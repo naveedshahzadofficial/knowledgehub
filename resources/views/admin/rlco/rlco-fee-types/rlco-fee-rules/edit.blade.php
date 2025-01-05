@@ -99,6 +99,16 @@
                         </div><!--form-group ends-->
 
                         <div class="form-group">
+                            <label for="processing_fee">Processing/ Registration Fee <span class="color-red-700"></span> </label>
+                            <input type="text" class="form-control  @error('processing_fee') is-invalid @enderror" name="processing_fee" value="{{ old('processing_fee',$rlcoFeeRule->processing_fee) }}" id="processing_fee"   />
+                            @error('processing_fee')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div><!--form-group ends-->
+
+                        <div class="form-group">
                             <label class="bmd-label-floating">Order <span class="color-red-700">*</span> </label>
                             <input maxlength="255" type="text" class="form-control  @error('order') is-invalid @enderror" name="order" value="{{ old('order',$rlcoFeeRule->order) }}" id="order"  required />
                             @error('order')
@@ -188,6 +198,12 @@
                         min: 0,
                         maxlength: 14 // Allows for 11 digits, 1 decimal, and 2 decimal places
                     },
+                    processing_fee: {
+                        required: false, // Only required if you need it to be mandatory
+                        number: true,
+                        min: 0,
+                        maxlength: 14 // Allows for 11 digits, 1 decimal, and 2 decimal places
+                    },
                     unit: {
                         maxlength: 255 // Unit can be nullable and a string
                     },
@@ -242,6 +258,11 @@
                         number: "Fixed Fee must be a valid number.",
                         min: "Fixed Fee cannot be less than 0.",
                         maxlength: "Fixed Fee cannot exceed 14 digits and 2 decimal places."
+                    },
+                    processing_fee: {
+                        number: "Processing Fee must be a valid number.",
+                        min: "Processing Fee cannot be less than 0.",
+                        maxlength: "Processing Fee cannot exceed 14 digits and 2 decimal places."
                     },
                     unit: {
                         maxlength: "Unit cannot exceed 255 characters."
