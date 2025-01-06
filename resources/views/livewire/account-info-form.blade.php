@@ -40,6 +40,9 @@ applicable_at_level: '{{ $form['applicable_at_level']??null }}',
                         </div><!--form-group ends-->
 
                     </div>
+                    <div class="row form-group">
+                       <button class="btn btn-custom-color" wire:click.prevent="ucAccountInfo()"  wire:loading.class="spinner spinner-white spinner-right" wire:loading.attr="disabled">Save</button>
+                    </div>
                 </div>
 
                 <h4 class="font-weight-bold section_heading text-white">
