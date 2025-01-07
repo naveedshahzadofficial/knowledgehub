@@ -80,6 +80,50 @@
                             @enderror
                         </div><!--form-group ends-->
 
+                        <div class="form-group conditional-group" id="date-type-group" style="display: none;">
+                            <label for="date_type">Date Type <span class="color-red-700">*</span></label>
+                            <div class="radio-inline">
+                                <label class="radio radio-success">
+                                    <input type="radio"  @if(old('date_type')=='1')checked="checked"@endif name="date_type" value="1">
+                                    <span></span>Date Only</label>
+
+                                <label class="radio radio-danger">
+                                    <input type="radio"  @if(old('date_type')=='2')checked="checked"@endif name="date_type" value="2">
+                                    <span></span>Year Only</label>
+
+                                <label class="radio radio-danger">
+                                    <input type="radio"  @if(old('date_type')=='3')checked="checked"@endif name="date_type" value="3">
+                                    <span></span>Time Only</label>
+
+                                <label class="radio radio-danger">
+                                    <input type="radio"  @if(old('date_type')=='4')checked="checked"@endif name="date_type" value="4">
+                                    <span></span>Date Time</label>
+                            </div>
+                            @error('date_type')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group conditional-group" id="max-date-group" style="display: none;">
+                                <label for="max_date">Max Date <span class="color-red-700">*</span></label>
+                                <div class="radio-inline">
+                                    <label class="radio radio-success">
+                                        <input type="radio"  @if(old('max_date')=='1')checked="checked"@endif name="max_date" value="1">
+                                        <span></span>Future Date</label>
+
+                                    <label class="radio radio-danger">
+                                        <input type="radio"  @if(old('max_date')=='2')checked="checked"@endif name="max_date" value="2">
+                                        <span></span>Current Date</label>
+                                </div>
+                                @error('max_date')
+                                <div class="invalid-feedback d-block">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+
                         <div class="form-group">
                             <label for="is_required">Is Array</label>
                             <div class="radio-inline">
@@ -206,6 +250,8 @@
                     form_table_column_id: "required",
                     field_label: "required",
                     field_type: "required",
+                    date_type: "required",
+                    max_date: "required",
                     is_array: "required",
                     is_required: "required",
                     field_order: "required",
@@ -223,6 +269,12 @@
                     },
                     field_type: {
                         required: "Field Type is required."
+                    },
+                    date_type: {
+                        required: "Date Type is required."
+                    },
+                    max_date: {
+                        required: "Max Date is required."
                     },
                     is_array: {
                         required: "Is Array is required."
@@ -256,8 +308,6 @@
                     }
                 }
             });
-
-
         });
 
         function generateSlug(text) {
@@ -271,6 +321,23 @@
 
         document.getElementById('field_group').addEventListener('input', function() {
             document.getElementById('field_group').value = generateSlug(this.value);
+        });
+
+        function toggleConditionalFields() {
+            const selectedFieldType = $('input[name="field_type"]:checked').val();
+            if (selectedFieldType === 'date') {
+                $('#date-type-group').show();
+                $('#max-date-group').show();
+            } else {
+                $('#date-type-group').hide();
+                $('#max-date-group').hide();
+            }
+        }
+
+        toggleConditionalFields();
+
+        $('input[name="field_type"]').on('change', function () {
+            toggleConditionalFields();
         });
 
     </script>
