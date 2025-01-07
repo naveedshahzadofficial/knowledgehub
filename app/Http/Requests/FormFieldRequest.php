@@ -29,6 +29,8 @@ class FormFieldRequest extends FormRequest
             'form_table_column_id' => ['required_if:form.is_tabular,true'],
             'field_label' => 'required|max:255',
             'field_type' => 'required',
+            'date_type' => 'required_if:field_type,date',
+            'max_date' => 'required_if:field_type,date',
             'is_array' => 'required',
             'is_required' => 'required',
             'field_group' => 'sometimes|nullable',
