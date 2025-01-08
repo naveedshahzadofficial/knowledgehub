@@ -453,28 +453,6 @@ export default {
                                         </h6>
                                     </div>
                                 </div>
-
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <h6 class="mb-0 d-flex align-items-center justify-content-between">
-                                            <span>Basement Affidavit on Rs 50/- Stamp paper (In case of basement)</span>
-                                            <button class="bg-transparent border-0">
-                                                <img :src="useAssets('assets/download-icon.svg')" alt="">
-                                            </button>
-                                        </h6>
-                                    </div>
-                                </div>
-
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <h6 class="mb-0 d-flex align-items-center justify-content-between">
-                                            <span>Undertaking for Damages on Rs.500/- Stamp paper</span>
-                                            <button class="bg-transparent border-0">
-                                                <img :src="useAssets('assets/download-icon.svg')" alt="">
-                                            </button>
-                                        </h6>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
