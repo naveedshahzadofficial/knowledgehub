@@ -35,6 +35,7 @@ class FormFieldRequest extends FormRequest
             'is_required' => 'required',
             'field_group' => 'sometimes|nullable',
             'field_options' => 'sometimes|nullable|array',
+            'field_grid_col' => 'required',
             'field_order' => 'required',
             'field_status' => 'required',
         ];

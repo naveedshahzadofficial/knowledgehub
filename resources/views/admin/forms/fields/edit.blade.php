@@ -188,6 +188,24 @@
                             @enderror
                         </div>
 
+                            <div class="form-group">
+                                <label for="field_grid_col">Grid Column <span class="color-red-700">*</span></label>
+                                <div class="radio-inline">
+                                    <label class="radio radio-success">
+                                        <input type="radio"  @if(old('field_grid_col', $formField->field_grid_col)=='1')checked="checked"@endif name="field_grid_col" value="1">
+                                        <span></span>1 Column</label>
+
+                                    <label class="radio radio-danger">
+                                        <input type="radio"  @if(old('field_grid_col', $formField->field_grid_col)=='2')checked="checked"@endif name="field_grid_col" value="2">
+                                        <span></span>2 Column</label>
+                                </div>
+                                @error('field_grid_col')
+                                <div class="invalid-feedback d-block">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+
 
                         <div class="form-group">
                             <label class="bmd-label-floating">Field Order <span class="color-red-700">*</span> </label>
@@ -258,6 +276,7 @@
                     max_date: "required",
                     is_array: "required",
                     is_required: "required",
+                    field_grid_col: "required",
                     field_order: "required",
                     field_status: "required",
                 },
@@ -285,6 +304,9 @@
                     },
                     is_required: {
                         required: "Please select required."
+                    },
+                    field_grid_col: {
+                        required: "Field Grid Col is required."
                     },
                     field_order: {
                         required: "Field Order is required."
