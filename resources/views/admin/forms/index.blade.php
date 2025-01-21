@@ -38,6 +38,7 @@
                             <th>Form ID</th>
                             <th>Sr. No.</th>
                             <th>Form Name</th>
+                            <th>Form Group</th>
                             <th>RLCOs</th>
                             <th>Status</th>
                             <th style="width: 120px;" class="text-center">Action</th>
@@ -72,6 +73,7 @@
                     {data: 'id', searchable: false, visible: false, printable: false},
                     {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
                     {data: 'form_name', name: 'form_name'},
+                    {data: 'group_name', name: 'group_name'},
                     {data: 'rlco_names', name: 'rlco_names'},
                     {data: 'form_status', name: 'form_status'},
                     {data: 'action', name: 'action', orderable: false, searchable: false, class:'text-center'},

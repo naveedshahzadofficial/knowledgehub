@@ -91,6 +91,18 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="bmd-label-floating">Group Name <span class="color-red-700">*</span> </label>
+                            <input maxlength="255" type="text" class="form-control  @error('group_name') is-invalid @enderror" name="group_name"
+                                   value="{{ old('group_name') }}"
+                                   id="group_name"  required />
+                            @error('group_name')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
                             <label class="bmd-label-floating">RLCOs <span class="color-red-700">*</span> </label>
                             <select name="rlco_ids[]" class="form-control select2  @error('rlco_ids') is-invalid @enderror" required multiple>
                                 @foreach($rlcos as $rlco)
@@ -158,6 +170,7 @@
                     is_add_more: "required",
                     form_name: "required",
                     form_order: "required",
+                    group_name: "required",
                     form_status: "required",
                     'rlco_ids[]': "required",
                 },
@@ -173,6 +186,9 @@
                     },
                     form_order: {
                         required: "Form Order is required."
+                    },
+                    group_name: {
+                        required: "Form Group is required."
                     },
                     form_status: {
                         required: "Please select form status."

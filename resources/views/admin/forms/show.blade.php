@@ -40,6 +40,13 @@
 
                      <div class="row">
                          <div class="col-lg-12">
+                             <strong>Group Name</strong>
+                             <label class="bmd-label-floating">{{ $form->group_name }}</label><br>
+                         </div>
+                     </div>
+
+                     <div class="row">
+                         <div class="col-lg-12">
                                 <strong>RLCOs</strong>
                                 <ul class="list-group ">
                                     @foreach($form->rlcos as $rlco)

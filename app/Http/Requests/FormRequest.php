@@ -27,6 +27,7 @@ class FormRequest extends \Illuminate\Foundation\Http\FormRequest
             'form_name' => 'required|max:255',
             'form_sub_heading' => 'sometimes|nullable',
             'form_order' => 'required',
+            'group_name' => 'required|max:255',
             'rlco_ids' => 'required|array|min:1',
             'form_status' => 'required',
         ];
