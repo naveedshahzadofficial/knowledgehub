@@ -10,7 +10,7 @@ class Form extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['form_name','form_sub_heading', 'form_status', 'form_order', 'is_tabular', 'is_add_more'];
+    protected $fillable = ['form_name','form_sub_heading', 'form_status', 'form_order', 'is_tabular', 'is_add_more', 'group_name'];
 
     public function scopeActive($query)
     {
