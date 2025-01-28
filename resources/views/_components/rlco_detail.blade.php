@@ -365,7 +365,7 @@
                     @endif
                 </div>
             </div>
-            <div id="collapse_faq_{{$loop->iteration}}" class="collapse" data-parent="#accordionFaqs" style="">
+            <div id="collapse_faq_{{$loop->iteration}}" class="collapse show" data-parent="#accordionFaqs" style="">
                 <div class="card-body pl-12">{!! $faq->faq_answer !!}</div>
             </div>
         </div>
@@ -402,7 +402,7 @@
                         @endif
                     </div>
                 </div>
-                <div id="collapse_fos_{{$loop->iteration}}" class="collapse" data-parent="#accordionFoss" style="">
+                <div id="collapse_fos_{{$loop->iteration}}" class="collapse show" data-parent="#accordionFoss" style="">
                     <div class="card-body pl-12">{!! $fos->fos_solution !!}</div>
                 </div>
             </div>

@@ -89,6 +89,8 @@ class RlcoForm extends Component
         $this->required_documents = RequiredDocument::where('document_status','Active')->get();
         $this->keywords = Collect();
         $this->form['admin_id'] = auth()->id();
+        if(auth()->user()->isDepartment())
+            $this->form['department_id'] = auth()->user()->department_id;
         $this->form['scope_ids'] = [];
         $this->required_document_form['document_types'] = [];
 

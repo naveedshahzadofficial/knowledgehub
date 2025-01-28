@@ -102,6 +102,7 @@
                     <div class="section_box">
 
                         <div class="row form-group">
+                            @if(!auth()->user()->isDepartment())
                             <div class="col-lg-6">
                                 <label>{!! __('Department Name') !!}<span
                                         class="text-danger">*</span></label>
@@ -115,6 +116,7 @@
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
+                            @endif
 
                             <div class="col-lg-6">
                                 <label>{!! __('RLCOs Name') !!}<span class="text-danger">*</span></label>
