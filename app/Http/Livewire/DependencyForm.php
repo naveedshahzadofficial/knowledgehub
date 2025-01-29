@@ -47,6 +47,7 @@ class DependencyForm extends Component
 
         $this->dependency_form['rlco_id'] = $this->rlco->id;
         $this->dependency_form['admin_id'] = auth()->id();
+        $this->dependency_form['priority']=1;
         Dependency::create($this->dependency_form);
         $this->dispatchBrowserEvent('dependency:select2',['id'=>'#organization_id','key_name'=>'dependency_form.department_id']);
         $this->reset('dependency_form');

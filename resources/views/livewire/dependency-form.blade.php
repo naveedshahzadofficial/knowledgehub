@@ -15,16 +15,18 @@
 
         <div class="col-lg-6">
             <label>{!! __('RLCO Name') !!}<span class="text-danger">*</span></label>
-            <input wire:model.defer="dependency_form.activity_name" type="text"
-                   class="form-control @error('dependency_form.activity_name') is-invalid @enderror"
-                   placeholder="RLCO Name"/>
-            @error('dependency_form.activity_name')
+            <div wire:ignore>
+                <x-select2-dropdown wire:model.defer="dependency_form.parent_rlco_id"
+                                    setFieldName="dependency_form.parent_rlco_id"
+                                    id="parent_rlco_id" fieldName="rlco_name" :listing="$rlcos" />
+            </div>
+            @error('dependency_form.parent_rlco_id')
             <div class="invalid-feedback d-block">{{ $message }}</div>
             @enderror
         </div>
 
     </div>
-    <div class="row form-group">
+    <div class="row form-group d-none">
         <div class="col-lg-6">
             <label>{!! __('Priority') !!}<span class="text-danger">*</span></label>
             <input wire:model.defer="dependency_form.priority" type="number"
@@ -64,7 +66,7 @@
             <th>&nbsp;</th>
             <th>Organization</th>
             <th>RLCO Name</th>
-            <th>Priority</th>
+            <th class="d-none">Priority</th>
             <th>Remarks</th>
             <th>Action</th>
         </tr>
@@ -86,8 +88,8 @@
                 </td>
 
                 <td>{{ optional($dependency->department)->department_name }}</td>
-                <td>{{ $dependency->activity_name }}</td>
-                <td>{{ $dependency->priority }}</td>
+                <td>{{ optional($dependency->parentRlco)->rlco_name?? $dependency->activity_name }}</td>
+                <td class="d-none">{{ $dependency->priority }}</td>
                 <td>{!! $dependency->remark !!}</td>
                 <td><button wire:click.prevent="editDependency({{ $dependency->id }})" class="btn btn-bg-primary text-center btn-circle btn-icon btn-xs"><i class="flaticon2-edit text-white"></i></button> &nbsp; <button wire:click.prevent="confirmDialog('dependency',{{ $dependency->id }})" class="btn btn-danger text-center btn-circle btn-icon btn-xs"><i class="flaticon2-trash text-white"></i></button></td>
             </tr>

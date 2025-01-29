@@ -34,6 +34,7 @@ class RlcoForm extends Component
     public $scopes;
     public $keywords;
     public $document_types;
+    public $rlcos;
 
     public $rlcoRequiredDocuments;
     public $required_document_form;
@@ -100,6 +101,7 @@ class RlcoForm extends Component
         $this->foss = Collect();
 
         $this->other_documents = Collect();
+        $this->rlcos = Collect();
 
         if($this->rlco){
             $this->form = $this->rlco->toArray();
@@ -335,7 +337,7 @@ class RlcoForm extends Component
 
     private function loadDependencies()
     {
-        $this->dependencies = Dependency::with('department')->where('rlco_id', $this->rlco->id)->orderBy('priority')->get();
+        $this->dependencies = Dependency::with('department', 'parentRlco')->where('rlco_id', $this->rlco->id)->orderBy('priority')->get();
     }
 
     public function addRequiredDocument(){
@@ -508,13 +510,13 @@ class RlcoForm extends Component
 
         $rules = [
             'dependency_form.department_id' => 'required',
-            'dependency_form.activity_name' => 'required',
-            'dependency_form.priority' => 'required|numeric|min:1|unique:dependencies,priority,NULL,id,rlco_id,' . $this->rlco->id,
+            'dependency_form.parent_rlco_id' => 'required',
+            /*'dependency_form.priority' => 'required|numeric|min:1|unique:dependencies,priority,NULL,id,rlco_id,' . $this->rlco->id,*/
 
         ];
         $messages = [
             'dependency_form.department_id.required' => 'Department / Organization Name is required.',
-            'dependency_form.activity_name.required' => 'RLCO Name is required.',
+            'dependency_form.parent_rlco_id.required' => 'RLCO Name is required.',
             'dependency_form.priority.required' => 'Priority is required.',
             'dependency_form.priority.unique' => 'Priority is already exits.',
             'dependency_form.priority.min' => 'Priority must be at least 1.',
@@ -522,9 +524,10 @@ class RlcoForm extends Component
         if(!empty($rules) && !empty($messages))
             $this->validate($rules,$messages);
 
-
+        $this->dependency_form['priority']=1;
         $this->rlco->dependencies()->create($this->dependency_form);
         $this->dispatchBrowserEvent('dependency:select2',['id'=>'#organization_id','key_name'=>'dependency_form.department_id']);
+        $this->dispatchBrowserEvent('dependency:select2',['id'=>'#parent_rlco_id','key_name'=>'dependency_form.parent_rlco_id']);
         $this->reset('dependency_form');
         $this->setEditorData('#dependency_remark-ckeditor', "");
         $this->loadDependencies();
@@ -535,7 +538,7 @@ class RlcoForm extends Component
         if($dependency){
             $this->dependency_form['id'] = $dependency->id;
             $this->dependency_form['department_id'] = $dependency->department_id;
-            $this->dependency_form['activity_name'] = $dependency->activity_name;
+            $this->dependency_form['parent_rlco_id'] = $dependency->parent_rlco_id;
             $this->dependency_form['remark'] = $dependency->remark;
             $this->dependency_form['priority'] = $dependency->priority;
             $this->dispatchBrowserEvent('select2:setValue',['id'=>'#organization_id','value'=>$dependency->department_id]);
@@ -555,13 +558,13 @@ class RlcoForm extends Component
 
         $rules = [
             'dependency_form.department_id' => 'required',
-            'dependency_form.activity_name' => 'required',
-            'dependency_form.priority' => "required|numeric|min:1|unique:dependencies,priority,{$dependency_id},id,rlco_id,{$this->rlco->id}",
+            'dependency_form.parent_rlco_id' => 'required',
+            /*'dependency_form.priority' => "required|numeric|min:1|unique:dependencies,priority,{$dependency_id},id,rlco_id,{$this->rlco->id}",*/
 
         ];
         $messages = [
             'dependency_form.department_id.required' => 'Department / Organization Name is required.',
-            'dependency_form.activity_name.required' => 'RLCO Name is required.',
+            'dependency_form.parent_rlco_id.required' => 'RLCO Name is required.',
             'dependency_form.priority.required' => 'Priority is required.',
             'dependency_form.priority.unique' => 'Priority is already exits.',
             'dependency_form.priority.min' => 'Priority must be at least 1.',
@@ -571,6 +574,7 @@ class RlcoForm extends Component
 
         $dependency->update($this->dependency_form);
         $this->dispatchBrowserEvent('dependency:select2',['id'=>'#organization_id','key_name'=>'dependency_form.department_id']);
+        $this->dispatchBrowserEvent('dependency:select2',['id'=>'#parent_rlco_id','key_name'=>'dependency_form.parent_rlco_id']);
         $this->reset('dependency_form');
         $this->setEditorData('#dependency_remark-ckeditor', "");
         $this->loadDependencies();
@@ -597,6 +601,24 @@ class RlcoForm extends Component
             $dependency->update(['priority' => $dependency->priority + 1]);
         }
         $this->loadDependencies();
+    }
+
+    public function updatedDependencyForm($value, $updatedKey)
+    {
+        switch ($updatedKey){
+            case 'department_id':
+                $this->rlcos = Rlco::active()->where('department_id',$value)->get();
+                $this->dispatchBrowserEvent('child:multi-column-checkbox-select2',[
+                    'data'=>$this->rlcos,
+                    'field_name'=>'rlco_name',
+                    'child_id'=>'#parent_rlco_id'
+                ]);
+                if(isset($this->dependency_form['parent_rlco_id'])){
+                    $this->dispatchBrowserEvent('select2:setValue',['id'=>'#parent_rlco_id','value'=>$this->dependency_form['parent_rlco_id']]);
+                }
+                break;
+
+        }
     }
 
     public function deleteDependency($dependency_id)
