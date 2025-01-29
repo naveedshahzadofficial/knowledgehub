@@ -50,4 +50,7 @@ Route::get('/login', [Auth\LoginController::class, 'showLoginForm'])->name('logi
 
         Route::post('required-documents/index-ajax', [ Admin\RequiredDocumentController::class,'indexAjax'])->name('required-documents.index-ajax');
         Route::resource('required-documents', Admin\RequiredDocumentController::class);
+
+        Route::post('departments/index-ajax', [ Admin\DepartmentController::class,'indexAjax'])->name('departments.index-ajax');
+        Route::resource('departments', Admin\DepartmentController::class);
     });
