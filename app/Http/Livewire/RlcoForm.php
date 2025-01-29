@@ -607,7 +607,12 @@ class RlcoForm extends Component
     {
         switch ($updatedKey){
             case 'department_id':
-                $this->rlcos = Rlco::active()->where('department_id',$value)->get();
+                $this->rlcos = Rlco::active()
+                    ->where('department_id',$value)
+                    ->when($this->rlco['id']??null, function ($query, $rlcoId) {
+                        $query->whereNotIn('id',[$rlcoId]);
+                    })
+                    ->get();
                 $this->dispatchBrowserEvent('child:multi-column-checkbox-select2',[
                     'data'=>$this->rlcos,
                     'field_name'=>'rlco_name',
