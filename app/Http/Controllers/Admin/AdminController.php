@@ -4,14 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminRequest;
+use App\Http\Requests\ChangePasswordRequest;
 use App\Models\Admin;
 use App\Models\Department;
+use http\Client\Curl\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\DataTables;
 
@@ -61,6 +64,22 @@ class AdminController extends Controller
         $departments = Department::active()->get();
         $roles = Role::get();
         return View('admin.admins.create', compact('departments', 'roles'));
+    }
+
+    public function showChangePasswordForm()
+    {
+        return view('admin.admins.change-password');
+    }
+    public function updatePassword(ChangePasswordRequest $request)
+    {
+        $user = Admin::find(auth()->guard('admin')->id());
+        if (Hash::check($request->old_password, $user->password)) {
+            $user->update(['password' => $request->new_password]);
+            session()->flash('success_message', 'Password changed successfully.');
+        }else{
+            session()->flash('error_message', 'Please enter the correct old password.');
+        }
+        return redirect(route('admin.change-password'));
     }
 
     /**
