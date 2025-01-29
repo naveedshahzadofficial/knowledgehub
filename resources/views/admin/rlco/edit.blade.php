@@ -9,6 +9,9 @@
                     <div class="card-title">
                         <h3 class="card-label">Update RLCO</h3>
                     </div>
+                    <div class="card-toolbar">
+                        <h4 class="card-label" style="color: #30807d;">{{ $rlco->rlco_name }}</h4>
+                    </div>
                 </div>
 
                 <div class="card-body p-0">
