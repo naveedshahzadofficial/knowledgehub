@@ -98,6 +98,12 @@
                                                     </a>
                                                 </li>
 
+                                                <li class="menu-item {{ areActiveRoutes(['admin.departments.index','admin.departments.create','admin.departments.edit']) }}" aria-haspopup="true">
+                                                    <a href="{{ route('admin.departments.index') }}" class="menu-link">
+                                                        <span class="menu-text text-white">Departments</span>
+                                                    </a>
+                                                </li>
+
                                                 <li class="menu-item {{ areActiveRoutes([
     'admin.forms.index','admin.forms.create','admin.forms.edit', 'admin.forms.show',
      'admin.forms.form-fields.index','admin.forms.form-fields.create','admin.forms.form-fields.edit', 'admin.forms.form-fields.show',

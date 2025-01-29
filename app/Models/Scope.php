@@ -11,6 +11,10 @@ class Scope extends Model
     use HasFactory, SoftDeletes;
     protected $fillable = ['scope_title', 'scope_order', 'scope_remarks', 'scope_status'];
 
+    public function scopeActive($query) {
+        return $query->where('scope_status', true);
+    }
+    
     public function rlcos()
     {
         return $this->belongsToMany(Rlco::class);

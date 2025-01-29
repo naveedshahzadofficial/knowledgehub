@@ -11,4 +11,7 @@ class Category extends Model
     use HasFactory, SoftDeletes;
     protected $fillable = ['category_name','category_order','category_remark', 'category_status'];
 
+    public function scopeActive($query) {
+        return $query->where('category_status', true);
+    }
 }
