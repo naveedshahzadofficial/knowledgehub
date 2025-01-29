@@ -43,6 +43,11 @@
 											<!--begin::Footer-->
 										{{--	<div class="navi-separator mt-3"></div>--}}
 											<div class="navi-footer px-8 py-5">
+
+                                                <a class="btn btn-custom-color font-weight-bold" href="{{ route('admin.change-password') }}">
+                                                    {{ __('Change Password') }}
+                                                </a>
+
                                                 <a class="btn btn-custom-color font-weight-bold" href="{{ route('admin.logout') }}"
                                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

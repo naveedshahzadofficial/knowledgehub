@@ -15,6 +15,9 @@ Route::get('/login', [Auth\LoginController::class, 'showLoginForm'])->name('logi
     Route::post('/password/reset', [Auth\ResetPasswordController::class, 'reset'])->name('password.update');
 
     Route::group(['middleware' => ['auth:admin']], function () {
+        Route::get('/change-password', [Admin\AdminController::class, 'showChangePasswordForm'])->name('change-password');
+        Route::post('/change-password', [Admin\AdminController::class, 'updatePassword'])->name('update-password');
+
         Route::post('/logout', [Auth\LoginController::class,'logout'])->name('logout');
 
         Route::resource('roles', Admin\RoleController::class);
