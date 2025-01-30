@@ -607,7 +607,7 @@ class RlcoForm extends Component
     {
         switch ($updatedKey){
             case 'department_id':
-                $this->rlcos = Rlco::active()
+                $this->rlcos = Rlco::select('id', 'rlco_name')->active()
                     ->where('department_id',$value)
                     ->when($this->rlco['id']??null, function ($query, $rlcoId) {
                         $query->whereNotIn('id',[$rlcoId]);
