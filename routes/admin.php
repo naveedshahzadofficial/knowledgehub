@@ -28,6 +28,7 @@ Route::get('/login', [Auth\LoginController::class, 'showLoginForm'])->name('logi
         Route::resource('forms.form-table-rows', Admin\FormTableRowController::class);
         Route::resource('forms.form-table-columns', Admin\FormTableColumnController::class);
 
+        Route::get('/rlcos/{rlco}/duplicate', [Admin\RlcoController::class, 'duplicate'])->name('rlcos.duplicate');
         Route::post('rlcos/index-ajax', [ Admin\RlcoController::class,'indexAjax'])->name('rlcos.index-ajax');
         Route::get('rlcos/{rlco}/sectors-mapping', [Admin\RlcoController::class, 'sectors_mapping'])->name('rlocs.sectors-mapping');
         Route::put('rlcos/{rlco}/sectors-mapping', [Admin\RlcoController::class, 'update_sectors_mapping'])->name('rlcos.sectors-mapping.update');

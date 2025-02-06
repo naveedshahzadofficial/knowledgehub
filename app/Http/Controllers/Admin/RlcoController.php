@@ -59,6 +59,7 @@ class RlcoController extends Controller
                 $actionBtn = '';
                 $actionBtn .= '<span onclick="toggleStatus(this); return false;"  data-href="' . route('admin.rlcos.destroy', $rlco) . '" class="edit btn btn-custom-color text-center btn-circle btn-icon btn-xs">' . ($rlco->rlco_status ? '<i class="fa fa-toggle-on text-white"></i>' : '<i class="fa fa-toggle-off text-danger"></i>') . '</span>';
                 if(!auth()->user()->isDepartment() && !auth()->user()->isSectoralMapper()) {
+                    $actionBtn .= '&nbsp;&nbsp;<a  href="' . route('admin.rlcos.duplicate', $rlco) . '" class="edit btn btn-custom-color text-center btn-circle btn-icon btn-xs" title="Duplicate"><i class="fas fa-clone text-white"></i></a>';
                     $actionBtn .= '&nbsp;&nbsp;<a  href="' . route('admin.rlcos.rlco-fee-types.index', $rlco) . '" class="edit btn btn-custom-color text-center btn-circle btn-icon btn-xs" title="Variable Fee"><i class="fas fa-money-bill text-white"></i></a>';
                 }
                 $actionBtn .= '&nbsp;&nbsp;<a  href="' . route('admin.rlcos.edit', $rlco) . '" class="edit btn btn-custom-color text-center btn-circle btn-icon btn-xs"><i class="flaticon-edit text-white"></i></a>';
@@ -107,6 +108,75 @@ class RlcoController extends Controller
             session()->flash('success_message', 'Rlco has been active successfully.');
         $rlco->update(['rlco_status'=>!$rlco->rlco_status]);
         return redirect()->route('admin.rlcos.index');
+    }
+
+    public function duplicate(Rlco $rlco)
+    {
+        $newRlco = $rlco->replicate();
+        $newRlco->rlco_no = null;
+        $newRlco->save();
+
+        $rlco->load('requiredDocuments', 'faqs', 'foss', 'dependencies', 'otherDocuments', 'businessActivities', 'keywords', 'scopes', 'activities');
+
+        // Duplicate requiredDocuments
+        foreach ($rlco->requiredDocuments as $requiredDocument) {
+            $newRequiredDocument = $requiredDocument->replicate();
+            $newRequiredDocument->rlco_id = $newRlco->id;
+            $newRequiredDocument->save();
+        }
+
+        // Duplicate faqs
+        foreach ($rlco->faqs as $faq) {
+            $newFaq = $faq->replicate();
+            $newFaq->rlco_id = $newRlco->id;
+            $newFaq->save();
+        }
+
+        // Duplicate foss
+        foreach ($rlco->foss as $fos) {
+            $newFos = $fos->replicate();
+            $newFos->rlco_id = $newRlco->id;
+            $newFos->save();
+        }
+
+        // Duplicate dependencies
+        foreach ($rlco->dependencies as $dependency) {
+            $newDependency = $dependency->replicate();
+            $newDependency->rlco_id = $newRlco->id;
+            $newDependency->save();
+        }
+
+        // Duplicate otherDocuments
+        foreach ($rlco->otherDocuments as $otherDocument) {
+            $newOtherDocument = $otherDocument->replicate();
+            $newOtherDocument->rlco_id = $newRlco->id;
+            $newOtherDocument->save();
+        }
+
+        // Duplicate businessActivities
+        foreach ($rlco->businessActivities as $businessActivity) {
+            $newRlco->businessActivities()->attach($businessActivity->id);
+        }
+
+        // Duplicate keywords
+        foreach ($rlco->keywords as $keyword) {
+            $newRlco->keywords()->attach($keyword->id);
+        }
+
+        // Duplicate scopes
+        foreach ($rlco->scopes as $scope) {
+            $newRlco->scopes()->attach($scope->id);
+        }
+
+        // Duplicate activities
+        foreach ($rlco->activities as $activity) {
+            $newRlco->activities()->attach($activity->id);
+        }
+
+        session()->flash('success_message', 'Rlco has been duplicated successfully.');
+        return redirect()->route('admin.rlcos.edit', $newRlco);
+
+
     }
 
     public function sectors_mapping(Rlco $rlco)
