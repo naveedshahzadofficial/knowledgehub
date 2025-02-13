@@ -218,5 +218,43 @@
             reDrawDataTable();
         }
     </script>
+
+    <script>
+        function verifyRlco(button) {
+            var rlcoId = $(button).data('id');
+            var deptName = $(button).data('dept-name');
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: deptName + " hereby certifies that the details provided for this RLCO are true and correct to the best of our knowledge",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, verify it!",
+                cancelButtonText: "Cancel"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ route('admin.rlcos.verify') }}",
+                        type: "POST",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            id: rlcoId
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                Swal.fire("Verified!", response.message, "success");
+                                myDataTable.ajax.reload();
+                            } else {
+                                Swal.fire("Error!", response.message, "error");
+                            }
+                        },
+                        error: function(xhr) {
+                            Swal.fire("Error!", "Something went wrong.", "error");
+                        }
+                    });
+                }
+            });
+        }
+    </script>
 @endpush
 
