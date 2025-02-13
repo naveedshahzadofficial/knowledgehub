@@ -14,6 +14,26 @@
         </div>
 
         <div class="col-lg-6">
+            <label for="">RLCO Selection Mode <span class="text-danger">*</span></label>
+            <div class="radio-inline">
+                <label class="radio radio-success">
+                    <input type="radio" wire:model.defer="dependency_form.rlco_selection_mode" name="rlco_selection_mode" @click="rlco_selection_mode= 'Choose RLCO'"  value="Choose RLCO">
+                    <span></span>Choose RLCO</label>
+                <label class="radio radio-success">
+                    <input type="radio" wire:model.defer="dependency_form.rlco_selection_mode" name="rlco_selection_mode" @click="rlco_selection_mode= 'Enter Manually'" value="Enter Manually">
+                    <span></span>Enter Manually</label>
+            </div>
+            @error('form.dependency_question')
+            <div class="invalid-feedback d-block">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+
+    </div>
+
+    <div class="row form-group">
+        <div class="col-lg-6" x-show.transition.opacity="rlco_selection_mode=='Choose RLCO'">
             <label>{!! __('RLCO Name') !!}<span class="text-danger">*</span></label>
             <div wire:ignore>
                 <x-select2-dropdown wire:model.defer="dependency_form.parent_rlco_id"
@@ -24,8 +44,17 @@
             <div class="invalid-feedback d-block">{{ $message }}</div>
             @enderror
         </div>
-
+        <div class="col-lg-6"  x-show.transition.opacity="rlco_selection_mode=='Enter Manually'">
+            <label>{!! __('RLCO Name') !!}<span class="text-danger">*</span></label>
+            <input wire:model.defer="dependency_form.activity_name" type="text"
+                   class="form-control @error('dependency_form.activity_name') is-invalid @enderror"
+                   placeholder="RLCO Name"/>
+            @error('dependency_form.activity_name')
+            <div class="invalid-feedback d-block">{{ $message }}</div>
+            @enderror
+        </div>
     </div>
+
     <div class="row form-group d-none">
         <div class="col-lg-6">
             <label>{!! __('Priority') !!}<span class="text-danger">*</span></label>
