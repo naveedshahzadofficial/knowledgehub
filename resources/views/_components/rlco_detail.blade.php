@@ -1,3 +1,6 @@
+<div class="d-flex justify-content-end mb-3">
+    <button onclick="window.print()" class="btn btn-custom-color font-weight-bold">Print</button>
+</div>
 <h4 class="main_section_heading">{!! __('BASIC INFO') !!}</h4>
 <div class="section_box">
 
@@ -131,12 +134,15 @@
 
 <h4 class="main_section_heading">{!! __('PROCESS') !!}</h4>
 <div class="section_box">
-
     <div class="d-flex justify-content-between pt-5">
         <div class="d-flex flex-column flex-root">
             <span class="font-weight-bolder mb-2">{!! __('Fee') !!}</span>
-            <span
-                class="opacity-70">{{ $rlco->fee }}</span>
+
+            @if ($rlco->fee_question === 'Yes' && $rlco->fee_plan === 'Schedule' && !empty($rlco->fee_schedule))
+                {!! $rlco->fee_schedule !!}
+            @else
+                <span class="opacity-70">{{ $rlco->fee }}</span>
+            @endif
         </div>
 
         <div class="d-flex flex-column flex-root">
@@ -453,3 +459,77 @@
     </div>
 </div>
 @endif
+
+<div x-data="{
+account_type: '{{ $form['account_type']??null }}',
+applicable_at_level: '{{ $form['applicable_at_level']??null }}',
+}"  class="form-body col-xs-12 col-lg-12 account-info-rlco">
+        <h4 class="font-weight-bold section_heading text-white ">
+            <span>  {!! __('ACCOUNT INFO') !!}</span>
+        </h4>
+        <div class="section_box">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label for="account_type">Account Type<span class="text-danger">*</span></label>
+                    <div class="radio-inline">
+                            <label class="">
+                                <span></span>{{ optional($rlco->accountInfo)->account_type ?? 'N/A' }}
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <label for="applicable_at_level">Applicable at Level<span class="text-danger">*</span></label>
+                    <div class="radio-inline">
+                            <label class="">
+                                <span></span>{{ optional($rlco->accountInfo)->applicable_at_level ?? 'N/A' }}
+                    </div>
+                </div>
+
+            </div>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th x-show.transition.opacity="applicable_at_level=='District' || applicable_at_level=='Tehsil'">District</th>
+                    <th x-show.transition.opacity="applicable_at_level=='Tehsil'">Tehsil</th>
+                    <th x-show.transition.opacity="applicable_at_level=='Custom'">Structural Unit</th>
+                    <th>Title/Head</th>
+                    <th>Account No./ IBAN</th>
+                </tr>
+                </thead>
+                <tbody>
+                        @forelse($rlco->accounts as $account)
+                            <tr>
+                                <td x-show.transition.opacity="applicable_at_level=='District' || applicable_at_level=='Tehsil'">{{ optional($account->district)->district_name_e }}</td>
+                                <td x-show.transition.opacity="applicable_at_level=='Tehsil'">{{ optional($account->tehsil)->tehsil_name_e }}</td>
+                                <td x-show.transition.opacity="applicable_at_level=='Custom'">{{ optional($account->departmentStructuralUnit)->unit_name }}</td>
+                                <td>{{ $account->account_title }}</td>
+                                <td>{{ $account->account_no }}</td>
+                            </tr>
+                        @empty
+                            <tr><td colspan="8" class="opacity-70">No account has been added currently.</td></tr>
+                        @endforelse
+
+                </tbody>
+            </table>
+        </div>
+</div>
+<style>
+    @media print {
+        .force-page-break {
+            page-break-after: always;
+        }
+        button[onclick="window.print()"] {
+            display: none;
+        }
+        #kt_header_mobile {
+            display: none;
+        }
+        #kt_header_mobile img {
+            display: none;
+        }
+    }
+    .account-info-rlco{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+</style>

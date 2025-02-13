@@ -30,8 +30,10 @@ Route::get('/login', [Auth\LoginController::class, 'showLoginForm'])->name('logi
 
         Route::get('/rlcos/{rlco}/duplicate', [Admin\RlcoController::class, 'duplicate'])->name('rlcos.duplicate');
         Route::post('rlcos/index-ajax', [ Admin\RlcoController::class,'indexAjax'])->name('rlcos.index-ajax');
+        Route::post('/rlcos/verify', [Admin\RlcoController::class, 'verifyRlco'])->name('rlcos.verify');
         Route::get('rlcos/{rlco}/sectors-mapping', [Admin\RlcoController::class, 'sectors_mapping'])->name('rlocs.sectors-mapping');
         Route::put('rlcos/{rlco}/sectors-mapping', [Admin\RlcoController::class, 'update_sectors_mapping'])->name('rlcos.sectors-mapping.update');
+        Route::get('rlcos/{rlco}/form-view', [Admin\RlcoController::class, 'form_view'])->name('rlcos.form-view');
         Route::resource('rlcos', Admin\RlcoController::class);
         Route::resource('rlcos.rlco-fee-types', Admin\RlcoFeeTypeController::class);
         Route::resource('rlcos.rlco-fee-types.rlco-fee-rules', Admin\RlcoFeeRuleController::class);
