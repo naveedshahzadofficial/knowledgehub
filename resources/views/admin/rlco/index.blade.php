@@ -91,6 +91,7 @@
                     <th>Sr. No.</th>
                     <th>Rlco Name</th>
                     <th>Department</th>
+                    <th>Created</th>
                     <th>Status</th>
                     <th style="width: 120px;" class="text-center">Action</th>
                 </tr>
@@ -131,11 +132,12 @@
                     {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
                     {data: 'rlco_name', name: 'rlco_name'},
                     {data: 'department_name', name: 'department_id'},
+                    {data: 'created_at', name: 'created_at'},
                     {data: 'rlco_status', name: 'status_id'},
                     {data: 'action', name: 'action', orderable: false, searchable: false, class:'text-center'},
                 ],
                 order: [[0, 'desc']],
-                dom: 'lfrtip',
+                dom: 'Blfrtip',
 
                 lengthMenu: [
                     [10, 20, 30, 50, 100, -1],

@@ -55,8 +55,9 @@ class RlcoController extends Controller
                     return '<span onclick="toggleStatus(this); return false;" data-href="'.route('admin.rlcos.destroy',$rlco).'"   class="btn btn-circle btn-sm border-0 cursor-move active '.($rlco->rlco_status?'btn-hover-success':'btn-hover-danger').'">'.$rlco->getRlcoStatus().'</span>';
                 else
                     return '<span class="btn btn-circle btn-sm border-0 active '.($rlco->rlco_status?'btn-hover-success':'btn-hover-danger').'">'.$rlco->getRlcoStatus().'</span>';
-            })
-            ->addColumn('action', function(Rlco $rlco){
+            })->editColumn('created_at', function (Rlco $rlco) {
+                return $rlco->created_at ? $rlco->created_at->format('d M, Y') : '-';
+            })->addColumn('action', function(Rlco $rlco){
                 $actionBtn = '';
                 $actionBtn .= '<span onclick="toggleStatus(this); return false;"  data-href="' . route('admin.rlcos.destroy', $rlco) . '" class="edit btn btn-custom-color text-center btn-circle btn-icon btn-xs">' . ($rlco->rlco_status ? '<i class="fa fa-toggle-on text-white"></i>' : '<i class="fa fa-toggle-off text-danger"></i>') . '</span>';
                 if(!auth()->user()->isDepartment() && !auth()->user()->isSectoralMapper()) {
@@ -83,7 +84,7 @@ class RlcoController extends Controller
 
                 return $actionBtn;
             })
-            ->rawColumns(['rlco_status','action'])
+            ->rawColumns(['rlco_status','action', 'created_at'])
             ->make(true);
     }
 
