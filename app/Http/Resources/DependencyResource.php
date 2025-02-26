@@ -17,11 +17,14 @@ class DependencyResource extends JsonResource
         return [
             'id' => $this->id,
             'rlco_id' => $this->rlco_id,
+            'rlco_selection_mode' => $this->rlco_selection_mode,
+            'parent_rlco_id' => $this->parent_rlco_id,
             'activity_name' => $this->activity_name,
             'department_id' => $this->department_id,
             'department' => new DepartmentResource($this->department),
             'priority' => !empty($this->priority) && $this->priority!=0?$this->priority:'N/A',
             'remark' => !empty($this->remark)?$this->remark:'N/A',
+            "parent_rlco"=> new RlcoResource($this->whenLoaded('parentRlco')),
         ];
     }
 }

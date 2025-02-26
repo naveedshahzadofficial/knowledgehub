@@ -23,7 +23,7 @@
                     <input type="radio" wire:model.defer="dependency_form.rlco_selection_mode" name="rlco_selection_mode" @click="rlco_selection_mode= 'Enter Manually'" value="Enter Manually">
                     <span></span>Enter Manually</label>
             </div>
-            @error('form.dependency_question')
+            @error('dependency_form.rlco_selection_mode')
             <div class="invalid-feedback d-block">
                 {{ $message }}
             </div>
@@ -117,7 +117,13 @@
                 </td>
 
                 <td>{{ optional($dependency->department)->department_name }}</td>
-                <td>{{ optional($dependency->parentRlco)->rlco_name?? $dependency->activity_name }}</td>
+
+                @if($dependency->rlco_selection_mode=='Choose RLCO')
+                <td>{{ optional($dependency->parentRlco)->rlco_name }}</td>
+                @else
+                <td>{{ $dependency->activity_name }}</td>
+                @endif
+
                 <td class="d-none">{{ $dependency->priority }}</td>
                 <td>{!! $dependency->remark !!}</td>
                 <td><button wire:click.prevent="editDependency({{ $dependency->id }})" class="btn btn-bg-primary text-center btn-circle btn-icon btn-xs"><i class="flaticon2-edit text-white"></i></button> &nbsp; <button wire:click.prevent="confirmDialog('dependency',{{ $dependency->id }})" class="btn btn-danger text-center btn-circle btn-icon btn-xs"><i class="flaticon2-trash text-white"></i></button></td>

@@ -43,7 +43,7 @@ class RlcoController extends Controller
             })->when($business_category_id, function ($query , $business_category_id){
                 $query->where('business_category_id', $business_category_id);
             })->where('rlco_status', 1)
-                ->with('businessCategory', 'department', 'inspectionDepartment', 'requiredDocuments.requiredDocument', 'faqs', 'foss', 'dependencies.department', 'otherDocuments', 'scopes');
+                ->with('businessCategory', 'department', 'inspectionDepartment', 'requiredDocuments.requiredDocument', 'faqs', 'foss', 'dependencies.department','dependencies.parentRlco', 'otherDocuments', 'scopes');
          }])
             ->withCount(['rlcos' => function($query) use($department_id, $business_category_id){
                 $query->when($department_id, function ($query , $department_id){
@@ -75,7 +75,7 @@ class RlcoController extends Controller
     }
 
     public function rlcoDetail(Rlco $rlco){
-        $rlco->load('businessCategory','department','inspectionDepartment','requiredDocuments.requiredDocument','faqs','foss','dependencies.department', 'otherDocuments', 'scopes');
+        $rlco->load('businessCategory','department','inspectionDepartment','requiredDocuments.requiredDocument','faqs','foss','dependencies.department', 'dependencies.parentRlco','otherDocuments', 'scopes');
         return response()->json(['rlco_detail'=>new RlcoResource($rlco)]);
     }
 

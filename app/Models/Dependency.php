@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Dependency extends Model
 {
     use HasFactory;
-    protected $fillable = ['rlco_id', 'parent_rlco_id' , 'department_id','activity_name','remark','admin_id','dependency_status', 'priority',];
+    protected $fillable = ['rlco_id', 'rlco_selection_mode', 'parent_rlco_id' , 'department_id','activity_name','remark','admin_id','dependency_status', 'priority',];
 
     public function department(){
         return $this->belongsTo(Department::class);

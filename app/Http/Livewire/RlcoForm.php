@@ -510,13 +510,17 @@ class RlcoForm extends Component
 
         $rules = [
             'dependency_form.department_id' => 'required',
-            'dependency_form.parent_rlco_id' => 'required',
+            'dependency_form.rlco_selection_mode'=> 'required|in:Choose RLCO,Enter Manually',
+            'dependency_form.parent_rlco_id'     => 'required_if:dependency_form.rlco_selection_mode,Choose RLCO',
+            'dependency_form.activity_name'      => 'required_if:dependency_form.rlco_selection_mode,Enter Manually',
             /*'dependency_form.priority' => 'required|numeric|min:1|unique:dependencies,priority,NULL,id,rlco_id,' . $this->rlco->id,*/
 
         ];
         $messages = [
             'dependency_form.department_id.required' => 'Department / Organization Name is required.',
-            'dependency_form.parent_rlco_id.required' => 'RLCO Name is required.',
+            'dependency_form.rlco_selection_mode.required' => 'Please select the RLCO Mode.',
+            'dependency_form.parent_rlco_id.required_if' => 'RLCO Name is required.',
+            'dependency_form.activity_name.required_if' => 'RLCO Name is required.',
             'dependency_form.priority.required' => 'Priority is required.',
             'dependency_form.priority.unique' => 'Priority is already exits.',
             'dependency_form.priority.min' => 'Priority must be at least 1.',
@@ -525,6 +529,11 @@ class RlcoForm extends Component
             $this->validate($rules,$messages);
 
         $this->dependency_form['priority']=1;
+        if($this->dependency_form['rlco_selection_mode']=='Choose RLCO'){
+            $this->dependency_form['activity_name']=null;
+        }else{
+            $this->dependency_form['parent_rlco_id']=null;
+        }
         $this->rlco->dependencies()->create($this->dependency_form);
         $this->dispatchBrowserEvent('dependency:select2',['id'=>'#organization_id','key_name'=>'dependency_form.department_id']);
         $this->dispatchBrowserEvent('dependency:select2',['id'=>'#parent_rlco_id','key_name'=>'dependency_form.parent_rlco_id']);
@@ -538,7 +547,9 @@ class RlcoForm extends Component
         if($dependency){
             $this->dependency_form['id'] = $dependency->id;
             $this->dependency_form['department_id'] = $dependency->department_id;
+            $this->dependency_form['rlco_selection_mode'] = $dependency->rlco_selection_mode;
             $this->dependency_form['parent_rlco_id'] = $dependency->parent_rlco_id;
+            $this->dependency_form['activity_name'] = $dependency->activity_name;
             $this->dependency_form['remark'] = $dependency->remark;
             $this->dependency_form['priority'] = $dependency->priority;
             $this->dispatchBrowserEvent('select2:setValue',['id'=>'#organization_id','value'=>$dependency->department_id]);
@@ -558,19 +569,29 @@ class RlcoForm extends Component
 
         $rules = [
             'dependency_form.department_id' => 'required',
-            'dependency_form.parent_rlco_id' => 'required',
+            'dependency_form.rlco_selection_mode'=> 'required|in:Choose RLCO,Enter Manually',
+            'dependency_form.parent_rlco_id'     => 'required_if:dependency_form.rlco_selection_mode,Choose RLCO',
+            'dependency_form.activity_name'      => 'required_if:dependency_form.rlco_selection_mode,Enter Manually',
             /*'dependency_form.priority' => "required|numeric|min:1|unique:dependencies,priority,{$dependency_id},id,rlco_id,{$this->rlco->id}",*/
 
         ];
         $messages = [
             'dependency_form.department_id.required' => 'Department / Organization Name is required.',
-            'dependency_form.parent_rlco_id.required' => 'RLCO Name is required.',
+            'dependency_form.rlco_selection_mode.required' => 'Please select the RLCO Mode.',
+            'dependency_form.parent_rlco_id.required_if' => 'RLCO Name is required.',
+            'dependency_form.activity_name.required_if' => 'RLCO Name is required.',
             'dependency_form.priority.required' => 'Priority is required.',
             'dependency_form.priority.unique' => 'Priority is already exits.',
             'dependency_form.priority.min' => 'Priority must be at least 1.',
         ];
         if(!empty($rules) && !empty($messages))
             $this->validate($rules,$messages);
+
+        if($this->dependency_form['rlco_selection_mode']=='Choose RLCO'){
+            $this->dependency_form['activity_name']=null;
+        }else{
+            $this->dependency_form['parent_rlco_id']=null;
+        }
 
         $dependency->update($this->dependency_form);
         $this->dispatchBrowserEvent('dependency:select2',['id'=>'#organization_id','key_name'=>'dependency_form.department_id']);

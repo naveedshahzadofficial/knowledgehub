@@ -493,7 +493,9 @@ export default {
                                     <div class="accordion-item mb-3 expanded" v-for="(dependency, index) in rlco_detail.dependencies">
                                         <h2 class="accordion-header">
                                             <button class="accordion-button py-4" type="button" data-bs-toggle="collapse" :data-bs-target="`#collapse_${index}`" aria-expanded="true" :aria-controls="`collapse_${index}`">
-                                                {{ dependency.activity_name }}
+                                                {{
+                                                    dependency.rlco_selection_mode === 'Choose RLCO' ? dependency.parent_rlco?.rlco_name : dependency.activity_name
+                                                }}
                                             </button>
                                         </h2>
                                         <div :id="`collapse_${index}`" class="accordion-collapse collapse" :class="{show: index == 0}" data-bs-parent="#accordionExample">
